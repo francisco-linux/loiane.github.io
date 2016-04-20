@@ -15,7 +15,7 @@ Olá pessoal, De vez em quando as pessoas perguntam o que uso pra gravar as aula
 
 É claro que não fui na loja e comprei tudo isso de uma vez. Faz 4 anos que comecei a gravar vídeos aqui para o blog e pro youtube. 
 
-![](/assets/img/2016/01/setup_aulas_201624.jpg)
+![]({{ site.url }}/assets/img/2016/01/setup_aulas_201624.jpg)
 
 Comecei somente com o [screenflow](http://telestream.net/screenflow), com meu computador e um fone do iPhone que tinha na época ([post com detalhes aqui](http://www.loiane.com/2012/08/ferramentas-que-uso-para-gravar-meus-screencasts-e-aulas/)). 2 anos atrás comprei o microfone Yeti numa viagem ([post com detalhes aqui](http://www.loiane.com/2013/11/resenha-microfone-usb-yeti-pop-filter-nady-mpf-6/)), e no final de 2015 comprei a espuma e o braço (descartei o pop-filter que tinha e passei a usar a espuma). Nos links que deixei dá pra ver a evolução até chegar no ambiente que tenho hoje. 
 
