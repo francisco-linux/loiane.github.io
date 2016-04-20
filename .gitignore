@@ -8,3 +8,7 @@ _site
 codekit-config.json
 node_modules
 npm-debug.log*
+.idea/*
+.idea/jsLibraryMappings.xml
+
+.idea/libraries/loiane_github_io_node_modules.xml
