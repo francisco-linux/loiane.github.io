@@ -11,11 +11,11 @@ Olá pessoal, De vez em quando as pessoas perguntam o que uso pra gravar as aula
 *   Microfone Blue Yeti USB Microphone: [http://amzn.to/1JoOSGN](http://amzn.to/1JoOSGN)
 *   Arm Stand (braço que segura o microfone) Image® Broadcasting Studio Microphone Arm Stand with Shock Mount: [http://amzn.to/1IMaWev](http://amzn.to/1IMaWev)
 *   Espuma (funciona como pop-filter e também para não entrar poeira no microfone) Foam Windscreen for Blue Yeti: [http://amzn.to/1JoP0Gi](http://amzn.to/1JoP0Gi)
-*   Software de captura e edição -  Screenflow: [http://telestream.net/screenflow](http://telestream.net/screenflow)
+*   Software de captura e edição - Screenflow: [http://telestream.net/screenflow](http://telestream.net/screenflow)
 
 É claro que não fui na loja e comprei tudo isso de uma vez. Faz 4 anos que comecei a gravar vídeos aqui para o blog e pro youtube. 
 
-![]({{ site.url }}/images/2016/01/setup_aulas_201624.jpg)
+![]({{ site.url }}/images/2016/01/setup_aulas_2016.jpg)
 
 Comecei somente com o [screenflow](http://telestream.net/screenflow), com meu computador e um fone do iPhone que tinha na época ([post com detalhes aqui](http://www.loiane.com/2012/08/ferramentas-que-uso-para-gravar-meus-screencasts-e-aulas/)). 2 anos atrás comprei o microfone Yeti numa viagem ([post com detalhes aqui](http://www.loiane.com/2013/11/resenha-microfone-usb-yeti-pop-filter-nady-mpf-6/)), e no final de 2015 comprei a espuma e o braço (descartei o pop-filter que tinha e passei a usar a espuma). Nos links que deixei dá pra ver a evolução até chegar no ambiente que tenho hoje. 
 
