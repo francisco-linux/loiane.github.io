@@ -1,0 +1,41 @@
+---
+layout: post
+title: Instalando Maven no Mac OS (Yosemite)
+date: 2015-05-04 07:00:08.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Maven
+- Tutoriais
+tags:
+- MacOS
+- Maven
+- Yosemite
+---
+<p>Oi pessoal,</p>
+<p>Hoje vamos aprender como instalar o <a href="https://maven.apache.org/index.html" target="_blank">Maven</a> no Mac (versão Yosemite especificamente), uma biblioteca para ajudar a gerenciar projetos Java. O <strong>Maven</strong> pode ajudar no build do projeto, gerenciar dependências e versões dos jars utilizados no projeto, e ainda pode oferecer métricas ao gerente do projeto.</p>
+<p><a href="{{ site.baseurl }}/images/2015/04/logo-maven.gif"><img class="aligncenter size-full wp-image-7734" src="{{ site.baseurl }}/images/2015/04/logo-maven.gif" alt="logo-maven" width="162" height="108" /></a></p>
+<h3>1 - Download e Instalação</h3>
+<p>Faça o download em <a href="https://maven.apache.org/download.cgi" target="_blank">https://maven.apache.org/download.cgi</a> e extraia o conteúdo do zip em algum lugar do seu computador. Guarde a localização pois vamos precisar para o próximo passo.</p>
+<h3>2 - Configuração das variáveis de ambiente</h3>
+<p>No arquivo .bash_profile adicione as seguintes linhas - lembre-se de atualizar o M2_HOME com o diretório de onde você extraiu o Maven:</p>
+<pre class="lang:default decode:true">export M2_HOME=/Users/loiane/Documents/development/apache-maven-3.3.1
+export M2=$M2_HOME/bin
+export PATH=$M2:$PATH</pre>
+<p>Se você ainda não tem o <em><strong>.bash_profile</strong></em> criado (ainda não configurou nenhuma variável de ambiente), abra o terminal e execute o comando <em><strong>touch .bash_profile</strong></em> - você pode abrir e editar esse arquivo com seu editor de texto favorito. O arquivo deve ser criado na home do seu usuário:</p>
+<p><a href="{{ site.baseurl }}/images/2015/04/maven_yosemite_01.png"><img class="aligncenter  wp-image-7733" src="{{ site.baseurl }}/images/2015/04/maven_yosemite_01.png" alt="maven_yosemite_01" width="571" height="320" /></a></p>
+<h3>3 - Verificando se tudo está OK</h3>
+<p>Se o terminal estiver aberto, feche-o e abra-o novamente. Digite o comando <em><strong>mvn --version</strong></em> e a seguinte mensagem deverá aparecer - isso significa que o Maven foi instalado e configurado com sucesso!</p>
+<p><a href="{{ site.baseurl }}/images/2015/04/maven_yosemite_02.png"><img class="aligncenter  wp-image-7732" src="{{ site.baseurl }}/images/2015/04/maven_yosemite_02.png" alt="maven_yosemite_02" width="583" height="167" /></a></p>
+<h3>4 - Resolução de problemas</h3>
+<p>Caso quando você digite <em><strong>mvn --version</strong></em> apareça o seguinte erro:</p>
+<p><a href="{{ site.baseurl }}/images/2015/04/maven_yosemite_03.png"><img class="aligncenter  wp-image-7730" src="{{ site.baseurl }}/images/2015/04/maven_yosemite_03.png" alt="maven_yosemite_03" width="571" height="384" /></a></p>
+<p>Significa que a variável <em><strong>JAVA_HOME</strong></em> não está configurada. Claro que para usar o Maven é necessário já ter o <em>Java Instalado</em>. Porém, quando instalamos o Java no Mac OS, não precisamos configurar as variáveis de ambiente pois as mesmas já são configuradas automaticamente (diferentemente do Windows).</p>
+<p>Para resolver esse problem é bem simples: Basta adicionar a seguinte linha no seu <strong>.bash_profile</strong> antes da configuração do Maven:</p>
+<pre class="lang:default mark:1 decode:true ">export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export M2_HOME=/Users/loiane/Documents/development/apache-maven-3.3.1
+export M2=$M2_HOME/bin
+export PATH=$M2:$PATH</pre>
+<p>Feche o terminal e teste novamente, dessa vez vai funcionar!</p>
+<p>Até a próxima! :)</p>
