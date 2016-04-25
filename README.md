@@ -1,6 +1,6 @@
 # loiane.github.io
 
-Uncompiled [Jekyll](//jekyllrb.com) source code for [loiane.com](//loiane.com).
+Uncompiled [Jekyll](//jekyllrb.com) source code for [loiane.com](http://loiane.com).
 
 ### Steps to use
 
