@@ -1,0 +1,51 @@
+---
+layout: post
+title: Instalando o Apache Ant e configurando a variável de ambiente ANT_HOME no Windows
+date: 2015-03-30 06:30:56.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Apache Ant
+tags:
+- Ant
+- ANT_HOME
+- Apache Ant
+
+---
+<p>Olá pessoal,</p>
+<p>Hoje vou mostrar como configurar a variável de ambiente ANT_HOME.</p>
+<p>O <a href="http://ant.apache.org/" target="_blank"><strong>Apache Ant</strong> </a>é uma biblioteca <strong>Java</strong> utilizada para automatizar builds. Muito utilizada em projetos Java e também utilizada para fazer build de projetos <strong>Android</strong> quando usamos o <strong>Phonegap</strong> (ou <strong>Cordova</strong>).</p>
+<p>O requisito para instalar o Ant e que para que funcione também é ter o <em><strong>Java JDK</strong></em> instalado (não pode ser o Java Runtime (JRE), pois o ant utiliza o comando <em>javac</em> (compilar projeto java). Então, caso não tenho o Java JDK instalado, pode conferir um <a href="http://www.loiane.com/2013/02/instalando-e-configurando-o-java-no-windows-8/" target="_blank">tutorial aqui</a> ou <a href="http://www.loiane.com/2013/10/curso-java-basico-java-se-gratuito/" target="_blank">vídeo-aula aqui</a>.</p>
+<p>Nesse tutorial vou fazer a configuração para o SO Windows 8 (a configuração é a mesma pra outras versões do Windows).</p>
+<h3>1 - Download</h3>
+<p>Para fazer o download, basta acessar o site do Apache Ant: <a href="http://ant.apache.org/" target="_blank">http://ant.apache.org/</a>. O link direto para download é esse aqui: <a href="http://ant.apache.org/bindownload.cgi" target="_blank">http://ant.apache.org/bindownload.cgi</a></p>
+<p>Existem 3 opções de download. Pode fazer o download de qualquer uma (zip, tar.gz, tar.bz2):</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_01.png"><img class="aligncenter wp-image-7622 " src="{{ site.baseurl }}/images/2015/03/apache_ant_01.png" alt="apache_ant_01" width="590" height="228" /></a></p>
+<h3>2 - Instalação</h3>
+<p>Como é um zip, basta extrair para qualquer lugar de preferência do seu computador. É importante guardar o caminho de onde foi instalado para a configuração da variável de ambiente a seguir.</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_021.jpg"><img class="aligncenter wp-image-7624 " src="{{ site.baseurl }}/images/2015/03/apache_ant_02.jpg" alt="apache_ant_02" width="591" height="291" /></a></p>
+<h3>3 - Criando a variável de ambiente ANT_HOME</h3>
+<p>No windows, clique com o botão direito em Meu Computador, e escolha a opção Propriedades:</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_03.jpg"><img class="aligncenter  wp-image-7626" src="{{ site.baseurl }}/images/2015/03/apache_ant_03.jpg" alt="apache_ant_03" width="372" height="225" /></a></p>
+<p>Clique em configurações avançadas:</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_04.jpg"><img class="aligncenter  wp-image-7627" src="{{ site.baseurl }}/images/2015/03/apache_ant_04.jpg" alt="apache_ant_04" width="596" height="276" /></a></p>
+<p>Variáveis de ambiente:</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_05.jpg"><img class="aligncenter  wp-image-7628" src="{{ site.baseurl }}/images/2015/03/apache_ant_05.jpg" alt="apache_ant_05" width="399" height="429" /></a></p>
+<p>Na parte de baixo das variáveis de ambiente (não pode ser na parte de cima), clique em Novo (precisa de acesso administrador pra isso):</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_06.jpg"><img class="aligncenter  wp-image-7629" src="{{ site.baseurl }}/images/2015/03/apache_ant_06.jpg" alt="apache_ant_06" width="589" height="629" /></a></p>
+<p>Entre com <strong>ANT_HOME</strong> e o caminho de onde foi extraído o Ant no seu computador:</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_07.jpg"><img class="aligncenter  wp-image-7630" src="{{ site.baseurl }}/images/2015/03/apache_ant_07.jpg" alt="apache_ant_07" width="525" height="211" /></a></p>
+<h4>4 - Adicionando o ANT_HOME no Path:</h4>
+<p>Com a variável <strong>ANT_HOME</strong> criada, vamos adicionar o <strong>ANT_HOME</strong> no <strong>Path</strong>. O comando <em><strong>ant</strong></em> está disponível nesse diretório e por isso temos que adicionar ele no <strong>Path</strong>.</p>
+<p>Na parte de baixo das variáveis de ambiente, localize o Path, selecione e clique em Editar:</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_08.jpg"><img class="aligncenter  wp-image-7631" src="{{ site.baseurl }}/images/2015/03/apache_ant_08.jpg" alt="apache_ant_08" width="543" height="238" /></a></p>
+<p>No final, adicione o seguinte valor:</p>
+<pre class="lang:default decode:true">;%ANT_HOME%\bin</pre>
+<p>Vai ficar assim (o importe é adicionar no final do Path, o que tiver antes está ok - e depois pode adicionar outras variáveis como Android, etc):</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_09.jpg"><img class="aligncenter  wp-image-7632" src="{{ site.baseurl }}/images/2015/03/apache_ant_09.jpg" alt="apache_ant_09" width="551" height="227" /></a></p>
+<p>Basta clicar em OK em tudo, fechar o terminal (CMD, caso esteja aberto) e fazer o teste digitando <em><strong>ant</strong></em>. A mensagem de que o ant está configurado corretamente precisa ser algo similar a imagem abaixo:</p>
+<p><a href="{{ site.baseurl }}/images/2015/03/apache_ant_102.jpg"><img class="aligncenter  wp-image-7635" src="{{ site.baseurl }}/images/2015/03/apache_ant_102.jpg" alt="apache_ant_10" width="523" height="312" /></a></p>
+<p>Só não pode ter erro de <em>comando não reconhecido</em>, pois significa que a configuração não está completa.</p>
+<p>Com essa configuração você consegue fazer build de projetos java automaticamente, e caso você esteja trabalhando com <em><strong>phonegap/cordova/ionic</strong></em>, você consegue fazer o build da plataforma Android!</p>
+<p>Até a próxima! :)</p>
