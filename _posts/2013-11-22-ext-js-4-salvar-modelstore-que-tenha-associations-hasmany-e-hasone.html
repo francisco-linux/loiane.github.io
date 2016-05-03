@@ -1,0 +1,138 @@
+---
+layout: post
+title: 'Ext JS 4: Salvar Model/Store que tenha Associations (HasMany e HasOne)'
+date: 2013-11-22 06:00:46.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- Associations
+- Data Package
+- ExtJS 4
+- HasMany
+- HasOne
+- Salvar Model Associations
+- Writer
+
+---
+<p>Olá pessoal,</p>
+<p>Com a chegada do Ext JS 4, a Sencha introduziu as associações (Associations) no data package. Todo mundo ficou muito contente, mas infelizmente essa parte das Associations não foi 100% implementada como a comunidade esperou.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/11/extjs-associations-writer-loiane.png"><img class="aligncenter size-full wp-image-6799" alt="extjs-associations-writer-loiane" src="{{ site.baseurl }}/assets/extjs-associations-writer-loiane.png" width="382" height="223" /></a></p>
+<p>Só se pode carregar dados aninhados (nested data/json) usando Associations (<a href="http://www.loiane.com/2012/02/curso-de-extjs-4-aula-14-data-package-model-associations/" target="_blank">você pode assistir um tutorial sobre isso aqui</a>). Mas e a parte de salvar, enviar os dados aninhados de volta para o sever, como é que fica? Pois é, não fica, ou seja, não é possível via API nativa do Ext JS.</p>
+<p>Mas...  a gente dá um jeito em tudo. Existem uns workarounds, maneiras de fazer isso funcionar. E não é gambiarra, é apenas modificar o código do Ext JS para que funcione do jeito que a gente quer.</p>
+<p>Para salvar dados via data package existem duas formas: fazer um sync na Store ou chamar o método save do Model. O sync da Store é o mais usado e por isso vou mostrar esse workaround aqui.</p>
+<h2>Solução:</h2>
+<p>Basta criar um novo Writer com a funcionalidade de incluir os dados associados. Simples né?</p>
+<p>Segue código:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]Ext.define('AssociatedWriter', {<br />
+    extend: 'Ext.data.writer.Json',<br />
+    alias: 'writer.associatedjson',</p>
+<p>    constructor: function(config) {<br />
+        this.callParent(arguments);<br />
+    },</p>
+<p>    getRecordData: function (record, operation) {<br />
+        record.data = this.callParent(arguments);<br />
+        Ext.apply(record.data, record.getAssociatedData());<br />
+        return record.data;<br />
+    }<br />
+});[/code]</p>
+<p>Você pode colocar esse código dentro da sua pasta app do seu projeto MVC sem problemas.</p>
+<h2>Exemplo de uso:</h2>
+<p>Considere que temos 2 Models: Contato e Telefone. Seguem os Models com Association:</p>
+<p><strong>Model Contato</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]Ext.define('Contato',{<br />
+    extend: 'Ext.data.Model',</p>
+<p>    fields: [<br />
+            {name: 'id', type: 'int'},<br />
+            {name: 'nome', type: 'string'},<br />
+            {name: 'sobrenome', type: 'string'}<br />
+    ],</p>
+<p>    hasMany: {model: 'Telefone', name: 'telefones', foreignKey: 'contatoId'}<br />
+});[/code]</p>
+<p><strong>Model Telefone</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]Ext.define('Telefone',{<br />
+    extend: 'Ext.data.Model',</p>
+<p>    fields: [<br />
+            {name: 'id', type: 'int'},<br />
+            {name: 'ddd', type: 'string'},<br />
+            {name: 'numero', type: 'string'},<br />
+            {name: 'contatoId', type: 'int'}<br />
+    ]<br />
+});[/code]</p>
+<p><strong>Store Contatos</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="20"]Ext.define('Contatos',{<br />
+    extend: 'Ext.data.Store',<br />
+    model: 'Contato',<br />
+    proxy: {<br />
+        type: 'ajax',</p>
+<p>        api: {<br />
+            create: 'php/json/criaContato.php', //CRUD<br />
+            read: 'php/json/listaContatos.php',<br />
+            update: 'php/json/atualizaContato.php',<br />
+            destroy: 'php/json/deletaContato.php',<br />
+        },</p>
+<p>        reader: {<br />
+            type: 'json',<br />
+            root: 'contatos'<br />
+        },</p>
+<p>        writer: {<br />
+            type: 'associatedjson', //nosso Writer customizado<br />
+            root: 'contatos',<br />
+            writeAllFields: true,<br />
+            encode: true,<br />
+            allowSingle: false<br />
+        }<br />
+    }<br />
+});[/code]</p>
+<p><strong>Código de Teste</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]Ext.onReady(function(){</p>
+<p>    var store = Ext.create('Contatos');</p>
+<p>    var novoTelefone01 = Ext.create('Telefone',{<br />
+    	ddd: '11',<br />
+    	numero: '9 9999-9999'<br />
+    });</p>
+<p>    var novoTelefone02 = Ext.create('Telefone',{<br />
+    	ddd: '11',<br />
+    	numero: '9 8888-8888'<br />
+    });</p>
+<p>    var novoContato = Ext.create('Contato',{<br />
+    	nome: 'Loiane',<br />
+    	sobrenome: 'Groner'<br />
+    });</p>
+<p>    novoContato.telefones().add(novoTelefone01);<br />
+    novoContato.telefones().add(novoTelefone02);</p>
+<p>    store.add(novoContato);</p>
+<p>    store.sync();<br />
+});[/code]</p>
+<p>E se a gente usar o nosso Writer customizado na Store, vamos enviar dados assim para o server:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/11/extjs-associations-writer.png"><img class="aligncenter  wp-image-6797" alt="extjs-associations-writer" src="{{ site.baseurl }}/assets/extjs-associations-writer.png" width="564" height="194" /></a></p>
+<p>E no server basta fazer o decode do JSON:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]{<br />
+   contatos:[<br />
+      {<br />
+         &quot;id&quot;:0,<br />
+         &quot;nome&quot;:&quot;Loiane&quot;,<br />
+         &quot;sobrenome&quot;:&quot;Groner&quot;,<br />
+         &quot;telefones&quot;:[<br />
+            {<br />
+               &quot;id&quot;:0,<br />
+               &quot;ddd&quot;:&quot;11&quot;,<br />
+               &quot;numero&quot;:&quot;9 9999-9999&quot;,<br />
+               &quot;contatoId&quot;:0<br />
+            },<br />
+            {<br />
+               &quot;id&quot;:0,<br />
+               &quot;ddd&quot;:&quot;11&quot;,<br />
+               &quot;numero&quot;:&quot;9 8888-8888&quot;,<br />
+               &quot;contatoId&quot;:0<br />
+            }<br />
+         ]<br />
+      }<br />
+   ]<br />
+}[/code]</p>
+<p>Parece complicado, mas na verdade é bem simples! :)</p>
+<p>Bem, é isso!</p>
+<p>Pra quem quiser fazer download do Writer customizado e do arquivo de exemplo, segue repositório do github: <a href="https://github.com/loiane/extjs-associations-writer" target="_blank">https://github.com/loiane/extjs-associations-writer</a></p>
+<p>Até a próxima! :)</p>
