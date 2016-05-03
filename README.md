@@ -15,3 +15,6 @@ For more details about the theme I'm using please refer to [Minimal Mistakes Jek
 ### Notes
 
 Despite being open sourced, all and content remain copyright of Loiane Groner. Please don't steal!
+
+Needs review:
+2015-02-11-curso-java-basico-aula-17-loop-for.html
