@@ -1,0 +1,343 @@
+---
+layout: post
+title: Entendendo o Ext.Ajax.request (Success X Failure)
+date: 2014-01-20 07:00:04.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+- Ext JS 4
+tags:
+- Callback
+- Ext JS 3
+- Ext.Ajax.request
+- ExtJS
+- Success X Failure
+
+---
+<p>Olá pessoal,</p>
+<p>Hoje vou falar um pouco sobre o <em><strong>Ext.Ajax.request</strong></em>, especialmente sobre as funções de callback de <em><strong>Success</strong> </em>e <em><strong>Failure</strong></em>. Esse é um dos erros que mais vejo em códigos alheios por aí.</p>
+<p>E por que especialmente sobre o <em><strong>Ext.Ajax.request</strong></em>? Mesmo quando a gente trabalha com <em><strong>Store</strong> </em>ou com <em><strong>Submit</strong> </em>de <em><strong>Forms</strong> </em>no <strong>ExtJS</strong>, por trás o <em><strong>Ext.Ajax</strong></em> é chamado. Então entendendo como o callback funciona, podemos aplicar a mesma lógica para a <em><strong>Store</strong> </em>e o <em><strong>Submit</strong> </em>de um Form.</p>
+<p>[caption id="attachment_6972" align="aligncenter" width="360"]<a href="http://www.loiane.com/wp-content/uploads/2014/01/success-and-failure-sign.jpg"><img class=" wp-image-6972" alt="success-and-failure-sign" src="{{ site.baseurl }}/assets/success-and-failure-sign.jpg" width="360" height="270" /></a> Fonte da Img: http://cdn.worldcupblog.org/www.worldcupblog.org/files/2010/07/success-and-failure-sign.jpg[/caption]</p>
+<p>Primeiro vou mostrar para vocês como esses callbacks são usados e de forma errada. Depois vou mostrar a forma como devem ser usados. E por último, uma maneira de deixar o seu código ainda mais limpo e bonito, reusando o máximo de código que a gente pode (afinal, não basta funcionar, código limpo e bonito também agrega valor né?).</p>
+<p>Para exemplificar, suponha o cenário de uma página de Login. Para esse exemplo, criei 3 páginas de Login idênticas, apenas diferindo o xtype e um Controller. Tenho também um php que vai no banco buscar o usuário e senha entrado pelo usuário. Para nosso exemplo, vamos criar uma tabela usuário (com colunas usuário e senha) e vamos inserir apenas 1 linha nessa tabela: usuário "admin" e senha "admin". Segue o script:</p>
+<pre class="lang:mysql decode:true">CREATE SCHEMA `blog` ;
+
+CREATE  TABLE `blog`.`user` (
+
+  `username` VARCHAR(45) NOT NULL ,
+
+  `password` VARCHAR(45) NOT NULL ,
+
+  PRIMARY KEY (`username`) ,
+
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) );
+
+ INSERT INTO `blog`.`user` (`username`, `password`) VALUES ('admin', 'admin');</pre>
+<p>Claro que isso é apenas um exemplo viu gente!</p>
+<p>No <em><strong>PHP</strong></em>, criei um arquivo login.php que apenas vai ao banco de dados fazer o <em><strong>SELECT</strong> </em>com o usuário e senha passado no Form de Login. Se usuário e senha existem na base, retorna um <em>success = true e msg = "Usuário Autenticado!"</em>. Caso contrário: <em>success = false e msg = "Usuário ou Senha Incorretos."</em>. Lembrando que o retorno para ExtJS é sempre no formato <em><strong>JSON</strong></em>.</p>
+<p>Segue o código php - bem simples que é pra mesmo quem não programa em PHP (como eu! rs) conseguir entender:</p>
+<pre class="lang:php decode:true">&lt;?php
+
+require("db/db.php");
+
+// username and password sent from form
+$userName = $_POST['user'];
+$pass = $_POST['password'];
+
+$userName = $mysqli-&gt;real_escape_string($userName);
+$pass = $mysqli-&gt;real_escape_string($pass);
+$sql = "SELECT * FROM USER WHERE userName='$userName' and password='$pass'";
+
+$success = false;
+$msg = ' ';
+
+if ($resultdb = $mysqli-&gt;query($sql)) {
+
+        // determine number of rows result set
+        $count = $resultdb-&gt;num_rows;
+
+        // If result matched $userName and $pass, table row must be 1 row
+        if($count==1){
+
+                $success = true;
+                $msg = utf8_encode('Usuário Autenticado!');
+
+        } else {
+
+                $success = false;
+                $msg = utf8_encode('Usuário ou Senha Incorretos.');
+        }
+
+        /* close result set */
+        $resultdb-&gt;close();
+}
+
+/* close connection */
+$mysqli-&gt;close();
+
+//JSON encoding
+echo json_encode(array(
+        "success" =&gt; $success,
+        "msg" =&gt; $msg
+));
+?&gt;</pre>
+<p>No final do post coloco um link onde é possível fazer download do código completo ok?</p>
+<h1>Entendendo o Problema</h1>
+<p>Vamos agora ao Form de Login:</p>
+<pre class="lang:js decode:true">Ext.define('MyApp.view.LoginIncorrect', {
+    extend: 'Ext.form.Panel',
+    alias: 'widget.loginincorrect',
+
+    bodyPadding: 10,
+    title: 'Login Incorrect',
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'textfield',
+                    anchor: '100%',
+                    itemId: 'user',
+                    fieldLabel: 'User',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'textfield',
+                    anchor: '100%',
+                    itemId: 'pass',
+                    fieldLabel: 'Pass',
+                    inputType: 'password',
+                    allowBlank: false
+                }
+            ],
+            dockedItems: [
+                {
+                    xtype: 'toolbar',
+                    dock: 'bottom',
+                    ui: 'footer',
+                    layout: {
+                        pack: 'end',
+                        type: 'hbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'button',
+                            formBind: true,
+                            itemId: 'submit',
+                            text: 'Submit'
+                        }
+                    ]
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+    }
+
+});</pre>
+<p>É um Form com dois campos: usuário de senha e um botão de submit. Nada de mágico no form acima!</p>
+<p>Então vamos lá! Quando o usuário clicar no botão de submit, a gente quer enviar o usuário e senha para o server e mostrar um alert na tela apenas - se usuário autenticado ou outra mensagem de erro.</p>
+<p>No Controller, vamos ouvir o seguinte evento:</p>
+<pre class="lang:js decode:true">"loginincorrect button#submit": {
+    click: this.onButtonClickIncorrect
+}</pre>
+<p>Vamos agora implementar a função/método <em><strong>onButtonClickIncorrect:</strong></em></p>
+<pre class="lang:js decode:true">onButtonClickIncorrect: function(button, e, eOpts) {
+    var formPanel = button.up('form'),
+        user = formPanel.down('textfield#user').getValue(),
+        pass = formPanel.down('textfield#pass').getValue();
+
+    Ext.Ajax.request({
+        url: 'php/login.php',
+        params: {
+            user: user,
+            password: pass
+        },
+        success: function(conn, response, options, eOpts) {
+
+            Ext.Msg.show({
+                title:'Info',
+                msg: 'Login feito com sucesso',
+                icon: Ext.Msg.INFO,
+                buttons: Ext.Msg.OK
+            });
+        },
+        failure: function(conn, response, options, eOpts) {
+
+            Ext.Msg.show({
+                title:'Erro',
+                msg: 'Usuário ou Senha incorretos.',
+                icon: Ext.Msg.ERROR,
+                buttons: Ext.Msg.OK
+            });
+        }
+    });
+}</pre>
+<p>E é mais ou menos assim que a gente vê as funções de callback na maioria dos códigos Ext JS! Notou alguma coisa de errado? Se sim, ótimo! Se não, vamos passo a passo para entender.</p>
+<h3>Cenário 1: entre com usuário e senha "admin"</h3>
+<p>Esse é o resultado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-01.png"><img class="aligncenter size-full wp-image-7005" alt="ext.ajax.request-loiane-01" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-01.png" width="448" height="223" /></a></p>
+<p>Parece ok né? É porque esse é o resultado esperado.</p>
+<h3>Cenário 2: entre com usuário "abc" e senha "abc"</h3>
+<p>Esse é o resultado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-02.png"><img class="aligncenter size-full wp-image-7007" alt="ext.ajax.request-loiane-02" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-02.png" width="449" height="220" /></a></p>
+<p>Hum, não era esse o resultado né? No server estamos retornando o resultado success = false. A mensagem esperada era outra né?</p>
+<p>Aí está o erro: muita gente espera que quando se retorna <strong>success = false</strong> no server, o callback a ser executado é o da função <strong>failure</strong>, o que não é verdade. O código está correto, mas o resultado que os desenvolvedores espera não está correto.</p>
+<h2>Quando o success e quando o failure são executados?</h2>
+<p>O success significa que o request conseguiu chegar ao server com sucesso, não importa o resultado no server (o seu <em><strong>success</strong> </em>interno como <em><strong>true</strong> </em>ou <em><strong>false</strong></em>). O <em>success</em> que usamos no server para retornar para o ExtJS <span style="text-decoration: underline;">não tem</span> nada a ver com o callback <em><strong>success</strong> </em>do <em><strong>Ext.Ajax.request</strong></em>! Se o request chegou ao server, automaticamente o callback success será executado!</p>
+<p>Mas e o failure? O failure é executado quando acontece uma falha na comunicação. Seja porque não encontrou a URL (erro 404), o servidor está fora do ar, etc.</p>
+<p>Vamos ver um terceiro cenário e entender o porquê precisamos do failure também.</p>
+<h3>Cenário 3: Renomeie o arquivo login.php para login_.php</h3>
+<p>Quando o ExtJS tentar executar o login.php, teremos um erro 404 - de URL não encontrada.</p>
+<p>Entre com usuário e senha "admin".</p>
+<p>Esse é o resultado.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-03.png"><img class="aligncenter  wp-image-7008" alt="ext.ajax.request-loiane-03" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-03.png" width="597" height="459" /></a></p>
+<p>Repare no console. O usuário nessa hora fica maluco, pois tá entrando com a senha e usuário corretos, mas a mensagem que o sistema mostra para o usuário é meio sem noção. Por isso é importante saber essas diferenças para que o seu sistema possa tomar as decisões corretas! O código acima não prevê todos os cenários e isso faz com que o sistema não funcione direito! O sistema funciona de maneira errada, e isso é um erro gravíssimo.</p>
+<h1>Maneira Certa de Usar</h1>
+<p>Vamos ver agora a maneira correta de prever esses casos. Temos 3 casos então.</p>
+<p>Essa seria a função/método com os 3 cenários:</p>
+<pre class="lang:js decode:true">onButtonClickCorrect: function(button, e, eOpts) {
+    var formPanel = button.up('form'),
+        user = formPanel.down('textfield#user').getValue(),
+        pass = formPanel.down('textfield#pass').getValue();
+
+    Ext.Ajax.request({
+        url: 'php/login.php',
+        params: {
+            user: user,
+            password: pass
+        },
+        success: function(conn, response, options, eOpts) {
+
+            var result = Ext.JSON.decode(conn.responseText, true);
+
+            if (!result){ // caso seja null
+                result = {};
+                result.success = false;
+                result.msg = conn.responseText;
+            }
+
+            if (result.success) {
+
+                Ext.Msg.show({
+                    title:'Info',
+                    msg: result.msg,
+                    icon: Ext.Msg.INFO,
+                    buttons: Ext.Msg.OK
+                });
+
+            } else {
+
+                Ext.Msg.show({
+                    title:'Erro',
+                    msg: result.msg,
+                    icon: Ext.Msg.ERROR,
+                    buttons: Ext.Msg.OK
+                });
+            }
+        },
+        failure: function(conn, response, options, eOpts) {
+
+            Ext.Msg.show({
+                title:'Erro - Contate Administrador do sistema!',
+                msg: conn.responseText,
+                icon: Ext.Msg.ERROR,
+                buttons: Ext.Msg.OK
+            });
+        }
+    });
+}</pre>
+<p>Vamos por partes. Quando o <em><strong>success</strong> </em>e o <em><strong>failure</strong> </em>são executados, eles recebem alguns parâmetros que são passados no request. E temos como usar esses parâmetros. No server, estamos retornando <em><strong>success</strong> </em>e <em><strong>msg</strong></em>, então vamos usar isso né? O parâmetro <em><strong>conn.responseText</strong></em> é que contém o <em><strong>success</strong> </em>e a <em><strong>msg</strong></em>, porém estão em uma String com formato <strong>JSON</strong>. Se quisermos usar algum desses parâmetros, temos que decodificar (linha 14). Caso o server não envie nada (por exemplo, caso ocorra algum erro na conexão com o banco de dados) o resultado dessa codificação será <em><strong>null</strong></em>. Então vamos criar um objeto que podemos usar ( linhas 16 a 20 - nesse caso apenas o <em><strong>responseText</strong> </em>vai conter alguma mensagem de execeção ou erro).</p>
+<p>Agora sim vamos usar o <em><strong>success</strong> </em>que usamos no server. Se ele for <strong><em>true</em></strong>, tudo ocorreu bem, então a gente mostra a mensagem que o server enviou (usuário autenticado - linhas 24 a 29). Caso contrário, a gente também exibe uma mensagem (que pode ser de usuário ou senha incorretos ou alguma mensagem de exceção/erro - linhas 33 a 38).</p>
+<p>A gente está acostumado a retornar o <strong><em>success</em> </strong>no ExtJS, mas como você pode ver, a gente pode retornar qualquer <strong>flag</strong> de <em>true/false</em> que nesse caso não faz diferença.</p>
+<p>E caso tenha alguma falha de comunicação com o servidor, a gente também exibe uma mensagem para o usuário, pedindo para ele/ela entrar em contato com alguém, já que isso não é falha do usuário, e sim do sistema.</p>
+<p>Vamos ver nossos 3 cenários novamente para ver o resultado e um cenário 4 (erro com banco de dados).</p>
+<h3>Cenário 1: entre com usuário e senha "admin"</h3>
+<p>Esse é o resultado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-04.png"><img class="aligncenter size-full wp-image-7009" alt="ext.ajax.request-loiane-04" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-04.png" width="464" height="262" /></a></p>
+<p>Parece ok né? É porque esse é o resultado esperado.</p>
+<h3>Cenário 2: entre com usuário "abc" e senha "abc"</h3>
+<p>Esse é o resultado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-05.png"><img class="aligncenter size-full wp-image-7010" alt="ext.ajax.request-loiane-05" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-05.png" width="477" height="260" /></a></p>
+<p>Resultado é o esperado.</p>
+<h3>Cenário 3: Renomeie o arquivo login.php para login_.php</h3>
+<p>Quando o ExtJS tentar executar o login.php, teremos um erro 404 - de URL não encontrada.</p>
+<p>Entre com usuário e senha "admin".</p>
+<p>Esse é o resultado.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-06.png"><img class="aligncenter size-full wp-image-7011" alt="ext.ajax.request-loiane-06" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-06.png" width="667" height="513" /></a></p>
+<p>Agora sim temos uma mensagem que significa algo!</p>
+<h3>Cenário 4: Erro/Exception com Banco de Dados</h3>
+<p>Vá no arquivo db.php e troque a senha do banco de dados - para uma errada. Queremos que o php lance um erro.</p>
+<p>Entre com usuário e senha "admin".</p>
+<p>Esse é o resultado.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-07.png"><img class="aligncenter size-full wp-image-7012" alt="ext.ajax.request-loiane-07" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-07.png" width="611" height="215" /></a></p>
+<p>Erro no banco de dados. Mesmo assim caiu no success (o request chegou ao servidor, mas teve um erro no código). E a gente consegue mostrar uma mensagem mais útil também.</p>
+<p>Viu como codificar corretamente faz toda a diferença? :)</p>
+<h1>Usando Funções de Escopo</h1>
+<p>Bem, não basta codificar corretamente, temos que codificar bonito também! Esse terceiro tópico é uma boa prática a ser seguida, ou seja, é opcional, mas é sempre legal a gente seguir boas práticas (isso nos torna desenvolvedores melhores também!).</p>
+<p>No nosso exemplo, tem pouco código dentro das funções de callback. Se você pegar um sistema de verdade, geralmente tem bem mais código, e deixar tudo junto assim acaba ficando muito grande e mais complicado pra ler (e também pra dar manutanção).</p>
+<pre class="lang:js decode:true">onButtonClickBestPractice: function(button, e, eOpts) {
+    var formPanel = button.up('form'),
+        user = formPanel.down('textfield#user').getValue(),
+        pass = formPanel.down('textfield#pass').getValue();
+
+    Ext.Ajax.request({
+        url: 'php/login.php',
+        params: {
+            user: user,
+            password: pass
+        },
+        scope: this,
+        success: this.onLoginSucess,
+        failure: this.onLoginFailure
+    });
+}</pre>
+<p><span style="line-height: 1.5em;">Pra deixar o código mais limpo e mais bonito e podendo reusar código, vamos usar funções de <strong>escopo</strong>. Vamos ter como escopo o próprio <em>Controller</em> (linha 12).</span></p>
+<p>Se você quiser saber o que acontece em caso de <em><strong>success</strong></em>, basta ir até o função <em><strong>onLoginSuccess</strong> </em>e caso <em><strong>failure</strong></em>, basta ir até a função <em><strong>onLoginFailure</strong></em>. Bem mais organizado.</p>
+<p>Vamos ver a função <em><strong>onLoginSuccess</strong> </em>primeiro:</p>
+<pre class="lang:js decode:true">onLoginSucess: function(conn, response, options, eOpts) {
+    var result = Ext.JSON.decode(conn.responseText, true);
+
+    console.log(result);
+
+    if (!result){ // caso seja null
+        result = {};
+        result.success = false;
+        result.msg = conn.responseText;
+    }
+
+    if (result.success) {
+
+        this.showMessage('Info', result.msg, Ext.Msg.INFO);
+
+    } else {
+
+        this.showMessage('Erro', result.msg, Ext.Msg.ERROR);
+
+    }
+}</pre>
+<p>É o mesmo código que apresentamos no tópico anterior, só que criamos uma outra função que recebe o título, a mensagem e o ícone a ser mostrado no alerta:</p>
+<pre class="lang:js decode:true">showMessage: function(title, msg, icon) {
+    Ext.Msg.show({
+        title: title,
+        msg: msg,
+        icon: icon,
+        buttons: Ext.Msg.OK
+    });
+}</pre>
+<p>Assim dá pra gente já fazer um reuso de código. Você ainda pode criar uma classe <em><strong>Util</strong> </em>para funções assim. E por exemplo, na parte que faz o decode da mensagem do server e criar o objeto <em><strong>result</strong></em>, você pode criar uma função para isso também. Geralmente faço isso para seguir um padrão de retorno do server e também manter um padrão no código inteiro.</p>
+<p>Vamos agora para a função de <em><strong>failure</strong></em>:</p>
+<pre class="lang:js decode:true">onLoginFailure: function(conn, response, options, eOpts) {
+    this.showMessage('Erro - Contate Administrador do sistema!', conn.responseText, Ext.Msg.ERROR);
+}</pre>
+<p>Muito mais limpo o código né?</p>
+<p>São pequenas coisas assim que fazem a diferença. Pode parecer que isso não faz diferença, mas faz sim. Tem diferença na performance e quando fazemos o build de produção, o arquivo fica menor e com isso o javascript da app fica com um tamanho menor (em apps maiores - da vida real - é que a gente percebe essa diferença). E o melhor, faz muita diferença depois de um tempo que você (ou outro desenvolvedor) vai ler esse código.</p>
+<h1>Download do Código Fonte Completo</h1>
+<p>Quem tiver interesse de fazer download e brincar para ver a diferença, segue repositório do github (tá em forma de projeto do Sencha Architect 3 também): <a href="https://github.com/loiane/extjs-ajax-request-example" target="_blank">https://github.com/loiane/extjs-ajax-request-example</a></p>
+<p>Espero que tenham gostado desse tutorial, tempo que não escrevia algo um pouco mais intermediário-avançado.</p>
+<p>Se tiverem mais alguma boa prática que querem compartilhar, basta deixar nos comentários!</p>
+<p>Até a próxima! :)</p>

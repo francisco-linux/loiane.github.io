@@ -1,0 +1,460 @@
+---
+layout: post
+title: Persistência de Dados em Java com jOOQ (alternativa ao Hibernate, MyBatis,
+  JDBC)
+date: 2014-01-27 05:00:58.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- jOOQ
+tags:
+- banco de dados
+- Java
+- jOOQ
+- Persistencia
+
+---
+<p>Olá pessoal,</p>
+<p>Começando uma série de posts aqui no blog para falar sobre o <a href="http://www.jooq.org/" target="_blank">jOOQ</a>, um framework java de persistência de dados que pode ser usado como uma alternativa ao Hibernate, MyBatis, JDBC, SpringData, etc.</p>
+<p>No post de hoje vou apresentar esse framework a vocês, prós e contras e como fazer o setup de um projeto HelloWorld que vamos usar como base nos próximos posts.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-logo-black.png"><img class="aligncenter  wp-image-7105" alt="jooq-logo-black" src="{{ site.baseurl }}/assets/jooq-logo-black.png" width="180" height="180" /></a></p>
+<p>O <a href="http://www.jooq.org/" target="_blank">jOOQ</a> ganhou bastante espaço nos últimos tempos, principalmente em conferências na gringa. Um dos motivos é essa frase que encontramos logo na página inicial do framework:</p>
+<blockquote><p>jOOQ gera código Java a partir de seu banco de dados e permite que você construa consultas SQL typesafe através de sua API fluente.</p></blockquote>
+<p>Ou seja, ao contrário de outros frameworks, onde você configura a partir de classes Java, o <a href="http://www.jooq.org/" target="_blank">jOOQ</a> é focado totalmente no SQL, fazendo a configuração das classes para você. Vocês irão ver que apenas de setup inicial, quase não vamos escrever código.</p>
+<p>O <a href="http://www.jooq.org/" target="_blank">jOOQ</a> é open source, e essa versão oferece suporte a banco de dados que também são open source. Se você quiser usar o <a href="http://www.jooq.org/" target="_blank">jOOQ</a> com algum banco de dados comercial, é preciso pagar (justo; e do ponto de vista corporativo, a licença tem um preço muito bom - afinal, desenvolvedor também precisa pagar contas né? rs).</p>
+<p>Para fazer setup do nosso projeto, vamos precisar:</p>
+<ul>
+<li>IDE (vou usar o <a href="http://www.eclipse.org/downloads/" target="_blank">Eclipse</a>)</li>
+<li><a href="http://www.jooq.org/download/" target="_blank">jars do jOOQ</a></li>
+<li><a href="http://dev.mysql.com/downloads/connector/j/" target="_blank">jar do conector do banco de dados</a> (vou usar o MySQL)</li>
+<li>Banco de dados de exemplo (vou usar o <a href="http://dev.mysql.com/doc/index-other.html" target="_blank">World do MySQL</a>)</li>
+</ul>
+<p><em>Também é possível usar o Maven para criar o projeto (vou criar o projeto com os jars mesmo, caso alguém queria executar o exemplo e ainda não use Maven).</em></p>
+<p><em></em>Os passos que vamos executar nesse tutorial são:</p>
+<ol>
+<li>Criação do banco de dados de exemplo</li>
+<li>Criação do projeto Java</li>
+<li>Geração das classes com o jOOQ</li>
+<li>Criação de uma classe Main para testar a conexão com o banco de dados</li>
+<li>Codificar uma query usando jOOQ DSL</li>
+<li>Iterar os resultados</li>
+</ol>
+<h1>1 - Criação do banco de dados de exemplo</h1>
+<p>Vou usar um banco de dados pronto para esse exemplo. É o banco World disponibilizado pelo MySQL mesmo - pode fazer download de qualquer versão abaixo - eu fiz do InnoDB.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-01.png"><img class="aligncenter  wp-image-7109" alt="jooq-loiane-01" src="{{ site.baseurl }}/assets/jooq-loiane-01.png" width="566" height="171" /></a></p>
+<p>Faça o Download e instal no seu MySQL. Basta executar os scripts que vem dentro do zip. O meu banco ficou assim:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-02.png"><img class="aligncenter size-full wp-image-7110" alt="jooq-loiane-02" src="{{ site.baseurl }}/assets/jooq-loiane-02.png" width="190" height="143" /></a></p>
+<h1>2 - Criação do projeto Java</h1>
+<p>Crie um projeto Java (Java Project mesmo, o mais simples) - estou usando o Eclipse - e crie uma pasta chamada <em>lib</em> para colocar os jars - e não esqueça de adicionar os jars ao <em>build path</em> do projeto:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-03.png"><img class="aligncenter  wp-image-7112" alt="jooq-loiane-03" src="{{ site.baseurl }}/assets/jooq-loiane-03.png" width="551" height="518" /></a></p>
+<h2>Maven</h2>
+<p>Se preferir, pode gerar o projeto maven e usar o seguintes artefatos no seu <em>pom.xml</em>:</p>
+<pre class="lang:xhtml decode:true">&lt;dependency&gt;
+  &lt;groupId&gt;org.jooq&lt;/groupId&gt;
+  &lt;artifactId&gt;jooq&lt;/artifactId&gt;
+  &lt;version&gt;3.2.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.jooq&lt;/groupId&gt;
+  &lt;artifactId&gt;jooq-meta&lt;/artifactId&gt;
+  &lt;version&gt;3.2.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.jooq&lt;/groupId&gt;
+  &lt;artifactId&gt;jooq-codegen&lt;/artifactId&gt;
+  &lt;version&gt;3.2.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+  &lt;version&gt;5.1.28&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+<h1>3 - Geração das classes com o jOOQ</h1>
+<p>O jOOQ é totalmente focado no SQL. Por este motivo, não criamos classes Java e mapeamos ao banco de dados como geralmente fazemos quando utilizamos Hibernate, JPA, MyBatis, etc.</p>
+<p>É o jOOQ que gera o código java que precisamos para "mapear" o banco de dados. E é bem simples. Basta criar um arquivo XML para isso que fica assim - arquivo <em><strong>library.xml</strong></em> que é criado dentro da pasta <em><strong>src</strong></em> do projeto:</p>
+<pre class="lang:xhtml decode:true">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.2.0.xsd"&gt;
+  &lt;!-- Configure the database connection here --&gt;
+  &lt;jdbc&gt;
+    &lt;driver&gt;com.mysql.jdbc.Driver&lt;/driver&gt;
+    &lt;url&gt;jdbc:mysql://localhost:3306/world&lt;/url&gt;
+    &lt;user&gt;root&lt;/user&gt;
+    &lt;password&gt;root&lt;/password&gt;
+  &lt;/jdbc&gt;
+
+  &lt;generator&gt;
+    &lt;!-- The default code generator. You can override this one, to generate your own code style
+         Defaults to org.jooq.util.DefaultGenerator --&gt;
+    &lt;name&gt;org.jooq.util.DefaultGenerator&lt;/name&gt;
+
+    &lt;database&gt;
+      &lt;!-- The database type. The format here is:
+           org.util.[database].[database]Database --&gt;
+      &lt;name&gt;org.jooq.util.mysql.MySQLDatabase&lt;/name&gt;
+
+      &lt;!-- The database schema (or in the absence of schema support, in your RDBMS this
+           can be the owner, user, database name) to be generated --&gt;
+      &lt;inputSchema&gt;world&lt;/inputSchema&gt;
+
+      &lt;!-- All elements that are generated from your schema
+           (A Java regular expression. Use the pipe to separate several expressions)
+           Watch out for case-sensitivity. Depending on your database, this might be important! --&gt;
+      &lt;includes&gt;.*&lt;/includes&gt;
+
+      &lt;!-- All elements that are excluded from your schema
+           (A Java regular expression. Use the pipe to separate several expressions).
+           Excludes match before includes --&gt;
+      &lt;excludes&gt;&lt;/excludes&gt;
+    &lt;/database&gt;
+
+    &lt;target&gt;
+      &lt;!-- The destination package of your generated classes (within the destination directory) --&gt;
+      &lt;packageName&gt;com.loiane.mysql.generatedclasses&lt;/packageName&gt;
+
+      &lt;!-- The destination directory of your generated classes --&gt;
+      &lt;directory&gt;/Users/loiane/Documents/workspace/jOOQ-examples/src&lt;/directory&gt;
+    &lt;/target&gt;
+  &lt;/generator&gt;
+&lt;/configuration&gt;</pre>
+<ul>
+<li>Nas linhas 4-9 temos os dados para fazer a conexão com o banco de dados.</li>
+<li>Na linha 19 temos qual é o banco de dados que vamos nos conectar. No nosso caso é o MySQL.</li>
+<li>Na linha 23 temos o nome do schema que queremos nos conectar.</li>
+<li>Na linha 38 qual é o pacote onde queremos que as classes sejam geradas.</li>
+<li>E na linha 41 qual é o caminho completo da pasta <em><strong>src</strong></em> do projeto.</li>
+</ul>
+<p>Para gerar as classes é possível executar por linha de comando, mas vamos fazer no eclipse mesmo. Para isso, selecione o projeto e vá em <em>Run Configurations</em>:</p>
+<p>Selecione o projeto e a classe principal como mostra abaixo:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-04.png"><img class="aligncenter  wp-image-7118" alt="jooq-loiane-04" src="{{ site.baseurl }}/assets/jooq-loiane-04.png" width="593" height="351" /></a></p>
+<p>E adicione o <em><strong>library.xml</strong></em> como parâmetro:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-05.png"><img class="aligncenter  wp-image-7117" alt="jooq-loiane-05" src="{{ site.baseurl }}/assets/jooq-loiane-05.png" width="598" height="350" /></a></p>
+<p style="text-align: left;">Clique em <em><strong>Run</strong></em><strong> </strong>- e veja o output no console. Será algo similar a isso:</p>
+<pre class="lang:sh decode:true">Jan 23, 2014 11:15:43 AM org.jooq.tools.JooqLogger info
+INFO: Initialising properties  : /library.xml
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: License parameters
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   Thank you for using jOOQ and jOOQ's code generator
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Database parameters
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   dialect                : MYSQL
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   target dir             : /Users/loiane/Documents/workspace/jOOQ-examples/src
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   target package         : com.loiane.mysql.generatedclasses
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   includes               : [.*]
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   excludes               : []
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   includeExcludeColumns  : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: DefaultGenerator parameters
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   strategy               : class org.jooq.util.DefaultGeneratorStrategy
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   deprecated             : true
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   generated annotation   : true
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   JPA annotations        : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   validation annotations : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   instance fields        : true
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   records                : true
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   pojos                  : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   immutable pojos        : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   interfaces             : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   daos                   : false
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   relations              : true
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:   global references      : true
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO:
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Generation remarks
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Emptying                 : /Users/loiane/Documents/workspace/jOOQ-examples/src/com/loiane/mysql/generatedclasses
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Generating schemata      : Total: 1
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Generating schema        : World.java
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: ----------------------------------------------------------
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Sequences fetched        : 0 (0 included, 0 excluded)
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Tables fetched           : 3 (3 included, 0 excluded)
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: UDTs fetched             : 0 (0 included, 0 excluded)
+Jan 23, 2014 11:15:44 AM org.jooq.tools.JooqLogger info
+INFO: Generating tables
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating table         : City.java [input=City, output=City, pk=KEY_City_PRIMARY]
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: ARRAYs fetched           : 0 (0 included, 0 excluded)
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Enums fetched            : 2 (2 included, 0 excluded)
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating table         : Country.java [input=Country, output=Country, pk=KEY_Country_PRIMARY]
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating table         : Countrylanguage.java [input=CountryLanguage, output=CountryLanguage, pk=KEY_CountryLanguage_PRIMARY]
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Tables generated         : Total: 1.862s
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating table references
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Table refs generated     : Total: 1.864s, +1.34ms
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating Keys
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Keys generated           : Total: 1.868s, +4.122ms
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating records
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating record        : CityRecord.java
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating record        : CountryRecord.java
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating record        : CountrylanguageRecord.java
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Table records generated  : Total: 1.903s, +35.639ms
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating ENUMs
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating ENUM          : CountryContinent.java
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Generating ENUM          : CountrylanguageIsofficial.java
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Enums generated          : Total: 1.907s, +3.571ms
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Routines fetched         : 0 (0 included, 0 excluded)
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: Packages fetched         : 0 (0 included, 0 excluded)
+Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
+INFO: GENERATION FINISHED!     : Total: 1.911s, +3.693ms</pre>
+<p>E pronto! Faça o refresh do projeto e verá que as classes foram geradas!</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-06.png"><img class="aligncenter size-full wp-image-7119" alt="jooq-loiane-06" src="{{ site.baseurl }}/assets/jooq-loiane-06.png" width="357" height="361" /></a></p>
+<h2 style="text-align: left;">No XML!</h2>
+<p style="text-align: left;">Se você assim como eu não é muito fã de XML, também é possível fazer a geração das classes acima sem usar XML!</p>
+<p style="text-align: left;">Para isso, vamos criar uma classe com um método main (ponto de entrada):</p>
+<pre class="lang:java decode:true">package com.loiane.config;
+
+import org.jooq.util.GenerationTool;
+import org.jooq.util.jaxb.Configuration;
+import org.jooq.util.jaxb.Database;
+import org.jooq.util.jaxb.Generator;
+import org.jooq.util.jaxb.Jdbc;
+import org.jooq.util.jaxb.Target;
+
+public class JOOQConfig {
+
+	public static void main(String[] args) throws Exception {
+		Configuration configuration = new Configuration()
+		    .withJdbc(new Jdbc()
+		        .withDriver("com.mysql.jdbc.Driver")
+		        .withUrl("jdbc:mysql://localhost:3306/world")
+		        .withUser("root")
+		        .withPassword("root"))
+		    .withGenerator(new Generator()
+		        .withName("org.jooq.util.DefaultGenerator")
+		        .withDatabase(new Database()
+		            .withName("org.jooq.util.mysql.MySQLDatabase")
+		            .withIncludes(".*")
+		            .withExcludes("")
+		            .withInputSchema("world"))
+		        .withTarget(new Target()
+		            .withPackageName("com.loiane.mysql.generatedclasses")
+		            .withDirectory("/Users/loiane/Documents/workspace/jOOQ-examples/src")));
+
+		GenerationTool.main(configuration);
+	}
+
+}</pre>
+<p style="text-align: left;">E se executarmos essa classe, o resultado será o mesmo que usando o library.xml:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-07.png"><img class="aligncenter size-full wp-image-7122" alt="jooq-loiane-07" src="{{ site.baseurl }}/assets/jooq-loiane-07.png" width="368" height="391" /></a></p>
+<h1>4 - Criação de uma classe Main para testar a conexão com o banco de dados</h1>
+<p>O próximo passo agora é criar uma classe para testarmos a conexão. Para deixar mais simples, não vou usar JUnit ou alguma biblioteca de testes. Vou criar uma classe bem simples para testar:</p>
+<pre class="lang:java decode:true">package com.loiane.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class TestConnection {
+
+	public static void main(String[] args) {
+		Connection conn = null;
+
+		String userName = "root";
+		String password = "root";
+		String url = "jdbc:mysql://localhost:3306/world";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(url, userName, password);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+	}
+}</pre>
+<h1>5 - Codificar uma query usando jOOQ DSL</h1>
+<p>O próximo passo é buscar os dados no banco. Para isso vamos usar o jOOQ DSL:</p>
+<pre class="lang:java mark:29-30 decode:true">package com.loiane.test;
+
+import static com.loiane.mysql.generatedclasses.tables.Country.COUNTRY;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
+
+public class TestConnection {
+
+	public static void main(String[] args) {
+		Connection conn = null;
+
+		String userName = "root";
+		String password = "root";
+		String url = "jdbc:mysql://localhost:3306/world";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(url, userName, password);
+
+			//buscando dados no banco
+            DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
+            Result&lt;Record&gt; result = create.select().from(COUNTRY).fetch();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+	}
+}</pre>
+<h1>6 - Iterar os resultados</h1>
+<p>E por último, vamos fazer um loop para ver se o resultado é o mesmo esperado:</p>
+<pre class="lang:java mark:33-38 decode:true">package com.loiane.test;
+
+import static com.loiane.mysql.generatedclasses.tables.Country.COUNTRY;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
+
+public class TestConnection {
+
+	public static void main(String[] args) {
+		Connection conn = null;
+
+		String userName = "root";
+		String password = "root";
+		String url = "jdbc:mysql://localhost:3306/world";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(url, userName, password);
+
+			//buscando dados no banco
+			DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
+			Result&lt;Record&gt; result = create.select().from(COUNTRY).fetch();
+
+			//iterando os resultados
+			for (Record r : result) {
+				String code = r.getValue(COUNTRY.CODE);
+				String name = r.getValue(COUNTRY.NAME);
+
+				System.out.println("Codigo: " + code + " name: " + name);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+	}
+}</pre>
+<p>E se executarmos a classe acima o resultado será:</p>
+<pre class="lang:sh decode:true">Codigo: ABW name: Aruba
+Codigo: AFG name: Afghanistan
+Codigo: AGO name: Angola
+Codigo: AIA name: Anguilla
+Codigo: ALB name: Albania
+Codigo: AND name: Andorra
+Codigo: ANT name: Netherlands Antilles
+Codigo: ARE name: United Arab Emirates
+Codigo: ARG name: Argentina
+Codigo: ARM name: Armenia
+Codigo: ASM name: American Samoa
+Codigo: ATA name: Antarctica
+Codigo: ATF name: French Southern territories
+Codigo: ATG name: Antigua and Barbuda
+Codigo: AUS name: Australia
+Codigo: AUT name: Austria
+Codigo: AZE name: Azerbaijan
+...</pre>
+<p>Prontinho!</p>
+<h1>Download do Código Fonte</h1>
+<p>Código completo disponível em: <a href="https://github.com/loiane/jOOQ-examples" target="_blank">https://github.com/loiane/jOOQ-examples</a></p>
+<p>Referência: <a href="http://www.jooq.org/doc/3.2/manual-single-page/" target="_blank">http://www.jooq.org/doc/3.2/manual-single-page/</a></p>
+<p>Até a próxima! :)</p>
