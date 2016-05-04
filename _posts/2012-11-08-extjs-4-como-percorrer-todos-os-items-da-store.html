@@ -1,0 +1,25 @@
+---
+layout: post
+title: 'ExtJS 4: Como Percorrer todos os Items da Store'
+date: 2012-11-08 07:00:54.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ExtJS
+- ExtJS 4
+- loop Store
+- Store
+
+---
+<p>Dica rápida: como percorrer todos os items/models (loop) de uma Store usada em um Grid.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/11/extjs-grid.png"><img class="aligncenter  wp-image-5442" title="extjs-grid" src="{{ site.baseurl }}/assets/extjs-grid.png" alt="" width="293" height="178" /></a></p>
+<p>Basta usar o código abaixo:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]var store = grid.getStore();<br />
+store.each(function(record,idx){<br />
+ //faz alguma coisa<br />
+ console.log(record.get('company');<br />
+});[/code]</p>
+<p>Até a próxima!</p>
