@@ -1,0 +1,102 @@
+---
+layout: post
+title: 'Começando com Sencha Desktop Packager: Exemplo Hello World'
+date: 2013-02-25 07:00:11.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+- Sencha Desktop Packager
+tags:
+- Ext JS 3
+- Ext JS 4
+- Sencha Desktop Packager
+
+---
+<p>Ei pessoal,</p>
+<p>Assunto fresquinho aqui no blog. Hoje o tutorial é sobre o <a href="http://www.sencha.com/products/desktop-packager/" target="_blank">Sencha Desktop Packager</a>, a ferramenta da Sencha que já deu o que falar desde que foi lançada.</p>
+<p>Comecei a testar a ferramenta em Janeiro, por causa do meu trabalho, mas o problema era o bendito custo. Não pelo fato de ser caro, mas pelo fato do bundle não valer a pena - não iríamos usar todos os produtos no bundle, e pagar por algo que não vai ser usado não vale a pena.</p>
+<p>Os testes que fiz foram satisfatórios. Mas é claro, você não vai pegar a sua aplicação que hoje roda na web, empacotar e distribuir. Algumas mudanças são necessárias. Particularmente, eu gostei muito da ferramenta, e para a nossa sorte, a Sencha lançou a versão standalone com um preço bem mais camarada. E o melhor: agora todo mundo pode baixar um trial para testar.</p>
+<p>Essa versão que a Sencha lançou para trial é um pouco diferente da versão de testes para empresas. No trial a licença é validada pelo usuário e senha do fórum da Sencha, bem parecido com o Sencha Architect. É assim que eles controlam os 30 dias de testes que você tem direito. Para a versão de testes para empresas, não tem isso. Mas o resto é bem parecido.</p>
+<p>Bom, vamos lá. Para fazer esse Hello World, vocês precisam ter instalado:</p>
+<ul>
+<li><a href="http://www.sencha.com/products/extjs/" target="_blank">Ext JS SDK</a></li>
+<li><a href="http://www.sencha.com/products/sencha-cmd/download" target="_blank">Sencha Command</a></li>
+<li><a href="http://www.sencha.com/products/desktop-packager/" target="_blank">Sencha Desktop Packager</a></li>
+</ul>
+<p>Para esse tutorial, usei o Ext JS 4.2 e o Sencha Command 3.1.</p>
+<p>O SDK do Ext JS está dentro da pasta htdocs do Xammp, e o Sencha Desktop Packager também. Também criei uma pasta chamada blog dentro de htdocs para criar o exemplo.</p>
+<h1>Criando uma Aplicação Ext JS de teste</h1>
+<p>Bem, o primeiro passo é criar uma aplicação Ext JS - vou usar o Sencha Command para fazer isso, mas não é necessário:</p>
+<p>No terminal, mude o diretório para o diretório do Ext JS SDK e depois use o comando para criar a aplicação de teste (chamei de DesktopPackager).</p>
+<p>Depois, use o comando <em>sencha generate app NomedaApp caminhodaApp/NomedaApp</em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-01.png"><img class="aligncenter  wp-image-5738" alt="sencha-desktop-packager-loiane-01" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-01.png" width="572" height="512" /></a></p>
+<p>Só para testar, eis a aplicação de exemplo criada pelo Sencha Command:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-02.png"><img class="aligncenter size-full wp-image-5739" alt="sencha-desktop-packager-loiane-02" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-02.png" width="563" height="448" /></a></p>
+<p>O próximo passo é fazer o build de produção da aplicação. Mude o diretório para o diretório da aplicação e use o comando <em>sencha app build</em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-03.png"><img class="aligncenter  wp-image-5740" alt="sencha-desktop-packager-loiane-03" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-03.png" width="572" height="307" /></a></p>
+<p style="text-align: left;">Testando novamente para ver se o build de produção está rodando normalmente e sem erros:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-04.png"><img class="aligncenter  wp-image-5741" alt="sencha-desktop-packager-loiane-04" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-04.png" width="596" height="378" /></a></p>
+<p style="text-align: left;">Bem, é isso o que precisamos para empacotar uma aplicação Ext JS 4. Ter o build de produção funcionando. Se você já tem uma aplicação pronta que queira testar, basta ter o build de produção pronto (mas teste antes para ter certeza que funcionar).</p>
+<p style="text-align: left;">O próximo passo é instalar o Sencha Desktop Packager</p>
+<h1 style="text-align: left;">Instalação do Sencha Desktop Packager</h1>
+<p style="text-align: left;">Para instalar é bem simples: basta descompactar o zip baixado do site da Sencha em algum lugar do seu computador.</p>
+<p style="text-align: left;">Depois é necessário adicionar esse diretório no <strong>PATH.</strong> Depois de adicionar no <strong>PATH</strong>, digite <strong><em>ionpackage</em></strong> para ver se está funcionando corretamente.</p>
+<h2 style="text-align: left;">MAC OS / Linux (Ubuntu):</h2>
+<h2 style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-05.png"><img class="aligncenter  wp-image-5742" alt="sencha-desktop-packager-loiane-05" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-05.png" width="572" height="307" /></a>Windows</h2>
+<p style="text-align: left;">Se você usa Windows, vá nas propriedades do ícone "Meu Computador":</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-01.png"><img class="aligncenter size-full wp-image-5747" alt="sencha-desktop-packager-windows-loiane-01" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-01.png" width="238" height="369" /></a></p>
+<p style="text-align: left;">Clique em Variáveis de Sistema:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-02.png"><img class="aligncenter size-full wp-image-5748" alt="sencha-desktop-packager-windows-loiane-02" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-02.png" width="430" height="494" /></a></p>
+<p style="text-align: left;">Localize a entrada do PATH e clique em Editar:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-03.png"><img class="aligncenter size-full wp-image-5749" alt="sencha-desktop-packager-windows-loiane-03" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-03.png" width="390" height="438" /></a></p>
+<p style="text-align: left;">Vá até o final da variável PATH e adicione ; mais o caminho de onde vc extraiu o Sencha Dektop Packager. No meu caso, extraí o conteúdo do zip para C:/SenchaDesktopPackager então adiciono o seguinte conteúdo no final do PATH: ;C:/SenchaDesktopPackager e clico em OK:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-04.png"><img class="aligncenter size-full wp-image-5750" alt="sencha-desktop-packager-windows-loiane-04" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-04.png" width="360" height="156" /></a></p>
+<p style="text-align: left;">Abra o terminal (Cmd) e digite <strong><em>ionpackage </em></strong>para ver se está funcionando corretamente:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-05.png"><img class="aligncenter  wp-image-5751" alt="sencha-desktop-packager-windows-loiane-05" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-05.png" width="546" height="280" /></a></p>
+<h1 style="text-align: left;">Empacotando a aplicação</h1>
+<p style="text-align: left;">Para empacotar uma aplicação, é necessário criar um arquivo de configuração. Para essa aplicação de exemplo, esse foi o arquivo criado, praticamente uma cópia do arquivo da aplicação HelloWorld que vem com o Desktop Packager:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]{<br />
+    &quot;applicationName&quot;      : &quot;Desktop Packager&quot;,<br />
+    &quot;applicationIconPaths&quot; : [&quot;HelloWorld.ico&quot;, &quot;HelloWorld.icns&quot;],<br />
+    &quot;versionString&quot;        : &quot;1.0&quot;,<br />
+    &quot;outputPath&quot;           : &quot;build/DesktopPackager/package/&quot;,<br />
+    &quot;webAppPath&quot;           : &quot;build/DesktopPackager/production/&quot;,<br />
+    &quot;settings&quot;             : {<br />
+        &quot;mainWindow&quot; : {<br />
+            &quot;autoShow&quot; : true<br />
+        }<br />
+    }<br />
+}[/code]</p>
+<p style="text-align: left;">Esse arquivo chamei de desktoppackager.json e salvei dentro de blog/DesktopPackager - o root da aplicação que foi criada.</p>
+<p style="text-align: left;">Também copiei os arquivos HelloWorld.ico e HelloWorld.icns da aplicação exemplo HelloWorld e colei dentro da pasta blog/DesktopPackager que é a aplicação que criei:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-09.png"><img class="aligncenter size-full wp-image-5752" alt="sencha-desktop-packager-loiane-09" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-09.png" width="566" height="538" /></a></p>
+<p style="text-align: left;">Por último, no terminal, troque o diretório para o diretório da aplicação e digite o comando <strong><em>ionpackage desktoppackager.json</em></strong></p>
+<p style="text-align: left;">Se for a primeira vez que você está executando o Sencha Desktop Packager, ele vai pedir o usuário e senha do fórum para validar a licença. Se você comprou a licença e recebeu o código de ativação, entre na parte de Activation Code: (a versão de testes para empresas não tem essa parte):</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-06.png"><img class="aligncenter  wp-image-5743" alt="sencha-desktop-packager-loiane-06" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-06.png" width="572" height="610" /></a></p>
+<p style="text-align: left;">A aplicação empacotada vai ficar dentro do diretório blog/DesktopPackager/build/DesktopPackager/package/:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-07.png"><img class="aligncenter size-full wp-image-5744" alt="sencha-desktop-packager-loiane-07" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-07.png" width="566" height="391" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-06.png"><img class="aligncenter  wp-image-5759" alt="sencha-desktop-packager-windows-loiane-06" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-06.png" width="499" height="355" /></a></p>
+<p style="text-align: left;">Depois é só executar:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-08.png"><img class="aligncenter  wp-image-5745" alt="sencha-desktop-packager-loiane-08" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-08.png" width="536" height="346" /></a></p>
+<p style="text-align: left;">É uma aplicação nativa do Mac OS como qualquer outra! Se você usar Windows para empacotar, o arquivo criado será um exe:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-windows-loiane-07.png"><img class="aligncenter  wp-image-5760" alt="sencha-desktop-packager-windows-loiane-07" src="{{ site.baseurl }}/assets/sencha-desktop-packager-windows-loiane-07.png" width="489" height="389" /></a></p>
+<h2 style="text-align: left;">Curiosidade:</h2>
+<p style="text-align: left;">A app gerada para o Mac OS tem 54.5 Mb - bem grande para alto tão simples.</p>
+<p style="text-align: left;">Os testes que fiz em Janeiro 2013 usando o Sencha Dektop Packager versão 1.0 apresentam um tamanho menor (3 Mb a menos - numa aplicação bem parecida com essa do tutorial). A Sencha menciona que fez  melhorias, mas parece que o tamanho do arquivo aumentou com isso.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/02/sencha-desktop-packager-loiane-10.png"><img class="aligncenter  wp-image-5757" alt="sencha-desktop-packager-loiane-10" src="{{ site.baseurl }}/assets/sencha-desktop-packager-loiane-10.png" width="460" height="200" /></a></p>
+<p style="text-align: left;">Essa mesma aplicação na nova versão (1.1) tem 53.5Mb.</p>
+<p style="text-align: left;">A app gerada para Windows tem 27.4 Mb.</p>
+<h2 style="text-align: left;">Licença</h2>
+<p style="text-align: left;">O <a href="http://www.sencha.com/store/desktop-packager" target="_blank">Sencha Desktop Packager custa 695 dólares</a> (vem suporte incluído). Você precisa de 1 licença para cada máquina que tiver ele instalado. Se for usar em 2 máquinas (1 Windows e 1 Mac por exemplo, precisa comprar 2 licenças).</p>
+<p style="text-align: left;">Minha opinião sobre o produto (lembrando que não é a verdade mais verdadeira no universo, é apenas o que penso): agora o preço ficou bem camarada e se você for um desenvolvedor freela, dependendo dos projetos que você faz (e o quanto cobra por eles), vale a pena a comprar (nao adianta, por ser em dólares americanos, sempre vamos achar salgado pelo fato de que quase dobra o preço em Reais).</p>
+<p style="text-align: left;">Para uma empresa (não desenvolvedor independente), vale a pena comprar pois o preço compensa.</p>
+<p style="text-align: left;">Existem soluções open source e gratuitas que fazem a mesma coisa? Sim, tem várias e muitas fazem muito mais que o Sencha Desktop Packager.</p>
+<p style="text-align: left;">Mesmo assim, se você tiver o orçamento para gastar (desenvolvedor freela e principalmente empresa) acho que vale o preço pela comodidade. Vc empacota uma aplicação pronta para produção (e pronta para rodar em desktop e não web) em menos de 1 minuto.</p>
+<p style="text-align: left;">Com outras soluções, precisa fazer tudo na mão. Tudo bem que não dá tanto trabalho assim, mas é uma comodidade que você tem.</p>
+<p style="text-align: left;">Enfim, é só a minha opinião, e não a verdade absoluta mais verdadeira do universo. :)</p>
+<h2 style="text-align: left;">Código Fonte do tutorial:</h2>
+<p style="text-align: left;">Para quem tiver curiosidade - ou não quiser ter o trabalho de criar uma app e fazer o build de produção apenas para testar, o código completo e também o exe e a app para Mac OS está no github:</p>
+<p style="text-align: left;"><a href="https://github.com/loiane/sencha-desktop-packager-helloworld" target="_blank">https://github.com/loiane/sencha-desktop-packager-helloworld</a></p>
+<p style="text-align: left;">Até a próxima! :)</p>

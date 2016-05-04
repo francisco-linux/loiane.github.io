@@ -1,0 +1,39 @@
+---
+layout: post
+title: Debugando webApps e PhoneGap Apps no iOS com iWebInspector
+date: 2013-02-07 07:00:58.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Phone Gap (Cordova)
+tags:
+- Cordova
+- debug
+- iOS
+- iWebInspector
+- PhoneGap
+- Sencha Touch 2
+
+---
+<p>Ei pessoal,</p>
+<p>Hoje vou apresentar mais uma ferramenta super legal para quem desenvolve mobile apps com JQuery Mobile, Sencha Touch, Phone Gap ou puramente com HTML 5, CSS e Javascript para o iOS. Já tinha<a title="Weinre: Web Inspector / Debugger para Mobile Web Apps – PhoneGap" href="http://www.loiane.com/2012/11/weinre-web-inspector-debugger-para-mobile-web-apps-phonegap/"> mencionado ela aqui</a>, mas agora finalmente escrevi um post apenas sobre ela!</p>
+<p>A ferramenta se chama <a href="http://www.iwebinspector.com/" target="_blank">iWebInspector</a> e server para debugar webapps ou apps híbridas implementadas com PhoneGap no iOS. Eu uso principalmente para debugar apps feitas com Sencha Touch e Phone Gap, já o Chrome não suporta executar o PhoneGap e não dá para usar o Developer Tools do Chrome. Aí uso o <a href="http://www.iwebinspector.com/" target="_blank">iWebInspector</a>.</p>
+<p>Essa ferramenta é apenas para o iOS, portanto, só está disponível para Mac OS. Ah, e não funciona no OS Mountain Lion (quer dizer, <a href="http://www.iwebinspector.com/help.html#ml" target="_blank">tem uma <del>gambiarra</del> solução aqui</a> que faz funcionar).</p>
+<p>Lembrando que saber debugar é tão importante quando saber programar, então o uso de ferramentas como essa é essencial no dia a dia de um desenvolvedor web mobile.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/01/iwebinspector.png"><img class="aligncenter size-full wp-image-5633" alt="iwebinspector" src="{{ site.baseurl }}/assets/iwebinspector.png" width="256" height="256" /></a></p>
+<p>Vou mostrar um exemplo aqui no blog. É uma app bem simples que integra o Sencha Touch 2 com PhoneGap.</p>
+<p>Primeiro temos que fazer o download do iWebInspector (é grátis): <a href="http://www.iwebinspector.com/" target="_blank">http://www.iwebinspector.com/ </a></p>
+<p>Depois, no XCode, abra seu projeto, abra o arquivo <em><strong>AppDelegate.m</strong></em>, ache o método <em><strong>application:didFinishLaunchingWithOptions</strong></em> e dentro do método adicione o seguinte código:</p>
+<p>[code lang="cpp" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+// Remove me after debugging<br />
+[NSClassFromString(@&quot;WebView&quot;) _enableRemoteInspector];<br />
+[/code]</p>
+<p>Não esqueça de remover depois senão poderá ter sua app recusada pela Apple por ter código de API proprietária.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/01/iwebInspector-loiane-01.png"><img class="aligncenter  wp-image-5636" alt="iwebInspector-loiane-01" src="{{ site.baseurl }}/assets/iwebInspector-loiane-01.png" width="529" height="241" /></a></p>
+<p>Emule sua app normalmente, abra o iWebInspector e na parte de "<em><strong>For Hybrid / PhoneGap app</strong></em>" preencha com o nome da sua app (nome do projeto):</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/01/iwebInspector-loiane-02.png"><img class="aligncenter size-full wp-image-5637" alt="iwebInspector-loiane-02" src="{{ site.baseurl }}/assets/iwebInspector-loiane-02.png" width="419" height="291" /></a></p>
+<p>E bom debug!</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/01/iwebInspector-loiane-03.png" target="_blank"><img class="aligncenter  wp-image-5638" alt="iwebInspector-loiane-03" src="{{ site.baseurl }}/assets/iwebInspector-loiane-03.png" width="538" height="336" /></a></p>
+<p>Espero que tenham gostado de mais um dica para apps Sencha Touch com PhoneGap. :)</p>
+<p>Até a próxima!</p>
