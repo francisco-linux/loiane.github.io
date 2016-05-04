@@ -1,0 +1,139 @@
+---
+layout: post
+title: 'Tutorial: Notificações Push no iOS'
+date: 2013-07-08 08:00:01.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- iOS
+tags:
+- iOS
+- iOS (Apple)
+- Notificações Push
+- Push
+
+---
+<p>Olá pessoal, No post de hoje vamos entender um pouco melhor como funcionam as notificações push no iOS e também vamos desenvolver uma app para poder testar o que aprendermos neste post. Apesar de particularmente não ser experiente no desenvolvimento de apps nativas com Objective C, notificações Push é um dos recursos que eu acho mais simples de se trabalhar nativamente do que usar PhoneGap ou Sencha Touch.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-04.png"><img class="aligncenter  wp-image-6147" alt="ios7-push-04" src="{{ site.baseurl }}/assets/ios7-push-04.png" width="303" height="172" /></a></p>
+<p>No iOS não podemos fazer muito no background. As apps podem executar um conjunto limitado de atividades para conservar a bateria (e ninguém iria usar uma app que fica usando toda a bateria né?). Mas e se alguma coisa muito legal acontecer e você quiser notificar o usuário, mesmo que o usuário não esteja usando a sua app? Neste caso, podemos usar notificações push. As notificações push podem fazer 3 coisas: mostrar um texto curto, executar um alerta em forma de som e setar um número (badge) no ícone da aplicação. Você pode escolher que a sua notificação push faça apenas uma dessas coisas listadas ou até mesmo as três.</p>
+<h3>Requisitos</h3>
+<p>Para este tutorial você vai precisar de:</p>
+<ol>
+<li><span style="line-height: 13px;"><em>um iPhone ou iPad</em> - notificações Push não funcionam no simulador, por isso precisamos de um aparelho Apple para poder testar na prática</span></li>
+<li><em>ser desenvolvedor cadastrado no programa iOS da Apple</em> - para conseguir testar apps num iPhone ou iPad, é necessário criar um App ID e um Provisioning Profile, que só pode ser feito através do developer center da Apple. <a title="Como se tornar um desenvolvedor iOS certificado pela Apple (Se Inscrever no iOS Developer Program – sem Fax!)" href="http://www.loiane.com/2013/01/como-se-tornar-um-desenvolvedor-ios-certificado-pela-apple-se-inscrever-no-ios-developer-program-sem-fax/" target="_blank">Já publiquei aqui no blog como se faz para se tornar um desenvolvedor iOS da Apple</a>.</li>
+<li><em>um servidor que esteja conectado a internet</em> - você pode usar o seu próprio computador. Vou usar o <a href="http://www.apachefriends.org/en/xampp.html" target="_blank">Xampp</a> como webserver.</li>
+<li><em>Mac OS e Xcode</em> - como vamos criar uma aplicação nativa, é necessário ter o <a href="https://developer.apple.com/xcode/" target="_blank">XCode</a> instalado no seu computador, que precisa rodar o Mac OS.</li>
+</ol>
+<p>Nível do tutorial: <strong>Avançado</strong></p>
+<h2>Overview: Como as Notificações Push Funcionam</h2>
+<p>Enviar notificações Push não é uma tarefa trivial, pois dependemos de vários módulos como podemos ver no diagrama a seguir: <a href="http://www.loiane.com/wp-content/uploads/2013/07/notifcacoespushios-loiane.png"><img class="aligncenter size-full wp-image-6268" alt="notifcacoespushios-loiane" src="{{ site.baseurl }}/assets/notifcacoespushios-loiane.png" width="483" height="291" /></a> 1 - primeiro temos que habilitar o uso de notificações Push na app. O usuário vai confirmar de deseja receber notificações Push ou não.</p>
+<p>2 - A app recebe um token. Esse token é como se fosse o endereço para onde as notificações push serão enviadas.</p>
+<p>3 - A app envia o token para o seu servidor. Nesse caso precisamos de ter um código server (php, java, ou qualquer outra linguagem) que recebe esse token e deixa ele gravado em algum lugar para usar esse token (endereço no futuro).</p>
+<p>4 - Quando algo de interessante acontecer e você quer que o usuário seja notificado através de uma notificação Push, o seu código server envia a notificação para o servidor APNS (Apple Push Notification Service).</p>
+<p>5 - O servidor APNS irá enviar a notificação para o aparelho do usuário.</p>
+<p>Alguns poréns: não podemos confiar 100% em notificações push. Pode acontecer delas não serem entregues. Tem que tomar cuidado com a quantidade de notificações push que enviamos, pois primeiro precisamos enviar para o servidor APNS da Apple e este será responsável por enviar a notificação. E o APNS trabalha com filas. Vamos ver nesse post todo o código necessário para enviar uma notificação Push de teste, tanto o código Objective C quanto o código server (em PHP). Vamos antes de codificarmos alguma coisa, tem alguns passos que precisamos executar.</p>
+<h2>Gerando o Certificate Signing Request (CSR)</h2>
+<p>Bem, se você já testou alguma app em um aparelho (iPhone, iPod ou Ipad) você já deve saber desses passos a seguir. Mas para enviar notificações Push, precisamos de 2 passos extras. Esse é um deles, que é gerar um CSR.</p>
+<p>Abra a aplicação Keychain Access (Applications/Utilities) e no meu escolha a seguinte opção:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-05.png"><img class="aligncenter  wp-image-6153" alt="ios7-push-05" src="{{ site.baseurl }}/assets/ios7-push-05.png" width="534" height="202" /></a></p>
+<p>Se você não tem a opção <em>Request a Certificate From a Certifica Authority</em>, instale primeiro o  <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer">WWDR Intermediate Certificate</a>.</p>
+<p>A seguinte janela irá aparecer: no email, é bom colocar o mesmo email que vc usa no <em>Apple iOS Dev Center</em>. O no <em>Common</em> <em>Name</em> vamos colocar o nome da app que vamos criar (<em><strong>PushChat</strong></em>). Não esqueça de checar a opção <em>Save to disk</em> e clique em <em>Continue</em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-06.png"><img class="aligncenter  wp-image-6154" alt="ios7-push-06" src="{{ site.baseurl }}/assets/ios7-push-06.png" width="554" height="392" /></a></p>
+<p>Abra as <em>Keys</em> e localize a chave que acabamos de criar. Clique com o botão direito do mouse e escolha <em>Export "PushChat"</em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-07.png"><img class="aligncenter  wp-image-6155" alt="ios7-push-07" src="{{ site.baseurl }}/assets/ios7-push-07.png" width="525" height="331" /></a></p>
+<p>Você precisa entrar com um passphrase/senha para criptografar o certificado. Escolhi <em><strong>pushchat</strong></em> mesmo para facilitar. Não esqueça disso pois vamos precisar logo mais.</p>
+<h2>Criando um App ID e Certificado SSL</h2>
+<p>Agora vamos criar um App ID e configurar para usar notificações Push. Entre no <a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank">iOS Dev Center</a> e escolha <strong><em>Certificates, Identifiers &amp; Profiles</em></strong>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-08.png"><img class="aligncenter  wp-image-6156" alt="ios7-push-08" src="{{ site.baseurl }}/assets/ios7-push-08-1024x648.png" width="553" height="350" /></a></p>
+<p>Escolha <em><strong>Identifiers</strong></em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-09.png"><img class="aligncenter  wp-image-6157" alt="ios7-push-09" src="{{ site.baseurl }}/assets/ios7-push-09-1024x648.png" width="553" height="350" /></a></p>
+<p>Vá em App IDS e clique no botão <strong>+</strong> para criar uma nova App ID:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-10.png"><img class="aligncenter  wp-image-6158" alt="ios7-push-10" src="{{ site.baseurl }}/assets/ios7-push-10-1024x648.png" width="553" height="350" /></a></p>
+<p>Dê um nome para a <strong>App</strong>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-11.png"><img class="aligncenter  wp-image-6159" alt="ios7-push-11" src="{{ site.baseurl }}/assets/ios7-push-11.png" width="490" height="111" /></a></p>
+<p>Escolha um nome para o pacote:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-12.png"><img class="aligncenter  wp-image-6160" alt="ios7-push-12" src="{{ site.baseurl }}/assets/ios7-push-12.png" width="456" height="228" /></a></p>
+<p>E não podemos esquecer de marcar a opção <em><strong>Push Notifications</strong></em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-13.png"><img class="aligncenter  wp-image-6161" alt="ios7-push-13" src="{{ site.baseurl }}/assets/ios7-push-13.png" width="462" height="261" /></a></p>
+<p>Termine de criar o App ID, e quando terminar, vai voltar para a lista de App IDs. Clique em cima da App ID que acabamos de criar e clique em <em><strong>Settings</strong></em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-14.png"><img class="aligncenter  wp-image-6166" alt="ios7-push-14" src="{{ site.baseurl }}/assets/ios7-push-14.png" width="510" height="368" /></a></p>
+<p>Vamos configurar o certificado SSL. Para isso, localize <em>Push Notifications</em> e clique em <em><strong>Create Certificate</strong></em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-15.png"><img class="aligncenter  wp-image-6163" alt="ios7-push-15" src="{{ site.baseurl }}/assets/ios7-push-15.png" width="475" height="280" /></a></p>
+<p>Siga os passos até a seguinte tela. Nessa tela vamos fazer o upload do arquivo que criamos no tópico anterior. Depois é só clicar em <strong>Generate</strong>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-16.png"><img class="aligncenter  wp-image-6164" alt="ios7-push-16" src="{{ site.baseurl }}/assets/ios7-push-16.png" width="482" height="342" /></a></p>
+<p>Faça o download do arquivo e salve em algum lugar do seu computador - é um arquivo chamado <strong>aps_development.cer</strong></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-17.png"><img class="aligncenter  wp-image-6165" alt="ios7-push-17" src="{{ site.baseurl }}/assets/ios7-push-17.png" width="478" height="214" /></a></p>
+<h2>Gerando o Arquivo PEM</h2>
+<p>Até agora temos os seguintes arquivos:</p>
+<ul>
+<li>O CSR</li>
+<li>O private key como p12 file (PushChatKey.p12)</li>
+<li>O certificado SSL, aps_development.cer</li>
+</ul>
+<p>Todos os arquivos salvei no desktop. Agora vamos usar o terminal para criar mais alguns arquivos. Como salvei todos no meu desktop, vou trocar o diretório:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]cd ~/Desktop/[/code]</p>
+<p>Depois vamos converter o arquivo  .cer em .pem:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]openssl x509 -in aps_development.cer -inform der -out PushChatCert.pem[/code]</p>
+<p>E também vamos converter o arquivo .p12 em .pem:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]&lt;br /&gt;openssl pkcs12 -nocerts -out PushChatKey.pem -in PushChatKey.p12&lt;br /&gt;Enter Import Password:&lt;br /&gt;MAC verified OK&lt;br /&gt;Enter PEM pass phrase:&lt;br /&gt;Verifying - Enter PEM pass phrase:&lt;br /&gt;[/code]</p>
+<p>Primeiro precisamos entrar com o passphrase para o arquivo .p12 para que o openssl possa let. Depois você precisa entrar com um passphrase que será usado para encriptar o arquivo PEM. Usei sempre <em><strong>pushchat</strong></em> para facilitar de lembrar! Mas em uma app de verdade que será executada em produção crie um passphrase mais complicado.</p>
+<p>E finalmente vamos combinar o certificado e a chave em um único arquivo .pem:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]cat PushChatCert.pem PushChatKey.pem &amp;gt; ck.pem[/code]</p>
+<p>Agora vamos testar para ver se o certificado funciona. Execute o seguinte comando:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]&lt;br /&gt;telnet gateway.sandbox.push.apple.com 2195&lt;br /&gt;Trying 17.172.232.226...&lt;br /&gt;Connected to gateway.sandbox.push-apple.com.akadns.net.&lt;br /&gt;Escape character is '^]'.&lt;br /&gt;[/code]</p>
+<p>Esse comando tenta fazer uma conexão não encriptada para o servidor APNS. Como podemos ver, a mensagem consegue chegar até o APNS. Pressione Ctrl+C para fechar a conexão. Se você obtiver uma mensagem de erro, tenha certeza de que a porta 2195 não esteja bloqueada pelo firewall. O resultado no terminal de todos os comandos acima vai ser esse: <a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-24.png"><img class="aligncenter size-full wp-image-6168" alt="ios7-push-24" src="{{ site.baseurl }}/assets/ios7-push-24.png" width="585" height="240" /></a> Por último, vamos tentar conectar com o servidor APNS novamente, mas deste vez usando nosso certificado SSL e a chave privada para uma conexão segura:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]&lt;br /&gt;openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert PushChatCert.pem -key PushChatKey.pem&lt;br /&gt;Enter pass phrase for PushChatKey.pem:&lt;br /&gt;[/code]</p>
+<p>No output irão aparecer várias coisas, como no screenshot abaixo: <a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-25.png"><img class="aligncenter size-full wp-image-6169" alt="ios7-push-25" src="{{ site.baseurl }}/assets/ios7-push-25.png" width="585" height="366" /></a> Tudo pronto para o próximo passo!</p>
+<h2>Criando o Provisioning Profile</h2>
+<p>Agora chegou a hora de criar o Provisioning Profile. E temos que ter cuidado ao criar esse arquivo, pois tudo vai depender dele. Muitas pessoas não conseguem testar e obtém mensagem de erro quando for gerar o device token. Nesse caso basta apagar e gerar o provisioning profile novamente.</p>
+<p>Vamos lá!</p>
+<p>De volta ao iOS Dev Center, selecione <strong>Provisioning Profile</strong> e clique para criar um novo:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-18.png"><img class="aligncenter  wp-image-6172" alt="ios7-push-18" src="{{ site.baseurl }}/assets/ios7-push-18.png" width="586" height="350" /></a></p>
+<p>Selecione <em><strong>iOS App Development</strong></em> e clique em <em>Continue</em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-19.png"><img class="aligncenter  wp-image-6173" alt="ios7-push-19" src="{{ site.baseurl }}/assets/ios7-push-19.png" width="507" height="468" /></a></p>
+<p>Selecione o App ID que criamos:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-20.png"><img class="aligncenter  wp-image-6174" alt="ios7-push-20" src="{{ site.baseurl }}/assets/ios7-push-20.png" width="450" height="319" /></a></p>
+<p>Selecione o certificado de desenvolvedor:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-21.png"><img class="aligncenter  wp-image-6177" alt="ios7-push-21" src="{{ site.baseurl }}/assets/ios7-push-21.png" width="486" height="270" /></a></p>
+<p>Selecione os devices que você quer testar a app:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-22.png"><img class="aligncenter  wp-image-6175" alt="ios7-push-22" src="{{ site.baseurl }}/assets/ios7-push-22.png" width="479" height="329" /></a></p>
+<p>E dê um nome ao profile e clique em generate:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-23.png"><img class="aligncenter  wp-image-6178" alt="ios7-push-23" src="{{ site.baseurl }}/assets/ios7-push-23.png" width="460" height="329" /></a></p>
+<p style="text-align: justify;">Não precisa fazer o download pois o XCode automaticamente irá fazer o download pra gente.</p>
+<h2>Criando uma App para Testes</h2>
+<p>Agora vamos abrir o <em><strong>XCode</strong></em> e criar uma app <em><strong>Single View Application</strong></em>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-26.png"><img class="aligncenter  wp-image-6179" alt="ios7-push-26" src="{{ site.baseurl }}/assets/ios7-push-26.png" width="504" height="340" /></a></p>
+<p>Dê um nome para a App, e o nome do pacote - muita atenção pois precisa ser os mesmos de  quando criamos o App ID, senão não irá funcionar:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-27.png"><img class="aligncenter  wp-image-6180" alt="ios7-push-27" src="{{ site.baseurl }}/assets/ios7-push-27.png" width="450" height="374" /></a></p>
+<p>Abra o arquivo <strong><em>AppDelegate.m </em></strong>e mude o método <em><strong>application:didFinishLaunchingWithOptions:</strong></em> para que fique assim:</p>
+<p>[code lang="cpp" firstline="1" toolbar="true" collapse="false" wraplines="false"]- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {&lt;br /&gt;	// Let the device know we want to receive push notifications&lt;br /&gt;	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:&lt;br /&gt;		(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];&lt;br /&gt;&lt;br /&gt;    return YES;&lt;br /&gt;}[/code]</p>
+<p>Isso vai fazer com que a app mostre a popup de confirmação para o usuário confirmar se quer ou não receber notificações Push. Mas precisamos também saber qual é o token, pois sem isso não conseguimos enviar a mensagem. Para isso adicione o seguinte código dentro da classe <strong><em>AppDelegate.m:</em></strong></p>
+<p>[code lang="cpp" firstline="1" toolbar="true" collapse="false" wraplines="false"]&lt;br /&gt;- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken&lt;br /&gt;{&lt;br /&gt;	NSLog(@&quot;My token is: %@&quot;, deviceToken);&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error&lt;br /&gt;{&lt;br /&gt;	NSLog(@&quot;Failed to get token, error: %@&quot;, error);&lt;br /&gt;}[/code]</p>
+<p>Agora nossa app está pronta!</p>
+<p>Instale e execute a app no seu device (mas não esqueça de executar a app com o USB conectado para podermos ver os logs e pegar o token). E como esperado, a app vai perguntar se queremos receber notificações push. Clique em OK:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-01.png"><img class="aligncenter" alt="ios7-push-01" src="{{ site.baseurl }}/assets/ios7-push-01-576x1024.png" width="277" height="491" /></a></p>
+<p>E no log do Xcode vamos ver uma mensagem assim:</p>
+<blockquote><p>My token is: &lt;eada5820da66f33b10ea6b7dc599965519fe3c17443b750595ba66a9396624b1&gt;</p></blockquote>
+<p>Guarde esse token pois vamos precisar dele.</p>
+<h2>Enviando a Notificação Push</h2>
+<p>Agora vamos para o código PHP!</p>
+<p>Esse é o código que vamos usar. Criei um arquivo chamado <strong>simplepush.php </strong>e coloquei o seguinte código nele:</p>
+<p>[code lang="php" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="4,7,10, 15"]&lt;br /&gt;&amp;lt;?php&lt;br /&gt;&lt;br /&gt;// Put your device token here (without spaces):&lt;br /&gt;$deviceToken = 'eada5820da66f33b10ea6b7dc599965519fe3c17443b750595ba66a9396624b1';&lt;br /&gt;&lt;br /&gt;// Put your private key's passphrase here:&lt;br /&gt;$passphrase = 'pushchat';&lt;br /&gt;&lt;br /&gt;// Put your alert message here:&lt;br /&gt;$message = 'Minha primeira notificação push!';&lt;br /&gt;&lt;br /&gt;////////////////////////////////////////////////////////////////////////////////&lt;br /&gt;&lt;br /&gt;$ctx = stream_context_create();&lt;br /&gt;stream_context_set_option($ctx, 'ssl', 'local_cert', 'ck.pem');&lt;br /&gt;stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);&lt;br /&gt;&lt;br /&gt;// Open a connection to the APNS server&lt;br /&gt;$fp = stream_socket_client(&lt;br /&gt;	'ssl://gateway.sandbox.push.apple.com:2195', $err,&lt;br /&gt;	$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);&lt;br /&gt;&lt;br /&gt;if (!$fp)&lt;br /&gt;	exit(&quot;Failed to connect: $err $errstr&quot; . PHP_EOL);&lt;br /&gt;&lt;br /&gt;echo 'Connected to APNS' . PHP_EOL;&lt;br /&gt;&lt;br /&gt;// Create the payload body&lt;br /&gt;$body['aps'] = array(&lt;br /&gt;	'alert' =&amp;gt; $message,&lt;br /&gt;	'sound' =&amp;gt; 'default'&lt;br /&gt;	);&lt;br /&gt;&lt;br /&gt;// Encode the payload as JSON&lt;br /&gt;$payload = json_encode($body);&lt;br /&gt;&lt;br /&gt;// Build the binary notification&lt;br /&gt;$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;&lt;br /&gt;&lt;br /&gt;// Send it to the server&lt;br /&gt;$result = fwrite($fp, $msg, strlen($msg));&lt;br /&gt;&lt;br /&gt;if (!$result)&lt;br /&gt;	echo 'Message not delivered' . PHP_EOL;&lt;br /&gt;else&lt;br /&gt;	echo 'Message successfully delivered' . PHP_EOL;&lt;br /&gt;&lt;br /&gt;// Close the connection to the server&lt;br /&gt;fclose($fp);&lt;br /&gt;[/code]</p>
+<p>Temos que prestar atenção em 3 linhas do código acima:</p>
+<p>Linha 4: é o token do device, é o endereço para onde a notificação push será enviada.</p>
+<p>Linha 7: não podemos esquecer do passphrase que usamos para criptografar o certificado.</p>
+<p>Linha 11: A mensagem que vamos usar na notificação push.</p>
+<p>Linha 15: o arquivo .pem que geramos. Nesse caso, coloquei esse arquivo no mesmo diretório do arquivo php.</p>
+<p>E no final, vamos fazer o teste!</p>
+<p>Basta executarmos o arquivo php que criamos:<br />
+<a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-28.png"><img class="aligncenter size-full wp-image-6181" alt="ios7-push-28" src="{{ site.baseurl }}/assets/ios7-push-28.png" width="585" height="114" /></a></p>
+<h2>Resultado</h2>
+<p style="text-align: left;">E alguns segundos depois (tenha certeza de que o dispositivo tenha conexão com internet - wifi ou 3G) e nossa notificação vai aparecer na tela do celular:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-02.png"><img class="aligncenter  wp-image-6148" alt="ios7-push-02" src="{{ site.baseurl }}/assets/ios7-push-02-1024x900.png" width="430" height="378" /></a></p>
+<p style="text-align: left;">Esse tutorial vale tanto para iOS 6 quanto para iOS 7! :)</p>
+<h3 style="text-align: left;">Download do Código Fonte</h3>
+<p style="text-align: left;">Código Objective-c (Xcode): <a href="https://github.com/loiane/ios-examples/tree/master/PushChat" target="_blank">https://github.com/loiane/ios-examples/tree/master/PushChat</a></p>
+<p style="text-align: left;">Código php: <a href="https://github.com/loiane/ios-examples/tree/master/PushServer" target="_blank">https://github.com/loiane/ios-examples/tree/master/PushServer</a></p>
+<p style="text-align: left;"><a href="http://www.raywenderlich.com/32960/apple-push-notification-services-in-ios-6-tutorial-part-1" target="_blank">Referência</a></p>
+<p style="text-align: left;">Até a próxima! :)</p>
