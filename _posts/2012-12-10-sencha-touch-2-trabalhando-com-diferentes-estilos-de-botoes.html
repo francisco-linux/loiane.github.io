@@ -1,0 +1,175 @@
+---
+layout: post
+title: 'Sencha Touch 2: Trabalhando com diferentes estilos de Botões'
+date: 2012-12-10 07:00:09.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Sencha Touch 2
+tags:
+- Button
+- Sencha Touch 2
+
+---
+<p>Um dos componentes do Sencha Touch 2 é o Button (Botão). A API vem com 15 diferentes estilos de botões nativos. Para escolher um estilo, basta setar a propriedade <em><strong>ui</strong></em>.</p>
+<p>Os 15 estilos estão divididos em 4 categorias: normal, action, confirm, decline; e cada dessas categorias em o estilo normal, arredondado (round) e pequeno (small); além disso, a categoria normal ainda conta com os botões de back e forward (anterior e próximo).</p>
+<p>Eis as possibilidades que o desenvolvedor tem:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/10/sencha-touch2-buttons.gif"><img class="aligncenter  wp-image-5403" title="sencha-touch2-buttons" src="{{ site.baseurl }}/assets/sencha-touch2-buttons.gif" alt="" width="545" height="280" /></a></p>
+<p>Eis o código para gerar o output acima:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]Ext.define('MyApp.view.MyContainer', {<br />
+    extend: 'Ext.Container',</p>
+<p>    config: {<br />
+        ui: 'light',<br />
+        layout: {<br />
+            type: 'vbox'<br />
+        },<br />
+        items: [<br />
+            {<br />
+                xtype: 'titlebar',<br />
+                docked: 'top',<br />
+                title: 'Sencha Touch 2 Buttons'<br />
+            },<br />
+            {<br />
+                xtype: 'container',<br />
+                defaults: {<br />
+                    flex: 1,<br />
+                    margin: 10<br />
+                },<br />
+                layout: {<br />
+                    align: 'center',<br />
+                    pack: 'center',<br />
+                    type: 'hbox'<br />
+                },<br />
+                items: [<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        text: 'normal'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'round',<br />
+                        text: 'round'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'small',<br />
+                        text: 'small'<br />
+                    }<br />
+                ]<br />
+            },<br />
+            {<br />
+                xtype: 'container',<br />
+                defaults: {<br />
+                    flex: 1,<br />
+                    margin: 10<br />
+                },<br />
+                layout: {<br />
+                    align: 'center',<br />
+                    pack: 'center',<br />
+                    type: 'hbox'<br />
+                },<br />
+                items: [<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'action',<br />
+                        text: 'action'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'action-round',<br />
+                        text: 'action-round'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'action-small',<br />
+                        text: 'action small'<br />
+                    }<br />
+                ]<br />
+            },<br />
+            {<br />
+                xtype: 'container',<br />
+                defaults: {<br />
+                    flex: 1,<br />
+                    margin: 10<br />
+                },<br />
+                layout: {<br />
+                    align: 'center',<br />
+                    pack: 'center',<br />
+                    type: 'hbox'<br />
+                },<br />
+                items: [<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'confirm',<br />
+                        text: 'confirm'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'confirm-round',<br />
+                        text: 'confirm-round'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'confirm-small',<br />
+                        text: 'confirm-small'<br />
+                    }<br />
+                ]<br />
+            },<br />
+            {<br />
+                xtype: 'container',<br />
+                defaults: {<br />
+                    flex: 1,<br />
+                    margin: 10<br />
+                },<br />
+                layout: {<br />
+                    align: 'center',<br />
+                    pack: 'center',<br />
+                    type: 'hbox'<br />
+                },<br />
+                items: [<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'decline',<br />
+                        text: 'decline'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'decline-round',<br />
+                        text: 'decline-round'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'decline-small',<br />
+                        text: 'decline-small'<br />
+                    }<br />
+                ]<br />
+            },<br />
+            {<br />
+                xtype: 'container',<br />
+                defaults: {<br />
+                    flex: 1,<br />
+                    margin: 10<br />
+                },<br />
+                layout: {<br />
+                    align: 'center',<br />
+                    pack: 'center',<br />
+                    type: 'hbox'<br />
+                },<br />
+                items: [<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'forward',<br />
+                        text: 'forward'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'button',<br />
+                        ui: 'back',<br />
+                        text: 'back'<br />
+                    }<br />
+                ]<br />
+            }<br />
+        ]<br />
+    }</p>
+<p>});[/code]</p>
+<p>Até a próxima!</p>
