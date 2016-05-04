@@ -1,0 +1,95 @@
+---
+layout: post
+title: Criando sua Primeira Chrome Packaged App
+date: 2013-06-10 08:00:09.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Chrome Packages Apps
+tags:
+- Chrome Packaged App
+- Hello World
+
+---
+<p>Ei pessoal,</p>
+<p>Seguindo a linha do <a title="Começando com Sencha Desktop Packager: Exemplo Hello World" href="http://www.loiane.com/2013/02/comecando-com-sencha-desktop-packager-exemplo-hello-world/">Sencha Desktop Packager</a>, também é possível ter uma espécie de aplicação nativa, mas que fica hospedada no chrome.</p>
+<p>Uma chrome packaged app oferece a experiência de uma aplicação desktop nativa, mas segura como uma página web. Assim como aplicações web, packaged apps também são escritas com <em><strong>HTML</strong></em>, <em><strong>JavaScript</strong> </em>e <em><strong>CSS</strong></em>. Package apps se parecem e se comportam como aplicações nativas, e ainda tem capabilidades que aplicações web não tem, como por exemplo, acessar arquivos locais na máquina do usuário.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/boxofapps-edu.png"><img class="aligncenter  wp-image-5936" alt="http://www.google.com/intl/en/chrome/assets/common/images/marquee/boxofapps-edu.png" src="{{ site.baseurl }}/assets/boxofapps-edu.png" width="226" height="172" /></a></p>
+<p>Nesse tutorial hoje vou mostrar como fazer um Hello World. <a href="http://developer.chrome.com/apps/first_app.html" target="_blank">Usei esse artigo</a> como referência. O código é exatamente o mesmo, só dei uma incrementada com alguns screenshots. No artigo você também encontra outros links que levam a mais informações sobre esse tipo de aplicação.</p>
+<p>Pré-requisitos para este tutorial:</p>
+<ul>
+<li>Ter o <a href="http://www.google.com/chrome/" target="_blank">Google Chrome</a> instalado</li>
+<li>Usar algum editor de texto (o que for de sua preferência)</li>
+<li>Nível do tutorial: fácil/iniciante</li>
+</ul>
+<h1>Criando a Packaged App</h1>
+<h2>1 - manifest.json</h2>
+<p>No diretório de sua preferência, crie uma pasta com o nome <strong>hello-world</strong>. Dentro dessa pasta precisamos criar um arquivo chamado <strong>manifest.json</strong> com o seguinte conteúdo:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]{<br />
+  &quot;name&quot;: &quot;Hello World!&quot;,<br />
+  &quot;description&quot;: &quot;My first packaged app.&quot;,<br />
+  &quot;version&quot;: &quot;0.1&quot;,<br />
+  &quot;app&quot;: {<br />
+    &quot;background&quot;: {<br />
+      &quot;scripts&quot;: [&quot;background.js&quot;]<br />
+    }<br />
+  },<br />
+  &quot;icons&quot;: { &quot;16&quot;: &quot;calculator-16.png&quot;, &quot;128&quot;: &quot;calculator-128.png&quot; }<br />
+}[/code]</p>
+<p>Esse arquivo descreve a aplicação, como o nome, descrição, qual arquivo js será executado ao executarmos a aplicação e qual ícone representa essa app.</p>
+<h2>2 - Arquivo JavaScript</h2>
+<p>Em seguida, precisamos criar o arquivo <strong>background.js</strong>, também dentro do da pasta <strong>hello-world</strong> com o seguinte conteúdo:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]chrome.app.runtime.onLaunched.addListener(function() {<br />
+  chrome.app.window.create('window.html', {<br />
+    'bounds': {<br />
+      'width': 400,<br />
+      'height': 500<br />
+    }<br />
+  });<br />
+});[/code]</p>
+<p>No código acima estamos escutando o evento <em><strong>onLaunched</strong></em>, que será disparado quando o usuário iniciar a app. Neste caso, uma janela será criada com a altura (<em>height</em>) e largura (<em>width</em>) especificados. E neste caso, a página <strong>window.html</strong> será renderizada no espaço disponível (corpo) da janela.</p>
+<h2>3 - Arquivo HTML</h2>
+<p>O terceiro passo então é criar o arquivo <strong>window.html</strong> (também dentro da pasta <strong>hello-world</strong>) com o seguinte conteúdo:</p>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+  &lt;head&gt;<br />
+  &lt;/head&gt;<br />
+  &lt;body&gt;<br />
+    &lt;div&gt;Hello, world!&lt;/div&gt;<br />
+  &lt;/body&gt;<br />
+&lt;/html&gt;[/code]</p>
+<p>Neste caso nossa app vai apenas mostrar uma <strong><em>DIV</em> </strong>com o texto <em><strong>Hello, World!</strong></em>.</p>
+<h2>4 - Ícones</h2>
+<p>O último passo é adicionar os ícones. Faça o download dos seguintes ícones e cole-os dentro da pasta <strong>hello-world</strong> também:</p>
+<ul>
+<li><a href="http://developer.chrome.com/static/images/calculator-16.png">calculator-16.png</a></li>
+<li><a href="http://developer.chrome.com/static/images/calculator-128.png">calculator-128.png</a></li>
+</ul>
+<p>A estrutura da app vai ficar assim no final:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-01.png"><img class="aligncenter size-full wp-image-5953" alt="chrome-packaged-app-01" src="{{ site.baseurl }}/assets/chrome-packaged-app-01.png" width="452" height="255" /></a></p>
+<h1>Executando a Packaged App</h1>
+<h2>5 - Ativando as flags</h2>
+<p>Se essa for a primeira vez que você está brincando com packages apps, precisa ativar uma propriedade do chrome.</p>
+<p>Abra uma página e digite <b>chrome://flags</b>.</p>
+<p>Procure por<em><strong> Experimental Extension APIs</strong></em> e clique em <strong><em>Enable</em></strong>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-02.png"><img class="aligncenter  wp-image-5949" alt="chrome-packaged-app-02" src="{{ site.baseurl }}/assets/chrome-packaged-app-02.png" width="601" height="49" /></a></p>
+<p>Restarte to chrome.</p>
+<h2>6 - Instalando a Packaged App</h2>
+<p>Para instalar a app, clique no botão de configuração do chrome, selecione <em><strong>Tools</strong> </em>-&gt; <em><strong>Extensions</strong> </em>(<em><strong>Ferramentas</strong> </em>-&gt; <em><strong>Extensões</strong></em>):</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-03.png"><img class="aligncenter size-full wp-image-5952" alt="chrome-packaged-app-03" src="{{ site.baseurl }}/assets/chrome-packaged-app-03.png" width="530" height="433" /></a></p>
+<p>Marque o checkbox <em><strong>Developer Mode</strong></em> e clique em <em><b>Load unpacked extension:</b></em></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-04.png"><img class="aligncenter  wp-image-5948" alt="chrome-packaged-app-04" src="{{ site.baseurl }}/assets/chrome-packaged-app-04.png" width="534" height="71" /></a></p>
+<p>Navegue até a pasta <em>hello-world</em> que foi criada e clique em <em>select/ok</em>:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-05.png"><img class="aligncenter size-full wp-image-5947" alt="chrome-packaged-app-05" src="{{ site.baseurl }}/assets/chrome-packaged-app-05.png" width="590" height="400" /></a></p>
+<p>O resultado ficará assim:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-06.png"><img class="aligncenter  wp-image-5951" alt="chrome-packaged-app-06" src="{{ site.baseurl }}/assets/chrome-packaged-app-06.png" width="543" height="188" /></a></p>
+<h2>7 - Executando a Packaged App</h2>
+<p>Abra uma nova aba no Chrome. Vamos ver a nossa aplicação. Clique no ícone para abrir:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-07.png"><img class="aligncenter size-full wp-image-5946" alt="chrome-packaged-app-07" src="{{ site.baseurl }}/assets/chrome-packaged-app-07.png" width="371" height="258" /></a></p>
+<p>E o resultado será esse:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/chrome-packaged-app-08.png"><img class="aligncenter size-full wp-image-5950" alt="chrome-packaged-app-08" src="{{ site.baseurl }}/assets/chrome-packaged-app-08.png" width="348" height="154" /></a></p>
+<p>Bem legal né? Agora basta devorar a documentação e brincar de desenvolver apps! Tem muitos problemas quando você começa a se aprofundar no desenvolvimento de apps assim, mas esse assunto fica para um outro post.</p>
+<p><a href="https://github.com/GoogleChrome/chrome-app-samples" target="_blank">Nesse link</a> você encontra vários exemplos disponibilizados pelo Google.</p>
+<p>O código fonte deste tutorial você encontra aqui: <a href="https://github.com/loiane/chrome-packaged-apps/tree/master/hello-world" target="_blank">https://github.com/loiane/chrome-packaged-apps/tree/master/hello-world</a></p>
+<p>Até a próxima! :)</p>
