@@ -1,0 +1,45 @@
+---
+layout: post
+title: Desenvolvendo para Windows Phone 8 no Mac OS
+date: 2013-05-16 08:00:42.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Windows Phone 8
+tags:
+- Mac OS
+- Parallels
+- Windows 8
+- Windows Phone 8
+
+---
+<p>Oi pessoal,</p>
+<p>Apesar de eu ter minhas preferências pessoais sobre sistema operacional que uso no meu desktop (Mac OS) e no meu smartphone (iOS), como profissional de TI não posso deixar que essas preferências atrapalhem no meu desenvolvimento profissional. Por essa razão, gosto sempre de testar as tecnologias novas que surgem no mercado, e uma delas é o Windows Phone 8.</p>
+<p>Tempos atrás fui numa loja da Vivo e na loja tinham uns aparelhos e tablets com Windows Phone 8, e eu adorei (não o bastante para me fazer trocar o meu smartphone, mas o bastante para me deixar curiosa e querer testar!). Então decidi fazer uns testes.</p>
+<p>Como uso Mac OS, então comecei a minha jornada para fazer o Windows Phone 8 SDK funcionar. Decidi fazer esse post então para compartilhar algumas coisas com vocês.</p>
+<p style="text-align: center;"><a href="http://winsource.com/wp-content/uploads/2012/09/Windows-Phone8.jpg" target="_blank"><img class="aligncenter  wp-image-5725" title="http://winsource.com/wp-content/uploads/2012/09/Windows-Phone8.jpg" alt="Windows-Phone8" src="{{ site.baseurl }}/assets/Windows-Phone8.jpg" width="434" height="289" /></a></p>
+<p>Primeiro, o que não gostei foi o fato de precisar do Windows 8 Pro. Claro, como sendo um produto Microsoft só vai rodar no Windows, até aí ok (até mesmo porque se você quiser desenvolver para iOS você também precisa usar Mac OS). Mas versão Pro?  E outra, precisa ser 64 bits. E mais uma, o seu processador precisa suportar <strong>SLAT</strong>. Ou seja, se você tiver um computador com 2 anos de idade (ou mais - não importa o sistema operacional), esqueça! Microsoft foi danadinha e tá fazendo o pessoal fazer updgrade de hardware para poder usar a nova versão do sistema operacional dela! rs</p>
+<p>O mais importante nessa história é ter um processador que tenha suporte <strong>SLAT</strong>. Se vc tiver o Windows 8 Pro 64 bits, vai conseguir instalar o Visual Studio 2012 e vai conseguir criar os projetos para Windows Phone 8, mas não vai conseguir emular. :/</p>
+<p>Se você tiver um processador i3, i5, i7 ou i9 vai funcionar. Se não tiver, não vai conseguir emular sua app Windows Phone 8 no simulador. O meu Macbook Pro é um core 2 duo (comprei em 2010), portanto, não consigo emular. Mas o meu iMac é um i5, então só consigo emular no iMac. Eu até tenho um notebook antigo rodando Windows XP, mas é core duo, então nada de funcionar.</p>
+<p>Então fique bem atento para esses detalhes antes de tentar alguma coisa!</p>
+<p>Outro detalhe importante: meu marido usa um PC e está usando o Windows 7 nele. É um computador mais novo (um pouco mais de 1 ano, então tem todos os requisitos para rodar o Windows 8). Tentei instalar o Windows 8 numa VM, mas não deixou também.</p>
+<p>Resumindo até agora: a confusão toda é por causa do bendito emulador do Windows Phone 8, que é virtualizado dentro do Windows 8. Você consegue instalar o Windows 8 numa VM normalmente, como qualquer sistema operacional, mas se não tiver todos os requisitos, dá pau na hora de instalar o VS 2012 para Windows Phone 8 e o emulador não funciona. Como eu não tenho um aparelho que roda o Windows Phone 8, o emulador é indispensável para testes né?</p>
+<p>Bem, li em vários blogs como fazer o bendito emulador rodar mas nenhum funcionou comigo. Instalei o Windows Phone 8 no <a href="http://www.vmware.com/fusion" target="_blank">VMWare Fusion 5</a>, fiz todas as configurações necessárias, instalei o VS 2012 express para Windows Phone 8, consegui criar o projeto, mas infelizmente o emulador não funcionou! :(</p>
+<p>Tinha até cogitado em alugar uma VM nesses serviços de cloud da vida, mas não achei nenhum que atende aos requisitos do Windows 8 (tá muito gulosinho pro meu gosto! rs). Reclamei no twitter e facebook (pra variar) e até pedi dicas. Até que resolvi tentar novamente com o <a href="http://www.parallels.com/products/desktop/" target="_blank">Parallels</a>.</p>
+<p>Mais um detalhe: na época que testei com o VMWare Fusion 5, o parallels ainda não tinha suporte para o Windows 8. Mas hoje tem. E o melhor: finalmente funcionou!!!!!!</p>
+<p>Então , para desenvolver com Windows Phone 8 no Mac OS você vai precisar:</p>
+<ul>
+<li>Paralles, trial de 14 dias gratuito (ferramenta paga): <a href="http://www.parallels.com/products/desktop/">http://www.parallels.com/products/desktop/</a><a title="http://www.vmware.com/fusion" href="http://www.vmware.com/fusion"><br />
+</a></li>
+<li>Windows 8 Pro 64 bits, versão trial 30 dias (SO pago): <a title="http://technet.microsoft.com/en-gb/evalcenter/hh699156.aspx" href="http://technet.microsoft.com/en-gb/evalcenter/hh699156.aspx">http://technet.microsoft.com/en-gb/evalcenter/hh699156.aspx</a></li>
+<li>Visual Studio 2012 Express para Windows Phone 8 : <a href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-for-windows-phone">http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-for-windows-phone</a></li>
+</ul>
+<p>Duas configurações são necessárias para conseguir que o emulador funcione:</p>
+<p>1 - pelo menos 2 GB de memória alocada para a VM. É recomendável que você tenha 8Gb de memória, mas 4Gb dá pro gasto também:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/windows8-mac-01.png"><img class="aligncenter  wp-image-5861" alt="windows8-mac-01" src="{{ site.baseurl }}/assets/windows8-mac-01.png" width="540" height="439" /></a></p>
+<p style="text-align: left;">2 - Tem que marcar a opção Nested Virtualization, pois como mencionado, o emulador do Windows Phone 8 é uma VM dentro do Windows 8.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/windows8-mac-02.png"><img class="aligncenter  wp-image-5860" alt="windows8-mac-02" src="{{ site.baseurl }}/assets/windows8-mac-02.png" width="556" height="456" /></a></p>
+<p style="text-align: left;">Bem, depois é só se divertir programando!</p>
+<p style="text-align: left;">Essa foi a minha jornada até conseguir que o emulador do WP 8 funcionasse. Se quiser compartilhar alguma dica, fique à vontade!</p>
+<p style="text-align: left;">Até a próxima! :)</p>
