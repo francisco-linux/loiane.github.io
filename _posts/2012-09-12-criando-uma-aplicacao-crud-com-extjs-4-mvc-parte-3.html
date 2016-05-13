@@ -1,0 +1,185 @@
+---
+layout: post
+title: 'Criando uma Aplicação CRUD com ExtJS 4 MVC: Parte 3'
+date: 2012-09-12 08:00:09.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- CRUD
+- ExtJS
+- ExtJS 4
+- ExtJS MVC
+- MVC
+
+---
+<p>Parte 3 da série de posts explicando passo a passo como criar uma aplicação simples com ExtJS 4 usando o MVC.</p>
+<p>Este tutorial está dividido em 5 partes - hoje vamos ver a terceira parte:</p>
+<ol start="1">
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-1">Preparando o Ambiente e montando o Projeto (Parte 1)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-2">Criando o Model e Store (Parte 2)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-3">Criando a View - Grid (Parte 3)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-4">Criando a View - Formulário (Parte 4)</a></li>
+<li><a title="Criando uma Aplicação CRUD com ExtJS 4 MVC: Parte 5" href="http://www.loiane.com/2013/07/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-5/" target="_blank">Criando o Controller (Parte 5)</a></li>
+</ol>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte3.png"><img class="aligncenter  wp-image-5146" title="extjs-4-mvc-parte3" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte3.png" width="583" height="302" /></a></p>
+<p>A terceira parte inclui:</p>
+<ol start="1">
+<li>Criando o Grid - Colunas</li>
+<li>Adicionando a Barra de Paginação</li>
+<li>Adicionado a Toolbar com Botões</li>
+<li>Resultado Final</li>
+</ol>
+<h1>1 - Criando o Grid - Colunas</h1>
+<p>Bom, para construir a nossa primeira View vamos usar um Grid. Para isso, vamos criar um arquivo chamado <strong><em>Grid.js</em></strong> dentro da pasta <strong><em>app/view/contato</em></strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.contato.Grid' ,{<br />
+    extend: 'Ext.grid.Panel',<br />
+    alias : 'widget.contatogrid',</p>
+<p>    requires: ['Ext.toolbar.Paging'],</p>
+<p>    iconCls: 'icon-grid',</p>
+<p>    title : 'Contatos',<br />
+    store: 'Contatos',</p>
+<p>    columns: [{<br />
+    	header: &quot;NOME&quot;,<br />
+		width: 170,<br />
+		flex:1,<br />
+		dataIndex: 'name'<br />
+	},{<br />
+		header: &quot;TELEFONE&quot;,<br />
+		width: 160,<br />
+		flex:1,<br />
+		dataIndex: 'phone'<br />
+	},{<br />
+		header: &quot;EMAIL&quot;,<br />
+		width: 170,<br />
+		flex:1,<br />
+		dataIndex: 'email'<br />
+	}],</p>
+<p>	initComponent: function() {<br />
+		this.callParent(arguments);<br />
+	}<br />
+});<br />
+[/code]</p>
+<p>Na linha 1, temos a declaração do nome da classe:</p>
+<ul>
+<li><strong><em>ExtMVC</em></strong> por causa do nome da aplicação;</li>
+<li><strong><em>view</em></strong> por causa do pacote <strong><em>view</em></strong>;</li>
+<li><strong><em>contato</em></strong> porque criamos um sub-diretório dentro de <strong><em>view</em></strong></li>
+<li><strong><em>Grid</em></strong> porque o nosso arquivo tem o nome de <strong><em>Grid.js</em></strong></li>
+</ul>
+<p>Na linha 3 temos a declaração do <strong><em>alias</em></strong>. Lembrando sempre que o <strong><em>alias</em></strong> deve ser “<strong><em>widget.</em></strong>” + o nome que queremos todo em letras minúsculas. Depois podemos usar o alias como o <strong><em>xtype</em></strong>, assim como fizemos no <strong><em>Viewport</em></strong>, lembram?</p>
+<p>Na linhas 7 temos a declaração do <strong><em>iconCls</em></strong>, e nessa <em>config</em> apenas declaramos o estilo que criamos no CSS para esse ícone. Essa <em>config</em> apenas adiciona um ícone ao lado do título do <em>Grid</em>.</p>
+<p>Na linha 10 declaramos a <strong><em>Store</em></strong>, afinal temos que mapear de onde virão os dados, certo?</p>
+<p>Nas linhas 12 a 27 temos a declaração de cada coluna e nesse caso temos 3 colunas. O <strong><em>header</em></strong> é o título que queremos dar a coluna, o <strong><em>width</em></strong> é a largura em pixels; o <strong><em>flex</em></strong>: 1 será aplicado na coluna que queremos que ocupe todo o espaço que estiver sobrando; e o <strong><em>dataIndex</em></strong> é onde mapeamos qual campo do <strong><em>Model</em></strong> a coluna vai mostrar.</p>
+<p>Por fim, nas linhas 29 a 31, iniciamos o Grid e aplicamos as configurações à classe mãe – vamos mudar daqui a pouco.</p>
+<p>Com o código acima, teremos um Grid que irá listar os dados que vierem do banco de dados.</p>
+<h1>2 - Adicionando a Barra de Paginação</h1>
+<p>Depois do Grid pronto, vamos adicionar a barra de paginação (em vermelho na figura do final do post).</p>
+<p>O Grid possui uma <em>config</em> chamada de <strong><em>dockedItem</em></strong>, onde podemos adicionar itens no topo, rodapé, à direita ou à esquerda do grid; o <strong><em>dockedItem</em></strong> é mais usado para adicionar Toolbars nos componentes. E é isso que vamos fazer agora: adicionar um <strong><em>dockedItem</em></strong> que tem como item uma <strong><em>PagingToolbar</em></strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+initComponent: function() {</p>
+<p>	this.dockedItems = [{<br />
+        xtype: 'pagingtoolbar',<br />
+        dock:'top',<br />
+        store: 'Contatos',<br />
+        displayInfo: true,<br />
+        displayMsg: 'Mostrando Contatos {0} - {1} de {2}',<br />
+        emptyMsg: &quot;Nenhum contato encontrado.&quot;<br />
+    }];</p>
+<p>	this.callParent(arguments);<br />
+}<br />
+[/code]</p>
+<p>Na linha 5 dizemos que a barra de paginação vai ficar no topo do grid (se quiser brincar com outras posições pode experimentar trocar o <strong><em>top</em></strong> por <strong><em>bottom</em></strong>, <strong><em>right</em></strong> ou <strong><em>left</em></strong>).</p>
+<p>Na linha 6 temos novamente a declaração da <em>Store</em> porque também temos que dizer a barra de paginação qual <em>Store</em> vamos controlar.</p>
+<p>E nas linhas 7 a 9 temos apenas algumas customizações de mensagens.</p>
+<h1>3 - Adicionado a Toolbar com Botões</h1>
+<p>Por último, vamos adicionar uma <strong><em>toolbar</em></strong> com dois botões no topo do Grid antes da barra de paginação (em roxo na figura do final do post).</p>
+<p>Como estamos adicionando uma nova toolbar, podemos apenas adicionar um novo item ao <strong><em>dockedItem</em></strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+initComponent: function() {</p>
+<p>	this.dockedItems = [{<br />
+        xtype: 'toolbar',<br />
+        items: [{<br />
+            iconCls: 'icon-save',<br />
+            text: 'Adicionar',<br />
+            action: 'add'<br />
+        },{<br />
+            iconCls: 'icon-delete',<br />
+            text: 'Excluir',<br />
+            action: 'delete'<br />
+        }]<br />
+    },<br />
+    {<br />
+        xtype: 'pagingtoolbar',<br />
+        dock:'top',<br />
+        store: 'Contatos',<br />
+        displayInfo: true,<br />
+        displayMsg: 'Mostrando Contatos {0} - {1} de {2}',<br />
+        emptyMsg: &quot;Nenhum contato encontrado.&quot;<br />
+    }];</p>
+<p>	this.callParent(arguments);<br />
+}<br />
+[/code]</p>
+<p>Na linha 4 temos a declaração do tipo de <strong><em>Toolbar</em></strong> que vamos usar, que é uma <strong><em>toolbar</em></strong> simples. Como nesse caso não estamos declarando o <strong><em>dock</em></strong>, então o ExtJS já entende que o valor padrão deve ser usado e nesse caso é “<strong><em>top</em></strong>”.</p>
+<p>Depois temos 2 botões como itens da <strong><em>toolbar</em></strong>. Cada botão terá um ícone (<strong><em>iconCls</em></strong>) ao lado do texto (<strong><em>text</em></strong>) e também vamos adicionar uma <strong><em>action</em></strong> para cada botão para depois usarmos para capturar os eventos disparados no <strong><em>Controller</em></strong>. Note que aqui não estamos tratando nenhuma lógica para ser executada caso o usuário clique no botão ou faça qualquer outra coisa. Aqui temos apenas o código da <strong><em>View</em></strong>, que é o que será mostrado ao usuário na tela, e essa <strong><em>View</em></strong> ainda não vai ter nada funcionando (clicar botão, etc).</p>
+<h1>4 - Resultado Final</h1>
+<p>O resultado final do código será esse:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.contato.Grid' ,{<br />
+    extend: 'Ext.grid.Panel',<br />
+    alias : 'widget.contatogrid',</p>
+<p>    requires: ['Ext.toolbar.Paging'],</p>
+<p>    iconCls: 'icon-grid',</p>
+<p>    title : 'Contatos',<br />
+    store: 'Contatos',</p>
+<p>    columns: [{<br />
+    	header: &quot;NOME&quot;,<br />
+		width: 170,<br />
+		flex:1,<br />
+		dataIndex: 'name'<br />
+	},{<br />
+		header: &quot;TELEFONE&quot;,<br />
+		width: 160,<br />
+		flex:1,<br />
+		dataIndex: 'phone'<br />
+	},{<br />
+		header: &quot;EMAIL&quot;,<br />
+		width: 170,<br />
+		flex:1,<br />
+		dataIndex: 'email'<br />
+	}],</p>
+<p>	initComponent: function() {</p>
+<p>		this.dockedItems = [{<br />
+            xtype: 'toolbar',<br />
+            items: [{<br />
+                iconCls: 'icon-save',<br />
+                itemId: 'add',<br />
+                text: 'Adicionar',<br />
+                action: 'add'<br />
+            },{<br />
+                iconCls: 'icon-delete',<br />
+                text: 'Excluir',<br />
+                action: 'delete'<br />
+            }]<br />
+        },<br />
+        {<br />
+            xtype: 'pagingtoolbar',<br />
+            dock:'top',<br />
+            store: 'Contatos',<br />
+            displayInfo: true,<br />
+            displayMsg: 'Mostrando Contatos {0} - {1} de {2}',<br />
+            emptyMsg: &quot;Nenhum contato encontrado.&quot;<br />
+        }];</p>
+<p>		this.callParent(arguments);<br />
+	}<br />
+});<br />
+[/code]</p>
+<p>E na tela, teremos o seguinte output:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte3-01.png"><img class="aligncenter  wp-image-5148" title="extjs-4-mvc-parte3-01" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte3-01.png" width="581" height="315" /></a></p>
+<h1>Conclusão:</h1>
+<p>Até agora já temos como enviar e buscar dados do banco de dados, e estamos mostrando o Grid na tela. No próximo post vamos construir o formulário para editar/criar algum registro do grid.</p>
+<p>Até o próximo post! :)</p>
+<p><a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank"><img class="aligncenter size-full wp-image-5129" title="banner-curso-extjs4" alt="" src="{{ site.baseurl }}/assets/banner-curso-extjs4.png" width="448" height="146" /></a></p>

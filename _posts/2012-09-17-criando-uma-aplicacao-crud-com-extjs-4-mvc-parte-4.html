@@ -1,0 +1,121 @@
+---
+layout: post
+title: 'Criando uma Aplicação CRUD com ExtJS 4 MVC: Parte 4'
+date: 2012-09-17 08:46:05.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- CRUD
+- ExtJS
+- ExtJS 4
+- ExtJS MVC
+- MVC
+
+---
+<p>Parte 4 da série de posts explicando passo a passo como criar uma aplicação simples com ExtJS 4 usando o MVC.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte4.png"><img class="aligncenter  wp-image-5178" title="extjs-4-mvc-parte4" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte4.png" width="449" height="218" /></a></p>
+<p>Este tutorial está dividido em 5 partes - hoje vamos ver a quarta parte:</p>
+<ol start="1">
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-1" target="_blank">Preparando o Ambiente e montando o Projeto (Parte 1)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-2" target="_blank">Criando o Model e Store (Parte 2)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-3" target="_blank">Criando a View - Grid (Parte 3)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-4" target="_blank">Criando a View - Formulário (Parte 4)</a></li>
+<li><a title="Criando uma Aplicação CRUD com ExtJS 4 MVC: Parte 5" href="http://www.loiane.com/2013/07/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-5/" target="_blank">Criando o Controller (Parte 5)</a></li>
+</ol>
+<p>A quarta parte inclui:</p>
+<ol start="1">
+<li>Criando o Formulário</li>
+</ol>
+<h1>1 - Criando o Formulário</h1>
+<p>Bem, essa quarta parte do tutorial é mais simples que as outras. Hoje vamos criar apenas o formulário para criação ou edição de algum contato. No post anterior criamos um grid com um botão para criar um contato – a ideia é que quando o usuário clicar nesse botão, uma janela se abra para o usuário entrar com os dados do novo contato – e é essa janela que vamos construir hoje. Outra idéia é quando o usuário der um duplo clique em algum registro do grid, uma janela também se abra com os dados do registro para o usuário poder editar. Vamos usar a mesma janela para criar/editar um contato.</p>
+<p>Para criar essa janela com formulário, vamos criar um arquivo chamado <strong><em>Formulario.js</em></strong> dentro de <strong><em>app/view/contato</em></strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.contato.Formulario', {<br />
+    extend: 'Ext.window.Window',<br />
+    alias : 'widget.contatoform',</p>
+<p>    requires: ['Ext.form.Panel','Ext.form.field.Text'],</p>
+<p>    title : 'Editar/Criar Contato',<br />
+    layout: 'fit',<br />
+    autoShow: true,<br />
+    width: 280,</p>
+<p>    iconCls: 'icon-user',</p>
+<p>    initComponent: function() {<br />
+        this.items = [<br />
+            {<br />
+                xtype: 'form',<br />
+                padding: '5 5 0 5',<br />
+                border: false,<br />
+                style: 'background-color: #fff;',</p>
+<p>                fieldDefaults: {<br />
+                    anchor: '100%',<br />
+                    labelAlign: 'left',<br />
+                    allowBlank: false,<br />
+                    combineErrors: true,<br />
+                    msgTarget: 'side'<br />
+                },</p>
+<p>                items: [<br />
+					{<br />
+					    xtype: 'textfield',<br />
+					    name : 'id',<br />
+					    fieldLabel: 'id',<br />
+					    hidden:true<br />
+					},<br />
+                    {<br />
+                        xtype: 'textfield',<br />
+                        name : 'name',<br />
+                        fieldLabel: 'Nome'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'textfield',<br />
+                        name : 'phone',<br />
+                        fieldLabel: 'Telefone'<br />
+                    },<br />
+                    {<br />
+                        xtype: 'textfield',<br />
+                        name : 'email',<br />
+                        fieldLabel: 'Email'<br />
+                    }<br />
+                ]<br />
+            }<br />
+        ];</p>
+<p>        this.dockedItems = [{<br />
+            xtype: 'toolbar',<br />
+            dock: 'bottom',<br />
+            id:'buttons',<br />
+            ui: 'footer',<br />
+            items: ['-&gt;', {<br />
+                iconCls: 'icon-save',<br />
+                text: 'Salvar',<br />
+                action: 'save'<br />
+            },{<br />
+                iconCls: 'icon-reset',<br />
+                text: 'Cancelar',<br />
+                scope: this,<br />
+                handler: this.close<br />
+            }]<br />
+        }];</p>
+<p>        this.callParent(arguments);<br />
+    }<br />
+});<br />
+[/code]</p>
+<p>Na linha 1 temos o nome da classe. Acho que nesse quarto post já pegaram a ideia de como formamos no o nome da classe né? :</p>
+<ul>
+<li><strong><em>ExtMVC</em></strong> por causa do nome da nossa aplicação;</li>
+<li><strong><em>View</em></strong> por causa do nome do pacote (diretório <strong><em>view</em></strong>);</li>
+<li><strong><em>Contato</em></strong> por causa do subdiretório de <strong><em>view</em></strong> – <strong><em>view/contato</em></strong>;</li>
+<li><strong><em>Formulario</em></strong> porque o nome do nosso arquivo é <strong><em>Formulario.js</em></strong></li>
+</ul>
+<p>Depois, na linha 17 temos a declaração do <strong><em>form</em></strong> como um item da <strong><em>Window</em></strong>.</p>
+<p>Nas linhas 22 a 28 temos algumas <strong><em>configs</em></strong> que serão aplicadas em todos os campos do form.</p>
+<p>Nas linhas 30 a 53 temos a declaração dos campos do form. Uma coisa muito importante aqui é a config <strong><em>name</em></strong> de cada campo. Note que o <strong><em>name</em></strong> é o mesmo do nome dos campos do <em>Model</em>. Isso vai ajudar muito a gente quando quisermos carregar uma instância do <em>Model</em> diretamente no <em>Form</em>. Note também que o <strong><em>name</em></strong> é como se fosse um <strong><em>id</em></strong>. Outra dica é evitar o uso de ids a qualquer custo em uma app ExtJS – <span style="text-decoration: underline;">não é uma boa prática</span>!</p>
+<p>Outro ponto é notar que o campo <strong><em>id</em></strong> é um campo do tipo <strong><em>hidden</em></strong>, ou seja, ele está lá no <em>form</em>, mas o usuário não vai ver. Isso também é mais uma coisa que vai nos ajudar muito depois!</p>
+<p>Depois, nas linhas 56 a 71 temos a declaração de uma <strong><em>toolbar</em></strong> (<strong><em>dockedItem</em></strong>) que vai ficar no rodapé do <strong><em>form</em></strong> (<strong><em>dock</em></strong>: <strong><em>bottom</em></strong>) com dois botões. O botão de salvar tem uma <strong><em>action</em></strong> que vai nos ajudar a capturar o evento depois no <strong><em>Controller</em></strong>.</p>
+<p>Outra coisa que quero que notem (pro pessoal que já trabalha com ExtJS a algum tempo) é que em nenhum momento estamos usando a config <strong><em>buttons</em></strong>. Sempre use uma toolbar como <strong><em>dockedItem</em></strong> e coloque o seus botões na <strong><em>toolbar</em></strong>. No Ext JS 4, <em><strong>dockedItem</strong></em> com <em><strong>toolbar</strong></em> como item substitui o uso da config <em><strong>buttons</strong></em>. Vamos logo adotar as boas práticas! :)</p>
+<h1>Conclusão:</h1>
+<p>Bem pessoal, por hoje é só isso que vamos ver mesmo. Esse post foi o menor da série, mas no próximo vamos ver como programamos o <strong><em>Controller</em></strong>, que é onde o pessoal fica com mais dúvidas.</p>
+<p>Observe que nas <strong><em>Views</em></strong> que criamos (<strong><em>Grid</em></strong> e <strong><em>Formulario</em></strong>) em momento nenhum do código estamos colocando lógica, estamos apenas declarando o código para renderizar os componentes na tela.</p>
+<p>Até o próximo post! :)</p>
+<p><a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank"><img class="aligncenter size-full wp-image-5129" title="banner-curso-extjs4" alt="" src="{{ site.baseurl }}/assets/banner-curso-extjs4.png" width="448" height="146" /></a></p>

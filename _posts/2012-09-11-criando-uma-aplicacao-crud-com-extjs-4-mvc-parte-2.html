@@ -1,0 +1,257 @@
+---
+layout: post
+title: 'Criando uma Aplicação CRUD com ExtJS 4 MVC: Parte 2'
+date: 2012-09-11 08:00:17.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- CRUD
+- ExtJS
+- ExtJS 4
+- ExtJS MVC
+- MVC
+
+---
+<p>Parte 2 da série de posts explicando passo a passo como criar uma aplicação simples com ExtJS 4 usando o MVC.</p>
+<p>Este tutorial está dividido em 5 partes - hoje vamos ver a segunda parte:</p>
+<ol start="1">
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-1" target="_blank">Preparando o Ambiente e montando o Projeto (Parte 1)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-2" target="_blank">Criando o Model e Store (Parte 2)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-3">Criando a View - Grid (Parte 3)</a></li>
+<li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-4">Criando a View - Formulário (Parte 4)</a></li>
+<li><a title="Criando uma Aplicação CRUD com ExtJS 4 MVC: Parte 5" href="http://www.loiane.com/2013/07/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-5/" target="_blank">Criando o Controller (Parte 5)</a></li>
+</ol>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte2.png"><img class="aligncenter  wp-image-5134" title="extjs-4-mvc-parte2" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte2.png" width="577" height="288" /></a></p>
+<p>A segunda parte inclui:</p>
+<ol start="1">
+<li>Criando o Model - Contato</li>
+<li>Criando a Store - Contatos</li>
+<li>Criando o Código PHP - CRUD</li>
+</ol>
+<h1>1 - Criando o Model - Contato</h1>
+<p>Como vamos trabalhar com uma coleção de dados que serão carregados do banco de dados, precisamos de um Model para representá-los. Nesse caso, o nosso Model terá os mesmos campos da tabela Contatos. Para isso, vamos criar um arquivo chamado <strong><em>Contato.js</em></strong> dentro da pasta <strong><em>app/model</em></strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.model.Contato', {<br />
+    extend: 'Ext.data.Model',<br />
+    fields: ['id', 'name', 'phone', 'email']<br />
+});<br />
+[/code]</p>
+<p>A linha 1 chama a atenção pelo nome da classe: <strong><em>ExtMVC.model.Contato</em></strong></p>
+<ul>
+<li><strong><em>ExtMVC</em></strong> pois é nome da nossa aplicação que declaramos na linha 4 do arquivo <strong><em>app.js</em></strong>;</li>
+<li><strong><em>model</em></strong> pois é o nome do pacote (diretório <strong><em>model</em></strong>);</li>
+<li><strong><em>Contato</em></strong>, pois o nosso arquivo se chama <strong><em>Contato.js</em></strong>;</li>
+</ul>
+<p>A convenção do nome da classe (<strong><em>Contato</em></strong>) é sempre o nome da entidade que estamos representando no singular!</p>
+<h1>2 - Criando a Store – Contatos</h1>
+<p>Agora precisamos criar a Store que quando carregada terá uma coleção de <strong><em>ExtMVC.model.Contato</em></strong> na memória. Para isso, vamos criar um arquivo chamado <strong><em>Contatos.js</em></strong> dentro da pasta <strong><em>app/store</em></strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.store.Contatos', {<br />
+    extend: 'Ext.data.Store',<br />
+    model: 'ExtMVC.model.Contato',<br />
+    autoLoad: true,<br />
+    pageSize: 35,<br />
+    autoLoad: {start: 0, limit: 35},</p>
+<p>    proxy: {<br />
+        type: 'ajax',<br />
+        api: {<br />
+        	create: 'php/criaContato.php',<br />
+            read: 'php/listaContatos.php',<br />
+            update: 'php/atualizaContato.php',<br />
+            destroy: 'php/deletaContato.php',<br />
+        },<br />
+        reader: {<br />
+            type: 'json',<br />
+            root: 'contatos',<br />
+            successProperty: 'success'<br />
+        },<br />
+        writer: {<br />
+            type: 'json',<br />
+            writeAllFields: true,<br />
+            encode: true,<br />
+            root: 'contatos'<br />
+        }<br />
+    }<br />
+});<br />
+[/code]</p>
+<p>Vamos então à explicação de algumas linhas de código:</p>
+<p>Na linha 1 temos a declaração do nome da classe: <strong><em>ExtMVC.store.Contato</em></strong></p>
+<ul>
+<li><strong><em>ExtMVC</em></strong> pois é nome da nossa aplicação que declaramos na linha 4 do arquivo <strong><em>app.js</em></strong>;</li>
+<li><strong><em>store</em></strong> pois é o nome do pacote (diretório <strong><em>store</em></strong>);</li>
+<li><strong><em>Contatos</em></strong>, pois o nosso arquivo se chama <strong><em>Contatos.js</em></strong>;</li>
+</ul>
+<p>A convenção do nome da classe da <em>Store</em> é o nome da entidade que estamos representando no plural – <strong><em>Contatos</em></strong> – pois estamos representando uma coleção de <strong><em>Contatos</em></strong>!</p>
+<p>Na linha 3 temos a declaração do <em>Model</em> que estamos representando. Temos que colocar o nome completo da classe (<strong><em>ExtMVC.store.Contato</em></strong>).</p>
+<p>Na linha 4 temos a declaração do <strong><em>autoLoad</em></strong>. Isso significa que não precisamos pedir para a <em>Store</em> buscar os dados no servidor manualmente. No momento que a <em>Store</em> for instanciada, ela automaticamente irá carregar os dados para nós.</p>
+<p>Na linha 5 temos a declaração do <strong><em>pageSize</em></strong>. Essa configuração é a quantidade de registros que queremos que apareçam no grid. Como vamos usar uma barra de paginação, essa é a quantidade de registros que vamos carregar por vez da base de dados. Isso é útil, por exemplo, se tivermos 1 milhão de registros no banco de dados, não queremos mostrar tudo de uma só vez pois é muita informação. E com a barra de paginação, mostramos um pouco de cada vez e o usuário pode navegar pela informação.</p>
+<p>Na linha 6 temos a declaração do <strong><em>autoLoad</em></strong> novamente, mas dessa vez dizendo que queremos que o primeiro registro seja o de número 0 (zero) e vamos trazer o limite de 35 do banco de dados. Depois no PHP vamos ver como tratar esses dados.</p>
+<p>A partir da linha 8 temos a declaração do <strong><em>Proxy</em></strong>, a classe responsável por dizer COMO vamos nos comunicar com o servidor. Nesse caso:</p>
+<p>Na linha 9, dizemos que vamos nos comunicar com o servidor através de requisições <strong><em>Ajax</em></strong>.</p>
+<p>Nas linhas 10 a 15 declaramos as <strong><em>urls</em></strong> que serão chamadas para realizar as operações de <strong><em>CRUD</em></strong> (<strong><em>create, read, update, destroy</em></strong>).</p>
+<p>Nas linhas 16 a 20 dizemos como e qual o formato da informação que deve vir do servidor. Na linha 17 dizemos que vamos ler um <strong><em>JSON</em></strong>; na linha 18 dizemos que a coleção/array de contatos devem vir dentro de uma propriedade chamada “<strong><em>contatos</em></strong>”; e na linha 19 dizemos que a propriedade que vai dizer se deu tudo certo no servidor ou não se chama “<strong><em>success</em></strong>”.</p>
+<p>O JSON abaixo é um exemplo de dado que será lido do servidor:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+{<br />
+ &quot;success&quot;:true,<br />
+ &quot;total&quot;:&quot;2&quot;,<br />
+ &quot;contatos&quot;:[<br />
+ {<br />
+ &quot;id&quot;:&quot;1&quot;,&quot;email&quot;:&quot;contact0@blog.com.br&quot;,&quot;name&quot;:&quot;Contact0&quot;,&quot;phone&quot;:&quot;(000) 000-0000&quot;<br />
+ },{<br />
+ &quot;id&quot;:&quot;2&quot;,&quot;email&quot;:&quot;contact1@blog.com.br&quot;,&quot;name&quot;:&quot;Contact1&quot;,&quot;phone&quot;:&quot;(000) 000-0000&quot;<br />
+ }<br />
+ ]<br />
+}<br />
+[/code]</p>
+<p>E nas linhas 21 a 26 dizemos como e qual é formato da informação que será enviada ao servidor. Na linha 22 dizemos que iremos enviar um <strong><em>JSON</em></strong>; na linha 23 dizemos que mesmo que apenas 1 campo do Model seja atualizado, sempre <em>iremos enviar todos os campos</em>; na linha 24 dizemos que queremos que os dados sejam encodados com <strong><em>Ext.encode()</em></strong> e finalmente, na linha 25 dizemos que todos os dados serão enviados ao servidor dentro de uma configuração “<strong><em>contatos</em></strong>”.</p>
+<p>Pronto! O mais legal do ExtJS é que sempre que fizermos um update, delete ou create em um modelo da <em>Store</em>, a própria <em>Store</em> vai fazer tudo para a gente, não vamos precisar nos preocupar em chamar o servidor manualmente!</p>
+<h1>3 - Criando o Código PHP – CRUD</h1>
+<blockquote><p>Bem, já vou deixando uma OBS bem grande aqui para deixar claro que NÂO programo em PHP; a minha praia é Java! rs – Se coloco Java, muita gente iria ter dificuldades, mas como PHP é a língua que mais pessoas irão entender e é a mais simples para criar esse código, vou usar PHP. O objetivo aqui é apenas mostrar <strong><em>a lógica usada no servidor</em></strong> e não boas práticas de PHP, ok?</p></blockquote>
+<h2>3.1 – Conectando ao banco de dados</h2>
+<p>O objetivo do código abaixo é apenas fazer conexão com o bando de dados – arquivo <strong><em>conectar.php</em></strong> que está dentro do diretório <strong><em>php</em></strong>:</p>
+<p>[code lang="php" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?php</p>
+<p>//nome do servidor (127.0.0.1)<br />
+$servidor = &quot;127.0.0.1&quot;;</p>
+<p>//usuário do banco de dados<br />
+$user = &quot;root&quot;;</p>
+<p>//senha do banco de dados<br />
+$senha = &quot;root&quot;;</p>
+<p>//nome da base de dados<br />
+$db = &quot;blog&quot;;</p>
+<p>//executa a conexão com o banco, caso contrário mostra o erro ocorrido<br />
+$conexao = mysql_connect($servidor,$user,$senha) or die (mysql_error());</p>
+<p>//seleciona a base de dados daquela conexão, caso contrário mostra o erro ocorrido<br />
+$banco = mysql_select_db($db, $conexao) or die(mysql_error());</p>
+<p>?&gt;<br />
+[/code]</p>
+<h2>3.2 – Buscando todos os Contatos</h2>
+<p>O objetivo do código abaixo é pegar os parâmetros enviados pelo ExtJS, realizar a busca no banco de dados por todos os contatos dentro do limite estabelecido pela paginação e formatar no formato JSON que declaramos dentro do <strong><em>Proxy</em></strong> da <strong><em>Store</em></strong> – arquivo <strong><em>listaContatos.php</em></strong> que está dentro do diretório <strong><em>php</em></strong>:</p>
+<p>[code lang="php" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?php<br />
+	//chama o arquivo de conexão com o bd<br />
+	include(&quot;conectar.php&quot;);</p>
+<p>	$start = $_REQUEST['start'];<br />
+	$limit = $_REQUEST['limit'];</p>
+<p>	$queryString = &quot;SELECT * FROM contact LIMIT $start,  $limit&quot;;</p>
+<p>	//consulta sql<br />
+	$query = mysql_query($queryString) or die(mysql_error());</p>
+<p>	//faz um looping e cria um array com os campos da consulta<br />
+	$contatos = array();<br />
+	while($contato = mysql_fetch_assoc($query)) {<br />
+	    $contatos[] = $contato;<br />
+	}</p>
+<p>	//consulta total de linhas na tabela<br />
+	$queryTotal = mysql_query('SELECT count(*) as num FROM contact') or die(mysql_error());<br />
+	$row = mysql_fetch_assoc($queryTotal);<br />
+	$total = $row['num'];</p>
+<p>	//encoda para formato JSON<br />
+	echo json_encode(array(<br />
+		&quot;success&quot; =&gt; mysql_errno() == 0,<br />
+		&quot;total&quot; =&gt; $total,<br />
+		&quot;contatos&quot; =&gt; $contatos<br />
+	));<br />
+?&gt;<br />
+[/code]</p>
+<p>Na linha 5 pegamos o parâmetro <strong><em>start</em></strong> do <em>request</em> que foi enviado pelo ExtJS. Esse <strong><em>start</em></strong> vai nos dizer qual é o primeiro registro a ser buscado no banco de dados.</p>
+<p>Na linha 6 pegamos o parâmetro <strong><em>limit</em></strong> do <em>request</em> que foi enviado pelo ExtJS. Esse <strong><em>limit</em></strong> vai nos dizer qual é a quantidade máxima de registros a serem buscados no banco de dados.</p>
+<p>Na linha 8 temos a declaração da consulta feita no MySQL – e é assim que vamos aplicar os parâmetros <strong><em>start</em></strong> e <strong><em>limit</em></strong>. Se você for usar outro banco de dados, precisa verificar a sintaxe correta. Nesse link tem um exemplo de como fazer paginação no Oracle, MS SQL Server e MySQL: <a href="http://thenitai.com/2009/11/15/sql-paging-with-oracle-mysql-and-ms-sql/">http://thenitai.com/2009/11/15/sql-paging-with-oracle-mysql-and-ms-sql/</a></p>
+<p>Nas linhas 10 a 17 fazemos a consulta e jogamos os resultados em um array.</p>
+<p>Nas linhas 19 a 22 pegamos o total de registros que existem na tabela. O ExtJS precisa dessa informação para calcular a quantidade de páginas do grid.</p>
+<p>E nas linhas 24 a 29 apenas formatamos a informação no formato JSON que o ExtJS está esperando.</p>
+<h2>3.3 – Criando um Contato</h2>
+<p>O objetivo do código é pegar os parâmetros enviados pelo ExtJS, fazer o INSERT no banco de dados e retornar os dados atualizados para o ExtJS – arquivo <strong><em>criaContato.php</em></strong> que está dentro do diretório <strong><em>php</em></strong>:</p>
+<p>[code lang="php" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?php<br />
+	//chama o arquivo de conexão com o bd<br />
+	include(&quot;conectar.php&quot;);</p>
+<p>	$info = $_POST['contatos'];</p>
+<p>	$data = json_decode(stripslashes($info));</p>
+<p>	$nome = $data-&gt;name;<br />
+	$email = $data-&gt;email;<br />
+	$phone = $data-&gt;phone;</p>
+<p>	//consulta sql<br />
+	$query = sprintf(&quot;INSERT INTO contact (name, email, phone) values ('%s', '%s', '%s')&quot;,<br />
+		mysql_real_escape_string($nome),<br />
+		mysql_real_escape_string($email),<br />
+		mysql_real_escape_string($phone));</p>
+<p>	$rs = mysql_query($query);</p>
+<p>	echo json_encode(array(<br />
+		&quot;success&quot; =&gt; mysql_errno() == 0,<br />
+		&quot;contatos&quot; =&gt; array(<br />
+			&quot;id&quot; =&gt; mysql_insert_id(),<br />
+			&quot;nome&quot; =&gt; $nome,<br />
+			&quot;email&quot; =&gt; $email,<br />
+			&quot;phone&quot; =&gt; $phone<br />
+		)<br />
+	));<br />
+?&gt;<br />
+[/code]</p>
+<p>Na linha 5 pegamos as informações contidas dentro do parâmetro <strong><em>contatos</em></strong> (lembra que no <strong>Writer</strong> colocamos o <strong><em>root</em></strong> como <strong><em>contatos</em></strong>?) que foi enviado através de um método <em>HTTP <strong>POST</strong></em> do ExtJS.</p>
+<p>Nas linhas 9 a 11 apenas extraímos os dados que queremos que estavam encapsulados dentro do <strong><em>root contatos</em></strong>. Como é um contato novo, não precisamos pegar o <strong><em>id</em></strong>, pois o mesmo será fornecido pelo banco de dados.</p>
+<p>Nas linhas 14 a 19 apenas executamos a query de INSERT.</p>
+<p>Nas linhas 21 a 29 montamos o JSON de retorno. Precisamos enviar de volta o dado que acabamos de inserir na base, pois a <em>Store</em> do ExtJS vai marcar internamente que aquele registro é novo, e quando enviamos o retorno, a <em>Store</em> vai atualizar os dados (no caso teremos um <strong><em>id</em></strong> diferente de zero) e a <em>Store</em> vai marcar o registro como OK.  Assim, quando sincronizarmos novamente a <em>Store</em> por qualquer motivo, a <em>Store</em> não precisa enviar esse dado de novo.</p>
+<h2>3.4 – Atualizando um Contato</h2>
+<p>A lógica usada para atualizar um contato é bem parecida com a criar. O objetivo do código é pegar os parâmetros enviados pelo ExtJS, fazer o UPDATE  no banco de dados e retornar os dados atualizados para o ExtJS – arquivo <strong><em>atualizaContato.php</em></strong> que está dentro do diretório <strong><em>php</em></strong>:</p>
+<p>[code lang="php" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?php<br />
+	//chama o arquivo de conexão com o bd<br />
+	include(&quot;conectar.php&quot;);</p>
+<p>	$info = $_POST['contatos'];</p>
+<p>	$data = json_decode(stripslashes($info));</p>
+<p>	$nome = $data-&gt;name;<br />
+	$email = $data-&gt;email;<br />
+	$phone = $data-&gt;phone;<br />
+	$id = $data-&gt;id;</p>
+<p>	//consulta sql<br />
+	$query = sprintf(&quot;UPDATE contact SET name = '%s', email = '%s', phone = '%s' WHERE id=%d&quot;,<br />
+		mysql_real_escape_string($nome),<br />
+		mysql_real_escape_string($email),<br />
+		mysql_real_escape_string($phone),<br />
+		mysql_real_escape_string($id));</p>
+<p>	$rs = mysql_query($query);</p>
+<p>	echo json_encode(array(<br />
+		&quot;success&quot; =&gt; mysql_errno() == 0,<br />
+		&quot;contatos&quot; =&gt; array(<br />
+			&quot;id&quot; =&gt; $id,<br />
+			&quot;name&quot; =&gt; $nome,<br />
+			&quot;email&quot; =&gt; $email,<br />
+			&quot;phone&quot; =&gt; $phone<br />
+		)<br />
+	));<br />
+?&gt;<br />
+[/code]</p>
+<p>Na linha 5 pegamos as informações contidas dentro do parâmetro <strong><em>contatos</em></strong> (lembra que no <strong>Writer</strong> colocamos o <strong><em>root</em></strong> como <strong><em>contatos</em></strong>?) que foi enviado através de um método <em>HTTP <strong>POST</strong></em> do ExtJS.</p>
+<p>Nas linhas 9 a 12 apenas extraímos os dados que queremos que estavam encapsulados dentro do <strong><em>root contatos</em></strong>. Como não é um contato novo, precisamos pegar o <strong><em>id</em></strong>, para fazer o filtro do UPDATE na base.</p>
+<p>Nas linhas 15 a 21 apenas executamos a query de UPDATE.</p>
+<p>E nas linhas 23 a 31 montamos o JSON de retorno. Da mesma forma que a <em>Store</em> sabe quando um registro é novo, ela também sabe que um registro foi atualizado e usa uma <em>flag</em> interna para isso. Quando retornamos o <strong><em>success</em></strong> e os dados atualizados, a <em>Store</em> vai atualizar os dados do registro e marcar que está OK.</p>
+<h2>3.5 – Excluindo um Contato</h2>
+<p>O objetivo do código é pegar os parâmetros enviados pelo ExtJS – nesse caso nos interessamos apenas pelo <strong><em>id</em></strong>, fazer o DELETE no banco de dados e retornar os dados atualizados para o ExtJS – arquivo <strong><em>deletaContato.php</em></strong> que está dentro do diretório <strong><em>php</em></strong>:</p>
+<p>[code lang="php" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?php<br />
+	//chama o arquivo de conexão com o bd<br />
+	include(&quot;conectar.php&quot;);</p>
+<p>	$info = $_POST['contatos'];</p>
+<p>	$data = json_decode(stripslashes($info));</p>
+<p>	$id = $data-&gt;id;</p>
+<p>	//consulta sql<br />
+	$query = sprintf(&quot;DELETE FROM contact WHERE id=%d&quot;,<br />
+		mysql_real_escape_string($id));</p>
+<p>	$rs = mysql_query($query);</p>
+<p>	echo json_encode(array(<br />
+		&quot;success&quot; =&gt; mysql_errno() == 0<br />
+	));<br />
+?&gt;<br />
+[/code]</p>
+<p>Na linha 5 pegamos as informações contidas dentro do parâmetro <strong><em>contatos</em></strong> (lembra que no <strong>Writer</strong> colocamos o <strong><em>root</em></strong> como <strong><em>contatos</em></strong>?) que foi enviado através de um método <em>HTTP <strong>POST</strong></em> do ExtJS.</p>
+<p>Na linha 9 pegamos apenas o <strong><em>id</em></strong>, pois só estamos interessados nele.</p>
+<p>Nas linhas 12 a 15 fazemos o DELETE no banco de dados.</p>
+<p>E nas linhas 17 a 19 apenas retornamos <strong><em>success</em></strong>. Repare que para o UPDATE e INSERT precisamos retornar todos os dados do contato que foi enviado para o Server. No caso do DELETE, apenas precisamos retornar o <strong><em>success</em></strong> para avisar que o delete ocorreu com sucesso e nesse caso a <em>Store</em> vai completar a requisição e remover o registro.</p>
+<h1>Conclusão:</h1>
+<p>Bem pessoal, agora já temos toda a lógica do servidor pronta e todas as classes do ExtJS necessárias para fazer essa comunicação. No próximo post vamos começar a montar as Views.</p>
+<p>Até o próximo post!</p>
+<p><a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank"><img class="aligncenter size-full wp-image-5129" title="banner-curso-extjs4" alt="" src="{{ site.baseurl }}/assets/banner-curso-extjs4.png" width="448" height="146" /></a></p>
