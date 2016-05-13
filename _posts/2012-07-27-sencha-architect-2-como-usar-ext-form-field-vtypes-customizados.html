@@ -1,0 +1,34 @@
+---
+layout: post
+title: 'Sencha Architect 2: Como usar Ext.form.field.VTypes Customizados'
+date: 2012-07-27 05:00:37.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Sencha Architect 2
+tags:
+- Ext.form.field.VTypes
+- Sencha Architect
+- VTypes Customizados
+
+---
+<p>Ei pessoal,</p>
+<p>Outro problema relacionado ao Sencha Architect 2. No post de hoje vamos ver como podemos usar um VType customizado dentro do Sencha Architect 2. A ferramenta ainda não tem esse tipo de suporte, só é possível usar os VTypes que vem nativos da API do ExtJS 4, mas existe um workaround que vamos conhecer hoje nesse post.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/07/sencha-architect2-custom-form-vtype-loiane.png"><img class="aligncenter  wp-image-4925" title="sencha-architect2-custom-form-vtype-loiane" src="{{ site.baseurl }}/assets/sencha-architect2-custom-form-vtype-loiane-1024x750.png" alt="" width="553" height="405" /></a></p>
+<p>A solução até que é simples. Como o Sencha Architect não suporta ainda VTypes customizados, o que precisamos fazer é antes do component que quermos aplicar o vType customizado ser renderizado, aplicamos o vType manualmente assim:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+onTextfieldBeforeRender: function(abstractcomponent, options) {<br />
+    abstractcomponent.vtype = 'uniqueUserName';<br />
+},</p>
+<p>init: function() {<br />
+    this.control({<br />
+        &quot;textfield[name='username']&quot;: {<br />
+            beforerender: this.onTextfieldBeforeRender<br />
+        }<br />
+    });</p>
+<p>}<br />
+[/code]</p>
+<p>No caso desse exemplo, queremos aplicar o vType de campo único a um textfield de um form, <a title="Exemplo ExtJS 4 Form: Valor de Campo Único (Validação Remota)" href="http://www.loiane.com/2012/07/exemplo-extjs-4-form-valor-de-campo-unico-validacao-remota/">como mostrei aqui nesse exemplo completo</a>.</p>
+<p>Viu só? O Sencha Architect 2 ainda não é a ferramenta perfeita para desenvolver com ExtJS 4,  mas permite esses workarounds enquanto o time de desenvolvedores da Sencha acertam esses detalhes que tanto a comunidade reclama!</p>
+<p>Até a próxima! :)</p>
