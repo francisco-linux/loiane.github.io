@@ -1,0 +1,88 @@
+---
+layout: post
+title: 'Começando com Sencha Touch 2: Hello World (iOS e Android)'
+date: 2012-05-16 04:30:52.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Sencha Touch 2
+tags:
+- Android
+- iOS
+- mobile
+- Sencha
+- Sencha Touch
+- Sencha Touch 2
+
+---
+<p>Neste post vamos aprender como criar uma aplicação base para começarmos a desenvolver com Sencha Touch 2, um framework JavaScript para desenvolvimento de aplicações mobile (iOS, Android e Blackberry) nativas.</p>
+<p>Se você não sabe o que é Sencha Touch e ficou curioso, pode assistir a <a title="Curso Sencha Touch 2" href="http://www.loiane.com/2012/03/curso-de-sencha-touch-2-gratuito/" target="_blank">primeira video-aula do curso de Sencha Touch 2</a>, onde faço um overview completo da tecnologia.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha_touch_slide.png"><img class="aligncenter size-full wp-image-4574" title="sencha_touch_slide" src="{{ site.baseurl }}/assets/sencha_touch_slide.png" alt="" width="550" height="320" /></a></p>
+<p><strong>Requisitos:</strong></p>
+<ul>
+<li><a href="http://www.sencha.com/products/touch/download/" target="_blank">Sencha Touch 2 SDK</a></li>
+<li><a href="http://www.sencha.com/products/sdk-tools/download" target="_blank">Sencha SDK Tools</a></li>
+<li>Browser (Chrome)</li>
+<li>Terminal - console</li>
+<li>Editor de texto</li>
+<li>Emulador mobile - iOS ou Android</li>
+</ul>
+<p><strong>Passo a passo desse tutorial:</strong></p>
+<ol>
+<li>Download do SDK</li>
+<li>Criar o projeto</li>
+<li>Fazer build</li>
+<li>Usando o Emulador iOS</li>
+<li>Usando o Emulador Android</li>
+<li>Próximos Passos</li>
+</ol>
+<h1>1 - Instalando o SDK e ferramentas necessárias</h1>
+<p>O primeiro passo é fazer o download do SDK do Sencha Touch 2 e do <a href="http://www.sencha.com/products/sdk-tools/download" target="_blank">SDK tools</a>. Vamos primeiro instalar o SDK Tools:</p>
+<p>1.1 - Vá até <a href="http://www.sencha.com/products/sdk-tools/download" target="_blank">http://www.sencha.com/products/sdk-tools/download </a>e faça o download para versão do seu sistema operacional.</p>
+<p>1.2 - Instale do SDK Tools - basta seguir o next-next-finish:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-sdk-tools-loiane.png"><img class="aligncenter  wp-image-4576" title="sencha-sdk-tools-loiane" src="{{ site.baseurl }}/assets/sencha-sdk-tools-loiane.png" alt="" width="553" height="446" /></a></p>
+<p style="text-align: left;">1.3 - Vá até <a href="http://www.sencha.com/products/touch/download/" target="_blank">http://www.sencha.com/products/touch/download/</a> e faça download da versão Open Source. Depois que o download terminar, basta unzipar o arquivo em um servidor web (apache, por exemplo). É necessário que seja possível acessar o Sencha Touch através de um endereço local, como por exemplo <em>http://localhost/sencha-touch-2.0.1</em>. Para entender mais sobre isso, você pode assistir a <a title="[Curso de Sencha Touch 2] Aula 02: Instalação e Hello World" href="http://www.loiane.com/2012/05/curso-de-sencha-touch-2-aula-02-instalacao-e-hello-world/" target="_blank">aula 2 do Curso Gratuito de Sencha Touch 2</a>.</p>
+<h1>2 - Criando o Projeto</h1>
+<p>Agora que já temos tudo instalado, vamos criar o nosso primeiro projeto. Recebo muitos emails perguntando como crio as minhas aplicações, e vou descrever para vocês agora.</p>
+<p>2.1 - Eu fiz o deploy do SDK do Sencha Touch no meu servidor Apache que já vem no Mac. Mas você também pode usar o Mamp, Xampp, .</p>
+<p>O diretório que o meu SDK está instalado é: <em>/Users/loiane/Projects/sencha-touch-2.0.1</em></p>
+<p>2.2 - Para criar o projeto precisamos abrir o terminar e navegar até o diretório onde o ST2 está instalado:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-011.png"><img class="aligncenter  wp-image-4580" title="sencha-touch-2-helloworld-loiane-01" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-011.png" alt="" width="543" height="336" /></a></p>
+<p>2.3 - Agora vamos usar o comando sencha generate app para gerar a base da aplicação. Para usarmos esse comando, precisamos passar mais 2 argumentos, sendo o primeiro o nome do namespace da nossa aplicação e o segundo o diretório onde será criada a aplicação. Vou criar uma aplicação com namespace STHelloWorld no diretório  <em>/Users/loiane/Projects/touch2-hello-world. </em>Sendo assim, preciso digitar o comando <strong><em>sencha</em></strong> <strong><em>generate app STHelloWorld ../touch2-hello-world</em></strong>:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-03.png" target="_blank"><img class="aligncenter  wp-image-4579" title="sencha-touch-2-helloworld-loiane-03" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-03.png" alt="" width="543" height="336" /></a></p>
+<p>2.4 - Como vocês podem ver, o SDK Tools gerou a aplicação completa no diretório:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-04.png"><img class="aligncenter size-full wp-image-4581" title="sencha-touch-2-helloworld-loiane-04" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-04.png" alt="" width="566" height="369" /></a></p>
+<p>2.5 - Se abrirmos o diretório da aplicação, veremos que a aplicação gerada contém tudo o que precisamos: a estrutura MVC, todos os arquivos da aplicação e o sdk do touch 2 incluso.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-05.png"><img class="aligncenter size-full wp-image-4582" title="sencha-touch-2-helloworld-loiane-05" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-05.png" alt="" width="566" height="730" /></a></p>
+<p>2.6 - Se acessarmos a aplicação no Google Chromes, por exemplo, teremos a seguinte resultado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-06.png"><img class="aligncenter size-full wp-image-4583" title="sencha-touch-2-helloworld-loiane-06" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-06.png" alt="" width="524" height="638" /></a></p>
+<p>Pronto, a aplicação está pronta e você já pode começar a modificar e criar sua aplicação em cima dessa que criamos.</p>
+<h1>3 - Usando o Emulador iOS</h1>
+<p>3.1 - Bem até agora testamos apenas no browser. Isso é legal porque não precisamos fazer o build para um emulador toda vez que a gente mudar alguma coisa; podemos testar primeiro no browser e no final, quando estiver da maneira desejada, podemos fazer o build e testar em um emulador, antes de empacotar a nossa app ST2 para uma app iOS ou Android.</p>
+<p>Note que na aplicação existe um arquivo chamado <span style="text-decoration: underline;"><em><strong>packager.json</strong></em></span> onde vamos editar as configurações para ver a aplicação funcionando em um emulador. A parte mais importante se quisermos executar é a configuração <span style="text-decoration: underline;"><em><strong>platform</strong></em></span>. Por padrão, já vem configurado para o iOS Emulator.</p>
+<p>Para testarmos a aplicação no iOS Emulator (precisa ter o XCode instalado, se você usa MacOS), basta executar o seguinte comando: <strong>sencha app build native:</strong></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-07.png" target="_blank"><img class="aligncenter  wp-image-4584" title="sencha-touch-2-helloworld-loiane-07" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-07.png" alt="" width="543" height="385" /></a></p>
+<p style="text-align: left;">3.2 - Quando o SDK Tools terminar de construir a aplicação, o iOS Emulator irá abrir e podermos navegar na aplicação:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-08.png"><img class="aligncenter size-full wp-image-4585" title="sencha-touch-2-helloworld-loiane-08" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-08.png" alt="" width="396" height="744" /></a></p>
+<h1>4 - Usando o Emulador Android</h1>
+<p>4.1 - Para usar o Android Emulator, precisamos ter o SDK do Android instalado na máquina. Caso você não tenha, vá até <a href="http://developer.android.com/sdk/index.html" target="_blank">http://developer.android.com/sdk/index.html</a> e faça o download e configure no seu sistema operacional.</p>
+<p>4.2 - Abra o arquivo <em><strong>packager.json </strong></em>e configure as seguintes opções:</p>
+<ul>
+<li>"platform":"AndroidEmulator",</li>
+<li>"sdkPath":"/Users/loiane/Documents/development/android-sdk-macosx", (configure o caminho do SDK do Android no seu sistema operacional)</li>
+<li>"androidAPILevel":"15",</li>
+</ul>
+<div>4.3 - Inicie o emulador Android correspondente ao API Level que configurou no arquivo packager.json</div>
+<div></div>
+<div>4.4 - Execute o comando <strong>sencha app build native </strong>novamente e a aplicação será carregada no emulador Android:</div>
+<div></div>
+<div><a href="http://www.loiane.com/wp-content/uploads/2012/05/sencha-touch-2-helloworld-loiane-09.png" target="_blank"><img class="aligncenter  wp-image-4594" title="sencha-touch-2-helloworld-loiane-09" src="{{ site.baseurl }}/assets/sencha-touch-2-helloworld-loiane-09.png" alt="" width="574" height="535" /></a></div>
+<h1>5 - Próximos Passos</h1>
+<p>Agora é só deixar a imaginação e criatividade fluir e criar lindas apps com ST2!</p>
+<ul>
+<li>Leia os guides da documentação: <a href="http://docs.sencha.com/touch/2-0/" target="_blank">http://docs.sencha.com/touch/2-0/</a></li>
+<li>Veja alguns exemplos: <a href="http://docs.sencha.com/touch/2-0/#!/example" target="_blank">http://docs.sencha.com/touch/2-0/#!/example</a></li>
+<li>Curso Online Gratuito: <a href="http://www.loiane.com/2012/03/curso-de-sencha-touch-2-gratuito/" target="_blank">http://www.loiane.com/2012/03/curso-de-sencha-touch-2-gratuito/</a></li>
+</ul>
+<p>Até a próxima! :)</p>
