@@ -1,0 +1,50 @@
+---
+layout: post
+title: 'ExtJS 4 Troubleshooting: ActionColumn iconCls não é mostrado'
+date: 2012-10-18 08:00:17.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ActionColumn
+- ExtJS 4
+- iconCls
+- Troubleshooting
+
+---
+<p><strong>ActionColumn</strong> é um tipo de coluna do componente grid do ExtJS muito usado. Com esse tipo de coluna, você pode usar aquele botões para fazer operações para cada linha do grid.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/10/actioncolumn.gif"><img class="aligncenter size-full wp-image-5287" title="actioncolumn" src="{{ site.baseurl }}/assets/actioncolumn.gif" alt="" width="250" height="159" /></a></p>
+<p>Só tem um problema: quando queremos mostrar um ícone através da config <strong>iconCls</strong>, não funciona. Aí temos que usar a config <strong>icon</strong>, passando a url relativa do ícone, como mostra o código abaixo:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]{<br />
+    xtype: 'actioncolumn',<br />
+    width: 50,<br />
+    items: [<br />
+        {<br />
+            icon: '../../shared/icons/fam/delete.gif',<br />
+            tooltip: 'Sell stock'<br />
+        }<br />
+    ]<br />
+}[/code]</p>
+<p>Para que a config <strong>iconCls</strong> funcione, temos que adicionar o seguinte CSS à aplicação:</p>
+<p>[code lang="css" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+.x-action-col-cell img {<br />
+    height: 16px;<br />
+    width: 16px;<br />
+    cursor: pointer;<br />
+}[/code]</p>
+<p>Aí podemos usar a propriedade <strong>iconCls</strong> assim:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]{<br />
+    xtype: 'actioncolumn',<br />
+    width: 50,<br />
+    items: [<br />
+        {<br />
+            iconCls: 'delete',<br />
+            tooltip: 'Sell stock'<br />
+        }<br />
+    ]<br />
+}[/code]</p>
+<p>O output será o mesmo em ambos os códigos. A vantagem do <strong>iconCls</strong> é que se você o CSS, o ícone será mudado em toda a aplicação.</p>
+<p>Dica enviada pelo Edmar! :)</p>
+<p>Até o próximo post!</p>
