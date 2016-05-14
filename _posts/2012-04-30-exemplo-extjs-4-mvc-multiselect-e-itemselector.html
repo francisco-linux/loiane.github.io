@@ -1,0 +1,316 @@
+---
+layout: post
+title: 'Exemplo ExtJS 4 MVC: MultiSelect e ItemSelector'
+date: 2012-04-30 04:30:36.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ExtJS 4
+- ExtJS 4 MVC
+
+---
+<p>Mais um exemplo MVC de ExtJS 4 aqui no blog. Hoje vamos ver o código do exemplo <a href="http://dev.sencha.com/deploy/ext-4.1.0-gpl/examples/multiselect/multiselect-demo.html" target="_blank">MultiSelect and ItemSelector - Form</a>.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-mvc-multiselect-loiane.jpg"><img class="aligncenter size-full wp-image-4428" title="extjs4-mvc-multiselect-loiane" src="{{ site.baseurl }}/assets/extjs4-mvc-multiselect-loiane.jpg" alt="" width="409" height="315" /></a></p>
+<p>Vamos ao código então!</p>
+<h2>Estrutura do Projeto</h2>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-mvc-multiselect.png"><img class="aligncenter size-full wp-image-4459" title="extjs4-mvc-multiselect" src="{{ site.baseurl }}/assets/extjs4-mvc-multiselect.png" alt="" width="566" height="650" /></a></p>
+<h2>Model – Number</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.model.Number',{<br />
+    extend: 'Ext.data.Model',<br />
+    fields: [<br />
+       {name: 'value'},<br />
+       {name: 'text'}<br />
+    ],<br />
+    idProperty: 'value'<br />
+});<br />
+[/code]</p>
+<h2>Store- Numbers</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.store.Numbers', {<br />
+    extend: 'Ext.data.ArrayStore',<br />
+    model: 'ExtMVC.model.Number',</p>
+<p>    data: [<br />
+        [123,'One Hundred Twenty Three'],<br />
+        ['1', 'One'],<br />
+        ['2', 'Two'],<br />
+        ['3', 'Three'],<br />
+        ['4', 'Four'],<br />
+        ['5', 'Five'],<br />
+        ['6', 'Six'],<br />
+        ['7', 'Seven'],<br />
+        ['8', 'Eight'],<br />
+        ['9', 'Nine']<br />
+    ],</p>
+<p>    sortInfo: {<br />
+        field: 'value',<br />
+        direction: 'ASC'<br />
+    }<br />
+ });<br />
+[/code]</p>
+<h2>View - ItemSelectorForm</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.ItemSelectorForm', {<br />
+    extend: 'Ext.form.Panel',<br />
+    alias : 'widget.itemselectorform',</p>
+<p>    requires: [<br />
+        'Ext.ux.form.ItemSelector',<br />
+        'ExtMVC.view.DockedToolbar',<br />
+        'ExtMVC.view.DockedButtons'<br />
+    ],</p>
+<p>    title: 'ItemSelector Test',<br />
+    width: 700,<br />
+    bodyPadding: 10,<br />
+    height: 300,<br />
+    layout: 'fit',</p>
+<p>    items:[{<br />
+        xtype: 'itemselector',<br />
+        name: 'itemselector',<br />
+        id: 'itemselector-field',<br />
+        anchor: '100%',<br />
+        fieldLabel: 'ItemSelector',<br />
+        store: Ext.create('ExtMVC.store.Numbers'),<br />
+        displayField: 'text',<br />
+        valueField: 'value',<br />
+        value: ['3', '4', '6'],<br />
+        allowBlank: false,<br />
+        msgTarget: 'side'<br />
+    }],</p>
+<p>    dockedItems: [{<br />
+        xtype: 'toptoolbar',<br />
+        dock: 'top'<br />
+    },{<br />
+        xtype: 'bottombuttons',<br />
+        dock: 'bottom'<br />
+    }]<br />
+})<br />
+[/code]</p>
+<h2>View - MultiSelectForm</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.MultiSelectForm', {<br />
+    extend: 'Ext.form.Panel',<br />
+    alias : 'widget.multiselectform',</p>
+<p>    requires: [<br />
+        'Ext.ux.form.MultiSelect',<br />
+        'ExtMVC.view.DockedToolbar',<br />
+        'ExtMVC.view.DockedButtons'<br />
+    ],</p>
+<p>    title: 'MultiSelect Test',<br />
+    bodyPadding: 10,<br />
+    width: 700,</p>
+<p>    items:[{<br />
+        anchor: '100%',<br />
+        xtype: 'multiselect',<br />
+        msgTarget: 'side',<br />
+        fieldLabel: 'Multiselect',<br />
+        name: 'multiselect',<br />
+        id: 'multiselect-field',<br />
+        allowBlank: false,<br />
+        store: Ext.create('ExtMVC.store.Numbers'),<br />
+        displayField: 'text',<br />
+        valueField: 'value',<br />
+        value: ['3', '4', '6'],<br />
+        ddReorder: true<br />
+    }],</p>
+<p>    dockedItems: [{<br />
+        xtype: 'toptoolbar',<br />
+        dock: 'top'<br />
+    },{<br />
+        xtype: 'bottombuttons',<br />
+        dock: 'bottom'<br />
+    }]<br />
+})<br />
+[/code]</p>
+<h2>View - DockedToolbar</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.DockedToolbar', {<br />
+    extend: 'Ext.toolbar.Toolbar',<br />
+    alias : 'widget.toptoolbar',</p>
+<p>    items: [{<br />
+        text: 'Options',<br />
+        menu: [{<br />
+            text: 'Get value',<br />
+            action: 'getValue'<br />
+        }, {<br />
+            text: 'Set value (2,3)',<br />
+            action: 'setValue'<br />
+        },{<br />
+            text: 'Toggle enabled',<br />
+            checked: true,<br />
+            action: 'enable'<br />
+        },{<br />
+            text: 'Toggle delimiter',<br />
+            checked: true,<br />
+            action: 'delimiter'<br />
+        }]<br />
+    }]<br />
+});<br />
+[/code]</p>
+<h2>View - DockedButtons</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.DockedButtons', {<br />
+    extend: 'Ext.toolbar.Toolbar',<br />
+    alias : 'widget.bottombuttons',</p>
+<p>    ui: 'footer',<br />
+    defaults: {<br />
+        minWidth: 75<br />
+    },</p>
+<p>    items: ['-&gt;', {<br />
+        text: 'Clear',<br />
+        action: 'clear'<br />
+    }, {<br />
+        text: 'Reset',<br />
+        action: 'reset'<br />
+    }, {<br />
+        text: 'Save',<br />
+        action: 'save'<br />
+    }]</p>
+<p>});<br />
+[/code]</p>
+<h2>View- Viewport</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+/**<br />
+ * The main application viewport, which displays the whole application<br />
+ * @extends Ext.Viewport<br />
+ */<br />
+Ext.define('ExtMVC.view.Viewport', {<br />
+    extend: 'Ext.Viewport',</p>
+<p>    layout: {<br />
+        type:'vbox',<br />
+        padding: 10,<br />
+        align:'stretch'<br />
+     },</p>
+<p>    requires: [<br />
+        'ExtMVC.view.MultiSelectForm',<br />
+        'ExtMVC.view.ItemSelectorForm'<br />
+    ],</p>
+<p>    initComponent: function() {<br />
+        var me = this;</p>
+<p>        Ext.apply(me, {<br />
+            items: [<br />
+                {<br />
+                    xtype: 'multiselectform'<br />
+                },{<br />
+                    xtype: 'box',<br />
+                    html: '&lt;/br&gt;'<br />
+                },{<br />
+                    xtype: 'itemselectorform'<br />
+                }<br />
+            ]<br />
+        });</p>
+<p>        me.callParent(arguments);<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>Controller</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.controller.SelectController', {<br />
+    extend: 'Ext.app.Controller',</p>
+<p>    models: ['Number'],</p>
+<p>    stores: ['Numbers'],</p>
+<p>    views: ['MultiSelectForm', 'ItemSelectorForm'],</p>
+<p>    init: function() {</p>
+<p>        this.control({<br />
+            'form bottombuttons button[action=clear]': {<br />
+                click: this.clearForm<br />
+            },<br />
+            'form bottombuttons button[action=reset]': {<br />
+                click: this.resetForm<br />
+            },<br />
+            'form bottombuttons button[action=save]': {<br />
+                click: this.saveForm<br />
+            },<br />
+            'form toptoolbar menuitem[action=getValue]': {<br />
+                click: this.getValue<br />
+            },<br />
+            'form toptoolbar menuitem[action=setValue]': {<br />
+                click: this.setValue<br />
+            },<br />
+            'form toptoolbar menuitem[action=enable]': {<br />
+                checkchange: this.enable<br />
+            },<br />
+            'form toptoolbar menuitem[action=delimiter]': {<br />
+                checkchange: this.delimiter<br />
+            }<br />
+        });<br />
+    },</p>
+<p>    clearForm: function(button){</p>
+<p>        var field = button.up('form').down('multiselect');<br />
+        if (!field.disabled) {<br />
+            field.clearValue();<br />
+        }<br />
+    },</p>
+<p>    resetForm: function(button){</p>
+<p>        button.up('form').getForm().reset();<br />
+    },</p>
+<p>    saveForm: function(button){</p>
+<p>        var form = button.up('form').getForm();<br />
+        form.getValues(true);<br />
+        if (form.isValid()){<br />
+            Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: &lt;br /&gt;'+<br />
+                form.getValues(true));<br />
+        }<br />
+    },</p>
+<p>    getValue: function(item){</p>
+<p>        var value = item.up('form').down('multiselect').getValue();<br />
+        Ext.Msg.alert('Value is a split array', value.join(', '));<br />
+    },</p>
+<p>    setValue: function(item){</p>
+<p>        var value = item.up('form').down('multiselect').setValue(['2', '3']);<br />
+    },</p>
+<p>    enable: function(item, checked){</p>
+<p>        item.up('form').down('multiselect').setDisabled(!checked);<br />
+    },</p>
+<p>    delimiter: function(item, checked){</p>
+<p>        var field = item.up('form').down('multiselect');<br />
+        if (checked) {<br />
+            field.delimiter = ',';<br />
+            Ext.Msg.alert('Delimiter Changed', 'The delimiter is now set to &lt;b&gt;&quot;,&quot;&lt;/b&gt;. Click Save to ' +<br />
+                          'see that values are now submitted as a single parameter separated by the delimiter.');<br />
+        } else {<br />
+            field.delimiter = null;<br />
+            Ext.Msg.alert('Delimiter Changed', 'The delimiter is now set to &lt;b&gt;null&lt;/b&gt;. Click Save to ' +<br />
+                          'see that values are now submitted as separate parameters.');<br />
+        }<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>App.js</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.Loader.setConfig({enabled: true});<br />
+Ext.Loader.setPath('Ext.ux', 'app/ux');</p>
+<p>Ext.application({<br />
+    name: 'ExtMVC',</p>
+<p>    controllers: [<br />
+        'SelectController'<br />
+    ],</p>
+<p>    autoCreateViewport: true<br />
+});<br />
+[/code]</p>
+<h2>Página HTML</h2>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+	&lt;title&gt;Ext JS 4 MVC Examples - loiane.com&lt;/title&gt;</p>
+<p>	&lt;!-- Ext JS Files --&gt;<br />
+	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;extjs/resources/css/ext-all.css&quot;&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;extjs/ext-all-debug.js&quot;&gt;&lt;/script&gt;</p>
+<p>    &lt;!-- Plugin Files --&gt;<br />
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;resources/ItemSelector.css&quot; /&gt;</p>
+<p>    &lt;!-- App Files --&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<h2>Download do código fonte completo</h2>
+<p>Você pode fazer o download do código fonte completo através dos meu repositório do Github: <a href="https://github.com/loiane/extjs4-mvc-multiselect">https://github.com/loiane/extjs4-mvc-multiselect</a></p>
+<h2>Demo</h2>
+<p>Para ver esse projeto rodando, acesse o link: <a href="http://loiane.com/extjs/extjs4-mvc-multiselect/" target="_blank">http://loiane.com/extjs/extjs4-mvc-multiselect/</a></p>
+<h3>Todos os exemplos ExtJS 4 MVC:</h3>
+<p><a href="http://www.loiane.com/2012/03/exemplos-sencha-extjs-4-em-mvc/" target="_blank">http://www.loiane.com/2012/03/exemplos-sencha-extjs-4-em-mvc/</a></p>
+<p>Até o próximo exemplo! <img src="{{ site.baseurl }}/assets/icon_smile.gif" alt=":)" /></p>

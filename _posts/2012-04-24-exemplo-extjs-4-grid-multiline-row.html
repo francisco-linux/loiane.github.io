@@ -1,0 +1,129 @@
+---
+layout: post
+title: 'Exemplo ExtJS 4 Grid: Multiline Row'
+date: 2012-04-24 04:30:56.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ExtJS 4
+- grid
+- Multiline Row
+
+---
+<p>O post de hoje é uma dica rápida de como alterar o grid do ExtJS 4 para que ele suporte um conteúdo de várias linhas em um record do grid.</p>
+<p>Por exemplo, veja o grid abaixo:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-grid-multiline-row-loiane-02.jpg"><img class="aligncenter  wp-image-4269" title="extjs4-grid-multiline-row-loiane-02" src="{{ site.baseurl }}/assets/extjs4-grid-multiline-row-loiane-02.jpg" alt="" width="550" height="189" /></a></p>
+<p>Na descrição queremos exibir o seguinte conteúdo:</p>
+<blockquote><p><em>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna.</em><br />
+<em> Aliquam commodo ullamcorper erat. Nullam vel justo in neque porttitor laoreet. Aenean lacus dui, consequat eu, adipiscing eget, nonummy non, nisi. Morbi nunc est, dignissim non, ornare sed, luctus eu, massa. Vivamus eget quam. Vivamus tincidunt diam nec urna. Curabitur velit.</em></p></blockquote>
+<p>Bem grande para apenas uma linha não é mesmo?</p>
+<p>O que podemos então fazer para que o grid exiba todo esse conteúdo acima?</p>
+<p>Basta acrescentar o seguinte css no seu projeto:</p>
+<p>[code lang="css" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+.x-grid-row .x-grid-cell-inner {<br />
+	white-space: normal;<br />
+}<br />
+.x-grid-row-over .x-grid-cell-inner {<br />
+	font-weight: bold;<br />
+	white-space: normal;<br />
+}<br />
+[/code]</p>
+<p>E a grid irá ficar assim:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-grid-multiline-row-loiane-01.jpg"><img class="aligncenter  wp-image-4268" title="extjs4-grid-multiline-row-loiane-01" src="{{ site.baseurl }}/assets/extjs4-grid-multiline-row-loiane-01.jpg" alt="" width="549" height="191" /></a></p>
+<p>Vamos ver como fica o código completo apresentado nesse post:</p>
+<h3>Código ExtJS 4:</h3>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.require([<br />
+    'Ext.grid.*',<br />
+    'Ext.data.*'<br />
+]);</p>
+<p>Ext.define('Post', {<br />
+    extend: 'Ext.data.Model',<br />
+    fields: [<br />
+       {name: 'post'},<br />
+       {name: 'desc'}<br />
+    ]<br />
+});</p>
+<p>Ext.onReady(function() {</p>
+<p>    // sample static data for the store<br />
+    var myData = [<br />
+        ['ExtJS 4 Grid Multiline Row',<br />
+        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh,'+<br />
+        'sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis,'+<br />
+        'interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada,'+<br />
+        'libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non'+<br />
+        'sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna.'+<br />
+		'Aliquam commodo ullamcorper erat. Nullam vel justo in neque porttitor laoreet. Aenean lacus dui,'+<br />
+		'consequat eu, adipiscing eget, nonummy non, nisi. Morbi nunc est, dignissim non, ornare sed,'+<br />
+		'luctus eu,'+<br />
+		'massa. Vivamus eget quam. Vivamus tincidunt diam nec urna. Curabitur velit.']<br />
+    ];</p>
+<p>    // create the data store<br />
+    var store = Ext.create('Ext.data.ArrayStore', {<br />
+        model: 'Post',<br />
+        data: myData<br />
+    });</p>
+<p>    // create the Grid<br />
+    var grid = Ext.create('Ext.grid.Panel', {<br />
+        store: store,<br />
+        stateful: true,<br />
+        collapsible: true,<br />
+        multiSelect: true,<br />
+        columns: [<br />
+            {<br />
+                text     : 'Post',<br />
+          		width    : 150,<br />
+                sortable : false,<br />
+                dataIndex: 'post'<br />
+            },<br />
+            {<br />
+                text     : 'Description',<br />
+                flex     : 1,<br />
+                sortable : false,<br />
+                dataIndex: 'desc'<br />
+            }<br />
+        ],<br />
+        height: 200,<br />
+        width: 600,<br />
+        title: 'Array Grid',<br />
+        renderTo: 'grid-example',<br />
+        viewConfig: {<br />
+            stripeRows: true,<br />
+            enableTextSelection: true<br />
+        }<br />
+    });<br />
+});</p>
+<p>[/code]</p>
+<h3>Código HTML:</h3>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+	&lt;title&gt;Ext JS 4 Examples - loiane.com&lt;/title&gt;</p>
+<p>	&lt;!-- Ext JS Files --&gt;<br />
+	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;extjs/resources/css/ext-all.css&quot;&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;extjs/ext-all.js&quot;&gt;&lt;/script&gt;</p>
+<p>    &lt;!-- App Files --&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</p>
+<p>    &lt;style type=&quot;text/css&quot;&gt;<br />
+	.x-grid-row .x-grid-cell-inner {<br />
+		white-space: normal;<br />
+	}<br />
+	.x-grid-row-over .x-grid-cell-inner {<br />
+		font-weight: bold;<br />
+		white-space: normal;<br />
+	}<br />
+    &lt;/style&gt;</p>
+<p>&lt;/head&gt;<br />
+&lt;body&gt;<br />
+	&lt;div id=&quot;grid-example&quot; style=&quot;padding:20px;&quot;&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<h3>Download do Código Fonte:</h3>
+<p>Você pode fazer o download do código fonte completo através dos meu repositório do Github: <a href="https://github.com/loiane/extjs4-grid-multiline-row" target="_blank">https://github.com/loiane/extjs4-grid-multiline-row</a></p>
+<h3>Demo:</h3>
+<p>Para ver esse projeto rodando, acesse o link: <a href="http://loiane.com/extjs/extjs4-grid-multiline-row" target="_blank">http://loiane.com/extjs/extjs4-grid-multiline-row</a></p>
+<p>Até a próxima! :)</p>

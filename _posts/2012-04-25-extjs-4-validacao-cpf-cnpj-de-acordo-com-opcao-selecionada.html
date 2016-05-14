@@ -1,0 +1,98 @@
+---
+layout: post
+title: 'ExtJS 4: Validação CPF / CNPJ de Acordo com Opção Selecionada'
+date: 2012-04-25 04:30:04.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- CNPJ
+- CPF
+- ExtJS 4
+- Validação ExtJS
+
+---
+<p>Tempos atrás postei um<a title="ExtJS 4 Form: Exemplo Campos CPF e CNPJ" href="http://www.loiane.com/2011/08/extjs-4-form-exemplo-campos-cpf-e-cnpj/" target="_blank"> post sobre duas extensões de campos de forms do ExtJS 4 para CPF e CNPJ já com validação</a>. Só que reparei que uma dúvida comum que as pessoas tem é como ter apenas um campo (CPF ou CNPJ) e deixar que o usuário escolha qual campo usar. E ainda assim, fazer com que as validações funcionem.</p>
+<p>Bem, por este motivo criei um exemplo. Fique á vontade para usar no seu projeto ou fazer melhorias! :)</p>
+<p>O exemplo já utiliza o ComponentQuery e não utiliza o Ext.getCmp (arg!). Tentei seguir as melhores práticas para este exemplo! :)</p>
+<p>O exemplo funciona assim:</p>
+<p>CPF selecionado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-validacao-cpf-cnpj-loiane-01.png"><img class="aligncenter size-full wp-image-4306" title="extjs4-validacao-cpf-cnpj-loiane-01" src="{{ site.baseurl }}/assets/extjs4-validacao-cpf-cnpj-loiane-01.png" alt="" width="260" height="109" /></a></p>
+<p>CNPJ selecionado:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-validacao-cpf-cnpj-loiane-02.png"><img class="aligncenter size-full wp-image-4307" title="extjs4-validacao-cpf-cnpj-loiane-02" src="{{ site.baseurl }}/assets/extjs4-validacao-cpf-cnpj-loiane-02.png" alt="" width="259" height="110" /></a></p>
+<p>Vamos ao código então!</p>
+<h2>Código:</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.Loader.setConfig({enabled: true});</p>
+<p>Ext.require([<br />
+	'Ux.CpfField',<br />
+	'Ux.CnpjField'<br />
+]);</p>
+<p>Ext.onReady(function() {</p>
+<p>	Ext.create('Ext.form.Panel', {<br />
+		renderTo: Ext.getBody(),<br />
+		title: 'Exemplo Campos CPF e CNPJ',<br />
+		width: 250,<br />
+		bodyPadding: 5,<br />
+		fieldDefaults: {<br />
+			labelAlign: 'left',<br />
+			labelWidth: 50,<br />
+			anchor: '100%',<br />
+			msgTarget: 'under'<br />
+		},<br />
+		defaultType: 'textfield',<br />
+		items: [<br />
+		{<br />
+            xtype      : 'radiogroup',<br />
+            fieldLabel : 'Tipo de Pessoa',<br />
+            columns: 2,<br />
+            items: [<br />
+                {<br />
+                    boxLabel  : 'Física',<br />
+                    name      : 'tipoPessoa',<br />
+                    inputValue: 'cpf',<br />
+                    checked   : true<br />
+                }, {<br />
+                    boxLabel  : 'Jurídica',<br />
+                    name      : 'tipoPessoa',<br />
+                    inputValue: 'cnpj'<br />
+                }<br />
+            ],<br />
+            onChange: function(field){<br />
+            	var novoValor = field.tipoPessoa;<br />
+            	if (!Ext.isArray(novoValor)) {<br />
+            		if (novoValor == 'cpf') {<br />
+            		var cpf = Ext.ComponentQuery.query('cpffield')[0];<br />
+            		var cnpj = Ext.ComponentQuery.query('cnpjfield')[0];<br />
+            		cpf.setVisible(true);<br />
+            		cnpj.setVisible(false);<br />
+            	} else {<br />
+            		var cpf = Ext.ComponentQuery.query('cpffield')[0];<br />
+            		var cnpj = Ext.ComponentQuery.query('cnpjfield')[0];<br />
+            		cpf.setVisible(false);<br />
+            		cnpj.setVisible(true);<br />
+            	}<br />
+            	}<br />
+            }<br />
+        },<br />
+		{<br />
+			fieldLabel: 'CPF',<br />
+			name: 'cpf',<br />
+			xtype: 'cpffield',<br />
+			hidden: false<br />
+		},{<br />
+			fieldLabel: 'CNPJ',<br />
+			name: 'cpnj',<br />
+			xtype: 'cnpjfield',<br />
+			hidden: true<br />
+		}]<br />
+	});</p>
+<p>});<br />
+[/code]</p>
+<h2>Download do código fonte:</h2>
+<p>Você pode fazer o download do código fonte completo no meu repositório do github: <a href="https://github.com/loiane/extjs4-validacao-cpf-cnpj">https://github.com/loiane/extjs4-validacao-cpf-cnpj</a></p>
+<h2>Demo:</h2>
+<p>Quer ver esse exemplo funcionando? Clique no link: <a href="http://www.loiane.com/extjs/extjs4-validacao-cpf-cnpj/">http://www.loiane.com/extjs/extjs4-validacao-cpf-cnpj/</a></p>
+<p>Até a próxima!</p>

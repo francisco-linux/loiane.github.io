@@ -1,0 +1,239 @@
+---
+layout: post
+title: 'Exemplo ExtJS 4 MVC: Paging Grid'
+date: 2012-04-02 04:30:54.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ExtJS 4
+- ExtJS 4 MVC
+
+---
+<p>Mais um exemplo MVC de ExtJS 4 aqui no blog. Hoje vamos ver o código do exemplo <a href="http://dev.sencha.com/deploy/ext-4.0.7-gpl/examples/grid/paging.html" target="_blank">Paging Grid</a>.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-mvc-paging-grid-loiane.png"><img class="aligncenter  wp-image-4145" title="extjs4-mvc-paging-grid-loiane" src="{{ site.baseurl }}/assets/extjs4-mvc-paging-grid-loiane.png" alt="" width="567" height="407" /></a></p>
+<p>Vamos ao código então!</p>
+<h2>Estrutura do Projeto</h2>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/04/extjs4-mvc-paging-grid-loiane-01.png"><img class="aligncenter size-full wp-image-4146" title="extjs4-mvc-paging-grid-loiane-01" src="{{ site.baseurl }}/assets/extjs4-mvc-paging-grid-loiane-01.png" alt="" width="577" height="577" /></a></p>
+<h2>Model</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.model.ForumThread', {<br />
+    extend: 'Ext.data.Model',<br />
+    fields: [<br />
+        'title',<br />
+        'forumtitle',<br />
+        'forumid',<br />
+        'username',<br />
+        {name: 'replycount', type: 'int'},<br />
+        {name: 'lastpost', mapping: 'lastpost', type: 'date', dateFormat: 'timestamp'},<br />
+        'lastposter',<br />
+        'excerpt',<br />
+        'threadid'<br />
+    ],<br />
+    idProperty: 'threadid'<br />
+});<br />
+[/code]</p>
+<h2>Store</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.store.ForumThreads', {<br />
+    extend: 'Ext.data.Store',<br />
+    model: 'ExtMVC.model.ForumThread',<br />
+    autoLoad: true,<br />
+    remoteSort: true,<br />
+    proxy: {<br />
+        // load using script tags for cross domain, if the data in on the same domain as<br />
+        // this page, an HttpProxy would be better<br />
+        type: 'jsonp',<br />
+        url: 'http://www.sencha.com/forum/topics-browse-remote.php',<br />
+        reader: {<br />
+            root: 'topics',<br />
+            totalProperty: 'totalCount'<br />
+        },<br />
+        // sends single sort as multi parameter<br />
+        simpleSortMode: true<br />
+    },<br />
+    sorters: [{<br />
+        property: 'lastpost',<br />
+        direction: 'DESC'<br />
+    }]<br />
+});<br />
+[/code]</p>
+<h2>View - Grid</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.view.forumThread.ForumThreadGrid' ,{<br />
+    extend: 'Ext.grid.Panel',<br />
+    alias : 'widget.forumthreadgrid',</p>
+<p>    requires: 'Ext.ux.PreviewPlugin',</p>
+<p>    title : 'ExtJS.com - Browse Forums',</p>
+<p>    disableSelection: true,</p>
+<p>    loadMask: true,</p>
+<p>    viewConfig: {<br />
+        id: 'gv',<br />
+        trackOver: false,<br />
+        stripeRows: false,<br />
+        plugins: [{<br />
+            ptype: 'preview',<br />
+            bodyField: 'excerpt',<br />
+            expanded: true,<br />
+            pluginId: 'preview'<br />
+        }]<br />
+    },</p>
+<p>    // pluggable renders<br />
+    renderTopic: function(value, p, record) {<br />
+        return Ext.String.format(<br />
+            '&lt;strong&gt;&lt;a href=&quot;http://sencha.com/forum/showthread.php?t={2}&quot; target=&quot;_blank&quot;&gt;{0}&lt;/a&gt;&lt;/strong&gt;&lt;a href=&quot;http://sencha.com/forum/forumdisplay.php?f={3}&quot; target=&quot;_blank&quot;&gt;{1} Forum&lt;/a&gt;',<br />
+            value,<br />
+            record.data.forumtitle,<br />
+            record.getId(),<br />
+            record.data.forumid<br />
+        );<br />
+    },</p>
+<p>    renderLast: function(value, p, r) {<br />
+        return Ext.String.format('{0}<br />
+by {1}', Ext.Date.dateFormat(value, 'M j, Y, g:i a'), r.get('lastposter'));<br />
+    },</p>
+<p>    initComponent: function() {</p>
+<p>    	this.store = 'ForumThreads';</p>
+<p>    	this.columns = [<br />
+        {<br />
+            id: 'topic',<br />
+            text: &quot;Topic&quot;,<br />
+            dataIndex: 'title',<br />
+            flex: 1,<br />
+            renderer: this.renderTopic,<br />
+            sortable: false<br />
+        },{<br />
+            text: &quot;Author&quot;,<br />
+            dataIndex: 'username',<br />
+            width: 100,<br />
+            hidden: true,<br />
+            sortable: true<br />
+        },{<br />
+            text: &quot;Replies&quot;,<br />
+            dataIndex: 'replycount',<br />
+            width: 70,<br />
+            align: 'right',<br />
+            sortable: true<br />
+        },{<br />
+            id: 'last',<br />
+            text: &quot;Last Post&quot;,<br />
+            dataIndex: 'lastpost',<br />
+            width: 150,<br />
+            renderer: this.renderLast,<br />
+            sortable: true<br />
+        }];</p>
+<p>         // paging bar on the bottom<br />
+        this.bbar = Ext.create('Ext.PagingToolbar', {<br />
+            store: this.store,<br />
+            displayInfo: true,<br />
+            displayMsg: 'Displaying topics {0} - {1} of {2}',<br />
+            emptyMsg: &quot;No topics to display&quot;,<br />
+            items:[<br />
+                '-', {<br />
+                xtype: 'button',<br />
+                text: 'Show Preview',<br />
+                pressed: true,<br />
+                action: 'showPreview',<br />
+                enableToggle: true<br />
+            }]<br />
+        });</p>
+<p>    	this.callParent(arguments);<br />
+    }<br />
+ });<br />
+[/code]</p>
+<h2>View- Viewport</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+/**<br />
+ * The main application viewport, which displays the whole application<br />
+ * @extends Ext.Viewport<br />
+ */<br />
+Ext.define('ExtMVC.view.Viewport', {<br />
+    extend: 'Ext.Viewport',<br />
+    layout: 'fit',</p>
+<p>    requires: [<br />
+        'ExtMVC.view.forumThread.ForumThreadGrid'<br />
+    ],</p>
+<p>    initComponent: function() {<br />
+        var me = this;</p>
+<p>        Ext.apply(me, {<br />
+            items: [<br />
+                {<br />
+                    xtype: 'forumthreadgrid'<br />
+                }<br />
+            ]<br />
+        });</p>
+<p>        me.callParent(arguments);<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>Controller</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('ExtMVC.controller.ForumThreads', {<br />
+    extend: 'Ext.app.Controller',</p>
+<p>    stores: ['ForumThreads'],</p>
+<p>    models: ['ForumThread'],</p>
+<p>    views: ['forumThread.ForumThreadGrid'],</p>
+<p>    init: function() {<br />
+    	this.control({<br />
+	        'forumthreadgrid button[action=showPreview]': {<br />
+	        	toggle: this.showPreview<br />
+	    	}<br />
+	    });<br />
+    },</p>
+<p>    showPreview: function(btn, pressed){</p>
+<p>        var preview = Ext.ComponentQuery.query('forumthreadgrid dataview')[0].plugins[0];</p>
+<p>        preview.toggleExpanded(pressed);<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>App.js</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.application({<br />
+    name: 'ExtMVC',</p>
+<p>    paths: { 'Ext.ux': 'extjs/ux/' },</p>
+<p>    controllers: [<br />
+        'ForumThreads'<br />
+    ],</p>
+<p>    autoCreateViewport: true<br />
+});<br />
+[/code]</p>
+<h2>Página HTML</h2>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+	&lt;title&gt;Ext JS 4 MVC Examples - loiane.com&lt;/title&gt;</p>
+<p>	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;extjs/resources/css/ext-all.css&quot;&gt;</p>
+<p>	 &lt;style&gt;<br />
+        .x-grid-cell-topic b {<br />
+            display: block;<br />
+        }<br />
+        .x-grid-cell-topic .x-grid-cell-inner {<br />
+            white-space: normal;<br />
+        }<br />
+        .x-grid-cell-topic a {<br />
+            color: #385F95;<br />
+            text-decoration: none;<br />
+        }<br />
+        .x-grid-cell-topic a:hover {<br />
+            text-decoration:underline;<br />
+        }<br />
+		.x-grid-cell-topic .x-grid-cell-innerf {<br />
+			padding: 5px;<br />
+		}<br />
+		.x-grid-rowbody {<br />
+	        padding: 0 5px 5px 5px;<br />
+		}<br />
+    &lt;/style&gt;</p>
+<p>    &lt;script type=&quot;text/javascript&quot; src=&quot;extjs/ext-debug.js&quot;&gt;&lt;/script&gt;</p>
+<p>    &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;[/code]</p>
+<h2>Download do código fonte completo</h2>
+<p>Você pode fazer o download do código fonte completo através dos meu repositório do Github: <a href="https://github.com/loiane/extjs4-mvc-paging-grid" target="_blank">https://github.com/loiane/extjs4-mvc-paging-grid</a></p>
+<h2>Demo</h2>
+<p>Para ver esse projeto rodando, acesse o link: <a href="http://loiane.com/extjs/extjs4-mvc-paging-grid/" target="_blank">http://loiane.com/extjs/extjs4-mvc-paging-grid/</a></p>
+<p>Até o próximo exemplo! :)</p>
