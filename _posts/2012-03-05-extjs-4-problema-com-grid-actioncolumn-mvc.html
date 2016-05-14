@@ -1,0 +1,237 @@
+---
+layout: post
+title: 'ExtJS 4: Problema com Grid ActionColumn + MVC'
+date: 2012-03-05 04:30:25.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ActionColumn
+- ExtJS 4
+- ExtJS 4 MVC
+- grid
+- MVC
+
+---
+<p>A dica de hoje é como resolver um problema do ExtJS relacionado a Grid ActionColumn usando a arquitetura MVC.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/03/ext-actioncolumn_loiane.jpg"><img class="aligncenter  wp-image-3660" title="ext-actioncolumn_loiane" src="{{ site.baseurl }}/assets/ext-actioncolumn_loiane.jpg" alt="" width="366" height="216" /></a></p>
+<h2>O Problema:</h2>
+<p>Os exemplos da Sencha que usam action column não usam o MVC como arquitetura. Todo o código fica em apenas em um arquivo. Até aí não tem problema nenhum. Mas como no ExtJS 4 é aconselhável que você use a arquitetura MVC para o seu código ExtJS, temos que usá-la né?</p>
+<p>No MVC, todas as ações tomadas pelo usuário precisam ser controladas pelo Controller. Ou seja, se o usuário clicar no botão da actioncolumn do grid, o controller precisa capturar esse evento e tomar alguma decisão.</p>
+<p>Vamos ao primeiro passo antes de mostrar o problema: o código abaixo foi retirado do <a href="http://dev.sencha.com/deploy/ext-4.0.7-gpl/examples/grid/array-grid.html" target="_blank">exemplo array-grid</a>, um dos exemplos disponíveis na docmentação do ExtJS 4. Esse array grid possui 2 action columns, como mostradas abaixo:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+{<br />
+    xtype: 'actioncolumn',<br />
+    width: 50,<br />
+    items: [{<br />
+        icon   : '../shared/icons/fam/delete.gif',<br />
+        tooltip: 'Sell stock',<br />
+        handler: function(grid, rowIndex, colIndex) {<br />
+            var rec = store.getAt(rowIndex);<br />
+            alert(&quot;Sell &quot; + rec.get('company'));<br />
+        }<br />
+    }, {<br />
+        getClass: function(v, meta, rec) {<br />
+            if (rec.get('change') &lt; 0) {<br />
+                this.items[1].tooltip = 'Hold stock';<br />
+                return 'alert-col';<br />
+            } else {<br />
+                this.items[1].tooltip = 'Buy stock';<br />
+                return 'buy-col';<br />
+            }<br />
+        },<br />
+        handler: function(grid, rowIndex, colIndex) {<br />
+            var rec = store.getAt(rowIndex);<br />
+            alert((rec.get('change') &lt; 0 ? &quot;Hold &quot; : &quot;Buy &quot;) + rec.get('company'));<br />
+        }<br />
+    }]<br />
+}<br />
+[/code]</p>
+<p>Bem, como imaginamos que o Action Column é um botão, ao transformamos o código acima em MVC, a primeira coisa que tentamos fazer é isso:</p>
+<p><strong>GridX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="7,22"]<br />
+{<br />
+    xtype: 'actioncolumn',<br />
+    width: 50,<br />
+    items: [{<br />
+        icon   : 'resources/icons/delete.gif',<br />
+        tooltip: 'Sell stock',<br />
+        action: 'sell'<br />
+        /*handler: function(grid, rowIndex, colIndex) {<br />
+        	var rec = store.getAt(rowIndex);<br />
+            alert(&quot;Sell &quot; + rec.get('company'));<br />
+        }*/<br />
+    }, {<br />
+        getClass: function(v, meta, rec) {<br />
+            if (rec.get('change') &lt; 0) {<br />
+                this.items[1].tooltip = 'Hold stock';<br />
+                return 'alert-col';<br />
+            } else {<br />
+                this.items[1].tooltip = 'Buy stock';<br />
+                return 'buy-col';<br />
+            }<br />
+        },<br />
+        action: 'buy'<br />
+        /*handler: function(grid, rowIndex, colIndex) {<br />
+        	var rec = store.getAt(rowIndex);<br />
+            alert((rec.get('change') &lt; 0 ? &quot;Hold &quot; : &quot;Buy &quot;) + rec.get('company'));<br />
+        }*/<br />
+    }]<br />
+}];</p>
+<p>[/code]</p>
+<p><strong>ControllerX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+init: function() {<br />
+    this.control({<br />
+        'stockgrid actioncolumn[action=sell]': {<br />
+        	click: this.sellStock<br />
+        },<br />
+        'stockgrid actioncolumn[action=buy]': {<br />
+            click: this.buyStock<br />
+        }<br />
+    });<br />
+},<br />
+[/code]</p>
+<p>Já que a action column é um botão, adicionamos uma action e podemos tratar no controller como se fosse qualquer outro botão, correto? ERRADO! Isso não funciona pois o Action Column NÃO é um componente.</p>
+<p>O que fazer então nesse caso? Não vou colocar o handler da Action Column na própria classe grid pois como estou usando MVC, isso é muuuuito feio!</p>
+<p>Eis então algumas soluções:</p>
+<h2><del>Gambiarras</del> Soluções:</h2>
+<p>Bem, quando estava com esse problema, dei uma pesquisada no fórum da Sencha e encontrei 3 soluções. Vou apresentar as 3 para vocês:</p>
+<h3>1ª <del>Gambiarra</del> Solução</h3>
+<p>Como a Action Column não é um componente, precisamos então disparar um evento quando o usuário clicar no botão, e aí vamos conseguir tratar esse evento no controller. Mas atenção, essa <del>gambiarra</del> solução só funciona se você tiver apenas 1 item dentro do seu action column.</p>
+<p><strong>GridX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="7,10"]<br />
+{<br />
+    xtype: 'actioncolumn',<br />
+    width: 50,<br />
+    items: [{<br />
+        icon   : 'resources/icons/delete.gif',<br />
+        tooltip: 'Sell stock',<br />
+        scope: this,<br />
+        handler: function(grid, rowIndex, colIndex) {<br />
+        	var rec = grid.getStore().getAt(rowIndex);<br />
+        	this.fireEvent('sellStock', this, rec);<br />
+        }<br />
+    }]<br />
+}<br />
+[/code]</p>
+<p><strong>ControllerX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+init: function() {<br />
+    this.control({<br />
+        'stockgrid': {<br />
+        	'sellStock': this.sellStock<br />
+        }<br />
+    });<br />
+},<br />
+[/code]</p>
+<p>Como o Action Column não é um componente, precisamos declarar a função handler dentro do código do grid mesmo, mas apenas para disparar um novo evento para o Controller escutar. Pelo menos a lógica do handler não vai ficar dentro do código do grid!</p>
+<h3>2ª <del>Gambiarra</del> Solução</h3>
+<p>Essa solução funciona se você tiver 1 ou vários items no Action Column. Essa <del>gambiarra</del> solução é muito feia, mas pelo menos funciona.</p>
+<p><strong>estilo.css</strong></p>
+<p>[code lang="css" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+/* style rows on mouseover */<br />
+.x-grid-row-over .x-grid-cell-inner {<br />
+	font-weight: bold;<br />
+}<br />
+/* shared styles for the ActionColumn icons */<br />
+.x-action-col-cell img {<br />
+	height: 16px;<br />
+	width: 16px;<br />
+	cursor: pointer;<br />
+}<br />
+/* custom icon for the &quot;buy&quot; ActionColumn icon */<br />
+.x-action-col-cell img.icon-buy {<br />
+	background-image: url(../icons/accept.gif);<br />
+}<br />
+/* custom icon for the &quot;alert&quot; ActionColumn icon */<br />
+.x-action-col-cell img.icon-alert {<br />
+	background-image: url(../icons/error.gif);<br />
+}<br />
+/* custom icon for the &quot;alert&quot; ActionColumn icon */<br />
+.x-action-col-cell img.icon-delete {<br />
+	background-image: url(../icons/delete.gif);<br />
+}<br />
+[/code]</p>
+<p><strong>GridX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="6,12,15"]<br />
+{<br />
+    xtype: 'actioncolumn',<br />
+    width: 50,<br />
+    items: [{<br />
+        //icon   : 'resources/icons/delete.gif',<br />
+        iconCls: 'icon-delete',<br />
+        tooltip: 'Sell stock',<br />
+    }, {<br />
+        getClass: function(v, meta, rec) {<br />
+            if (rec.get('change') &lt; 0) {<br />
+                this.items[1].tooltip = 'Hold stock';<br />
+                return 'icon-alert';<br />
+            } else {<br />
+                this.items[1].tooltip = 'Buy stock';<br />
+                return 'icon-buy';<br />
+            }<br />
+        }<br />
+    }]<br />
+}<br />
+[/code]</p>
+<p><strong>ControllerX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+init: function() {<br />
+    this.control({<br />
+    	 'stockgrid actioncolumn': {<br />
+    		 click: this.onAction<br />
+    	 }<br />
+    });<br />
+},</p>
+<p>onAction: function(view,cell,row,col,e){</p>
+<p>    var m = e.getTarget().className.match(/\bicon-(\w+)\b/);</p>
+<p>    var rec = this.getStocksStore().getAt(row);</p>
+<p>    if(m){<br />
+        switch(m[1]){<br />
+            case 'buy':<br />
+            	alert(&quot;Buy &quot; + rec.get('company'));<br />
+                break;<br />
+            case 'alert':<br />
+            	alert(&quot;Hold &quot; + rec.get('company'));<br />
+                break;<br />
+            case 'delete':<br />
+            	alert(&quot;Sell &quot; + rec.get('company'));<br />
+                break;<br />
+        }<br />
+    }<br />
+}<br />
+[/code]</p>
+<p>Primeiro, mude o nome do estilo que irá aplicar nas Action Columns. Tem que ser algo do tipo <strong><em>icon-nomedaaction. </em></strong>Depois aplique esse css nos botões de acordo com a action de cada um.</p>
+<p>No Controller, vamos apenas escutar o evento disparado pelo actioncolumn do grid, mas não saberemos qual é o botão que o usuário clicou. Através do nome da classe (css que aplicamos) do target do evento, conseguimos saber o botão que o usuário clicou.</p>
+<p>Essa é uma <del>gambiarra</del> solução muitíssimo feia, mas o pessoal tem usado muito essa. Pelo menos funciona!</p>
+<h3>3ª Solução</h3>
+<p>Ah, esse é uma solução mesmo, e não <del>gambiarra</del> solução temporária que será permanente!</p>
+<p>Em vez de usar o ActionColumn da API nativa do ExtJS, use o <a href="https://github.com/lucianlature/Ext.plugin.extjs4.ActionButtonColumn" target="_blank">plugin Ext.ux.grid.column.ActionButtonColumn</a>, que substitui o Action Column por um botão de verdade, que é um componente do ExtJS 4 e assim podemos tratar o evento no controller como um botão normalmente!</p>
+<p><strong>GridX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="2,7"]<br />
+{<br />
+    xtype:'actionbuttoncolumn',<br />
+    width: 50,<br />
+    items: [{<br />
+        iconCls: 'icon-delete',<br />
+        tooltip: 'Sell stock',<br />
+        action: 'sell'<br />
+    }]<br />
+}<br />
+[/code]</p>
+<p><strong>ControllerX.js</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+init: function() {<br />
+    this.control({<br />
+        'stockgrid actionbuttoncolumn[action=sell]': {<br />
+        	click: this.sellStock<br />
+        }<br />
+    });<br />
+},<br />
+[/code]</p>
+<p>Agora sim, tudo funcionando perfeitamente!</p>
+<p>Bem, se você está passando por esse problema, escolha uma das 3 soluções acima e seja feliz!</p>
+<p>Até a próxima!</p>

@@ -1,0 +1,51 @@
+---
+layout: post
+title: Instalando Apache + PHP + MySQL no Windows com WAMP
+date: 2012-03-09 04:30:12.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Tutoriais
+tags:
+- Apache
+- ExtJS
+- MySQL
+- php
+- WAMP
+- Windows
+
+---
+<p>Todo mundo que já tentou sabe que instalar e configurar o server Apache + PHP + MySQL na máquina pode ser um pouco enjoado de fazer.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp-home-title.png"><img class="aligncenter size-full wp-image-3767" title="wamp-home-title" src="{{ site.baseurl }}/assets/wamp-home-title.png" alt="" width="501" height="99" /></a></p>
+<p>O <a href="http://www.wampserver.com/en/" target="_blank">WAMP Server</a> é uma plataforma para desenvolvimento web para Windows. Com apenas 1 instalador, você instala  Apache + PHP + MySQL e já vem tudo configurado, pronto para usar!</p>
+<p>O <a href="http://www.wampserver.com/en/" target="_blank">WAMP Server</a> também é recomendado pela Sencha para quem quer instalar o ExtJS ou Sencha Touch no Windows. Fiz a instalação offline do ExtJS 4.1 no final desse exemplo para mostrar como é simples.</p>
+<p>Passo a passo da instalação:</p>
+<p>Obs.: Só dá pra instalar o <a href="http://www.wampserver.com/en/" target="_blank">WAMP Server</a> se você for o admin da máquina. Amanhã vou postar outra solução se você não tiver acesso de admin.</p>
+<p>1 - Bem, o primeiro passo é fazer o download do arquivo executável mais apropriado para o seu computador (32bits ou 64 bits). Para fazer o download, basta acessar: <a href="http://www.wampserver.com/en/" target="_blank">http://www.wampserver.com/en/</a></p>
+<p>2 - Vamos iniciar a instalação. A instalação é bem simples, mas de qualquer maneira, vou colocar um screenshot de cada passo aqui, caso alguém tenha alguma dúvida. Primeiro, clique em "<em>next</em>"</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_02.jpg"><img class="aligncenter size-full wp-image-3768" title="wamp_loiane_02" src="{{ site.baseurl }}/assets/wamp_loiane_02.jpg" alt="" width="503" height="388" /></a></p>
+<p>3 - Aceite os termos e clique em "<em>next</em>":</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_03.jpg"><img class="aligncenter size-full wp-image-3769" title="wamp_loiane_03" src="{{ site.baseurl }}/assets/wamp_loiane_03.jpg" alt="" width="503" height="388" /></a></p>
+<p>4 - Escolha o diretório para instalação. Deixei o diretório padrão mesmo: "<em>C:\wamp</em>":</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_04.jpg"><img class="aligncenter size-full wp-image-3770" title="wamp_loiane_04" src="{{ site.baseurl }}/assets/wamp_loiane_04.jpg" alt="" width="503" height="388" /></a></p>
+<p>5 - Agora clique em "<em>install</em>":</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_06.jpg"><img class="aligncenter size-full wp-image-3771" title="wamp_loiane_06" src="{{ site.baseurl }}/assets/wamp_loiane_06.jpg" alt="" width="503" height="388" /></a></p>
+<p>6 - Espere a instalação:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_07.jpg"><img class="aligncenter size-full wp-image-3773" title="wamp_loiane_07" src="{{ site.baseurl }}/assets/wamp_loiane_07.jpg" alt="" width="503" height="388" /></a></p>
+<p>7 - Escolha o browser padrão para executar suas aplicações. Nesse caso escolhi o Firefox, mas você pode escolher o browser que mais lhe agrada.</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_08.jpg"><img class="aligncenter  wp-image-3774" title="wamp_loiane_08" src="{{ site.baseurl }}/assets/wamp_loiane_08.jpg" alt="" width="563" height="432" /></a></p>
+<p>8 - Espere a instalação terminar.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_09.jpg"><img class="aligncenter size-full wp-image-3775" title="wamp_loiane_09" src="{{ site.baseurl }}/assets/wamp_loiane_09.jpg" alt="" width="503" height="388" /></a></p>
+<p>9 - Entre com os parâmetros. no SMTP deixei a opção padrão "<em>localhost</em>" e mudei apenas o email de contato do admin:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_10.jpg"><img class="aligncenter size-full wp-image-3776" title="wamp_loiane_10" src="{{ site.baseurl }}/assets/wamp_loiane_10.jpg" alt="" width="503" height="388" /></a></p>
+<p>10 - Clique em "<em>finish</em>":</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_11.jpg"><img class="aligncenter size-full wp-image-3777" title="wamp_loiane_11" src="{{ site.baseurl }}/assets/wamp_loiane_11.jpg" alt="" width="503" height="388" /></a></p>
+<p>11 - Teste se tudo está ok acessando o endereço de "<em>localhost</em>" no seu browser. A tela abaixo deve aparecer:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_12.jpg"><img class="aligncenter  wp-image-3778" title="wamp_loiane_12" src="{{ site.baseurl }}/assets/wamp_loiane_12.jpg" alt="" width="587" height="489" /></a></p>
+<p>12 - Se quiser fazer o deploy de alguma aplicação, basta colar a pasta dentro do diretório "C:\wamp\www". Nesse caso fiz o deploy do ExtJS 4.1. Apenas colei a pasta do SDK do ExtJS:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_13.jpg"><img class="aligncenter size-full wp-image-3779" title="wamp_loiane_13" src="{{ site.baseurl }}/assets/wamp_loiane_13.jpg" alt="" width="553" height="493" /></a></p>
+<p>13 - Para acessar, basta acessar o endereço <em>localhost/nomedasuaaplicacao</em>, nesse caso: <em>localhost/extjs4</em></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/03/wamp_loiane_14.jpg"><img class="aligncenter  wp-image-3780" title="wamp_loiane_14" src="{{ site.baseurl }}/assets/wamp_loiane_14.jpg" alt="" width="553" height="419" /></a></p>
+<p>Prontinho! Uma maneira bem simples de instalar o PHP + Apache + MySQL sem ter que ficar esquentando a cabeça com um monte de configuração!</p>
+<p>Até a próxima!</p>

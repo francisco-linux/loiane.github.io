@@ -1,0 +1,274 @@
+---
+layout: post
+title: 'Exemplo ExtJS 4: Basic Array Grid em MVC'
+date: 2012-03-19 04:30:54.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ExtJS 4
+- ExtJS 4 MVC
+---
+<p>Começando com o primeiro exemplo MVC de ExtJS 4 aqui no blog. Hoje vamos ver o código do exemplo <a href="http://dev.sencha.com/deploy/ext-4.0.7-gpl/examples/grid/array-grid.html" target="_blank">Basic Array Grid</a>.</p>
+<p>Vamos ao código então!</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/03/extjs4-basic-array-grid-mvc.jpg" target="_blank"><img class="aligncenter  wp-image-3734" title="extjs4-basic-array-grid-mvc" src="{{ site.baseurl }}/assets/extjs4-basic-array-grid-mvc.jpg" alt="" width="488" height="287" /></a></p>
+<p style="text-align: left;">Obs.: passei por um probleminha durante a transformação desse exemplo, e acabei postando um post sobre a explicação de actioncolumns no MVC <a title="ExtJS 4: Problema com Grid ActionColumn + MVC" href="http://www.loiane.com/2012/03/extjs-4-problema-com-grid-actioncolumn-mvc/" target="_blank">aqui</a>.</p>
+<h2>Estrutura do Projeto</h2>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/03/extjs4-mvc-basic-array-grid.png"><img class="aligncenter size-full wp-image-3906" title="extjs4-mvc-basic-array-grid" src="{{ site.baseurl }}/assets/extjs4-mvc-basic-array-grid.png" alt="" width="566" height="692" /></a></p>
+<h2>Model</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('Ext4Example.model.Stock', {<br />
+	extend: 'Ext.data.Model',<br />
+	fields: [<br />
+	    {name: 'company'},<br />
+        {name: 'price',      type: 'float'},<br />
+        {name: 'change',     type: 'float'},<br />
+        {name: 'pctChange',  type: 'float'},<br />
+        {name: 'lastChange', type: 'date', dateFormat: 'm-d-Y'}<br />
+    ]<br />
+});<br />
+[/code]</p>
+<h2>Store</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('Ext4Example.store.Stocks', {<br />
+    extend: 'Ext.data.ArrayStore',<br />
+    model: 'Ext4Example.model.Stock',<br />
+    data: [<br />
+        ['3m Co',                               71.72, 0.02,  0.03,  '9/1 12:00am'],<br />
+        ['Alcoa Inc',                           29.01, 0.42,  1.47,  '9/1 12:00am'],<br />
+        ['Altria Group Inc',                    83.81, 0.28,  0.34,  '9/1 12:00am'],<br />
+        ['American Express Company',            52.55, 0.01,  0.02,  '9/1 12:00am'],<br />
+        ['American International Group, Inc.',  64.13, 0.31,  0.49,  '9/1 12:00am'],<br />
+        ['AT&amp;T Inc.',                           31.61, -0.48, -1.54, '9/1 12:00am'],<br />
+        ['Boeing Co.',                          75.43, 0.53,  0.71,  '9/1 12:00am'],<br />
+        ['Caterpillar Inc.',                    67.27, 0.92,  1.39,  '9/1 12:00am'],<br />
+        ['Citigroup, Inc.',                     49.37, 0.02,  0.04,  '9/1 12:00am'],<br />
+        ['E.I. du Pont de Nemours and Company', 40.48, 0.51,  1.28,  '9/1 12:00am'],<br />
+        ['Exxon Mobil Corp',                    68.1,  -0.43, -0.64, '9/1 12:00am'],<br />
+        ['General Electric Company',            34.14, -0.08, -0.23, '9/1 12:00am'],<br />
+        ['General Motors Corporation',          30.27, 1.09,  3.74,  '9/1 12:00am'],<br />
+        ['Hewlett-Packard Co.',                 36.53, -0.03, -0.08, '9/1 12:00am'],<br />
+        ['Honeywell Intl Inc',                  38.77, 0.05,  0.13,  '9/1 12:00am'],<br />
+        ['Intel Corporation',                   19.88, 0.31,  1.58,  '9/1 12:00am'],<br />
+        ['International Business Machines',     81.41, 0.44,  0.54,  '9/1 12:00am'],<br />
+        ['Johnson &amp; Johnson',                   64.72, 0.06,  0.09,  '9/1 12:00am'],<br />
+        ['JP Morgan &amp; Chase &amp; Co',              45.73, 0.07,  0.15,  '9/1 12:00am'],<br />
+        ['McDonald\'s Corporation',             36.76, 0.86,  2.40,  '9/1 12:00am'],<br />
+        ['Merck &amp; Co., Inc.',                   40.96, 0.41,  1.01,  '9/1 12:00am'],<br />
+        ['Microsoft Corporation',               25.84, 0.14,  0.54,  '9/1 12:00am'],<br />
+        ['Pfizer Inc',                          27.96, 0.4,   1.45,  '9/1 12:00am'],<br />
+        ['The Coca-Cola Company',               45.07, 0.26,  0.58,  '9/1 12:00am'],<br />
+        ['The Home Depot, Inc.',                34.64, 0.35,  1.02,  '9/1 12:00am'],<br />
+        ['The Procter &amp; Gamble Company',        61.91, 0.01,  0.02,  '9/1 12:00am'],<br />
+        ['United Technologies Corporation',     63.26, 0.55,  0.88,  '9/1 12:00am'],<br />
+        ['Verizon Communications',              35.57, 0.39,  1.11,  '9/1 12:00am'],<br />
+        ['Wal-Mart Stores, Inc.',               45.45, 0.73,  1.63,  '9/1 12:00am']<br />
+    ]<br />
+});<br />
+[/code]</p>
+<h2>View - Grid</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('Ext4Example.view.stock.StockGrid' ,{<br />
+    extend: 'Ext.grid.Panel',<br />
+    alias : 'widget.stockgrid',</p>
+<p>    title : 'Json Grid',</p>
+<p>    /**<br />
+     * Custom function used for column renderer<br />
+     * @param {Object} val<br />
+     */<br />
+    change: function(val) {<br />
+        if (val &gt; 0) {<br />
+            return '&lt;span style=&quot;color:green;&quot;&gt;' + val + '&lt;/span&gt;';<br />
+        } else if (val &lt; 0) {<br />
+            return '&lt;span style=&quot;color:red;&quot;&gt;' + val + '&lt;/span&gt;';<br />
+        }<br />
+        return val;<br />
+    },</p>
+<p>    /**<br />
+     * Custom function used for column renderer<br />
+     * @param {Object} val<br />
+     */<br />
+    pctChange: function(val) {<br />
+        if (val &gt; 0) {<br />
+            return '&lt;span style=&quot;color:green;&quot;&gt;' + val + '%&lt;/span&gt;';<br />
+        } else if (val &lt; 0) {<br />
+            return '&lt;span style=&quot;color:red;&quot;&gt;' + val + '%&lt;/span&gt;';<br />
+        }<br />
+        return val;<br />
+    },</p>
+<p>    viewConfig: {<br />
+        stripeRows: true<br />
+    },</p>
+<p>    initComponent: function() {</p>
+<p>    	this.store = 'Stocks';</p>
+<p>    	this.columns = [{<br />
+            text     : 'Company',<br />
+            flex     : 1,<br />
+            sortable : false,<br />
+            dataIndex: 'company'<br />
+        },<br />
+        {<br />
+            text     : 'Price',<br />
+            width    : 75,<br />
+            sortable : true,<br />
+            renderer : 'usMoney',<br />
+            dataIndex: 'price'<br />
+        },<br />
+        {<br />
+            text     : 'Change',<br />
+            width    : 75,<br />
+            sortable : true,<br />
+            renderer : this.change,<br />
+            dataIndex: 'change'<br />
+        },<br />
+        {<br />
+            text     : '% Change',<br />
+            width    : 75,<br />
+            sortable : true,<br />
+            renderer : this.pctChange,<br />
+            dataIndex: 'pctChange'<br />
+        },<br />
+        {<br />
+            text     : 'Last Updated',<br />
+            width    : 85,<br />
+            sortable : true,<br />
+            renderer : Ext.util.Format.dateRenderer('m/d/Y'),<br />
+            dataIndex: 'lastChange'<br />
+        },<br />
+        {<br />
+            xtype: 'actioncolumn',<br />
+            width: 50,<br />
+            items: [{<br />
+                iconCls: 'icon-delete',<br />
+                tooltip: 'Sell stock',<br />
+            }, {<br />
+                getClass: function(v, meta, rec) {<br />
+                    if (rec.get('change') &lt; 0) {<br />
+                        this.items[1].tooltip = 'Hold stock';<br />
+                        return 'icon-alert';<br />
+                    } else {<br />
+                        this.items[1].tooltip = 'Buy stock';<br />
+                        return 'icon-buy';<br />
+                    }<br />
+                }<br />
+            }]<br />
+        }];</p>
+<p>    	this.callParent(arguments);<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>View- Viewport</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+/**<br />
+ * The main application viewport, which displays the whole application<br />
+ * @extends Ext.Viewport<br />
+ */<br />
+Ext.define('Ext4Example.view.Viewport', {<br />
+    extend: 'Ext.Viewport',<br />
+    layout: 'fit',</p>
+<p>    requires: [<br />
+        'Ext4Example.view.stock.StockGrid'<br />
+    ],</p>
+<p>    initComponent: function() {<br />
+        var me = this;</p>
+<p>        Ext.apply(me, {<br />
+            items: [<br />
+                {<br />
+                    xtype: 'stockgrid'<br />
+                }<br />
+            ]<br />
+        });</p>
+<p>        me.callParent(arguments);<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>Controller</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('Ext4Example.controller.Stocks', {<br />
+    extend: 'Ext.app.Controller',</p>
+<p>    stores: ['Stocks'],</p>
+<p>    models: ['Stock'],</p>
+<p>    views: ['stock.StockGrid'],</p>
+<p>    init: function() {<br />
+        this.control({<br />
+            'stockgrid actioncolumn': {<br />
+                click: this.onAction<br />
+            }<br />
+        });<br />
+    },</p>
+<p>    onAction: function(view,cell,row,col,e){</p>
+<p>        var m = e.getTarget().className.match(/\bicon-(\w+)\b/);</p>
+<p>        var rec = this.getStocksStore().getAt(row);</p>
+<p>        if(m){<br />
+            switch(m[1]){<br />
+                case 'buy':<br />
+                    alert(&quot;Buy &quot; + rec.get('company'));<br />
+                    break;<br />
+                case 'alert':<br />
+                    alert(&quot;Hold &quot; + rec.get('company'));<br />
+                    break;<br />
+                case 'delete':<br />
+                    alert(&quot;Sell &quot; + rec.get('company'));<br />
+                    break;<br />
+            }<br />
+        }<br />
+    }<br />
+});<br />
+[/code]</p>
+<h2>App.js</h2>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.application({<br />
+    name: 'Ext4Example',</p>
+<p>    controllers: [<br />
+        'Stocks'<br />
+    ],</p>
+<p>    autoCreateViewport: true<br />
+});<br />
+[/code]</p>
+<h2>Página HTML</h2>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+	&lt;title&gt;Ext JS 4 Examples - loiane.com&lt;/title&gt;</p>
+<p>	&lt;!-- Ext JS Files --&gt;<br />
+	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;extjs/resources/css/ext-all.css&quot;&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;extjs/ext.js&quot;&gt;&lt;/script&gt;</p>
+<p>    &lt;!-- App Files --&gt;<br />
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;resources/css/array-grid.css&quot; /&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;/head&gt;<br />
+&lt;body&gt;&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<h2>CSS</h2>
+<p>[code lang="css" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+/* style rows on mouseover */<br />
+.x-grid-row-over .x-grid-cell-inner {<br />
+	font-weight: bold;<br />
+}<br />
+/* shared styles for the ActionColumn icons */<br />
+.x-action-col-cell img {<br />
+	height: 16px;<br />
+	width: 16px;<br />
+	cursor: pointer;<br />
+}<br />
+/* custom icon for the &quot;buy&quot; ActionColumn icon */<br />
+.x-action-col-cell img.icon-buy {<br />
+	background-image: url(../icons/accept.gif);<br />
+}<br />
+/* custom icon for the &quot;alert&quot; ActionColumn icon */<br />
+.x-action-col-cell img.icon-alert {<br />
+	background-image: url(../icons/error.gif);<br />
+}<br />
+/* custom icon for the &quot;alert&quot; ActionColumn icon */<br />
+.x-action-col-cell img.icon-delete {<br />
+	background-image: url(../icons/delete.gif);<br />
+}<br />
+[/code]</p>
+<h2>Download do código fonte completo</h2>
+<p>Você pode fazer o download do código fonte completo através dos meu repositório do Github: <a href="https://github.com/loiane/extjs4-mvc-basic-array-grid" target="_blank">https://github.com/loiane/extjs4-mvc-basic-array-grid</a></p>
+<h2>Demo</h2>
+<p>Para ver esse projeto rodando, acesse o link: <a title="http://loiane.com/extjs/extjs4-mvc-basic-array-grid/" href="http://loiane.com/extjs/extjs4-mvc-basic-array-grid/" target="_blank">http://loiane.com/extjs/extjs4-mvc-basic-array-grid/</a></p>
+<p>Até o próximo exemplo! :)</p>
