@@ -74,7 +74,7 @@
   }
   &__links {
     position: absolute;
-    bottom: 15px;
+    bottom: 40px;
     left: 30px;
     right: 30px;
     display: flex;
@@ -94,6 +94,21 @@
       position: absolute;
       bottom: 0;
       right: 0;
+    }
+  }
+  &__disclaimer {
+    position: absolute;
+    bottom: 9px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    @media screen and (max-width: 850px) {
+      display: none;
+    }
+    a {
+      color: #FFFFFF;
     }
   }
 }
@@ -116,4 +131,9 @@
 .social_network {
   color: #FFFFFF;
   margin: 0 10px 0 0;
+}
+
+.copy-span {
+  margin: 0 10px 0 0;
+  padding-bottom: 7px;
 }

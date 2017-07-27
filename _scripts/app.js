@@ -37,7 +37,7 @@
   }
 
   function showNoResults() {
-    searchResults.innerHTML = '<li><a href="#">No results. Search for entire words, i.e. "forms"</a></li>'
+    searchResults.innerHTML = '<li><a href="#">No posts found.</a></li>'
   }
 
   function render(collection) {
