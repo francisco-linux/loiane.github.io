@@ -1,14 +1,59 @@
 ---
-layout: archive
-author_profile: true
+layout: default
 ---
 
-{% include base_path %}
+{% include components/categories.html %}
 
-<h3 class="archive__subtitle">Recent Posts</h3>
+<div class="posts">
+  {% for post in paginator.posts %}
+    {% include components/post-card.html %}
+  {% endfor %}
+</div>
 
-{% for post in paginator.posts %}
-  {% include archive-single.html %}
-{% endfor %}
+<div class="pagination">
+  <ul>
+    <li id="pagination-prev">
+      {% if paginator.previous_page %}
+        <a class="pagination-button" href="{{ paginator.previous_page_path }}">
+          <img src="{{ site.baseurl }}/img/icons/prev.svg" alt="">
+          Prev
+        </a>
+      {% else %}
+        <span>
+          <img src="{{ site.baseurl }}/img/icons/prev.svg" alt="">
+          Prev
+        </span>
+      {% endif %}
+    </li>
 
-{% include paginator.html %}
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <li class="pagination-item">
+          <span id="current-page">{{ page }}</span>
+        </li>
+      {% elsif page == 1 %}
+        <li class="pagination-item">
+          <a href="/">{{ page }}</a>
+        </li>
+      {% else %}
+        <li class="pagination-item">
+          <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    <li id="pagination-next">
+      {% if paginator.next_page %}
+        <a class="pagination-button" href="{{ paginator.next_page_path }}">
+          Next
+          <img src="{{ site.baseurl }}/img/icons/next.svg" alt="">
+        </a>
+      {% else %}
+        <span>
+          Next
+          <img src="{{ site.baseurl }}/img/icons/next.svg" alt="">
+        </span>
+      {% endif %}
+    </li>
+  </ul>
+</div>

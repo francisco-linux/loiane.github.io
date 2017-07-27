@@ -1,20 +1,47 @@
-# loiane.github.io
+# Source code for loiane.com
 
 Uncompiled [Jekyll](//jekyllrb.com) source code for [loiane.com](http://loiane.com).
 
-### Steps to use
+## Build this project
 
-* Clone repo
-* Install Jekyll (Ruby)
-* Install Bundler (`gem install bundler`)
-* Run `bundle install` in the project directory on the command line
-* Run `bundle exec jekyll serve` in the project directory on the command line
+### Install jekyll
 
-For more details about the theme I'm using please refer to [Minimal Mistakes Jekyll theme](https://mmistakes.github.io)
+Ensure `jekyll` is installed:
+
+```
+gem install jekyll
+```
+
+### Installing dependencies
+
+This project makes use of `gulp` and `yarn`. First, you'll need to make sure you have them both installed:
+
+```
+npm install --g gulp
+npm install --g yarn
+```
+
+Next, you'll need to `yarn install` the other dev-dependencies, run this from the `loiane.github.io` root folder:
+
+```
+cd loiane.github.io
+yarn install
+```
+
+### Running the server
+
+Gulp is setup to make it easier to run all the tasks, to run the project simply run:
+
+```
+yarn start
+```
+
+This will start serving the project from `localhost:4000`, with livereload functionality.
 
 ### Notes
 
-Despite being open sourced, all and content remain copyright of Loiane Groner. Please don't steal!
+Despite being open sourced, all code and content remain copyright of Loiane Groner. Please don't steal!
 
-Needs review:
-2015-02-11-curso-java-basico-aula-17-loop-for.html
+### Theme
+
+Theme adapted from https://github.com/toddmotto/toddmotto.github.io 

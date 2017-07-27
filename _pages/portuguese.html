@@ -1,0 +1,21 @@
+---
+layout: default
+permalink: /categories/pt-br
+---
+
+{% include components/categories.html %}
+
+{%
+	include components/category-title.html
+	category="pt-br"
+	icon="pt-br"
+	text="Todos os posts em Português"
+%}
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.language == 'pt-br' %}
+			{% include components/post-card.html %}
+		{% endif %}
+  {% endfor %}
+</div>

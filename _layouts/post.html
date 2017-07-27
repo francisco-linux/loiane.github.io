@@ -2,75 +2,106 @@
 layout: default
 ---
 
-{% include base_path %}
+{% include components/categories.html %}
 
-{% if (page.header.overlay_color or page.header.overlay_image) or page.header.image %}
-  {% include page__hero.html %}
-{% endif %}
-
-{% if page.url != "/" and site.breadcrumbs %}
-  {% unless paginator %}
-    {% include breadcrumbs.html %}
-  {% endunless %}
-{% endif %}
-
-<div id="main" role="main">
-  {% include sidebar.html %}
-
-  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date: "%B %d, %Y" }}">{% endif %}
-    {% if page.modified %}<meta itemprop="dateModified" content="{{ page.modified | date: "%B %d, %Y" }}">{% endif %}
-
-    <div class="page__inner-wrap">
-      {% unless page.header.overlay_color or page.header.overlay_image %}
-        <header>
-          <h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>
-          {% if page.read_time %}
-            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
-          {% endif %}
-        </header>
-      {% endunless %}
-
-      <section class="page__content" itemprop="text">
-        {{ content }}
-        {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label }}</a></div>{% endif %}
-      </section>
-
-      <footer class="page__meta">
-        {% if site.data.ui-text[site.locale].meta_label %}
-          <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
-        {% endif %}
-        {% include page__taxonomy.html %}
-        {% if page.modified %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label }}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
-        {% elsif page.date %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
-        {% endif %}
-      </footer>
-
-      {% if page.share %}{% include social-share.html %}{% endif %}
-
-      {% include post_pagination.html %}
+<article class="post single">
+  <section class="post__content">
+    <div class="post__detail">
+    <header class="post__header">
+      <h1 class="alpha post__title" itemprop="name headline">
+        {{ page.title }}
+        <div class="post-card__container">
+          <div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
+            </div>
+            {{ page.date | date: "%-d %b, %Y" }}
+          </div>
+          <div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/tags/time.svg" alt="">
+            </div>
+            {% assign words = content | strip_html | number_of_words %}
+            {% if words < 360 %}
+              1 min read
+            {% else %}
+              {{ words | divided_by:200 }} mins read
+            {% endif %}
+          </div>
+          <div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/icons/github-dark.svg" alt="">
+            </div>
+            {% if page.path %}
+            <a class="post-card-edit" href="//github.com/loiane/loiane.github.io/blob/master/{{ page.path }}" target="_blank">
+              Edit post
+            </a>
+            {% endif %}
+          </div>
+          <!--<div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/icons/comments.svg" alt="">
+            </div>
+            <span class="disqus-comment-count" data-disqus-url="http://loiane.com{{ page.url }}"></span>
+          </div>-->
+        </div>
+      </h1>
+      <div class="post__meta__divider"></div>
+    </header>
+      {{ content }}
     </div>
 
-    {% if site.comments.provider and page.comments %}
-      {% include comments.html %}
-    {% endif %}
-  </article>
 
-  {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}
-  {% if page.id and page.related and site.related_posts.size > 0 %}
-    <div class="page__related">
-      {% if site.data.ui-text[site.locale].related_label %}
-        <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label }}</h4>
-      {% endif %}
-      <div class="grid__wrapper">
-        {% for post in site.related_posts limit:4 %}
-          {% include archive-single.html type="grid" %}
-        {% endfor %}
-      </div>
+  </section>
+</article>
+
+<div class="share">
+  <h4 class="share__title">Enjoy this post? Share it!</h4>
+  <p>
+    I love writing blog posts and creating new content.
+    It would help me a lot you'd spare a moment to share them!
+  </p>
+  <div class="addthis_inline_share_toolbox"></div>
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-597a235ae1b10e2a"></script>
+</div>
+
+<div class="post__ending">
+
+  {% if page.previous.url %}
+    <div class="post-card">
+      <a href="{{ page.previous.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.previous.title }}">
+        <div class="post-card__meta">
+          <div class="post-card__tag">
+            <img src="{{ site.baseurl }}/img/tags/{% if page.previous.tag %}{{ page.previous.tag }}{% else %}tag{% endif %}.svg" alt="">
+          </div>
+          {{ page.previous.date | date: "%b %-d, %Y" }}
+        </div>
+        <h2 class="post-card__title">
+          {{ page.previous.title }}
+        </h2>
+        <p>
+          {{ page.previous.content | markdownify | strip_html | truncatewords: 15 }}
+        </p>
+      </a>
     </div>
   {% endif %}
+  {% if page.next.url %}
+    <div class="post-card">
+      <a href="{{ page.next.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.next.title }}">
+        <div class="post-card__meta">
+          <div class="post-card__tag">
+            <img src="{{ site.baseurl }}/img/tags/{% if page.next.tag %}{{ page.next.tag }}{% else %}tag{% endif %}.svg" alt="">
+          </div>
+          {{ page.next.date | date: "%b %-d, %Y" }}
+        </div>
+        <h2 class="post-card__title">
+          {{ page.next.title }}
+        </h2>
+        <p>
+          {{ page.next.content | markdownify | strip_html | truncatewords: 15 }}
+        </p>
+      </a>
+    </div>
+  {% endif %}
+  </div>
 </div>

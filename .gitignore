@@ -1,14 +1,11 @@
-*.sublime-project
-*.sublime-workspace
-.DS_Store
-.jekyll-metadata
-.sass-cache
-_asset_bundler_cache
-_site
-codekit-config.json
-node_modules
-npm-debug.log*
-.idea/*
-.idea/jsLibraryMappings.xml
+# FireShell
+# http://getfireshell.com
+# @author Loiane Groner
 
-.idea/libraries/loiane_github_io_node_modules.xml
+_site
+node_modules
+.DS_Store
+.tmp
+.sass-cache
+*.sublime-*
+.jekyll-metadata
