@@ -10,7 +10,7 @@
   </div>
   <nav class="nav">
     <a href="/" class="nav__link{% if page.url == '/' %} nav__link--active{% endif %}">
-      <img src="{{ site.baseurl }}/img/nav/blog.svg" alt="">
+      <i class="mdi mdi-file-document-box mdi-24px blog_link"></i>
       Blog
     </a>
     <!-- a href="/about" class="nav__link{% if page.url == '/about' %} nav__link--active{% endif %}">
@@ -22,32 +22,29 @@
       Talks (Palestras)
     </a -->
     <a href="//www.packtpub.com/books/info/authors/loiane-groner" target="_blank" class="nav__link{% if page.url == '/books' %} nav__link--active{% endif %}">
-      <img src="{{ site.baseurl }}/img/nav/books.svg" alt="" width="24px">
-      <img src="{{ site.baseurl }}/img/nav/external.svg" alt="" class="nav__external">
+      <i class="mdi mdi-library mdi-24px books_link"></i>
+      <i class="mdi mdi-open-in-new nav__external"></i>
       My Books
     </a>
     <a href="//loiane.training/" target="_blank" class="nav__link{% if page.url == '/courses' %} nav__link--active{% endif %}">
-      <img src="{{ site.baseurl }}/img/nav/video.svg" alt="">
-      <img src="{{ site.baseurl }}/img/nav/external.svg" alt="" class="nav__external">
+      <i class="mdi mdi-video mdi-24px courses_link"></i>
+      <i class="mdi mdi-open-in-new nav__external"></i>
       Courses (Pt-br)
     </a>
   </nav>
   <div class="header__links">
-    <a href="//twitter.com/loiane" target="_blank">
-      <img src="{{ site.baseurl }}/img/icons/twitter.svg" alt="Loiane Groner on Twitter">
+    <a href="//twitter.com/loiane" target="_blank" alt="Loiane Groner on Twitter">
+      <i class="mdi mdi-twitter mdi-24px social_network"></i>
     </a>
-    <a href="//github.com/loiane" target="_blank">
-      <img src="{{ site.baseurl }}/img/icons/github.svg" alt="Loiane Groner on GitHub">
+    <a href="//github.com/loiane" target="_blank" alt="Loiane Groner on GitHub">
+      <i class="mdi mdi-github-circle mdi-24px social_network"></i>
     </a>
-    <a href="//youtube.com/loianegroner" target="_blank">
-      <img src="{{ site.baseurl }}/img/icons/youtube.svg" alt="Loiane Groner on YouTube">
+    <a href="//youtube.com/loianegroner" target="_blank" alt="Loiane Groner on YouTube">
+      <i class="mdi mdi-youtube-play mdi-24px social_network"></i>
     </a>
-    <a href="//facebook.com/loianegroner" target="_blank">
-      <img src="{{ site.baseurl }}/img/icons/fb.svg" alt="Loiane Groner on Facebook">
+    <a href="//facebook.com/loianegroner" target="_blank" alt="Loiane Groner on Facebook">
+      <i class="mdi mdi-facebook-box mdi-24px social_network"></i>
     </a>
-    <span>
-      &copy; {{ site.time | date: '%Y' }}
-    </span>
   </div>
 </header>
 <div class="banner">

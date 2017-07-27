@@ -22,4 +22,4 @@ markdown: kramdown
 highlighter: rouge
 
 # Gems
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
