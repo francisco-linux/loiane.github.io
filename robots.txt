@@ -1,2 +1,3 @@
-User-Agent: *
+User-agent: *
+Sitemap: http://loiane.com/sitemap.xml
 Disallow:
