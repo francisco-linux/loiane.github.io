@@ -22,7 +22,7 @@ tag: pt-br
 <p>A resposta que o Ext JS e Sencha Touch tem para isso é usar o proxy JsonP, onde você faz um request cross-domain e consegue ler um JSON como resposta. Nesse caso um script javascript será adicionado automaticamente na página para que essa leitura seja possível. Mas o JsonP fazer apenas requests GET, ou seja, só é possível ler dados.</p>
 <p>Com uma requisição GET também é possível enviar parâmetros na url, mas como você vai fazer login passando usuário e senha na própria URL (<strong><em>http://dominio1.com?user=loiane&amp;senha=123456</em></strong>)? Não dá né gente!?</p>
 <p>Será que é possível então fazer requests AJAX usando GET, POST ou até mesmo REST (GET, POST, PUT, DELETE) para domínios diferentes (cross-domain)?</p>
-<p style="text-align: center;"><a href="https://forrst-live.s3.amazonaws.com/posts/snaps/81575/mega.png?1305377817"><img class="aligncenter  wp-image-6426" alt="cors" src="{{ site.baseurl }}/assets/cors.png" width="347" height="197" /></a></p>
+<p style="text-align: center;"><a href="https://forrst-live.s3.amazonaws.com/posts/snaps/81575/mega.png?1305377817"><img class="aligncenter  wp-image-6426" alt="cors" src="{{ site.baseurl }}/images/assets/cors.png" width="347" height="197" /></a></p>
 <p>É possível sim e a resposta é o CORS (Cross-Origin Resource Sharing).</p>
 <p>Nesse caso, quando a gente usa CORS precisamos mudar apenas o backend para que este aceite requisições cross-origin. No Ext JS ou Sencha Touch não precisamos fazer nada, vamos usar um proxy Ajax ou Rest (o que preferir) normalmente.</p>
 <p>Para adicionar o CORS no backend é muito simples. Nessa página tem todos os detalhes: <strong><a href="http://enable-cors.org/" target="_blank">http://enable-cors.org/</a></strong></p>
@@ -43,9 +43,9 @@ Claro que sim! :)</p>
 <p>Se você executar locamente vai rodar tranquilo.</p>
 <p>Agora, vou retirar a parte PHP e vou fazer deploy em outro servidor/computador e vou executar o Ext JS de um computador. Para melhor exemplificar, vou executar o código Ext JS no código do meu laptop e o PHP vai ficar deployado no meu desktop:</p>
 <p>Meu desktop - computador 01:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane01.png"><img class="aligncenter size-full wp-image-6987" alt="encha-cors-loiane01" src="{{ site.baseurl }}/assets/encha-cors-loiane01.png" width="437" height="279" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane01.png"><img class="aligncenter size-full wp-image-6987" alt="encha-cors-loiane01" src="{{ site.baseurl }}/images/assets/encha-cors-loiane01.png" width="437" height="279" /></a></p>
 <p>Meu notebook - computador 02:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane02.png"><img class="aligncenter  wp-image-6988" alt="encha-cors-loiane02" src="{{ site.baseurl }}/assets/encha-cors-loiane02.png" width="463" height="310" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane02.png"><img class="aligncenter  wp-image-6988" alt="encha-cors-loiane02" src="{{ site.baseurl }}/images/assets/encha-cors-loiane02.png" width="463" height="310" /></a></p>
 <p>Como os códigos cliente e servidor estão separados, na Store do ExtJS preciso atualizar a url, já que o acesso ao php não é mais local. No meu caso ficou assim:</p>
 <pre class="lang:js decode:true">api: {
     create: 'http://192.168.0.14/blog/sencha-cors-comp01/extjs4-crud-mvc/php/criaContato.php',
@@ -54,7 +54,7 @@ Claro que sim! :)</p>
     destroy: 'http://192.168.0.14/blog/sencha-cors-comp01/extjs4-crud-mvc/php/deletaContato.php'
 }</pre>
 <p>Se tentar executar agora, não vai funcionar e o Ext JS vai lançar uma exception dizendo que não consegue fazer esse request e/ou o servidor não consegue processar:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane03.png" target="_blank"><img class="aligncenter  wp-image-6989" alt="encha-cors-loiane03" src="{{ site.baseurl }}/assets/encha-cors-loiane03-1024x821.png" width="553" height="444" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane03.png" target="_blank"><img class="aligncenter  wp-image-6989" alt="encha-cors-loiane03" src="{{ site.baseurl }}/images/assets/encha-cors-loiane03-1024x821.png" width="553" height="444" /></a></p>
 <blockquote><p>Note que o código onde está o código ExtJS é localhost (127.0.0.1) e estou tentando fazer request para 192.168.0.14, ou seja, domínios diferentes.</p></blockquote>
 <p>Agora vamos voltar no código PHP e adicionar o <em><strong>Access-Control-Allow-Origin: * - </strong>na verdade, no site do CORS fala que basta adicionar o header, mas isso não procede. Para que o seu código trate o CORS de maneira correta no PHP, é necessário um pouco mais que isso! Criei um arquivo novo chamado enableCORS.php com o seguinte conteúdo:</em></p>
 <pre class="lang:php decode:true">&lt;?php
@@ -100,10 +100,10 @@ function enableCORS() {
 
 ...</pre>
 <p>E vamos tentar novamente:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane04.png" target="_blank"><img class="aligncenter  wp-image-6990" alt="encha-cors-loiane04" src="{{ site.baseurl }}/assets/encha-cors-loiane04-1024x821.png" width="553" height="444" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane04.png" target="_blank"><img class="aligncenter  wp-image-6990" alt="encha-cors-loiane04" src="{{ site.baseurl }}/images/assets/encha-cors-loiane04-1024x821.png" width="553" height="444" /></a></p>
 <p>Agora funciona! E basta fazer o mesmo para todos os arquivos PHP para que o CRUD funcione como esperado.</p>
 <p>Se a gente olhar os detalhes do request, vamos ver as informações do response e ver que o request foi feito usando CORS:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane05.png"><img class="aligncenter  wp-image-6991" alt="encha-cors-loiane05" src="{{ site.baseurl }}/assets/encha-cors-loiane05-1024x781.png" width="553" height="422" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/09/encha-cors-loiane05.png"><img class="aligncenter  wp-image-6991" alt="encha-cors-loiane05" src="{{ site.baseurl }}/images/assets/encha-cors-loiane05-1024x781.png" width="553" height="422" /></a></p>
 <p>O mesmo se aplica a alguma app <strong>Sencha Touch</strong> - ou até mesmo requisição <strong>Ajax com JQuery</strong>.</p>
 <p>Caso queria conferir o código completo usado nesse post, segue o exemplo de CRUD com CORD habilitado: <a href="https://github.com/loiane/sencha-touch-extjs-CORS" target="_blank">https://github.com/loiane/sencha-touch-extjs-CORS</a></p>
 <p>Até a próxima! :)</p>

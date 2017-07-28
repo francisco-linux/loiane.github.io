@@ -19,7 +19,7 @@ tag: pt-br
 <p>Olá Pessoal,</p>
 <p>Hoje vou começar uma série de posts explicando passo a passo como criar uma aplicação simples com ExtJS 4 usando o MVC. A aplicação vai ser um CRUD,  já que é a maneira mais simples de demonstrar vários recursos.</p>
 <p>Eu já tinha disponibilizado a <a title="ExtJS 4 MVC: Ajax CRUD Grid com PHP e MySQL – JSON" href="http://www.loiane.com/2012/05/extjs-4-mvc-ajax-crud-grid-com-php-e-mysql-json/" target="_blank">aplicação antes em outro post aqui no blog</a>, mas como recebi muitos pedidos pelo passo a passo, cá estou eu escrevendo! :) - se no futuro sobrar um tempinho, gravo vídeo-aulas também.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1.png"><img class="aligncenter  wp-image-5118" title="extjs-4-mvc-parte1" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte1.png" width="598" height="306" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1.png"><img class="aligncenter  wp-image-5118" title="extjs-4-mvc-parte1" alt="" src="{{ site.baseurl }}/images/assets/extjs-4-mvc-parte1.png" width="598" height="306" /></a></p>
 <p>Bom, eu separei então essa série em 5 partes - hoje vamos ver a primeira:</p>
 <ol start="1">
 <li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-1" target="_blank">Preparando o Ambiente e montando o Projeto (Parte 1)</a></li>
@@ -50,7 +50,7 @@ tag: pt-br
 <h1>2 - Criando a aplicação</h1>
 <p>Agora vamos começar a criar a nossa aplicação. Dentro do webserver, crie um diretório chamado <strong><em>extjs4-mvc-json-crud-php-mysql</em></strong> (ou outro nome de sua preferência).</p>
 <p>Quando a aplicação ficar pronta, teremos a seguinte estrutura com os seguintes arquivos:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1-012.png"><img class="aligncenter size-full wp-image-5121" title="extjs-4-mvc-parte1-01" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte1-012.png" width="562" height="904" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1-012.png"><img class="aligncenter size-full wp-image-5121" title="extjs-4-mvc-parte1-01" alt="" src="{{ site.baseurl }}/images/assets/extjs-4-mvc-parte1-012.png" width="562" height="904" /></a></p>
 <p>Vamos ver passo a passo como criamos todos esses arquivos.</p>
 <h2>2.1 - Criando a Estrutura</h2>
 <p>Dentro de<strong><em> extjs4-mvc-json-crud-php-mysql</em></strong>, crie uma outra pasta chamada <strong><em>app</em></strong>. Dentro da pasta <strong><em>app</em></strong>, crie quatro pastas: <strong><em>controller</em></strong>, <strong><em>view</em></strong>, <strong><em>model</em></strong>, <strong><em>store</em></strong>. É nesse diretório que vamos criar todo o nosso código ExtJS.</p>
@@ -59,10 +59,10 @@ tag: pt-br
 <p>Crie também um arquivo chamado <strong>app.js</strong> e <strong>index.html</strong>. Deixe os arquivos em branco por enquanto. Vamos trabalhar neles ainda nesse post.</p>
 <p>Por último, unzipe o SDK do ExtJS 4 dentro do diretório e renomei-o para <strong><em>extjs</em></strong>.</p>
 <p>Até agora temos a seguinte estrutura:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1-02.png"><img class="aligncenter size-full wp-image-5122" title="extjs-4-mvc-parte1-02" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte1-02.png" width="562" height="428" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1-02.png"><img class="aligncenter size-full wp-image-5122" title="extjs-4-mvc-parte1-02" alt="" src="{{ site.baseurl }}/images/assets/extjs-4-mvc-parte1-02.png" width="562" height="428" /></a></p>
 <h2>2.2 - Criando o CSS</h2>
 <p>O único motivo de termos um arquivo CSS é para customizar alguma coisa na nossa aplicação. No nosso caso, queremos apenas mostra ícones nos botões assim:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1-03.png"><img class="aligncenter size-full wp-image-5123" title="extjs-4-mvc-parte1-03" alt="" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte1-03.png" width="142" height="55" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/09/extjs-4-mvc-parte1-03.png"><img class="aligncenter size-full wp-image-5123" title="extjs-4-mvc-parte1-03" alt="" src="{{ site.baseurl }}/images/assets/extjs-4-mvc-parte1-03.png" width="142" height="55" /></a></p>
 <p>Para isso, precisamos criar o seguinte CSS:</p>
 <p>[code lang="css" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 .icon-user {<br />
@@ -169,4 +169,4 @@ Ext.define('ExtMVC.view.Viewport', {<br />
 <p>Na linha 16 temos a declaração do <strong><em>xtype contatogrid</em></strong>, que é o alias do Grid que iremos criar; que será o único componente a ser mostrado na tela para o usuário (por isso estamos usando um layout do tipo <strong><em>fit</em></strong>).</p>
 <p>Com tudo o que fizemos nesse post, já temos o esqueleto do projeto, que vamos continuar a desenvolver no próximo post!</p>
 <p>Até o próximo post! :)</p>
-<p><a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank"><img class="aligncenter size-full wp-image-5129" title="banner-curso-extjs4" alt="" src="{{ site.baseurl }}/assets/banner-curso-extjs4.png" width="448" height="146" /></a></p>
+<p><a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank"><img class="aligncenter size-full wp-image-5129" title="banner-curso-extjs4" alt="" src="{{ site.baseurl }}/images/assets/banner-curso-extjs4.png" width="448" height="146" /></a></p>

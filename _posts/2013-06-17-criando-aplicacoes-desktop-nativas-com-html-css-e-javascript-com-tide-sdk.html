@@ -18,7 +18,7 @@ tag: pt-br
 ---
 <p>Ei pessoal,</p>
 <p>Mais um post sobre aplicações desktop nativas (híbridas) com tecnologias web (HTML, CSS e JavaScript). Recebi alguns emails e comentários depois que publiquei o <a title="Começando com Sencha Desktop Packager: Exemplo Hello World" href="http://www.loiane.com/2013/02/comecando-com-sencha-desktop-packager-exemplo-hello-world/" target="_blank">post sobre o Sencha Desktop Packager</a> sobre uma alternativa free e open source.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/tidebox.png"><img class="aligncenter  wp-image-5965" alt="tidebox" src="{{ site.baseurl }}/assets/tidebox.png" width="192" height="173" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/tidebox.png"><img class="aligncenter  wp-image-5965" alt="tidebox" src="{{ site.baseurl }}/images/assets/tidebox.png" width="192" height="173" /></a></p>
 <p>O bom do Sencha Desktop Packager é se a empresa usa muito Ext JS e quer empacotar aplicações com Ext JS, além de ter suporte. Aí o preço da licença é quase nada se comparado ao serviço oferecido (e o foco da Sencha é o público corporativo né?). Mas, para os meros mortais desenvolvedores freelas, desembolsar quase 1400 reais é muita coisa para uma licença. E para nossa sorte, existem alternativas gratuitas e open source no mercado (até melhores que o <a title="Começando com Sencha Desktop Packager: Exemplo Hello World" href="http://www.loiane.com/2013/02/comecando-com-sencha-desktop-packager-exemplo-hello-world/" target="_blank">SDP</a>).</p>
 <p>Então no post de hoje vou apresentar o <strong>Tide SDK</strong>, que dentre todas as ferramentas que empacotam apps desktop nativas, está no meu top 3. o <strong>Tide SDK</strong> era conhecido como o Titanium Desktop, então não é tão desconhecido assim da comunidade e já tem história e uma comunidade bem ativa.</p>
 <p>Hoje então vamos fazer um hello world apenas para apresentar a ferramenta, e depois podemos ir nos aprofundando no assunto com outros posts aqui no blog.</p>
@@ -31,12 +31,12 @@ tag: pt-br
 </ol>
 <h2>1 - Download do SDK e da IDE</h2>
 <p>Para fazer o download do SDK e da IDE, vá até <a href="http://www.tidesdk.org/" target="_blank">http://www.tidesdk.org/</a> e clique e download.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-01.png"><img class="aligncenter size-full wp-image-5966" alt="TideSDK-loiane-01" src="{{ site.baseurl }}/assets/TideSDK-loiane-01.png" width="574" height="96" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-01.png"><img class="aligncenter size-full wp-image-5966" alt="TideSDK-loiane-01" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-01.png" width="574" height="96" /></a></p>
 <p>Faça o download do SDK e da IDE para para o sistema operacional que você estiver usando. No meu caso é o Mac OS:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-02.png"><img class="aligncenter  wp-image-5967" alt="TideSDK-loiane-02" src="{{ site.baseurl }}/assets/TideSDK-loiane-02.png" width="579" height="527" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-02.png"><img class="aligncenter  wp-image-5967" alt="TideSDK-loiane-02" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-02.png" width="579" height="527" /></a></p>
 <h2>2 - Instalação do SDK e da IDE</h2>
 <p>O SDK é um zip. Unzip o arquivo e renomeie a pasta para apenas TideSDK.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-03.png"><img class="aligncenter size-full wp-image-5968" alt="TideSDK-loiane-03" src="{{ site.baseurl }}/assets/TideSDK-loiane-03.png" width="254" height="129" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-03.png"><img class="aligncenter size-full wp-image-5968" alt="TideSDK-loiane-03" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-03.png" width="254" height="129" /></a></p>
 <p>Agora precisamos copiar (ou recortar) essa pasta e colar em um diretório específico. Para:</p>
 <ul>
 <li><strong>Mac OS</strong>: <em>~/Library/Application Support/TideSDK</em> (é a pasta Library que fica dentro do diretório do seu usuário, no meu caso por exemplo é <em>/Users/loiane/Library/Application Support/TideSDK</em>)</li>
@@ -52,22 +52,22 @@ tag: pt-br
 <p>Para instalar a IDE, basta executar o arquivo executável e seguir o wizard da instalação.</p>
 <h2>3 - Criação do Projeto Hello World</h2>
 <p>Abra a IDE do Tide SDK que acabamos de instalar. Clique em <strong>New Project</strong>:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-04.png"><img class="aligncenter size-full wp-image-5970" alt="TideSDK-loiane-04" src="{{ site.baseurl }}/assets/TideSDK-loiane-04.png" width="234" height="65" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-04.png"><img class="aligncenter size-full wp-image-5970" alt="TideSDK-loiane-04" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-04.png" width="234" height="65" /></a></p>
 <p>Preencha as informações do projeto, como nome do projeto, pacote, o diretório onde será criado (nesse caso uma pasta HelloWorld será criada dentro do diretório informado), o url da empresa (se tiver) e se deseja ativar PHP, Python ou Ruby (como é um Hello world vou deixar desabilitado). Em seguida, clique em <strong>Create Project</strong>:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-05.png"><img class="aligncenter  wp-image-5971" alt="TideSDK-loiane-05" src="{{ site.baseurl }}/assets/TideSDK-loiane-05.png" width="553" height="411" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-05.png"><img class="aligncenter  wp-image-5971" alt="TideSDK-loiane-05" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-05.png" width="553" height="411" /></a></p>
 <p>Se navegar até o diretório informado, verá que o projeto <em><strong>HelloWorld</strong></em> foi criado com a seguinte estrutura:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-06.png"><img class="aligncenter size-full wp-image-5972" alt="TideSDK-loiane-06" src="{{ site.baseurl }}/assets/TideSDK-loiane-06.png" width="452" height="255" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-06.png"><img class="aligncenter size-full wp-image-5972" alt="TideSDK-loiane-06" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-06.png" width="452" height="255" /></a></p>
 <p>Dentro da pasta Resources é onde ficam os arquivos HTML, CSS e JS. Como esse tutorial é um Hello World, o projeto inicial já cria um HTML com um conteúdo dentro para poder testar. Em outro post podemos ir mais a fundo nos arquivos de configuração.</p>
 <h2>4 - Executando o Projeto Hello World</h2>
 <p>E para executar o projeto precisamos trocar de aba. Clique em <strong>Test &amp; Package</strong>:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-07.png"><img class="aligncenter size-full wp-image-5973" alt="TideSDK-loiane-07" src="{{ site.baseurl }}/assets/TideSDK-loiane-07.png" width="483" height="194" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-07.png"><img class="aligncenter size-full wp-image-5973" alt="TideSDK-loiane-07" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-07.png" width="483" height="194" /></a></p>
 <p>No canto inferior esquerdo verá um botão <strong>Launch App</strong>. Clique nesse botão:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-08.png"><img class="aligncenter size-full wp-image-5974" alt="TideSDK-loiane-08" src="{{ site.baseurl }}/assets/TideSDK-loiane-08.png" width="288" height="50" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-08.png"><img class="aligncenter size-full wp-image-5974" alt="TideSDK-loiane-08" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-08.png" width="288" height="50" /></a></p>
 <p>A app será executada:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-09.png"><img class="aligncenter size-full wp-image-5975" alt="TideSDK-loiane-09" src="{{ site.baseurl }}/assets/TideSDK-loiane-09.png" width="593" height="137" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-09.png"><img class="aligncenter size-full wp-image-5975" alt="TideSDK-loiane-09" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-09.png" width="593" height="137" /></a></p>
 <p>E como podem ver, é uma app desktop nativa que está exibindo código HTML.</p>
 <p>E se a gente voltar no diretório do projeto, dentro da pasta dist vamos ver que foi gerada um arquivo executável. Essa é a nossa app!</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-10.png"><img class="aligncenter size-full wp-image-5976" alt="TideSDK-loiane-10" src="{{ site.baseurl }}/assets/TideSDK-loiane-10.png" width="452" height="299" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/06/TideSDK-loiane-10.png"><img class="aligncenter size-full wp-image-5976" alt="TideSDK-loiane-10" src="{{ site.baseurl }}/images/assets/TideSDK-loiane-10.png" width="452" height="299" /></a></p>
 <p>Código Fonte deste tutorial: <a href="https://github.com/loiane/TideSDK-examples/tree/master/HelloWorld" target="_blank">https://github.com/loiane/TideSDK-examples/tree/master/HelloWorld</a></p>
 <p>Se quiserem mais informações, podem consultar a documentação (é bem parecida com a documentação do Ext JS e Sencha Touch): <a href="http://tidesdk.multipart.net/docs/user-dev/generated/#!/api" target="_blank">http://tidesdk.multipart.net/docs/user-dev/generated/#!/api</a></p>
 <p>Até a próxima! :)</p>

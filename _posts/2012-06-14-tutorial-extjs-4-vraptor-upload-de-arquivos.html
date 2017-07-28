@@ -17,7 +17,7 @@ language: pt-br
 tag: pt-br
 ---
 <p>No post de hoje vamos ver uma dica rápida de como fazer upload de arquivos com ExtJS e VRaptor <strong>corretamente</strong>.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2012/06/extjs-vraptor-loiane.png"><img class="aligncenter size-full wp-image-4727" title="extjs-vraptor-loiane" src="{{ site.baseurl }}/assets/extjs-vraptor-loiane.png" alt="" width="319" height="287" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2012/06/extjs-vraptor-loiane.png"><img class="aligncenter size-full wp-image-4727" title="extjs-vraptor-loiane" src="{{ site.baseurl }}/images/assets/extjs-vraptor-loiane.png" alt="" width="319" height="287" /></a></p>
 <p>Pesquisando pelos fóruns na net, vi que muita gente usa VRaptor com ExtJS, mas infelizmente o pessoal trata o upload de arquivos de maneira errada por não saberem como fazer direito. O VRaptor possui um plugin para trabalhar com ExtJS, mas esse serve apenas para você trabalhar com data grids. O que muita gente também não sabe, é que upload de arquivo com ExtJS (não importa a versão que vc esteja trabalhando) funciona de uma forma diferente do submit de um form comum.</p>
 <p>A pegadinha é: no <strong>response</strong> que o ExtJS espera, você precisa enviar uma mensagem no formato <strong>JSON</strong>, mas o cabeçalho do <strong>content-type</strong> <span style="text-decoration: underline;"><em><strong>NÃO</strong></em></span> pode ser json! Tem que ser <strong>text/html</strong>! E pronto, tudo se resolve!</p>
 <p>O code snippet  abaixo faz parte do projeto de exemplo que apresentei na JavaCE Conference 2012. Vou deixar o link do projeto completo do github no final do post.</p>

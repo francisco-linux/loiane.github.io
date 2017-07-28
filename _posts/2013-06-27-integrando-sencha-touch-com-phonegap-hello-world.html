@@ -20,7 +20,7 @@ tag: pt-br
 ---
 <p>Ei pessoal,</p>
 <p>No post de hoje vamos aprender quais são os passos para integrar o <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a> com <a href="http://phonegap.com/" target="_blank">PhoneGap</a>. Vamos fazer uma app bem simples, apenas um Hello World.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/03/Sencha_PowerGap_Image.jpg"><img class="aligncenter  wp-image-5780" alt="Sencha_PowerGap_Image" src="{{ site.baseurl }}/assets/Sencha_PowerGap_Image.jpg" width="158" height="157" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/03/Sencha_PowerGap_Image.jpg"><img class="aligncenter  wp-image-5780" alt="Sencha_PowerGap_Image" src="{{ site.baseurl }}/images/assets/Sencha_PowerGap_Image.jpg" width="158" height="157" /></a></p>
 <p style="text-align: left;">Seguem os passos:</p>
 <ol>
 <li>Criar uma app Sencha Touch</li>
@@ -38,14 +38,14 @@ tag: pt-br
 </ul>
 <h1>1 - Criando uma App Sencha Touch</h1>
 <p>O primeiro passo é criar a app com Sencha Touch. Para isso, vamos usar o comando <strong>sencha generate app </strong>(Para maiores informações, consulte o <a title="Curso Sencha Touch 2" href="http://www.loiane.com/2012/03/curso-de-sencha-touch-2-gratuito/" target="_blank">curso gratuito de Sencha Touch 2</a>). Neste tutorial vamos criar uma app Sencha Touch chamada <em>SenchaTouchPhoneGap </em>com namespace <em>MyApp</em>:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-01.png"><img class="aligncenter size-full wp-image-6105" alt="sencha-touch-phonegap-01" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-01.png" width="592" height="366" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-01.png"><img class="aligncenter size-full wp-image-6105" alt="sencha-touch-phonegap-01" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-01.png" width="592" height="366" /></a></p>
 <p>Com a app gerada, teste no browser para ver se tudo está funcionando como deveria. A app inicial gerada pelo Sencha Touch deve aparecer:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-02.png"><img class="aligncenter size-full wp-image-6106" alt="sencha-touch-phonegap-02" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-02.png" width="485" height="329" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-02.png"><img class="aligncenter size-full wp-image-6106" alt="sencha-touch-phonegap-02" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-02.png" width="485" height="329" /></a></p>
 <h1>2 - Integrando com PhoneGap</h1>
 <p>Agora abra o SDK do PhoneGap e encontre o arquivo <strong>cordova.js</strong>. Pode ser de qualquer plataforma, já que será usado apenas para testes. Na figura abaixo você pode ver a localização do arquivo para android e ios (se clicar na figura irá abrir em um tamanho maior):</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-03.png"><img class="aligncenter  wp-image-6107" alt="sencha-touch-phonegap-03" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-03.png" width="595" height="336" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-03.png"><img class="aligncenter  wp-image-6107" alt="sencha-touch-phonegap-03" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-03.png" width="595" height="336" /></a></p>
 <p>Pegue o arquivo <strong>cordova.js</strong> (não importa a plataforma, mas de preferência android ou ios) e cole dentro do projeto Sencha Touch que criamos:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-04.png"><img class="aligncenter size-full wp-image-6108" alt="sencha-touch-phonegap-04" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-04.png" width="452" height="306" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-04.png"><img class="aligncenter size-full wp-image-6108" alt="sencha-touch-phonegap-04" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-04.png" width="452" height="306" /></a></p>
 <p>Abra o arquivo app.json e localize a entrada js. Adicione o mapeamento para o arquivo cordova.js. Vai ficar mais ou menos assim:</p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 'js': [<br />
@@ -65,7 +65,7 @@ tag: pt-br
 ],<br />
 [/code]</p>
 <p>Se executarmos a app no browser novamente e abrirmos o <strong>Chrome Developer Tools</strong> (lembrando que por enquanto o Sencha Touch ainda não funciona no Firefox), podemos ver que o arquivo <strong>cordova.js</strong> já está sendo carregado. E uma dica: a gente nunca edita a página <em>index.html</em> de uma app Sencha Touch para adicionar <em>CSS</em> ou arquivos <em>JS</em>, isso sempre é feito pelo <em>app.json:</em></p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-05.png"><img class="aligncenter size-full wp-image-6109" alt="sencha-touch-phonegap-05" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-05.png" width="569" height="199" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-05.png"><img class="aligncenter size-full wp-image-6109" alt="sencha-touch-phonegap-05" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-05.png" width="569" height="199" /></a></p>
 <p>Agora vamos abrir o arquivo app.js e mudar a função launch para que a tela da nossa app seja mostrada apenas depois do PhoneGap estar pronto para uso. A função launch vai ficar assim:</p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]launch: function() {<br />
     // Destroy the #appLoadingIndicator element<br />
@@ -77,20 +77,20 @@ tag: pt-br
 },[/code]</p>
 <h1>3 - Testando!</h1>
 <p>E vamos executar a app novamente no browser para ver o que acontece.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-06.png"><img class="aligncenter size-full wp-image-6110" alt="sencha-touch-phonegap-06" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-06.png" width="486" height="458" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-06.png"><img class="aligncenter size-full wp-image-6110" alt="sencha-touch-phonegap-06" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-06.png" width="486" height="458" /></a></p>
 <p>Como podemos ver acima, vamos ter alguns erros. Isso porque o PhoneGap não pode ser executado no browser, temos que usar uma ferramenta específica para testar. E essa ferramenta se chama Ripple. <a title="Emulando Apps PhoneGap e Mobile Web Apps, no Browser com Ripple" href="http://www.loiane.com/2013/02/emulando-apps-phonegap-e-mobile-web-apps-no-browser-com-ripple/" target="_blank">Já falei sobre ela aqui no blog nesse artigo</a>. Vamos testar a app no Ripple para garantir que tudo está funcionando:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-07.png"><img class="aligncenter  wp-image-6111" alt="sencha-touch-phonegap-07" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-07.png" width="535" height="568" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-07.png"><img class="aligncenter  wp-image-6111" alt="sencha-touch-phonegap-07" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-07.png" width="535" height="568" /></a></p>
 <h1>4 - Criando os Projetos Android e iOS</h1>
 <p>Bem, antes da gente criar os projetos PhoneGap, vamos fazer o build do projeto Sencha Touch. Esse passo é necessário se a app está pronta para produção, pois vamos minificar o código. Mas se desejar trabalhar trabalhar com o código normal (todos os arquivos) durante o desenvolvimento, é questão de gosto pessoal. E antes de fazer o build, volte no <em>app.json</em> e remova a referência ao <em>cordova.js</em> também. Feito isso, podemos usar o comando <em>sencha app build</em> para gerar o build de produção da app.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-08.png"><img class="aligncenter size-full wp-image-6112" alt="sencha-touch-phonegap-08" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-08.png" width="585" height="366" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-08.png"><img class="aligncenter size-full wp-image-6112" alt="sencha-touch-phonegap-08" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-08.png" width="585" height="366" /></a></p>
 <p>Com o build de produção feito, vamos gerar os projetos phonegap. Abaixo, já gerei para iOS e Android. Aqui no blog já escrevi artigos sobre como criar projetos passo a passo com Phonegap para <a title="Começando com Phone Gap 2 (Cordova): Hello Word iOS" href="http://www.loiane.com/2012/11/comecando-com-phone-gap-2-cordova-hello-word-ios/" target="_blank">iOS</a> e <a title="Começando com Phone Gap 2 (Cordova): Hello World Android" href="http://www.loiane.com/2012/11/comecando-com-phone-gap-2-cordova-hello-world-android/" target="_blank">Android</a> (só clicar no link para abrir os respectivos tutoriais):</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-09.png"><img class="aligncenter size-full wp-image-6113" alt="sencha-touch-phonegap-09" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-09.png" width="585" height="156" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-09.png"><img class="aligncenter size-full wp-image-6113" alt="sencha-touch-phonegap-09" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-09.png" width="585" height="156" /></a></p>
 <p>Abra os projetos gerados pelo Phonegap e remova todo o conteúdo dentro da pasta <strong>www</strong>, exceto o arquivo <strong>cordova.js</strong> (já que este é específico de cada plataforma) - pode clicar nas imagens abaixo para abrir num tamanho maior. Depois, abra a pasta build/production do projeto Sencha Touch e copie todo o conteúdo e cole dentro das pastas <strong>www</strong> de cada projeto. Vai ficar como nas imagens abaixo:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-10.png" target="_blank"><img class="aligncenter  wp-image-6114" alt="sencha-touch-phonegap-10" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-10-1024x240.png" width="553" height="130" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-10.png" target="_blank"><img class="aligncenter  wp-image-6114" alt="sencha-touch-phonegap-10" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-10-1024x240.png" width="553" height="130" /></a></p>
 <p>Depois, caso queira usar o iOS, basta emular no xCode a app para iOS:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-11.png"><img class="aligncenter  wp-image-6115" alt="sencha-touch-phonegap-11" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-11.png" width="258" height="501" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-11.png"><img class="aligncenter  wp-image-6115" alt="sencha-touch-phonegap-11" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-11.png" width="258" height="501" /></a></p>
 <p>E usando o Eclipse ou Android Studio também pode emular a app para Android:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-12.png"><img class="aligncenter  wp-image-6116" alt="sencha-touch-phonegap-12" src="{{ site.baseurl }}/assets/sencha-touch-phonegap-12.png" width="570" height="558" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/05/sencha-touch-phonegap-12.png"><img class="aligncenter  wp-image-6116" alt="sencha-touch-phonegap-12" src="{{ site.baseurl }}/images/assets/sencha-touch-phonegap-12.png" width="570" height="558" /></a></p>
 <p style="text-align: center;">
 <p style="text-align: left;">O resultado é exatamente o mesmo para ambas as plataformas.</p>
 <p style="text-align: left;">Espero que tenham gostado dessa introdução de como integrar o PhoneGap com Sencha Touch. Aproveitei de deixei algumas dicas legais também como o Ripple e build de produção do Sencha Touch!</p>

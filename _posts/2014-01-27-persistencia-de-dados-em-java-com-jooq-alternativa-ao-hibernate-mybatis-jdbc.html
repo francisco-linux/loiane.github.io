@@ -19,7 +19,7 @@ tag: pt-br
 <p>Olá pessoal,</p>
 <p>Começando uma série de posts aqui no blog para falar sobre o <a href="http://www.jooq.org/" target="_blank">jOOQ</a>, um framework java de persistência de dados que pode ser usado como uma alternativa ao Hibernate, MyBatis, JDBC, SpringData, etc.</p>
 <p>No post de hoje vou apresentar esse framework a vocês, prós e contras e como fazer o setup de um projeto HelloWorld que vamos usar como base nos próximos posts.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-logo-black.png"><img class="aligncenter  wp-image-7105" alt="jooq-logo-black" src="{{ site.baseurl }}/assets/jooq-logo-black.png" width="180" height="180" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-logo-black.png"><img class="aligncenter  wp-image-7105" alt="jooq-logo-black" src="{{ site.baseurl }}/images/assets/jooq-logo-black.png" width="180" height="180" /></a></p>
 <p>O <a href="http://www.jooq.org/" target="_blank">jOOQ</a> ganhou bastante espaço nos últimos tempos, principalmente em conferências na gringa. Um dos motivos é essa frase que encontramos logo na página inicial do framework:</p>
 <blockquote><p>jOOQ gera código Java a partir de seu banco de dados e permite que você construa consultas SQL typesafe através de sua API fluente.</p></blockquote>
 <p>Ou seja, ao contrário de outros frameworks, onde você configura a partir de classes Java, o <a href="http://www.jooq.org/" target="_blank">jOOQ</a> é focado totalmente no SQL, fazendo a configuração das classes para você. Vocês irão ver que apenas de setup inicial, quase não vamos escrever código.</p>
@@ -43,12 +43,12 @@ tag: pt-br
 </ol>
 <h1>1 - Criação do banco de dados de exemplo</h1>
 <p>Vou usar um banco de dados pronto para esse exemplo. É o banco World disponibilizado pelo MySQL mesmo - pode fazer download de qualquer versão abaixo - eu fiz do InnoDB.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-01.png"><img class="aligncenter  wp-image-7109" alt="jooq-loiane-01" src="{{ site.baseurl }}/assets/jooq-loiane-01.png" width="566" height="171" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-01.png"><img class="aligncenter  wp-image-7109" alt="jooq-loiane-01" src="{{ site.baseurl }}/images/assets/jooq-loiane-01.png" width="566" height="171" /></a></p>
 <p>Faça o Download e instal no seu MySQL. Basta executar os scripts que vem dentro do zip. O meu banco ficou assim:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-02.png"><img class="aligncenter size-full wp-image-7110" alt="jooq-loiane-02" src="{{ site.baseurl }}/assets/jooq-loiane-02.png" width="190" height="143" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-02.png"><img class="aligncenter size-full wp-image-7110" alt="jooq-loiane-02" src="{{ site.baseurl }}/images/assets/jooq-loiane-02.png" width="190" height="143" /></a></p>
 <h1>2 - Criação do projeto Java</h1>
 <p>Crie um projeto Java (Java Project mesmo, o mais simples) - estou usando o Eclipse - e crie uma pasta chamada <em>lib</em> para colocar os jars - e não esqueça de adicionar os jars ao <em>build path</em> do projeto:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-03.png"><img class="aligncenter  wp-image-7112" alt="jooq-loiane-03" src="{{ site.baseurl }}/assets/jooq-loiane-03.png" width="551" height="518" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-03.png"><img class="aligncenter  wp-image-7112" alt="jooq-loiane-03" src="{{ site.baseurl }}/images/assets/jooq-loiane-03.png" width="551" height="518" /></a></p>
 <h2>Maven</h2>
 <p>Se preferir, pode gerar o projeto maven e usar o seguintes artefatos no seu <em>pom.xml</em>:</p>
 <pre class="lang:xhtml decode:true">&lt;dependency&gt;
@@ -127,9 +127,9 @@ tag: pt-br
 </ul>
 <p>Para gerar as classes é possível executar por linha de comando, mas vamos fazer no eclipse mesmo. Para isso, selecione o projeto e vá em <em>Run Configurations</em>:</p>
 <p>Selecione o projeto e a classe principal como mostra abaixo:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-04.png"><img class="aligncenter  wp-image-7118" alt="jooq-loiane-04" src="{{ site.baseurl }}/assets/jooq-loiane-04.png" width="593" height="351" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-04.png"><img class="aligncenter  wp-image-7118" alt="jooq-loiane-04" src="{{ site.baseurl }}/images/assets/jooq-loiane-04.png" width="593" height="351" /></a></p>
 <p>E adicione o <em><strong>library.xml</strong></em> como parâmetro:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-05.png"><img class="aligncenter  wp-image-7117" alt="jooq-loiane-05" src="{{ site.baseurl }}/assets/jooq-loiane-05.png" width="598" height="350" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-05.png"><img class="aligncenter  wp-image-7117" alt="jooq-loiane-05" src="{{ site.baseurl }}/images/assets/jooq-loiane-05.png" width="598" height="350" /></a></p>
 <p style="text-align: left;">Clique em <em><strong>Run</strong></em><strong> </strong>- e veja o output no console. Será algo similar a isso:</p>
 <pre class="lang:sh decode:true">Jan 23, 2014 11:15:43 AM org.jooq.tools.JooqLogger info
 INFO: Initialising properties  : /library.xml
@@ -262,7 +262,7 @@ INFO: Packages fetched         : 0 (0 included, 0 excluded)
 Jan 23, 2014 11:15:46 AM org.jooq.tools.JooqLogger info
 INFO: GENERATION FINISHED!     : Total: 1.911s, +3.693ms</pre>
 <p>E pronto! Faça o refresh do projeto e verá que as classes foram geradas!</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-06.png"><img class="aligncenter size-full wp-image-7119" alt="jooq-loiane-06" src="{{ site.baseurl }}/assets/jooq-loiane-06.png" width="357" height="361" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-06.png"><img class="aligncenter size-full wp-image-7119" alt="jooq-loiane-06" src="{{ site.baseurl }}/images/assets/jooq-loiane-06.png" width="357" height="361" /></a></p>
 <h2 style="text-align: left;">No XML!</h2>
 <p style="text-align: left;">Se você assim como eu não é muito fã de XML, também é possível fazer a geração das classes acima sem usar XML!</p>
 <p style="text-align: left;">Para isso, vamos criar uma classe com um método main (ponto de entrada):</p>
@@ -300,7 +300,7 @@ public class JOOQConfig {
 
 }</pre>
 <p style="text-align: left;">E se executarmos essa classe, o resultado será o mesmo que usando o library.xml:</p>
-<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-07.png"><img class="aligncenter size-full wp-image-7122" alt="jooq-loiane-07" src="{{ site.baseurl }}/assets/jooq-loiane-07.png" width="368" height="391" /></a></p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/jooq-loiane-07.png"><img class="aligncenter size-full wp-image-7122" alt="jooq-loiane-07" src="{{ site.baseurl }}/images/assets/jooq-loiane-07.png" width="368" height="391" /></a></p>
 <h1>4 - Criação de uma classe Main para testar a conexão com o banco de dados</h1>
 <p>O próximo passo agora é criar uma classe para testarmos a conexão. Para deixar mais simples, não vou usar JUnit ou alguma biblioteca de testes. Vou criar uma classe bem simples para testar:</p>
 <pre class="lang:java decode:true">package com.loiane.test;

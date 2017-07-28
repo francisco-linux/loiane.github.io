@@ -17,7 +17,7 @@ language: pt-br
 tag: pt-br
 ---
 <p>Parte 5 da série de posts explicando passo a passo como criar uma aplicação simples com ExtJS 4 usando o MVC.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/07/extjs-4-mvc-parte5.png"><img class="aligncenter size-full wp-image-6319" alt="extjs-4-mvc-parte5" src="{{ site.baseurl }}/assets/extjs-4-mvc-parte5.png" width="493" height="253" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/07/extjs-4-mvc-parte5.png"><img class="aligncenter size-full wp-image-6319" alt="extjs-4-mvc-parte5" src="{{ site.baseurl }}/images/assets/extjs-4-mvc-parte5.png" width="493" height="253" /></a></p>
 <p>Este tutorial está dividido em 5 partes – hoje vamos ver a quinta e última parte (demorou, mas saiu! rs):</p>
 <ol start="1">
 <li><a href="http://www.loiane.com/2012/09/criando-uma-aplicacao-crud-com-extjs-4-mvc-parte-1" target="_blank">Preparando o Ambiente e montando o Projeto (Parte 1)</a></li>
@@ -122,7 +122,7 @@ Ext.define('ExtMVC.controller.Contatos', {<br />
 <p>Na linha 39 estamos verificando se o parâmetro record está vazio/null. Caso negativo, vamos carregar os dados do registro no Form (linha 40). Isso só irá funcionar caso o evento disparado seja o <em><strong>itemdblclick.</strong></em><strong> </strong>E é claro, o nome dos campos do Model precisam ser os mesmos dos campos do Form para isso funcionar.</p>
 <p>Nós não vamos nos preocupar em salvar o contato agora. A única coisa que queremos é abrir o formulário e carregar os dados da linha que o usuário selecionou.</p>
 <p>Segue um screenshot do formulário:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/07/extjs-mvc-crud-form.png"><img class="aligncenter size-full wp-image-6996" alt="extjs-mvc-crud-form" src="{{ site.baseurl }}/assets/extjs-mvc-crud-form.png" width="403" height="175" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/07/extjs-mvc-crud-form.png"><img class="aligncenter size-full wp-image-6996" alt="extjs-mvc-crud-form" src="{{ site.baseurl }}/images/assets/extjs-mvc-crud-form.png" width="403" height="175" /></a></p>
 <h1>3 - Adicionar um Contato</h1>
 <p>Para adicionar um contato, esperamos que o usuário clique no botão Add e com isso o evento click do botão Add seja disparado e o método <em><strong>editarContato</strong></em><strong> </strong>seja executado. Note que é o mesmo método que usamos para abrir a janela para editar o contato.</p>
 <p>Caso o evento click seja disparado, o parâmetro record não será verdadeiro, e com isso o form não irá carregar os dados, ou seja, a única coisa que será feita é a janela que será aberta para o usuário digitar as informações (linha 37).</p>

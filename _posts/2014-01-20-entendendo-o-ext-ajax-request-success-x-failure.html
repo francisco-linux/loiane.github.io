@@ -20,7 +20,7 @@ tag: pt-br
 <p>Olá pessoal,</p>
 <p>Hoje vou falar um pouco sobre o <em><strong>Ext.Ajax.request</strong></em>, especialmente sobre as funções de callback de <em><strong>Success</strong> </em>e <em><strong>Failure</strong></em>. Esse é um dos erros que mais vejo em códigos alheios por aí.</p>
 <p>E por que especialmente sobre o <em><strong>Ext.Ajax.request</strong></em>? Mesmo quando a gente trabalha com <em><strong>Store</strong> </em>ou com <em><strong>Submit</strong> </em>de <em><strong>Forms</strong> </em>no <strong>ExtJS</strong>, por trás o <em><strong>Ext.Ajax</strong></em> é chamado. Então entendendo como o callback funciona, podemos aplicar a mesma lógica para a <em><strong>Store</strong> </em>e o <em><strong>Submit</strong> </em>de um Form.</p>
-<p>[caption id="attachment_6972" align="aligncenter" width="360"]<a href="http://www.loiane.com/wp-content/uploads/2014/01/success-and-failure-sign.jpg"><img class=" wp-image-6972" alt="success-and-failure-sign" src="{{ site.baseurl }}/assets/success-and-failure-sign.jpg" width="360" height="270" /></a> Fonte da Img: http://cdn.worldcupblog.org/www.worldcupblog.org/files/2010/07/success-and-failure-sign.jpg[/caption]</p>
+<p>[caption id="attachment_6972" align="aligncenter" width="360"]<a href="http://www.loiane.com/wp-content/uploads/2014/01/success-and-failure-sign.jpg"><img class=" wp-image-6972" alt="success-and-failure-sign" src="{{ site.baseurl }}/images/assets/success-and-failure-sign.jpg" width="360" height="270" /></a> Fonte da Img: http://cdn.worldcupblog.org/www.worldcupblog.org/files/2010/07/success-and-failure-sign.jpg[/caption]</p>
 <p>Primeiro vou mostrar para vocês como esses callbacks são usados e de forma errada. Depois vou mostrar a forma como devem ser usados. E por último, uma maneira de deixar o seu código ainda mais limpo e bonito, reusando o máximo de código que a gente pode (afinal, não basta funcionar, código limpo e bonito também agrega valor né?).</p>
 <p>Para exemplificar, suponha o cenário de uma página de Login. Para esse exemplo, criei 3 páginas de Login idênticas, apenas diferindo o xtype e um Controller. Tenho também um php que vai no banco buscar o usuário e senha entrado pelo usuário. Para nosso exemplo, vamos criar uma tabela usuário (com colunas usuário e senha) e vamos inserir apenas 1 linha nessa tabela: usuário "admin" e senha "admin". Segue o script:</p>
 <pre class="lang:mysql decode:true">CREATE SCHEMA `blog` ;
@@ -181,11 +181,11 @@ echo json_encode(array(
 <p>E é mais ou menos assim que a gente vê as funções de callback na maioria dos códigos Ext JS! Notou alguma coisa de errado? Se sim, ótimo! Se não, vamos passo a passo para entender.</p>
 <h3>Cenário 1: entre com usuário e senha "admin"</h3>
 <p>Esse é o resultado:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-01.png"><img class="aligncenter size-full wp-image-7005" alt="ext.ajax.request-loiane-01" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-01.png" width="448" height="223" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-01.png"><img class="aligncenter size-full wp-image-7005" alt="ext.ajax.request-loiane-01" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-01.png" width="448" height="223" /></a></p>
 <p>Parece ok né? É porque esse é o resultado esperado.</p>
 <h3>Cenário 2: entre com usuário "abc" e senha "abc"</h3>
 <p>Esse é o resultado:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-02.png"><img class="aligncenter size-full wp-image-7007" alt="ext.ajax.request-loiane-02" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-02.png" width="449" height="220" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-02.png"><img class="aligncenter size-full wp-image-7007" alt="ext.ajax.request-loiane-02" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-02.png" width="449" height="220" /></a></p>
 <p>Hum, não era esse o resultado né? No server estamos retornando o resultado success = false. A mensagem esperada era outra né?</p>
 <p>Aí está o erro: muita gente espera que quando se retorna <strong>success = false</strong> no server, o callback a ser executado é o da função <strong>failure</strong>, o que não é verdade. O código está correto, mas o resultado que os desenvolvedores espera não está correto.</p>
 <h2>Quando o success e quando o failure são executados?</h2>
@@ -196,7 +196,7 @@ echo json_encode(array(
 <p>Quando o ExtJS tentar executar o login.php, teremos um erro 404 - de URL não encontrada.</p>
 <p>Entre com usuário e senha "admin".</p>
 <p>Esse é o resultado.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-03.png"><img class="aligncenter  wp-image-7008" alt="ext.ajax.request-loiane-03" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-03.png" width="597" height="459" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-03.png"><img class="aligncenter  wp-image-7008" alt="ext.ajax.request-loiane-03" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-03.png" width="597" height="459" /></a></p>
 <p>Repare no console. O usuário nessa hora fica maluco, pois tá entrando com a senha e usuário corretos, mas a mensagem que o sistema mostra para o usuário é meio sem noção. Por isso é importante saber essas diferenças para que o seu sistema possa tomar as decisões corretas! O código acima não prevê todos os cenários e isso faz com que o sistema não funcione direito! O sistema funciona de maneira errada, e isso é um erro gravíssimo.</p>
 <h1>Maneira Certa de Usar</h1>
 <p>Vamos ver agora a maneira correta de prever esses casos. Temos 3 casos então.</p>
@@ -259,23 +259,23 @@ echo json_encode(array(
 <p>Vamos ver nossos 3 cenários novamente para ver o resultado e um cenário 4 (erro com banco de dados).</p>
 <h3>Cenário 1: entre com usuário e senha "admin"</h3>
 <p>Esse é o resultado:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-04.png"><img class="aligncenter size-full wp-image-7009" alt="ext.ajax.request-loiane-04" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-04.png" width="464" height="262" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-04.png"><img class="aligncenter size-full wp-image-7009" alt="ext.ajax.request-loiane-04" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-04.png" width="464" height="262" /></a></p>
 <p>Parece ok né? É porque esse é o resultado esperado.</p>
 <h3>Cenário 2: entre com usuário "abc" e senha "abc"</h3>
 <p>Esse é o resultado:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-05.png"><img class="aligncenter size-full wp-image-7010" alt="ext.ajax.request-loiane-05" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-05.png" width="477" height="260" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-05.png"><img class="aligncenter size-full wp-image-7010" alt="ext.ajax.request-loiane-05" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-05.png" width="477" height="260" /></a></p>
 <p>Resultado é o esperado.</p>
 <h3>Cenário 3: Renomeie o arquivo login.php para login_.php</h3>
 <p>Quando o ExtJS tentar executar o login.php, teremos um erro 404 - de URL não encontrada.</p>
 <p>Entre com usuário e senha "admin".</p>
 <p>Esse é o resultado.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-06.png"><img class="aligncenter size-full wp-image-7011" alt="ext.ajax.request-loiane-06" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-06.png" width="667" height="513" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-06.png"><img class="aligncenter size-full wp-image-7011" alt="ext.ajax.request-loiane-06" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-06.png" width="667" height="513" /></a></p>
 <p>Agora sim temos uma mensagem que significa algo!</p>
 <h3>Cenário 4: Erro/Exception com Banco de Dados</h3>
 <p>Vá no arquivo db.php e troque a senha do banco de dados - para uma errada. Queremos que o php lance um erro.</p>
 <p>Entre com usuário e senha "admin".</p>
 <p>Esse é o resultado.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-07.png"><img class="aligncenter size-full wp-image-7012" alt="ext.ajax.request-loiane-07" src="{{ site.baseurl }}/assets/ext.ajax_.request-loiane-07.png" width="611" height="215" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2014/01/ext.ajax_.request-loiane-07.png"><img class="aligncenter size-full wp-image-7012" alt="ext.ajax.request-loiane-07" src="{{ site.baseurl }}/images/assets/ext.ajax_.request-loiane-07.png" width="611" height="215" /></a></p>
 <p>Erro no banco de dados. Mesmo assim caiu no success (o request chegou ao servidor, mas teve um erro no código). E a gente consegue mostrar uma mensagem mais útil também.</p>
 <p>Viu como codificar corretamente faz toda a diferença? :)</p>
 <h1>Usando Funções de Escopo</h1>
