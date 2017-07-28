@@ -1,0 +1,220 @@
+---
+layout: post
+title: Novidades Java 7 - Project Coin
+date: 2011-07-11 07:00:46.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Java
+- Tutoriais
+tags:
+- Java
+- Java 7
+- NetBeans 7
+- Project Coin
+meta:
+ratings_average: '5'
+views: '8833'
+ratings_users: '1'
+ratings_score: '5'
+_edit_last: '1'
+_thumbnail_id: '2705'
+_aioseop_description: Java,Java 7, Project Coin, NetBeans 7
+_aioseop_title: Novidades Java 7 - Project Coin
+_revision-control: a:1:{i:0;s:8:"defaults";}
+_aioseop_keywords: Java,Java 7, Project Coin, NetBeans 7
+_syntaxhighlighter_encoded: '1'
+_yoast_wpseo_metadesc: Java,Java 7, Project Coin, NetBeans 7
+_yoast_wpseo_metakeywords: Java,Java 7, Project Coin, NetBeans 7
+_yoast_wpseo_title: Novidades Java 7 - Project Coin
+language: pt-br
+tag: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Na semana passada estive presente na festa de lançamento do Java 7, durante o TDC 2011 e foi bem legal. Fiquei ansiosa por usar o Java 7, e decidi ir pra casa brincar um pouco com as novas features.</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_11.jpg" target="_blank"><img class="aligncenter size-full wp-image-2693" title="java7_loiane_11" src="{{ site.baseurl }}/images/assets/java7_loiane_11.jpg" alt="" width="519" height="249" /></a></p>
+<p style="text-align: justify;">Fotos do evento: <a href="http://www.flickr.com/photos/loiane/sets/72157627015952961/">http://www.flickr.com/photos/loiane/sets/72157627015952961/</a></p>
+<p style="text-align: justify;">Vídeo do Evento (Oracle): <a href="http://blogs.oracle.com/java/entry/java_7_celebration_begins" target="_blank">http://blogs.oracle.com/java/entry/java_7_celebration_begins</a></p>
+<p style="text-align: justify;">Slides:<a href="http://blogs.oracle.com/darcy/resource/ProjectCoin/CoinLaunch.pdf" target="_blank"> http://blogs.oracle.com/darcy/resource/ProjectCoin/CoinLaunch.pdf</a></p>
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-2705" title="Print" src="{{ site.baseurl }}/images/assets/duke_java7.jpg" alt="" width="150" height="253" />Sempre acompanhava blogs e fóruns com a lista das novidades, mas nem todas entraram para essa release. Neste post vou listar e dar exemplos das que realmente entraram.</p>
+<p style="text-align: justify;">O primeiro passo é fazer download do <a href="http://jdk7.java.net/" target="_blank">Java 7</a>. Nesse caso usei Windows mesmo (:/).</p>
+<p style="text-align: justify;">Como a Oracle só vai lançar o Java de verdade no fim do mês de julho (2011), o Eclipse ainda não tem suporte nativo. Tem apenas um plugin que está na versão beta. Decidi não usar.</p>
+<p style="text-align: justify;">Vou então usar o <a href="NetBeans" target="_blank">NetBeans</a>, que já está com suporte ao Java 7. Se você instalar o Java 7 e depois instalar o <a href="NetBeans" target="_blank">NetBeans</a>, vai perceber que a JDK padrão já é a versão 7.</p>
+<p style="text-align: justify;">Quando criar um projeto Java no <a href="NetBeans" target="_blank">NetBeans</a>, o compilador do projeto será Java 7, mas o compilador do código fonte ainda vai estar na versão 6. Para funcionar com o Java 7, é <a href="http://netbeans.org/kb/docs/java/javase-jdk7.html#project" target="_blank">necessária fazer uma pequena mudança</a>.</p>
+<p style="text-align: justify;">Vamos então começar a brincar com o Project Coin:</p>
+<h1 style="text-align: justify;">Strings in Switch:</h1>
+<p style="text-align: justify;">Para todos os exemplo, tentei primeiro escrever o código como escrevemos hoje (Java 6) para depois tentar converter para o Java 7. O legal do <a href="NetBeans" target="_blank">NetBeans</a>, é que ele já vem com algumas dicas de mudanças e faz isso automaticamente pra gente.</p>
+<p style="text-align: justify;">Primeiro, fiz comparação de Strings com if-else. O <a href="NetBeans" target="_blank">NetBeans</a>me mostrou um warning sugerindo para trocar:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_01.jpg"><img class="aligncenter size-full wp-image-2694" title="java7_loiane_01" src="{{ site.baseurl }}/images/assets/java7_loiane_01.jpg" alt="" width="443" height="289" /></a></p>
+<p style="text-align: justify;">E se aceitar a mudança, vai trocar para:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_02.jpg"><img class="aligncenter size-full wp-image-2695" title="java7_loiane_02" src="{{ site.baseurl }}/images/assets/java7_loiane_02.jpg" alt="" width="451" height="338" /></a></p>
+<p style="text-align: justify;">E o código:</p>
+<p>Antes:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+ public void testStringInSwitch(String param){</p>
+<p>final String JAVA5 = &quot;Java 5&quot;;<br />
+final String JAVA6 = &quot;Java 6&quot;;<br />
+final String JAVA7 = &quot;Java 7&quot;;</p>
+<p>if (param.equals(JAVA5)){<br />
+System.out.println(JAVA5);<br />
+} else if (param.equals(JAVA6)){<br />
+System.out.println(JAVA6);<br />
+} else if (param.equals(JAVA7)){<br />
+System.out.println(JAVA7);<br />
+}<br />
+}<br />
+[/code]</p>
+<p>Java7:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+ public void testStringInSwitch(String param){</p>
+<p>final String JAVA5 = &quot;Java 5&quot;;<br />
+final String JAVA6 = &quot;Java 6&quot;;<br />
+final String JAVA7 = &quot;Java 7&quot;;</p>
+<p>switch (param) {<br />
+case JAVA5:<br />
+System.out.println(JAVA5);<br />
+break;<br />
+case JAVA6:<br />
+System.out.println(JAVA6);<br />
+break;<br />
+case JAVA7:<br />
+System.out.println(JAVA7);<br />
+break;<br />
+}<br />
+}<br />
+[/code]</p>
+<h1 style="text-align: justify;">Binary Literals:</h1>
+<p>Antes:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testBinaryIntegralLiterals(){</p>
+<p>int binary = 8;</p>
+<p>if (binary == 8){<br />
+System.out.println(true);<br />
+} else{<br />
+System.out.println(false);<br />
+}<br />
+}<br />
+[/code]</p>
+<p>Java7:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+ public void testBinaryIntegralLiterals(){</p>
+<p>int binary = 0b1000; //2^3 = 8</p>
+<p>if (binary == 8){<br />
+System.out.println(true);<br />
+} else{<br />
+System.out.println(false);<br />
+}<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">O NetBeans também dá dica para trocar um número literal para um binário literal:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_09.jpg"><img class="aligncenter size-full wp-image-2696" title="java7_loiane_09" src="{{ site.baseurl }}/images/assets/java7_loiane_09.jpg" alt="" width="432" height="172" /></a></p>
+<p style="text-align: justify;">Para</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_10.jpg"><img class="aligncenter size-full wp-image-2697" title="java7_loiane_10" src="{{ site.baseurl }}/images/assets/java7_loiane_10.jpg" alt="" width="417" height="174" /></a></p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testUnderscoresNumericLiterals() {</p>
+<p>int oneMillion_ = 1_000_000;<br />
+int oneMillion = 1000000;</p>
+<p>if (oneMillion_ == oneMillion){<br />
+System.out.println(true);<br />
+} else{<br />
+System.out.println(false);<br />
+}<br />
+}<br />
+[/code]</p>
+<h1 style="text-align: justify;">Underscore Between Literals:</h1>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testUnderscoresNumericLiterals() {</p>
+<p>	int oneMillion_ = 1_000_000; //new<br />
+int oneMillion = 1000000;</p>
+<p>if (oneMillion_ == oneMillion){<br />
+		System.out.println(true);<br />
+} else{<br />
+System.out.println(false);<br />
+}<br />
+}<br />
+[/code]</p>
+<h1 style="text-align: justify;">Diamond Syntax:</h1>
+<p>Before:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testDinamond(){</p>
+<p>List&lt;String&gt; list1 = new ArrayList&lt;String&gt;();<br />
+Map&lt;String, List&lt;String&gt;&gt; map1 = new HashMap&lt;String, List&lt;String&gt;&gt;();<br />
+}<br />
+[/code]</p>
+<p>Java7:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testDinamond(){<br />
+List&lt;String&gt; list = new ArrayList&lt;&gt;();<br />
+Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;&gt;();<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">O NetBeans também dá dica:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_05.jpg"><img class="aligncenter size-full wp-image-2698" title="java7_loiane_05" src="{{ site.baseurl }}/images/assets/java7_loiane_05.jpg" alt="" width="598" height="98" /></a></p>
+<p style="text-align: justify;">Para</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_06.jpg"><img class="aligncenter size-full wp-image-2699" title="java7_loiane_06" src="{{ site.baseurl }}/images/assets/java7_loiane_06.jpg" alt="" width="501" height="105" /></a></p>
+<h1 style="text-align: justify;">Multi-Catch Similar Exceptions:</h1>
+<p>Antes:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testMultiCatch(){</p>
+<p>try {<br />
+throw new FileNotFoundException(&quot;FileNotFoundException&quot;);<br />
+} catch (FileNotFoundException fnfo) {<br />
+fnfo.printStackTrace();<br />
+} catch (IOException ioe) {<br />
+ioe.printStackTrace();<br />
+ }<br />
+[/code]</p>
+<p>Java 7:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testMultiCatch(){</p>
+<p>try {<br />
+throw new FileNotFoundException(&quot;FileNotFoundException&quot;);<br />
+} catch (FileNotFoundException | IOException fnfo) {<br />
+fnfo.printStackTrace();<br />
+}<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Mesma coisa aqui. Dica para converter o código para Java 7:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_03.jpg" target="_blank"><img class="aligncenter size-full wp-image-2700" title="java7_loiane_03" src="{{ site.baseurl }}/images/assets/java7_loiane_03.jpg" alt="" width="554" height="171" /></a></p>
+<p style="text-align: justify;">Para</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_04.jpg"><img class="aligncenter size-full wp-image-2702" title="java7_loiane_04" src="{{ site.baseurl }}/images/assets/java7_loiane_04.jpg" alt="" width="549" height="138" /></a></p>
+<h1 style="text-align: justify;">Try with Resources:</h1>
+<p>Antes:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testTryWithResourcesStatement() throws FileNotFoundException, IOException{</p>
+<p> FileInputStream in = null;<br />
+try {<br />
+in = new FileInputStream(&quot;java7.txt&quot;);</p>
+<p>System.out.println(in.read());</p>
+<p>} finally {<br />
+if (in != null) {<br />
+in.close();<br />
+}<br />
+}</p>
+<p>}<br />
+[/code]</p>
+<p>Java 7:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+public void testTryWithResourcesStatement() throws FileNotFoundException, IOException{</p>
+<p>try (FileInputStream in = new FileInputStream(&quot;java7.txt&quot;)) {</p>
+<p>System.out.println(in.read());</p>
+<p>}<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Dica:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_07.jpg"><img class="aligncenter size-full wp-image-2703" title="java7_loiane_07" src="{{ site.baseurl }}/images/assets/java7_loiane_07.jpg" alt="" width="543" height="169" /></a></p>
+<p style="text-align: justify;">Para:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/java7_loiane_08.jpg"><img class="aligncenter size-full wp-image-2704" title="java7_loiane_08" src="{{ site.baseurl }}/images/assets/java7_loiane_08.jpg" alt="" width="549" height="98" /></a></p>
+<p style="text-align: justify;">A <a href="http://mail.openjdk.java.net/pipermail/coin-dev/2009-March/000217.html" target="_blank">simplificação de varargs</a> também entrou na lista. Mas não entendi direito como usar. Talvez porque nunca tenha usado varargs profissionalmente em um projeto. Item para estudar mais!</p>
+<p style="text-align: justify;">Existem outras features que foram submetidas, mas não entraram nessa release:</p>
+<ul style="text-align: justify;">
+<li><a href="http://mail.openjdk.java.net/pipermail/coin-dev/2009-March/000047.html" target="_blank">Elvis Operator</a></li>
+<li><a href="http://mail.openjdk.java.net/pipermail/coin-dev/2009-March/001193.html" target="_blank">List and Maps Index</a></li>
+<li><a href="http://mail.openjdk.java.net/pipermail/coin-dev/2009-March/001193.html" target="_blank">Collection Literals</a></li>
+<li><a href="http://mail.openjdk.java.net/pipermail/coin-dev/2009-March/000047.html" target="_blank">Null-Safe navigation</a></li>
+</ul>
+<p style="text-align: justify;">O código apresentado neste post não é apenas teoria, já funciona no NetBeans e pode já pode ser usado em projetos. Você pode fazer o download no meu github: <a href="https://github.com/loiane/Java7HelloWorld" target="_blank">https://github.com/loiane/Java7HelloWorld</a></p>
+<p style="text-align: justify;">Um update: A DZone lançou um um RefCardz sobre NetBeans e Java 7 - o download é gratuito: <a href="http://refcardz.dzone.com/refcardz/netbeans-ide-7-programming" target="_blank">http://refcardz.dzone.com/refcardz/netbeans-ide-7-programming</a></p>
