@@ -4,6 +4,11 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+$syntax-hue:          220;
+$syntax-saturation:   13%;
+$syntax-brightness:   18%;
+$syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
+
 html, body {
   margin: 0;
   padding: 0; }
@@ -28,7 +33,7 @@ textarea {
   font-size: 16px;
   font-family: 'tt-regular', "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  color: #3a4250;
+  color: lighten($syntax-bg, 4%);
   -webkit-font-smoothing: antialiased; }
 
 body {
