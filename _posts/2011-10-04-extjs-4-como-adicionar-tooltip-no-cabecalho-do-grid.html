@@ -1,0 +1,150 @@
+---
+layout: post
+title: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+date: 2011-10-04 07:00:04.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- ExtJS 4
+- Plugin ExtJS 4
+- Tooltip no Cabeçalho do Grid
+meta:
+  _revision-control: a:1:{i:0;s:8:"defaults";}
+  _edit_last: '1'
+  _syntaxhighlighter_encoded: '1'
+  shareaholic_disable_share_buttons: '0'
+  shareaholic_disable_open_graph_tags: '0'
+  _aioseop_title: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+  _aioseop_description: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+  _aioseop_keywords: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+  ratings_users: '0'
+  ratings_score: '0'
+  ratings_average: '0'
+  views: '4110'
+  _yoast_wpseo_metadesc: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+  _yoast_wpseo_metakeywords: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+  _yoast_wpseo_title: 'ExtJS 4: Como adicionar Tooltip no Cabeçalho do Grid'
+language: pt-br
+tag: pt-br
+---
+<p style="text-align: justify;">Este tutorial tem como objetivo mostrar como adicionar um tooltip no header (cabeçalho) de um Grid. Essa feature não é nativa da API do Ext JS 4. Felizmente, existe um plugin third-party que podemos usar para fazer isso.</p>
+<p style="text-align: justify;">Para começar, criei um projeto JavaScript no <a href="http://eclipse.org/" target="_blank">Eclipse</a> e a estrutura do projeto se parece com o screenshot abaixo:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/08/extjs4-grid-header-tooltip-loiane-01.png"><img class="aligncenter size-full wp-image-2883" title="extjs4-grid-header-tooltip-loiane-01" src="{{ site.baseurl }}/images/assets/extjs4-grid-header-tooltip-loiane-01.png" alt="" width="244" height="190" /></a></p>
+<h3 style="text-align: justify;">Código do Plugin</h3>
+<p style="text-align: justify;">A primeira coisa que precisamos adicionar no projeto (depois do SDK do Ext 4, é claro) é o plugin. Para isso, vamos criar um subdiretório ux/grid dentro do projeto. Pasta ux pois estamos criando um plugin e uma pasta grid pois se trata de um plugin para o component grid. E também vamos criar um arquivo HeaderToolTip.js  com o seguinte conteúdo:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+/**<br />
+ * @class Ext.ux.grid.HeaderToolTip<br />
+ * @namespace ux.grid<br />
+ *<br />
+ *  Text tooltips should be stored in the grid column definition<br />
+ *<br />
+ *  Sencha forum url:<br />
+ *  http://www.sencha.com/forum/showthread.php?132637-Ext.ux.grid.HeaderToolTip<br />
+ */<br />
+Ext.define('Ext.ux.grid.HeaderToolTip', {<br />
+    alias: 'plugin.headertooltip',<br />
+    init : function(grid) {<br />
+        var headerCt = grid.headerCt;<br />
+        grid.headerCt.on(&quot;afterrender&quot;, function(g) {<br />
+            grid.tip = Ext.create('Ext.tip.ToolTip', {<br />
+                target: headerCt.el,<br />
+                delegate: &quot;.x-column-header&quot;,<br />
+                trackMouse: true,<br />
+                renderTo: Ext.getBody(),<br />
+                listeners: {<br />
+                    beforeshow: function(tip) {<br />
+                        var c = headerCt.down('gridcolumn[id=' + tip.triggerElement.id  +']');<br />
+                        if (c  &amp;&amp; c.tooltip)<br />
+                            tip.update(c.tooltip);<br />
+                        else<br />
+                            return false;<br />
+                    }<br />
+                }<br />
+            });<br />
+        });<br />
+    }<br />
+});<br />
+[/code]</p>
+<h3 style="text-align: justify;">Grid com Header Tooltip</h3>
+<p style="text-align: justify;">Agora vamos implementar o código da aplicação de exemplo. Para isso, vamos criar um grid bem simples com apenas uma coluna:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="1,3,4,5,6,7,35,42"]<br />
+Ext.Loader.setConfig({enabled: true});</p>
+<p>Ext.require([<br />
+    'Ext.grid.*',<br />
+    'Ext.data.*',<br />
+    'Ext.ux.grid.HeaderToolTip'<br />
+]);</p>
+<p>Ext.onReady(function() {</p>
+<p>    var myData = [<br />
+        ['3m Co'],<br />
+        ['Alcoa Inc'],<br />
+        ['Altria Group Inc'],<br />
+        ['American Express Company'],<br />
+        ['American International Group, Inc.'],<br />
+        ['AT&amp;T Inc.'],<br />
+        ['Boeing Co.'],<br />
+        ['Caterpillar Inc.'],<br />
+        ['Citigroup, Inc.'],<br />
+        ['E.I. du Pont de Nemours and Company'],<br />
+        ['Exxon Mobil Corp'],<br />
+        ['General Electric Company']<br />
+    ];</p>
+<p>    var store = Ext.create('Ext.data.ArrayStore', {<br />
+        fields: [<br />
+           {name: 'company'}<br />
+        ],<br />
+        data: myData<br />
+    });</p>
+<p>    Ext.create('Ext.grid.Panel', {<br />
+        store: store,<br />
+        plugins: ['headertooltip'],<br />
+        columns: [<br />
+            {<br />
+                text     : 'Company',<br />
+                flex     : 1,<br />
+                sortable : false,<br />
+                dataIndex: 'company',<br />
+                tooltip: 'Some tooltip'<br />
+            }<br />
+        ],<br />
+        height: 200,<br />
+        width: 200,<br />
+        title: 'Grid with Header Tooltip',<br />
+        renderTo: 'grid-example',<br />
+        viewConfig: {<br />
+            stripeRows: true<br />
+        }<br />
+    });<br />
+});<br />
+[/code]</p>
+<p style="text-align: justify;">Na linha 1, temos a declaração do Ext.Loader para que o Ext consiga fazer carregamento dinâmico dos componentes e arquivos que precisamos:.</p>
+<p style="text-align: justify;">Nas linhas 3-7 temos a lista de componentes que precisamos que estejam carregados antes de carregar a aplicação. Isso inclui o Ext.ux.grid.HeaderTooltip.js. Dessa maneira, o Ext sabe que precisa procurar por um arquivo HeaderTooltip.js dentro da pasta ux/grid.</p>
+<p style="text-align: justify;">E na linha 35 temos a declaração do plugin HeaderTooltip como um plugin do grid.</p>
+<p style="text-align: justify;">E finalmente, na linha 42, precisamos declarar um atributo chamado <em>tooltip</em> que tem como valor o tooltip que queremos mostrar no header do grid.</p>
+<h3 style="text-align: justify;">Página HTML</h3>
+<p style="text-align: justify;">Por último vamos criar uma página HTML para ser executada em um browser e visualizar nosso projeto:</p>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+    &lt;title&gt;Grid with Header Tooltip&lt;/title&gt;</p>
+<p>    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;ext4/resources/css/ext-all.css&quot; /&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;ext4/ext-all.js&quot;&gt;&lt;/script&gt;</p>
+<p>    &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+    &lt;div id=&quot;grid-example&quot; style=&quot;padding:20px;&quot;&gt;&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<p style="text-align: justify;">E quando executarmos a aplicação, vamos ter o seguinte:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/08/extjs4-grid-header-tooltip-loiane-02.png"><img class="aligncenter size-full wp-image-2884" title="extjs4-grid-header-tooltip-loiane-02" src="{{ site.baseurl }}/images/assets/extjs4-grid-header-tooltip-loiane-02.png" alt="" width="514" height="424" /></a>E está pronto!</p>
+<blockquote><p><em><strong>Disclaimer</strong>: Não sou a autora do plugin HeaderTooltip. Se tiver algum problema com o plugin, erro ou incompatibilidade, favor procurar o autor do plugin no fórum na sencha na seguinte thread: <a href="http://www.sencha.com/forum/showthread.php?132637-Ext.ux.grid.HeaderToolTip" target="_blank">http://www.sencha.com/forum/showthread.php?132637-Ext.ux.grid.HeaderToolTip</a>. Neste tutorial apenas demonstrei como usar o plugin.</em></p></blockquote>
+<p style="text-align: justify;">Estou usando a versão 4.0.2a do Ext (versão open source) nesse projeto.</p>
+<h3 style="text-align: justify;">Download do Código Fonte:</h3>
+<p style="text-align: justify;">Você pode fazer o download do código fonte completo, pronto par rodar no:</p>
+<p style="text-align: justify;"><strong>Meu github:</strong> <a href="https://github.com/loiane/extjs4-grid-header-tooltip" target="_blank">https://github.com/loiane/extjs4-grid-header-tooltip</a></p>
+<p style="text-align: justify;">Bons códigos! :)</p>

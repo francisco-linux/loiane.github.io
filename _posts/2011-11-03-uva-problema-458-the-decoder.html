@@ -1,0 +1,148 @@
+---
+layout: post
+title: 'UVa: Problema 458 - The Decoder'
+date: 2011-11-03 11:27:02.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Algoritmos
+- UVa Online Judge
+tags:
+- 458 - The Decoder
+- ASCII
+- The Decoder
+- uva
+- uva 458
+- UVa Online Judge
+meta:
+  _revision-control: a:1:{i:0;s:8:"defaults";}
+  _edit_last: '1'
+  _thumbnail_id: '2651'
+  _aioseop_title: 'UVa: Problema 458 - The Decoder'
+  _aioseop_description: 'UVa: Problema 458 - The Decoder'
+  _aioseop_keywords: 'UVa: Problema 458 - The Decoder'
+  _syntaxhighlighter_encoded: '1'
+  shareaholic_disable_share_buttons: '0'
+  shareaholic_disable_open_graph_tags: '0'
+  ratings_users: '0'
+  ratings_score: '0'
+  ratings_average: '0'
+  views: '3750'
+  _yoast_wpseo_metadesc: 'UVa: Problema 458 - The Decoder'
+  _yoast_wpseo_metakeywords: 'UVa: Problema 458 - The Decoder'
+  _yoast_wpseo_title: 'UVa: Problema 458 - The Decoder'
+language: pt-br
+tag: pt-br
+---
+<p>Outro problema da lista de iniciantes do UVa. Nesse post vamos resolver o  <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=399" target="_blank">Problema 458 - The Decoder</a>.</p>
+<p style="text-align: center;"><img class="size-full wp-image-2651 aligncenter" title="logouva_458" src="{{ site.baseurl }}/images/assets/logouva_458.jpg" alt="" width="94" height="95" /></p>
+<h3>Descrição do Problema:</h3>
+<p>Escreva um programa de decodificar um conjunto de caracteres em uma mensagem válida. O programa deve ler um arquivo que contém caracteres codificados e "imprimir" (output) exatamente a mensagem decodificada. A chave de codificação é exatamente uma única operação aritmética simples baseado no conjunto de caracteres ASCII.</p>
+<h3>Entendendo o Problema:</h3>
+<p>No enunciado também colocam 3 exemplos de input e output:</p>
+<p><strong>Exemplo de Input:</strong></p>
+<blockquote><p>1JKJ'pz'{ol'{yhklthyr'vm'{ol'Jvu{yvs'Kh{h'Jvywvyh{pvu5<br />
+1PIT'pz'h'{yhklthyr'vm'{ol'Pu{lyuh{pvuhs'I|zpulzz'Thjopul'Jvywvyh{pvu5<br />
+1KLJ'pz'{ol'{yhklthyr'vm'{ol'Kpnp{hs'Lx|pwtlu{'Jvywvyh{pvu5</p></blockquote>
+<p><strong>Exemplo de Output:</strong></p>
+<blockquote><p>*CDC is the trademark of the Control Data Corporation.<br />
+*IBM is a trademark of the International Business Machine Corporation.<br />
+*DEC is the trademark of the Digital Equipment Corporation.</p></blockquote>
+<p>Esse é um problema relativamente simples e a única coisa que precisamos é uma <a href="http://www.asciitable.com/" target="_blank">tabela ASCII</a> para comparar os caracteres:</p>
+<p style="text-align: left;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/asciifull.gif" target="_blank"><img class="aligncenter size-full wp-image-2650" title="asciifull" src="{{ site.baseurl }}/images/assets/asciifull.gif" alt="" width="572" height="390" /></a>Vamos então começar a comparar as mensagens.  Vamos pegar os 3 primeiros caracteres da primeira mensagem: "1JK".</p>
+<ul>
+<li>Na tabela ASCII, o caractere "1" corresponde ao decimal 49. Precisamos transformar esse caractere no "*", que na tabela corresponde ao decimal 42.</li>
+<li>O caractere "J" corresponde ao decimal 74, e precisamos transformar no caractere "C", que corresponde ao decimal 67.</li>
+<li>O caractere "L" corresponde ao decimal 76, e precisamos transformar no caractere "D", que corresponde ao decimal 68.</li>
+</ul>
+<p style="text-align: left;">Se reparar, sempre estamos voltando 7 caracteres:</p>
+<ul>
+<li>49 - 42 = 7</li>
+<li>74 - 67 = 7</li>
+<li>76 - 68 = 7</li>
+</ul>
+<p style="text-align: left;">Então para decodificar é só subtrair 7 do código decimal!</p>
+<h3 style="text-align: left;">Código:</h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.volume0;</p>
+<p>import java.io.DataInputStream;<br />
+import java.io.DataOutputStream;<br />
+import java.io.EOFException;<br />
+import java.io.IOException;</p>
+<p>/**<br />
+ * Problem 458 - The Decoder<br />
+ *<br />
+ * Just shift each character ASCII Codes 7 characters down. (7 is perfect number)<br />
+ *<br />
+ * Problem Link:<br />
+ * http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=399<br />
+ *<br />
+ * Runtime: 1.548s<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class P458 {</p>
+<p>	public static void main(String[] args) throws IOException {</p>
+<p>		DataInputStream in = new DataInputStream(System.in);<br />
+		DataOutputStream output = new DataOutputStream(System.out) ;<br />
+		byte ch;<br />
+		try {<br />
+			while (true) {<br />
+				ch = decode(in.readByte());<br />
+				output.writeByte(ch);<br />
+				output.flush();<br />
+			}<br />
+		} catch (EOFException eof) {}<br />
+	}</p>
+<p>	public static byte decode(byte ch){</p>
+<p>		if (ch != 10 &amp;&amp; ch != 13)<br />
+			ch = (byte)(ch - 7);</p>
+<p>		return ch;<br />
+	}</p>
+<p>	public static String decodeLine(String line){</p>
+<p>		byte[] bytes = line.getBytes();<br />
+		byte[] decoded = new byte[bytes.length];</p>
+<p>		for (int i=0; i&lt;bytes.length; i++){<br />
+			decoded[i] = decode(bytes[i]);<br />
+		}</p>
+<p>		return new String(decoded);<br />
+	}<br />
+}<br />
+[/code]</p>
+<h3 style="text-align: left;">Dicas:</h3>
+<p>Com Java, só funcionou com DataInputStream e DataOutputStream, pois já lê diretamente o código co caractere. Tentei ler com BufferedReader ou Scanner (maneiras tradicionais de ler input do UVa), mas não funcionou.</p>
+<p style="text-align: left;">Como o problema não fala de nenhuma condição de parada, temos que ter até encontrar o final do arquivo/input (EOF). Para fazer isso, usamos um while(true) - sim, é feio fazer isso, mas no UVa é a única solução com Java. E nesse caso a condição de parada vai ser uma exceção e deixamos o catch em branco mesmo (outra coisa feia) - não façam isso em sistemas comerciais, esses problemas são apenas para brincar!<br />
+Tempo de execução no UVa: 1.548s</p>
+<h3 style="text-align: left;">Testando Entrada e Saída:</h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.test.volume0;</p>
+<p>import static org.junit.Assert.assertEquals;</p>
+<p>import org.junit.Test;</p>
+<p>import com.loiane.volume0.P458;</p>
+<p>/**<br />
+ * Test Case<br />
+ * Problem 458 - The Decoder<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class TestP458 {</p>
+<p>	@Test<br />
+	public void testProblem548(){</p>
+<p>		final String input1 = &quot;1JKJ'pz'{ol'{yhklthyr'vm'{ol'Jvu{yvs'Kh{h'Jvywvyh{pvu5&quot;;<br />
+		final String input2 = &quot;1PIT'pz'h'{yhklthyr'vm'{ol'Pu{lyuh{pvuhs'I|zpulzz'Thjopul'Jvywvyh{pvu5&quot;;<br />
+		final String input3 = &quot;1KLJ'pz'{ol'{yhklthyr'vm'{ol'Kpnp{hs'Lx|pwtlu{'Jvywvyh{pvu5&quot;;</p>
+<p>		final String output1 = &quot;*CDC is the trademark of the Control Data Corporation.&quot;;<br />
+		final String output2 = &quot;*IBM is a trademark of the International Business Machine Corporation.&quot;;<br />
+		final String output3 = &quot;*DEC is the trademark of the Digital Equipment Corporation.&quot;;</p>
+<p>	    assertEquals(output1, P458.decodeLine(input1));<br />
+		assertEquals(output2, P458.decodeLine(input2));<br />
+		assertEquals(output3, P458.decodeLine(input3));<br />
+	}<br />
+}<br />
+[/code]</p>
+<p style="text-align: left;">Bons códigos!</p>

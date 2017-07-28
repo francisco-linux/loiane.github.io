@@ -1,0 +1,282 @@
+---
+layout: post
+title: Como Salvar e Fazer Load de Imagens usando Hibernate e MySQL
+date: 2011-10-18 09:00:41.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Hibernate
+- Tutoriais
+tags:
+- annotations
+- hibernate
+- hibernate 3
+- Load Imagem Hibernate
+- Salvar Imagem Hibernate
+meta:
+  _syntaxhighlighter_encoded: '1'
+  _edit_last: '1'
+  _aioseop_description: Como Salvar e Fazer Load de Imagens usando Hibernate e MySQL
+  _aioseop_title: Como Salvar e Fazer Load de Imagens usando Hibernate e MySQL
+  shareaholic_disable_share_buttons: '0'
+  shareaholic_disable_open_graph_tags: '0'
+  _revision-control: a:1:{i:0;s:8:"defaults";}
+  _aioseop_keywords: Como Salvar e Fazer Load de Imagens usando Hibernate e MySQL
+  _thumbnail_id: '3049'
+  ratings_users: '0'
+  ratings_score: '0'
+  ratings_average: '0'
+  views: '12974'
+  _yoast_wpseo_metadesc: Como Salvar e Fazer Load de Imagens usando Hibernate e MySQL
+  _yoast_wpseo_metakeywords: Como Salvar e Fazer Load de Imagens usando Hibernate
+    e MySQL
+  _yoast_wpseo_title: Como Salvar e Fazer Load de Imagens usando Hibernate e MySQL
+language: pt-br
+tag: pt-br
+---
+<p>Este tutorial tem como objetivo mostrar como salvar e fazer load (select) de imagens no banco de dados usando <a href="http://www.hibernate.org/" target="_blank">Hibernate </a>e <a href="http://www.mysql.com/" target="_blank">MySQL</a>.</p>
+<h3>Requerimentos</h3>
+<p>Para este projeto de exemplo, vamos precisar:</p>
+<ul>
+<li><a href="http://www.eclipse.org/" target="_blank">Eclipse IDE</a> (você pode usar a sua IDE favorita);</li>
+<li><a href="http://www.mysql.com/" target="_blank">MySQL</a> (pode usar outro banco de dados, tenha em mente que terá que mudar o tipo de dado da imagem);</li>
+<li><a href="http://www.hibernate.org/" target="_blank">Hibernate </a>jars e dependências (no download do projeto já tem todos os arquivos incluídos);</li>
+<li><a href="http://www.junit.org/" target="_blank">JUnit </a>- para testar (jar também incluído no projeto).</li>
+</ul>
+<h3>PrintScreen do Projeto</h3>
+<p>Ao final, nosso projeto deve ficar com a seguinte estrutura:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-01.png"><img class="aligncenter size-full wp-image-3050" title="hibernate-image-loiane-01" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-01.png" alt="" width="257" height="326" /></a></p>
+<h3>Modelo do Banco de Dados</h3>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-02.png"><img class="aligncenter size-full wp-image-3051" title="hibernate-image-loiane-02" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-02.png" alt="" width="192" height="127" /></a></p>
+<p>Antes de começarmos a ver o código, precisamos rodar o seguinte script no <a href="http://www.mysql.com/" target="_blank">MySQL</a> para criar a tabela Book (livro):</p>
+<p>[code lang="sql" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+DROP SCHEMA IF EXISTS `blog` ;<br />
+CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;<br />
+USE `blog` ;</p>
+<p>-- -----------------------------------------------------<br />
+-- Table `blog`.`BOOK`<br />
+-- -----------------------------------------------------<br />
+DROP TABLE IF EXISTS `blog`.`BOOK` ;</p>
+<p>CREATE  TABLE IF NOT EXISTS `blog`.`BOOK` (<br />
+  `BOOK_ID` INT NOT NULL AUTO_INCREMENT ,<br />
+  `BOOK_NAME` VARCHAR(45) NOT NULL ,<br />
+  `BOOK_IMAGE` MEDIUMBLOB NOT NULL ,<br />
+  PRIMARY KEY (`BOOK_ID`) )<br />
+ENGINE = InnoDB;<br />
+[/code]</p>
+<p>Essa tabela Book será usada nesse tutorial.</p>
+<h3>Book POJO</h3>
+<p>Vamos usar essa class para representar a tabela <strong>Book</strong> (livro). Um livro tem um <em>ID</em>, um nome (<em>name</em>) e uma imagem (<em>image</em>), que é representada por um array de <em>bytes</em>.</p>
+<p>Como o objetivo é persistir uma imagem no banco de dados, temos que usar o tipo <em><strong>BLOB</strong></em>. O <a href="http://www.mysql.com/" target="_blank">MySQL</a> tem algumas variações de <em>BLOBs</em>. Você pode ver as diferenças entre os tipos <a href="http://dev.mysql.com/doc/refman/5.0/en/blob.html" target="_blank">aqui</a>. Nesse exemplo vamos usar o <em><strong>Medium Blob</strong></em>, que pode armazenar <em> L + 3 bytes, onde L &lt; 2^24</em>.</p>
+<p>Não esqueça de adicionar o <em>column definition</em> na annotation <em>Column</em>.</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="22,23"]<br />
+package com.loiane.model;</p>
+<p>import javax.persistence.Column;<br />
+import javax.persistence.Entity;<br />
+import javax.persistence.GeneratedValue;<br />
+import javax.persistence.Id;<br />
+import javax.persistence.Lob;<br />
+import javax.persistence.Table;</p>
+<p>@Entity<br />
+@Table(name=&quot;BOOK&quot;)<br />
+public class Book {</p>
+<p>	@Id<br />
+	@GeneratedValue<br />
+	@Column(name=&quot;BOOK_ID&quot;)<br />
+	private long id;</p>
+<p>	@Column(name=&quot;BOOK_NAME&quot;, nullable=false)<br />
+	private String name;</p>
+<p>	@Lob<br />
+	@Column(name=&quot;BOOK_IMAGE&quot;, nullable=false, columnDefinition=&quot;mediumblob&quot;)<br />
+	private byte[] image;</p>
+<p>	public long getId() {<br />
+		return id;<br />
+	}</p>
+<p>	public void setId(long id) {<br />
+		this.id = id;<br />
+	}</p>
+<p>	public String getName() {<br />
+		return name;<br />
+	}</p>
+<p>	public void setName(String name) {<br />
+		this.name = name;<br />
+	}</p>
+<p>	public byte[] getImage() {<br />
+		return image;<br />
+	}</p>
+<p>	public void setImage(byte[] image) {<br />
+		this.image = image;<br />
+	}<br />
+}<br />
+[/code]</p>
+<h3>Hibernate Config</h3>
+<p>Este arquivo de configuração contém informações necessárias para conectar ao banco de dados.</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+&lt;!DOCTYPE hibernate-configuration PUBLIC<br />
+		&quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;<br />
+		&quot;http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd&quot;&gt;<br />
+&lt;hibernate-configuration&gt;<br />
+    &lt;session-factory&gt;<br />
+        &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;<br />
+        &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost/blog&lt;/property&gt;<br />
+        &lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;<br />
+        &lt;property name=&quot;hibernate.connection.password&quot;&gt;root&lt;/property&gt;<br />
+        &lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;<br />
+    	&lt;property name=&quot;connection.pool_size&quot;&gt;1&lt;/property&gt;<br />
+    	&lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;<br />
+    &lt;/session-factory&gt;<br />
+&lt;/hibernate-configuration&gt;<br />
+[/code]</p>
+<h3>Hibernate Util</h3>
+<p>A classe <em>HibernateUtil</em> ajuda a criar um <em>SessionFactory</em> a partir das informações do arquivo de configuração.</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.hibernate;</p>
+<p>import org.hibernate.SessionFactory;<br />
+import org.hibernate.cfg.AnnotationConfiguration;</p>
+<p>import com.loiane.model.Book;</p>
+<p>public class HibernateUtil {</p>
+<p>	private static final SessionFactory sessionFactory;</p>
+<p>	static {<br />
+		try {<br />
+			sessionFactory = new AnnotationConfiguration()<br />
+								.configure()<br />
+								.addPackage(&quot;com.loiane.model&quot;) //the fully qualified package name<br />
+								.addAnnotatedClass(Book.class)<br />
+								.buildSessionFactory();</p>
+<p>		} catch (Throwable ex) {<br />
+			System.err.println(&quot;Initial SessionFactory creation failed.&quot; + ex);<br />
+			throw new ExceptionInInitializerError(ex);<br />
+		}<br />
+	}</p>
+<p>	public static SessionFactory getSessionFactory() {<br />
+		return sessionFactory;<br />
+	}<br />
+}<br />
+[/code]</p>
+<h3>DAO</h3>
+<p>Nessa classe, vamos criar dois métodos: um para salvar uma instância da classe Book no banco de dados e outro para buscar uma instância dessa classe.</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.dao;</p>
+<p>import org.hibernate.HibernateException;<br />
+import org.hibernate.Session;<br />
+import org.hibernate.Transaction;</p>
+<p>import com.loiane.hibernate.HibernateUtil;<br />
+import com.loiane.model.Book;</p>
+<p>public class BookDAOImpl {</p>
+<p>	/**<br />
+	 * Inserts a row in the BOOK table.<br />
+	 * Do not need to pass the id, it will be generated.<br />
+	 * @param book<br />
+	 * @return an instance of the object Book<br />
+	 */<br />
+	public Book saveBook(Book book)<br />
+	{<br />
+		Session session = HibernateUtil.getSessionFactory().openSession();<br />
+		Transaction transaction = null;<br />
+		try {<br />
+			transaction = session.beginTransaction();<br />
+			session.save(book);<br />
+			transaction.commit();<br />
+		} catch (HibernateException e) {<br />
+			transaction.rollback();<br />
+			e.printStackTrace();<br />
+		} finally {<br />
+			session.close();<br />
+		}<br />
+		return book;<br />
+	}</p>
+<p>	/**<br />
+	 * Delete a book from database<br />
+	 * @param bookId id of the book to be retrieved<br />
+	 */<br />
+	public Book getBook(Long bookId)<br />
+	{<br />
+		Session session = HibernateUtil.getSessionFactory().openSession();<br />
+		try {<br />
+			Book book = (Book) session.get(Book.class, bookId);<br />
+			return book;<br />
+		} catch (HibernateException e) {<br />
+			e.printStackTrace();<br />
+		} finally {<br />
+			session.close();<br />
+		}<br />
+		return null;<br />
+	}<br />
+}<br />
+[/code]</p>
+<h3>Teste</h3>
+<p>Para testar, vamos primeiro criar uma instância da classe <em>Book</em> (livro) e setar o atributo da imagem. Para fazer isso, precisamos buscar a imagem em algum lugar, e nesse caso vamos pegar de um diretório do HD.</p>
+<p>Apenas para garantir na hora de buscar no banco de dados que a imagem que gravamos é a mesma que estamos buscamos, vamos salvá-la em um diretório.</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.test;</p>
+<p>import static org.junit.Assert.assertNotNull;</p>
+<p>import java.io.File;<br />
+import java.io.FileInputStream;<br />
+import java.io.FileOutputStream;</p>
+<p>import org.junit.AfterClass;<br />
+import org.junit.BeforeClass;<br />
+import org.junit.Test;</p>
+<p>import com.loiane.dao.BookDAOImpl;<br />
+import com.loiane.model.Book;</p>
+<p>public class TestBookDAO {</p>
+<p>	private static BookDAOImpl bookDAO;</p>
+<p>	@BeforeClass<br />
+	public static  void runBeforeClass() {<br />
+		bookDAO = new BookDAOImpl();<br />
+	}</p>
+<p>	@AfterClass<br />
+	public static void runAfterClass() {<br />
+		bookDAO = null;<br />
+	}</p>
+<p>	/**<br />
+	 * Test method for {@link com.loiane.dao.BookDAOImpl#saveBook()}.<br />
+	 */<br />
+	@Test<br />
+	public void testSaveBook() {</p>
+<p>		//File file = new File(&quot;images\\extjsfirstlook.jpg&quot;); //windows<br />
+		File file = new File(&quot;images/extjsfirstlook.jpg&quot;);<br />
+        byte[] bFile = new byte[(int) file.length()];</p>
+<p>        try {<br />
+	        FileInputStream fileInputStream = new FileInputStream(file);<br />
+	        fileInputStream.read(bFile);<br />
+	        fileInputStream.close();<br />
+        } catch (Exception e) {<br />
+	        e.printStackTrace();<br />
+        }</p>
+<p>        Book book = new Book();<br />
+        book.setName(&quot;Ext JS 4 First Look&quot;);<br />
+        book.setImage(bFile);</p>
+<p>        bookDAO.saveBook(book);</p>
+<p>        assertNotNull(book.getId());<br />
+	}</p>
+<p>	/**<br />
+	 * Test method for {@link com.loiane.dao.BookDAOImpl#getBook()}.<br />
+	 */<br />
+	@Test<br />
+	public void testGetBook() {</p>
+<p>		Book book = bookDAO.getBook((long) 1);</p>
+<p>		assertNotNull(book);</p>
+<p>		try{<br />
+        	//FileOutputStream fos = new FileOutputStream(&quot;images\\output.jpg&quot;);  //windows<br />
+        	FileOutputStream fos = new FileOutputStream(&quot;images/output.jpg&quot;);<br />
+            fos.write(book.getImage());<br />
+            fos.close();<br />
+        }catch(Exception e){<br />
+        	e.printStackTrace();<br />
+        }<br />
+	}<br />
+}<br />
+[/code]</p>
+<p>Outra maneira de manualmente verificar se a imagem foi realmente salva é ir no <a href="http://www.mysql.com/" target="_blank">MySQL</a> e olhar na tabela:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-03.png"><img class="aligncenter size-full wp-image-3052" title="hibernate-image-loiane-03" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-03.png" alt="" width="337" height="83" /></a></p>
+<p>e se clicarmos com o botão direito...</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-04.png"><img class="aligncenter size-full wp-image-3053" title="hibernate-image-loiane-04" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-04.png" alt="" width="313" height="336" /></a></p>
+<p>podemos ver a imagem que salvamos:</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-05.png"><img class="aligncenter size-full wp-image-3054" title="hibernate-image-loiane-05" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-05.png" alt="" width="568" height="333" /></a></p>
+<h3>Download do Código Fonte</h3>
+<p>Você pode fazer download do código fonte completo (ou fazer um <em>fork/clone</em> do projeto - <em>git</em>) (todos os repositórios possuem o mesmo código fonte):</p>
+<p><em><strong>Github</strong></em>: <a href="https://github.com/loiane/hibernate-image-example" target="_blank">https://github.com/loiane/hibernate-image-example</a></p>
+<p><em><strong>BitBucket</strong></em>: <a href="https://bitbucket.org/loiane/hibernate-image-example/downloads" target="_blank">https://bitbucket.org/loiane/hibernate-image-example/downloads</a></p>
+<p>Bons códigos!</p>

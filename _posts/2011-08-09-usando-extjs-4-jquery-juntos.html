@@ -1,0 +1,62 @@
+---
+layout: post
+title: Usando ExtJS 4 + JQuery juntos
+date: 2011-08-09 07:00:31.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+- JQuery
+tags:
+- Ext JS + JQuery
+- Ext JS 3
+- Ext JS 4
+- jQuery
+meta:
+  _edit_last: '1'
+  _aioseop_description: Usando ExtJS 4 + JQuery juntos
+  _aioseop_title: Usando ExtJS 4 + JQuery juntos
+  _revision-control: a:1:{i:0;s:8:"defaults";}
+  _aioseop_keywords: Usando ExtJS 4 + JQuery juntos
+  _syntaxhighlighter_encoded: '1'
+  ratings_users: '1'
+  ratings_score: '5'
+  ratings_average: '5'
+  views: '6642'
+  _yoast_wpseo_metadesc: Usando ExtJS 4 + JQuery juntos
+  _yoast_wpseo_metakeywords: Usando ExtJS 4 + JQuery juntos
+  _yoast_wpseo_title: Usando ExtJS 4 + JQuery juntos
+language: pt-br
+tag: pt-br
+---
+<p>Esse post apresenta um exemplo de como usar <a href="http://www.sencha.com/" target="_blank">Ext JS 4</a> e <a href="http://jquery.com/" target="_blank">JQuery </a>juntos em um projeto.</p>
+<p>Para usar <a href="http://www.sencha.com/" target="_blank">Ext JS 4</a> com qualquer outro framework javascript, basta fazer o import do arquivo js do framework (neste caso <a href="http://jquery.com/" target="_blank">JQuery </a>) e o import do Ext JS e está pronto para usar. Não precisa de nenhum outro arquivo adicional, como na versão 3 do Ext.</p>
+<p>Eu sou super fã do Ext JS, mas algumas coisas, como manipulação de DOM, não gosto de usar Ext Core, prefiro JQuery, acho que juntos formam uma dupla perfeita! :)</p>
+<p>Abaixo um screenshot da estrutura de diretórios projeto de exemplo:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/08/extjs4_jquery_loiane.png"><img class="aligncenter size-full wp-image-2820" title="extjs4_jquery_loiane" src="{{ site.baseurl }}/images/assets/extjs4_jquery_loiane.png" alt="" width="170" height="154" /></a></p>
+<p>E a página HTML:<br />
+[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+	&lt;title&gt;Ext JS 4 + JQuery&lt;/title&gt;</p>
+<p>	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;ext4/resources/css/ext-all.css&quot; /&gt;</p>
+<p>	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.6.2.min.js&quot;&gt;&lt;/script&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;ext4/ext-all.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+	&lt;script type=&quot;text/javascript&quot;&gt;<br />
+	Ext.onReady(function() {<br />
+		Ext.Msg.alert('Alert',$('#divId').text());</p>
+<p>	});<br />
+	&lt;/script&gt;<br />
+	&lt;div id=&quot;divId&quot; style=&quot;padding:20px;&quot;&gt;Using Ext JS 4 + JQuery&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<p>O resultado será:<br />
+<a href="http://www.loiane.com/wp-content/uploads/2011/08/extjs4_jquery_loiane_01.png"><img src="{{ site.baseurl }}/images/assets/extjs4_jquery_loiane_01.png" alt="" title="extjs4_jquery_loiane_01" width="261" height="164" class="aligncenter size-full wp-image-2823" /></a></p>
+<h3>Download do código fonte:</h3>
+<p><strong>Github</strong>: <a href="https://github.com/loiane/extjs4-jquery" target="_blank">https://github.com/loiane/extjs4-jquery</a></p>
+<p><strong>Google Code (arquivo zip):</strong> <a href="https://code.google.com/p/extjs4-jquery/downloads/list" target="_blank">https://code.google.com/p/extjs4-jquery/downloads/list</a></p>
+<p>Bons códigos! :)</p>

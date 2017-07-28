@@ -1,0 +1,61 @@
+---
+layout: post
+title: 'Project Euler: Problema 2'
+date: 2011-11-21 09:03:40.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Project Euler
+tags:
+- Fibonacci
+- Project Euler
+- Project Euler Problema 2
+meta:
+  _edit_last: '1'
+  _syntaxhighlighter_encoded: '1'
+  _thumbnail_id: '3072'
+  shareaholic_disable_share_buttons: '0'
+  shareaholic_disable_open_graph_tags: '0'
+  _revision-control: a:1:{i:0;s:8:"defaults";}
+  ratings_users: '0'
+  ratings_score: '0'
+  ratings_average: '0'
+  views: '3959'
+language: pt-br
+tag: pt-br
+---
+<p>Explicação e solução em Java do Problema 2 do  <a href="http://projecteuler.net" target="_blank">Project Euler</a>.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/10/project_euler_loiane_02.png"><img class="aligncenter size-full wp-image-3072" title="project_euler_loiane_02" src="{{ site.baseurl }}/images/assets/project_euler_loiane_02.png" alt="" width="253" height="77" /></a><strong>Link do problema:</strong> <a href="http://projecteuler.net/problem=2" target="_blank">http://projecteuler.net/problem=2</a></p>
+<h3>Descrição do Problema:</h3>
+<p>Cada novo termo da <a href="http://pt.wikipedia.org/wiki/N%C3%BAmero_de_Fibonacci" target="_blank">sequência de Fibonacci</a> é gerado somando os dois termos anteriores. Començando por 1 e 2, os primeiros 10 termos são:</p>
+<p>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...</p>
+<p>Considerandos os termos da<a href="http://pt.wikipedia.org/wiki/N%C3%BAmero_de_Fibonacci" target="_blank"> sequência de Fibonacci </a>cujos valores não excedem 4 milhões encontre a soma dos valores pares.</p>
+<h3>Solução:</h3>
+<p>Outro problema de força bruta, só precisamos somar os números pares.</p>
+<p>Mas vamos tentar otimizar um pouco. Repare nos números destacados abaixo da sequência:</p>
+<p>1, 1, <strong>2</strong>, 3, 5, <strong>8</strong>, 13, 21, <strong>34</strong>, 55, 89, <strong>144, ...</strong></p>
+<p><strong></strong>Temos um número par a cada 3 números da sequência. Ao invés de calcular todos os números da sequência e testar se o valor é par, podemos calcular de 3 em 3 e obter diretamente o resultado que queremos.</p>
+<h3>Código:</h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.projecteuler;</p>
+<p>public class Problem2 {</p>
+<p>	public static void main(String[] args) {</p>
+<p>		long sum = 0;<br />
+		long prev = 1;<br />
+		long current = 2;<br />
+		long n;</p>
+<p>		while (current &lt; 4000000){<br />
+			sum = sum + current;<br />
+		    n = current;<br />
+		    current += 2 * (current + prev);<br />
+		    prev += 2 * n;<br />
+		}</p>
+<p>		System.out.println(sum);<br />
+	}<br />
+}<br />
+[/code]</p>
+<p>Para ver a solução, basta executar o código acima.</p>
+<p>Mais sugestões?</p>
+<p>Lista de mais problemas do Project Euler resolvidos: <a title="http://www.loiane.com/projetos/project-euler/" href="http://www.loiane.com/projetos/project-euler/">http://www.loiane.com/projetos/project-euler/</a></p>
+<p>Meu repositório no GitHub: <a href="https://github.com/loiane/project-euler" target="_blank">https://github.com/loiane/project-euler</a></p>

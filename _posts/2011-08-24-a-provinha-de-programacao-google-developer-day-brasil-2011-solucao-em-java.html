@@ -1,0 +1,312 @@
+---
+layout: post
+title: 'A Provinha de Programação – Google Developer Day Brasil 2011: Solução em Java'
+date: 2011-08-24 08:58:57.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Eventos
+- Java
+tags:
+- Google Developer Day Brasil 2011
+- Java
+- Provinha de Programação
+- Solução
+meta:
+  _edit_last: '1'
+  _revision-control: a:1:{i:0;s:8:"defaults";}
+  _syntaxhighlighter_encoded: '1'
+  _aioseop_title: 'A Provinha de Programação – Google Developer Day Brasil 2011: Solução
+    em Java'
+  _aioseop_description: 'A Provinha de Programação – Google Developer Day Brasil 2011:
+    Solução em Java'
+  _aioseop_keywords: 'A Provinha de Programação – Google Developer Day Brasil 2011:
+    Solução em Java'
+  _thumbnail_id: '2872'
+  ratings_users: '1'
+  ratings_score: '5'
+  ratings_average: '5'
+  views: '6978'
+  _yoast_wpseo_metadesc: 'A Provinha de Programação – Google Developer Day Brasil
+    2011: Solução em Java'
+  _yoast_wpseo_metakeywords: 'A Provinha de Programação – Google Developer Day Brasil
+    2011: Solução em Java'
+  _yoast_wpseo_title: 'A Provinha de Programação – Google Developer Day Brasil 2011:
+    Solução em Java'
+language: pt-br
+tag: pt-br
+---
+<p style="text-align: justify;">Neste post vou apresentar minha soluções da <a title="A Provinha de Programação – Google Developer Day Brasil 2011" href="http://www.loiane.com/2011/08/a-provinha-de-programacao-google-developer-day-brasil-2011/" target="_blank">Provinha de Programação do Google Developer Day Brasil 2011</a>, conforme tinha citado <a title="A Provinha de Programação – Google Developer Day Brasil 2011" href="http://www.loiane.com/2011/08/a-provinha-de-programacao-google-developer-day-brasil-2011/" target="_blank">num post anterior</a>.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/08/logo.png"><img src="{{ site.baseurl }}/images/assets/logo.png" alt="" title="logo" width="123" height="106" class="aligncenter size-full wp-image-2872" /></a></p>
+<p style="text-align: justify;">É importante saber que minhas respostas podem não estar certas, então se você também fez a provinha e encontrou uma resposta diferente, deixe um comentário para podermos discutir e descobrir a resposta correta da questão; assim podemos trocar idéias e aprender mais ainda (afinal, errando também se aprende né?)! :)</p>
+<p style="text-align: justify;">Outra coisa que notei: cada login tem uma provinha diferente, então as informações que estão na minha provinha, podem estar diferente para outras pessoas.</p>
+<p style="text-align: justify;">Para explicar de maneira geral como organizei o meu projeto, eis um screenshot:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/08/gdd2011_loiane.png"><img class="aligncenter size-full wp-image-2841" title="gdd2011_loiane" src="{{ site.baseurl }}/images/assets/gdd2011_loiane.png" alt="" width="281" height="326" /></a>A classe GGD2001Quiz contém todos os método necessários para resolver a provinha. Os testes que fiz estão na classes TestGGD2001Quiz. A provinha fornece dois textos (A e B), e também fornece as respostas em relação ao texto A, então todos os test cases passaram com as respostas fornecidas pela provinha. E aí implementei a classe GenerateTextBAnswers para gerar as respostas para o Texto B.</p>
+<p style="text-align: justify;">Como os textos A e B são bem grandinhos, coloquei eles em dois arquivos (textA.txt e textB.txt). Aí para resolver as questões preciso ler os arquivos (cada um contém apenas uma linha).</p>
+<p style="text-align: justify;"><strong>Texto A:</strong></p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+ppj qmlltdnb fqd xljs zjc qnv hcqcgfv fvnwnmks pbjhdk fkhwjq mrbr dfc kdv wsgd xzhmfvl lhtfz smx dpxnm nsqdwx dvpg gwhtbzfn vqkx cfxbb hsh tgmxrgvp wxqqfw rztpvf sqtfj dmdvg bxqw zmc sbdxq vjk fzjn fqnp lcmt dqpt xznnhhsl cxsfnpsd fggjscv svhn ktlzdr xkxrmss vngbl ktqftht nnlvzt whjp mbl jhr fgnnrvfb nkjdbjb lmcdk ktx kmgfjgfp skn lqgtqkt tcznq fjmmrrhs gvdpsd dppfct jhwhx dnvznpx dzl jlcpktnw fnf mfghx nzncvqd bbl wgsg zjcr hckp ntz bqs skmcq wssf bkksf vvcpvwb lqv nwlqpc lbwjmsz hfpt gzg dflps ddhtkfwf rrtzskzt fcmg hdgn cklw pchqsc sbbncjt hzwhr jrjfxs kvh hbsbv qkvvl bxr ljzfdbp sltszt bhb srjzj nmdllhqw glgnck fblgxj cnckc khnlnb zbfcc wgdn jjncrl msx kmplvcw cxbgb nzl nhll clbt ghj jkhpml pgmgxrtx hdz lzpw mkgrgl slq rzljl jbdsjpvb fdgmk sbpz hpmb zdnpmdk phnnpjr hzlxxx swxqtf tdggdhf gqhsv fbnvls qlpxpb dxmbcw zjpk whxrjgxt wqqrv zpc bmlbmtb spc hpr rdd tvpxgxtl vrr bghsd lpr tjpngd flwpdv jgkzrl svf mcfzsjb fpz kcvxdwwz ftglgql rqshckm wlz dxnm crgwx vxtztj jzdtsb lnkwnl xwzfkv vkqrldlg ltgck grc tklm pzwxhfwh dchqj znwhrp pnsplpc xvtf hxpvnsg gqx dsqs fprfb qgmv zjzhpws bwjcn rmtsmfn kkqww lhrxdrx grzk qsgx fdjsgks ntxq bxqbgwz vxnn bxbqqf mdzpljbm rms rtq ftmpl mlqggth wtjhtlt kvwlzvd mvftlc ttcbjwdp wkdmwj gdgnrw jnpppd mbhncl vfdqc kpgg fgx gwdmwz fnrk rjwgzt cwzcdzsm ztfwpf ldgrkqmd dng jwvnxpr tdwtcxqg bwxhbxp csktz pzssgjlp hlhtvvks gdqbwg sxhww kmqgxf cxznm svbwkzlm xzdg rcnw gkkngj mhtcf pkkrw bvpk xpf dgzgzjd wmk mkdhsm qflrdln khgrvqn rclk llzhqdv vltnm knqfz kbpsf kmxxtl dcc sgrjnjf hbdhffd qdftrnm fbrkc cqgtmm lbz ktggkv hrhgn rqfrzh ptwwv nwcxcj gbtt pmzv vbf rlq tdgc lthqqtt krnfhdms mtdbfjrj ktp nbkvtsr rfscgmzx qxglx frhtw xdwkv shc cmhwdqf wvpb ggcnrnwb wczdjnwq jfsg vjxs snxbkkw qpjmpdpv ggcqmgwm nwwzgvjl tkbcs nwwwssx scz qfcf jbwdgvd xphmv djhgmkvv jcfgbfhn jfvkq dzk bhcz rxh svr pwf hdb xhct vxbjbgmt ljxz gpjzbgrk wvgpdc crhthwhz fhghwzpz ccmx kvlqn mnfttktc gxbsh qfvvfcw tbff zvbr zlb xsdsllgz krnkvl jvhfdltc gpsp fslvtfgc fhwxxtqc hnhc qnfgckz rswrxsj jmdf flg zdzjg wqnplvgq tczgrmp knr pvzcjs klshcdv npwdzqn tvprqcb bmvcg psqcgqrv klzbq xcwgbb mhtxv bqmjw lxnwtp fhjsbwr rzz bgjdbwbx ftdqwbv dgxdxd htfxg pzfnksb swq dwqm npfmqbt frngqrmb vlvfjfrr nqkqvr tqqqrm dfkkzs tvjn pxldtxfn kmjqj kxpbh jhpqnnmw lzq xgpzhhvt lvpmcb hngcht xvfnspr krf mdcwfmd glll plmrsb vzd vsbzqxg hndpxr mqsqdfmp trghlpx nplzsk qgfld fkq lqkx hqcmvwrc gfgjgph tnst rnhkw rqv ctmfkgcr szqmss nbvswchs mrqpw jgxcvkpq bwqk vtjvgvjs fxrj ppjtxrkg jrbzdrdk lmrnb szdcmk wznf jxznsg bgkddsm rmngkhms tqcvlds xczhht tmmsbgsd czvpcrll xfbjbrhv hmvp qwb hmvbr ltw mhmbvbd nmqncvvh vxbk tczgjs zkkjjsc qkr ttcc vhldzw wwgltg mvq rdnkkkq wwldz chbtgsjl gsmrmgmv rszzqpk pxgqjt cxd zcrnp knstqzd nxl lfbks zznfl mtzwdvp bhnw cqx tdxfcbh vnvfrsr tzt lllz xmjvwndh wgwm gvgvsdnp qgrgfb bwqmfcvl kmkg tvfhcfwx gbk fbvzjps ppblb bvfrhltr gbmpm rxwm vzjhh mxtvt fsmhtf zxnftg klzhmq whvrzxb pwtlfqp tkp gthgbnfq fvnjm rhr rghw vrnpbx wbfxn msqd fvqdzm tfxmvvk jhd chtjvspt sklslf ldhwwtl rcjwtmw wjvlc mwch klbjq gcgpwqrl cjpcht rsgpgn hvkmhsqp pzvjhwnr fdzzg sczwmqz vfbgqg ggz vwbb hrtxxf zxb pkwlg mpkws xxtk hnhgfn lrwhr flg qbwssqdv zgth qshd brbtpfk tcj kfqb skwzjt hhrrrds fhxznc jwkmxhb pgj ljmcds bnkwldn qtkghjpw qhkvdrpd mpcsl jmxqld vkxvlnt vmmg nprqbt sjjg mhrlvwt rbrwn ckb hdlv nwtlwm qwkfkgnk jwhc pfvjlprq qbz phhkn qctrthrs vzb rlmcmj bhvfksd kgd cqchsgw dhppv fjds nclcxzss scc pcjp llzpc pwv ngnvgjp dhvfcgk ppxpffr cmzk hmlwk fpx dhfkmsgm stgpgc znc fzfjfbtz wkzrsvls wsw lzhjxknm svlsjq qkdnlscr bhmgrhfp lmfw kntqq qxrdg wpwlhdgv jvfm dxg kvpr ljsh tcvx mcmlm fjbxzs dqqdx xsh sxr xksghjw kgfbkj prbtf hxvpbth qvkzf snzlrr glqcctr tkfl ctgspcg htzgr zrckgxck xjkk rhbcmhtm gljp cgvq gzmnzpbb bmjhllxr qnzhc nmbrblk fzn pxjzvq jftgq sbr klrwrzt slxhzhq srvvvc lgt dfrxv shdwh chqc gftfgvkv nndvrbr brrtmxzv plvxdj xcjh dfmxrpj tsnqvvd bmkmpt chcfr<br />
+[/code]</p>
+<p style="text-align: justify;"><strong>Texto B:</strong></p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+zsbb ffmqqzn gpcpl slnwbfk fhvpv pcpp fktvgjtq pwmd txg ltxgksj vfddqdp tdhjkh fzklb mlhpnw vdh vbkgpbgg dmpgr pskvkx zfwxbgr wfwt xvhfmpb swbvpt cdqx rmns rsfqww cjhjfcm nhdztjsb bqsfq fbh zskrp pdzg dglfssk xsgtn hmh nbh tmjn pjzd cxvx dgd djvgql tsjlh rpbcgms sbq bbqcv mvl hjh zhttp kmsnvmqp rdjpvf xwrtndnd bkqvxk rbqgmr kxnwdgqg wbbf gnrl gmksgwg jxwcq wkdhglb mpv lqpdh dbxnkb klhfgs ldsfgpnz wmxcd kcbvdrg hvgbxj cmmkwbqx trg ztwmls mbztlgwk pnvdrhf fpcp mlqjtgzh rwvvt lqnc hfw bmnfppmv zvbggrzl drdfzqb rbhfv zbrcnm fxrdwwh bgnlwr tlzdfznm hlvtwzfq rfslqqlf mth pngg btbzlzkm wkdjnr fvz qfhnfqh rzbwztnr gjjvdpm mzbd ljv dxs xbc wdv gfdm pjmdzb rcszs zrwqddm dpth mmvh xhxfbk gmcchd jtcq xnbzgll tqwjqcg cbgkwjgc pgnvvtr bvr mhnhktbr fhvxkgsf lhgh dskpmfbq nhrddc ckvgk rhfr bkjzgs gjrq xmwt dgp hsjg zctzpbc mxqmdgpb dsslbstd lgff rbkrt zpq srrrwpzf nfdtddp dgjhvsl xwnz qqtnjtv gskklxkw rwnvxjqd znhgbzm jzr ldwszrcm zlmwhjw qwsgvmwk jnz sgdr dbdm rgsjn dxbhlb gfrqtm ldbw hvq zgllvkzd dbpxzn vzcrr thtfl wcc sqzsfcwn qtfswfj ghhxzd wzbxsmvz mblcst wmxwngw pnkqh lzfkdrkf tthj sccvpzp jrjgv sprrl kcp nwrmdcg kbvj gdcd xnxpgjxv kxqtk dgfh qrgkrggg pnzzwm dflv rgp vbgmnmll shb dznlzlb zrs fbwqd rlblp fsl lpxbktg vrhbsrbh qqsd znq mtqh rsrpjllh nqstrx brxtcg nrmmq wdmrrvbx zcnkvnkr jbxrm qskjmpcs mpdtk trjbv bjfxm mmvxw jlncbj gqkdjnpt pkjgbf ndpljpq pgvrzdk qkdj kzbdccxh hxttlnc vxf bsls pfffd xpg gbzk lrlg rpqsh nrgsgqbk ptsfjnsn cpvg dclltm ctl vbwnkhg pcxpr xtmwc htwpkn nsjc jhqvvcpj ljwjx psg vxcswsgn lcf wjmxsstb jvksghb wzrzltsl scg gqwjv vgqgw dpmhsxxf spdg zgmz rvzf tztrv lvfj mprbnjtm qcbv fkxmxvj fxjkkxnl tmqvwv vbmw gdrbzg ccsjhs ssbqx ldplxps lbd tpnlbszm lwknpg fdppmrmd kch rktqd ssvnjwk gsjk pjhjx vfkpht lfpnt hwjsg ghzg mzvjw ffbm dxzn nlftbcn tcxggx qqqqqwb gwprs ktn zqx jxqmdr swl qtdrs dtvjwx klhrcfk gfvcmj cvjv krkd xmz gtr ptg cqqk qwfhjk fvhrx qskqfvfm ktwfg rphkqr kwxjxct lbqzbl bzs jppx vkhvw jcx zgtdrv mrvrj sfr hxflch zcbsj zvrkzx jxtgjmn zsmgw xtvzld dtpblt wrwnpr wnsmm ssf zxxt jnm ktmvkwp rqqztql rwbphms cvnm kmqd jqpqjm hzsnlbqw fnxhm vcjmszt dzw pbvs knt wcg kgwx vpzkwwx jklfswl zchwjx cjtfw zjfhv bpgqwfs jfhhqh rwshxfn shfvd pgcpp tmcz nqjvs dhtbvrmq dthxjvhv vqgn gmbwqwk grms ppthrb ppkmld whjkkkt sdd rcclt vxz pcnjw vdpgcgz qncsxj mprq hpj rgckm brzxf njsljl kscxmv hvn ghr jtppn xgnlcmdl vgl hhwx plnzdcrb rgwc dmqxbnr dctm gpntq qmvgc jgrljg sgjctv dltbbdb wzlhs hfzqf dhvpzgs xrrwtmjk qkcjh tgdlvcg wgbshf bncpcf nlwt btf sqvs psflr gxpsf lmwr nnnbjtt snhqqswk mswhpdp czl fsbxhzcf rrfjczf bkfkwkvn dkm xzq xkqkd vmhhj hcdtvgk hfmnp gjnmkcn wmzp mkjv dznrt bbxgqhg bbgvzzrl kqzkthdx wxmkcl ktfnkfd vfw klhbg cgm qhkmd gzpvnnkg qcwt xkhb bvgwr zgxscvr tsgchwmq mnrt wwb fhnvtzj bzhgwtr mvqj hwmchst vjz mfdwtlgz trgk mkkrfnz fdknhrtk djx cnf zrv twzxb bctfrnpl tfnjth qpbfcq hwk pmxjdzk zmr dsxnfctn vmjvxhl mcf zlthph dpf mlpfkpw hrlz vmdnsh jdls zwpqnfsf krxbk fhqc rrwt hdx ddz bqfmdvw znqm xfxqrcm thzctsxg twcr flxw rfqsdm dhgm ngwptn zrfwmkv xgd dnd wfgwwl gfhthbwj mvqbncg ctgx lhfgjvqt vjvhc sccxjgwh lsrcdx mwscxzx hhrdv hhvmd rsqxqr kcp dkpplfz qkmxckbx wrkqjf qcvldrs nwwmfjq bndtc xwl wcsrzn hxg flspqjb gjtqlbh hbdrfj pgkzv xqrmtcwm tfsjqx fzlgvz krrjdt mdhjcdj xpspdz stscgg vnghts khhwvdhr nqcpbrb ktd xmxfhc pfrm hxnvch mjcldq qsfxg lqtnpkk drvqbv bqmg gxp tdqzbsqh mrvjwtlb qgdcmxp dllt kdklt lshnjhtt lrmv rhvnmr lcj nfhngb hpkz xmh dnxsnj dlgngxr rwdjf hjpvxnwt dwv ldplvxpn rlcscmpf zpdglpg hkbl ssq kvblgw xpmrv tndw krwwskvq fjh jnt xkwpmsb jpfgs mfqftxdp zzm jnnctnq bclkkrtv tdlhv ljtwnv jbdwgpv pkw zwbdjqfm tvlft xkcckxd ldngdzqb jmp dtdtpl pbsn fpjq wjmcrdft pjtcnlww gxmnj cqhpgqx fdtgzh qcjp lxq grbfbwq ptrtpmnz xbkthnhk rpmgm mdksgj stwfcj qbcpprh pfxtdfc mvl ckdmlp dtk gbmjt dvppsrsq fvz zgr cmjnhsvf lwcmpnkf qcdkcq tzh plfbsnsp swwfbfbr wnxwjl drcghs pmxhflhd psffj lgcdnq htbj vkd kkkwn xrz kfft<br />
+[/code]</p>
+<p style="text-align: justify;">Então vamos ao código!</p>
+<h3 style="text-align: justify;">Questão 1: contar preposições</h3>
+<p style="text-align: justify;">A provinha dá algumas informações para a gente sobre como são formadas as preposições:</p>
+<blockquote><p>Esses pergaminhos estão no antigo e misterioso idioma Googlon. Após muitos anos de estudo, os linguistas já conhecem algumas características desse idioma.<br />
+Primeiramente, as letras Googlon são classificadas em dois grupos: as letras <strong>t, s, w, l e h</strong> são chamadas "letras tipo <strong>foo</strong>", enquanto que as demais são conhecidas como "letras tipo <strong>bar</strong>".<br />
+Os linguistas descobriram que as preposições em Googlon são as palavras de 3 letras que terminam numa letra tipo foo, mas onde não ocorre a letra <strong>m</strong>. Portanto, é fácil ver que existem <span style="text-decoration: underline;">80 preposições no Texto A</span>. E no Texto B, quantas preposições existem?</p></blockquote>
+<p style="text-align: justify;">Segue o código:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class GGD2011Quiz {</p>
+<p>	private final char[] FOO = { 't', 's', 'w', 'l', 'h' };<br />
+	private final String M = &quot;m&quot;;<br />
+	private final String SPACE = &quot; &quot;;</p>
+<p>	public String[] readFile(String fileName) throws IOException {</p>
+<p>		BufferedReader br = new BufferedReader(new FileReader(<br />
+				new File(fileName)));</p>
+<p>		String text = br.readLine();</p>
+<p>		return text.split(SPACE);<br />
+	}</p>
+<p>	public int countPrepositions(String fileName) throws IOException {</p>
+<p>		String[] words = readFile(fileName);</p>
+<p>		int total = 0;</p>
+<p>		for (String word : words) {</p>
+<p>			if (isPreposition(word)) {<br />
+				total++;<br />
+			}<br />
+		}</p>
+<p>		return total;<br />
+	}</p>
+<p>	private boolean isPreposition(String word) {</p>
+<p>		char lastChar;<br />
+		boolean isPreposition = false;</p>
+<p>		if (word.length() == 3) {</p>
+<p>			if (word.contains(M))<br />
+				return false;</p>
+<p>			lastChar = word.charAt(word.length() - 1);<br />
+			isPreposition = true;</p>
+<p>			for (char c : FOO) {</p>
+<p>				if (c == lastChar) {<br />
+					isPreposition = false;<br />
+				}<br />
+			}</p>
+<p>		}</p>
+<p>		return isPreposition;<br />
+	}<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Criei um método para ler o arquivo e retornar a lista de palavras to texto (readFile). Depois criei um método para encontrar a resposta desejada (countPrepositions) e também criei um método para verificar se uma palavra é preposição ou não de acordo com as regras dadas.</p>
+<p style="text-align: justify;">E fiz um teste usando JUnit e passou!</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class TestGGD2011Quiz {</p>
+<p>	private GGD2011Quiz ggd2001Quiz = new GGD2011Quiz();</p>
+<p>	private final String fileName = &quot;files/textA.txt&quot;;</p>
+<p>	@Test<br />
+    public void testCountPrepositions() throws IOException{</p>
+<p>        assertEquals(80, ggd2001Quiz.countPrepositions(fileName));<br />
+    }<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">E a resposta para o texto B é: 64.</p>
+<h3 style="text-align: justify;">Questão 2: contar verbos</h3>
+<p style="text-align: justify;">A segunda questão também dá algumas informações para descobrir se uma palavra é verbo ou não:</p>
+<blockquote><p>Um outro fato interessante descoberto pelos linguistas é que, no Googlon, os verbos sempre são palavras de <strong>8 ou mais letras</strong> que terminam numa letra tipo <strong>foo</strong>. Além disso, se um verbo <strong>começa com uma letra tipo foo</strong>, o verbo está em primeira pessoa.<br />
+Assim, lendo o Texto A, é possível identificar <span style="text-decoration: underline;">29 verbos no texto</span>, dos quais <span style="text-decoration: underline;">25 estão em primeira</span><br />
+<span style="text-decoration: underline;"> pessoa</span>.</p></blockquote>
+<p style="text-align: justify;">Nessa questão então vou apenas considerar as informações para verificar se é verbo. Por enquanto vou esquecer as informações sobre verbo em primeira pessoa.</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+	public int countVerbs(String fileName) throws IOException {</p>
+<p>		String[] words = readFile(fileName);</p>
+<p>		int total = 0;</p>
+<p>		for (String word : words) {</p>
+<p>			if (isVerb(word)) {<br />
+				total++;<br />
+			}<br />
+		}</p>
+<p>		return total;<br />
+	}</p>
+<p>	private boolean isVerb(String word) {</p>
+<p>		char lastChar;<br />
+		boolean isVerb = false;</p>
+<p>		if (word.length() &gt;= 8) {</p>
+<p>			lastChar = word.charAt(word.length() - 1);<br />
+			isVerb = false;</p>
+<p>			for (char c : FOO) {</p>
+<p>				if (c == lastChar) {<br />
+					isVerb = true;<br />
+				}<br />
+			}</p>
+<p>		}</p>
+<p>		return isVerb;<br />
+	}<br />
+[/code]</p>
+<p style="text-align: justify;">Semelhante ao método para contar preposições, fiz um método para contar os verbos e um método para verificar se uma palavra é verbo ou não de acordo com as regras.</p>
+<p style="text-align: justify;">Também um o teste:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class TestGGD2011Quiz {</p>
+<p>	private GGD2011Quiz ggd2001Quiz = new GGD2011Quiz();</p>
+<p>	private final String fileName = &quot;files/textA.txt&quot;;</p>
+<p>	@Test<br />
+    public void testCountVerbs() throws IOException{</p>
+<p>        assertEquals(29, ggd2001Quiz.countVerbs(fileName));<br />
+    }<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">E a resposta para o texto B é: 22.</p>
+<h3 style="text-align: justify;">Questão 3: contar verbos em primeira pessoa</h3>
+<p style="text-align: justify;">Na questão 2 já temos as informações para resolver a questão 3. Já sabemos se uma palavra é verbo ou não, agora só falta verificar se o verbo está em primeira pessoa ou não:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+	public int countVerbsFirstPerson(String fileName) throws IOException {</p>
+<p>		String[] words = readFile(fileName);</p>
+<p>		int total = 0;</p>
+<p>		for (String word : words) {</p>
+<p>			if (isVerbFirstPerson(word)) {<br />
+				total++;<br />
+			}<br />
+		}</p>
+<p>		return total;<br />
+	}</p>
+<p>	private boolean isVerbFirstPerson(String word) {</p>
+<p>		char firstChar;<br />
+		boolean isVerbFirstPerson = false;</p>
+<p>		if (isVerb(word)) {</p>
+<p>			isVerbFirstPerson = true;<br />
+			firstChar = word.charAt(0);</p>
+<p>			for (char c : FOO) {</p>
+<p>				if (c == firstChar) {<br />
+					isVerbFirstPerson = false;<br />
+				}<br />
+			}<br />
+		}</p>
+<p>		return isVerbFirstPerson;<br />
+	}<br />
+[/code]</p>
+<p style="text-align: justify;">Fiz o teste:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class TestGGD2011Quiz {</p>
+<p>	private GGD2011Quiz ggd2001Quiz = new GGD2011Quiz();</p>
+<p>	private final String fileName = &quot;files/textA.txt&quot;;</p>
+<p>	@Test<br />
+    public void testCountVerbsFirstPerson() throws IOException{</p>
+<p>        assertEquals(25, ggd2001Quiz.countVerbsFirstPerson(fileName));<br />
+    }<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">E a resposta para o texto B é: 14.</p>
+<h3 style="text-align: justify;">Questão 4: gerar vocabulário ordenado</h3>
+<blockquote><p>Um professor universitário utilizará os textos A e B para ensinar o Googlon aos alunos. Para ajudar os alunos a compreender o texto, esse professor precisa criar uma lista de vocabulário para cada texto, isto é, uma lista ordenada (e sem repetições) das palavras que aparecem em cada um dos textos.<br />
+Essas listas devem estar ordenadas e não podem conter repetições de palavras. No Googlon, assim como no nosso alfabeto, as palavras são ordenadas lexicograficamente, mas o problema é que no Googlon, a ordem das letras no alfabeto é diferente da nossa. O alfabeto Googlon, em ordem, é: <strong>zbcqlwhvrjmtnksgxfdp</strong>. Assim, ao fazer essas listas, o professor deve respeitar a ordem alfabética Googlon.<br />
+O professor preparou a lista de vocabulário para o <strong>Texto A</strong>:</p></blockquote>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+zznfl zbfcc zcrnp zlb zvbr zrckgxck zjzhpws zjc zjcr zjpk zmc ztfwpf znc znwhrp zkkjjsc zgth zxb zxnftg zdzjg zdnpmdk zpc bbl bqmjw bqs bwqmfcvl bwqk bwjcn bwxhbxp bhb bhcz bhvfksd bhmgrhfp bhnw bvfrhltr bvpk brbtpfk brrtmxzv bmlbmtb bmvcg bmjhllxr bmkmpt bnkwldn bkksf bghsd bgjdbwbx bgkddsm bxbqqf bxqbgwz bxqw bxr czvpcrll ccmx cqchsgw cqgtmm cqx clbt cwzcdzsm chbtgsjl chcfr chqc chtjvspt crhthwhz crgwx cjpcht cmzk cmhwdqf ctmfkgcr ctgspcg cnckc ckb cklw csktz cgvq cxznm cxbgb cxsfnpsd cxd cfxbb qbz qbwssqdv qctrthrs qlpxpb qwb qwkfkgnk qhkvdrpd qvkzf qmlltdnb qtkghjpw qnzhc qnv qnfgckz qkvvl qkr qkdnlscr qshd qsgx qgrgfb qgmv qgfld qxrdg qxglx qfcf qflrdln qfvvfcw qdftrnm qpjmpdpv lzq lzhjxknm lzpw lbz lbwjmsz lcmt lqv lqkx lqgtqkt llzhqdv llzpc lllz lhrxdrx lhtfz lvpmcb lrwhr ljzfdbp ljmcds ljsh ljxz lmcdk lmrnb lmfw ltw lthqqtt ltgck lnkwnl lgt lxnwtp lfbks ldhwwtl ldgrkqmd lpr wznf wbfxn wczdjnwq wqqrv wqnplvgq wlz wwldz wwgltg whvrzxb whjp whxrjgxt wvgpdc wvpb wjvlc wmk wtjhtlt wkzrsvls wkdmwj wsw wssf wsgd wgwm wgsg wgdn wxqqfw wpwlhdgv hzlxxx hzwhr hbsbv hbdhffd hcqcgfv hckp hqcmvwrc hlhtvvks hhrrrds hvkmhsqp hrhgn hrtxxf hmlwk hmvbr hmvp htzgr htfxg hnhc hnhgfn hngcht hndpxr hsh hxvpbth hxpvnsg hfpt hdz hdb hdlv hdgn hpr hpmb vzb vzjhh vzd vbf vqkx vlvfjfrr vltnm vwbb vhldzw vvcpvwb vrr vrnpbx vjk vjxs vmmg vtjvgvjs vnvfrsr vngbl vkqrldlg vkxvlnt vsbzqxg vxbjbgmt vxbk vxtztj vxnn vfbgqg vfdqc rzz rzljl rztpvf rbrwn rclk rcjwtmw rcnw rqv rqshckm rqfrzh rlq rlmcmj rhbcmhtm rhr rrtzskzt rjwgzt rmtsmfn rmngkhms rms rtq rnhkw rszzqpk rswrxsj rsgpgn rghw rxwm rxh rfscgmzx rdnkkkq rdd jzdtsb jbwdgvd jbdsjpvb jcfgbfhn jlcpktnw jwhc jwvnxpr jwkmxhb jhwhx jhr jhd jhpqnnmw jvhfdltc jvfm jrbzdrdk jrjfxs jjncrl jmxqld jmdf jnpppd jkhpml jgkzrl jgxcvkpq jxznsg jfvkq jftgq jfsg mbl mbhncl mcmlm mcfzsjb mqsqdfmp mlqggth mwch mhrlvwt mhmbvbd mhtcf mhtxv mvq mvftlc mrbr mrqpw mtzwdvp mtdbfjrj mnfttktc mkgrgl mkdhsm msqd msx mxtvt mfghx mdzpljbm mdcwfmd mpcsl mpkws tzt tbff tcznq tczgrmp tczgjs tcvx tcj tqcvlds tqqqrm tvjn tvfhcfwx tvprqcb tvpxgxtl trghlpx tjpngd tmmsbgsd ttcbjwdp ttcc tnst tkbcs tklm tkfl tkp tsnqvvd tgmxrgvp tfxmvvk tdwtcxqg tdgc tdggdhf tdxfcbh nzl nzncvqd nbvswchs nbkvtsr nclcxzss nqkqvr nwcxcj nwlqpc nwwzgvjl nwwwssx nwtlwm nhll nmbrblk nmqncvvh nmdllhqw ntz ntxq nnlvzt nndvrbr nkjdbjb nsqdwx ngnvgjp nxl nplzsk npwdzqn nprqbt npfmqbt kbpsf kcvxdwwz klzbq klzhmq klbjq klrwrzt klshcdv khnlnb khgrvqn kvlqn kvwlzvd kvh kvpr krnkvl krnfhdms krf kmqgxf kmjqj kmkg kmgfjgfp kmxxtl kmplvcw ktqftht ktlzdr ktggkv ktx ktp knqfz knr kntqq knstqzd kkqww kgfbkj kgd kxpbh kfqb kdv kpgg szqmss szdcmk sbbncjt sbr sbdxq sbpz scz sczwmqz scc sqtfj slq sltszt slxhzhq swq swxqtf shc shdwh svbwkzlm svlsjq svhn svr svf srvvvc srjzj sjjg smx stgpgc snzlrr snxbkkw sklslf skwzjt skmcq skn sgrjnjf sxhww sxr spc gzmnzpbb gzg gbmpm gbtt gbk gcgpwqrl gqhsv gqx glqcctr glll gljp glgnck gwhtbzfn gwdmwz ghj gvgvsdnp gvdpsd grzk grc gthgbnfq gkkngj gsmrmgmv ggz ggcqmgwm ggcnrnwb gxbsh gftfgvkv gfgjgph gdqbwg gdgnrw gpjzbgrk gpsp xzhmfvl xznnhhsl xzdg xczhht xcwgbb xcjh xljs xwzfkv xhct xvtf xvfnspr xjkk xmjvwndh xksghjw xkxrmss xsh xsdsllgz xgpzhhvt xxtk xfbjbrhv xdwkv xphmv xpf fzjn fzn fzfjfbtz fblgxj fbvzjps fbrkc fbnvls fcmg fqnp fqd flwpdv flg fhwxxtqc fhjsbwr fhghwzpz fhxznc fvqdzm fvnwnmks fvnjm frhtw frngqrmb fjbxzs fjmmrrhs fjds ftmpl ftglgql ftdqwbv fnrk fnf fkq fkhwjq fslvtfgc fsmhtf fgnnrvfb fggjscv fgx fxrj fdzzg fdjsgks fdgmk fpz fprfb fpx dzl dzk dcc dchqj dqqdx dqpt dwqm dhvfcgk dhfkmsgm dhppv dvpg djhgmkvv dmdvg dnvznpx dng dsqs dgzgzjd dgxdxd dxmbcw dxnm dxg dfc dflps dfrxv dfmxrpj dfkkzs ddhtkfwf dpxnm dppfct pzwxhfwh pzvjhwnr pzssgjlp pzfnksb pbjhdk pchqsc pcjp plvxdj plmrsb pwv pwtlfqp pwf phhkn phnnpjr pvzcjs prbtf pmzv ptwwv pnsplpc pkwlg pkkrw psqcgqrv pgj pgmgxrtx pxldtxfn pxjzvq pxgqjt pfvjlprq ppblb ppj ppjtxrkg ppxpffr<br />
+[/code]</p>
+<blockquote><p>Como seria a lista de vocabulário do Texto B?</p></blockquote>
+<p style="text-align: justify;">Essa questão é apenas sobre ordenação. Pegamos todas as palavras e ordenamos de acordo com a ordem dada.</p>
+<p style="text-align: justify;">Para resolver essa questão da maneira mais simples possível, criei uma nova constante no código:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class GGD2011Quiz {</p>
+<p>	private final String RULE = &quot;&lt;z&lt;b&lt;c&lt;q&lt;l&lt;w&lt;h&lt;v&lt;r&lt;j&lt;m&lt;t&lt;n&lt;k&lt;s&lt;g&lt;x&lt;f&lt;d&lt;p&quot;;</p>
+<p>	public List&lt;String&gt; createVocabulary(String fileName) throws IOException,<br />
+			ParseException {</p>
+<p>		String[] words = readFile(fileName);</p>
+<p>		RuleBasedCollator collator = new RuleBasedCollator(RULE);</p>
+<p>		Set&lt;String&gt; distinct = new HashSet&lt;String&gt;(Arrays.asList(words));</p>
+<p>		List&lt;String&gt; list = new ArrayList&lt;String&gt;();<br />
+		list.addAll(distinct);</p>
+<p>		Collections.sort(list, collator);</p>
+<p>		return list;<br />
+	}</p>
+<p>}<br />
+[/code]</p>
+<p style="text-align: justify;">O Java tem um recurso chamado <strong>RuleBaseCollator</strong> que nos permite resolver essa questão sem dor de cabeça. A constante que declarei contém as regras e apenas usei o sort do Java mesmo e apliquei as regras de ordenação.</p>
+<p style="text-align: justify;">Para maiores informação sobre o <strong>RuleBaseCollator</strong>, acesse a página da Oracle: <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/text/RuleBasedCollator.html" target="_blank">http://download.oracle.com/javase/1.4.2/docs/api/java/text/RuleBasedCollator.html</a></p>
+<p style="text-align: justify;">Um outro detalhes que também devemos ficar atentos é em relação á palavras distintas. Só podemos ordenar palavras não repetidas, por isso usei um Set para excluir as repetições.</p>
+<p style="text-align: justify;">O teste:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class TestGGD2011Quiz {</p>
+<p>	private GGD2011Quiz ggd2001Quiz = new GGD2011Quiz();</p>
+<p>	private final String fileName = &quot;files/textA.txt&quot;;</p>
+<p>	@Test<br />
+    public void testCreateVocabulary() throws IOException, ParseException{</p>
+<p>		List&lt;String&gt; l1 = Arrays.asList(ggd2001Quiz.readFile(&quot;files/vocabularyA.txt&quot;));<br />
+		List&lt;String&gt; l2 = ggd2001Quiz.createVocabulary(fileName);</p>
+<p>		ListAssert.assertEquals(l1, l2);<br />
+    }<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Esse ListAssert não é nativo o JUnit, pois o JUnit não compara item por item da lista, por isso também usei o JUnit-addons para facilitar o trabalho!</p>
+<p style="text-align: justify;">E a resposta gerada para o texto B:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+zzm zbrcnm zcbsj zchwjx zctzpbc zcnkvnkr zqx zlmwhjw zlthph zwbdjqfm zwpqnfsf zhttp zvbggrzl zvrkzx zrwqddm zrv zrs zrfwmkv zjfhv zmr ztwmls znq znqm znhgbzm zsbb zsmgw zskrp zgllvkzd zgr zgmz zgtdrv zgxscvr zxxt zfwxbgr zpq zpdglpg bzhgwtr bzs bbqcv bbgvzzrl bbxgqhg bclkkrtv bctfrnpl bqmg bqsfq bqfmdvw bvr bvgwr brzxf brxtcg bjfxm bmnfppmv btbzlzkm btf bncpcf bndtc bkqvxk bkjzgs bkfkwkvn bsls bgnlwr bpgqwfs czl cbgkwjgc ccsjhs cqqk cqhpgqx cvjv cvnm cjhjfcm cjtfw cmjnhsvf cmmkwbqx ctl ctgx cnf ckvgk ckdmlp cgm cxvx cdqx cpvg qbcpprh qcbv qcwt qcvldrs qcjp qcdkcq qqqqqwb qqtnjtv qqsd qwsgvmwk qwfhjk qhkmd qrgkrggg qmvgc qtfswfj qtdrs qncsxj qkcjh qkmxckbx qkdj qskqfvfm qskjmpcs qsfxg qgdcmxp qfhnfqh qpbfcq lzfkdrkf lbqzbl lbd lcj lcf lqtnpkk lqnc lqpdh lwcmpnkf lwknpg lhgh lhfgjvqt lvfj lrlg lrmv ljwjx ljv ljtwnv lmwr ltxgksj lshnjhtt lsrcdx lgcdnq lgff lxq lfpnt ldbw ldwszrcm ldngdzqb ldsfgpnz ldplvxpn ldplxps lpxbktg wzbxsmvz wzlhs wzrzltsl wbbf wcc wcsrzn wcg wwb whjkkkt wrwnpr wrkqjf wjmcrdft wjmxsstb wmzp wmxcd wmxwngw wnsmm wnxwjl wkdhglb wkdjnr wgbshf wxmkcl wfwt wfgwwl wdv wdmrrvbx hzsnlbqw hbdrfj hcdtvgk hlvtwzfq hwjsg hwmchst hwk hhwx hhvmd hhrdv hvq hvn hvgbxj hrlz hjh hjpvxnwt hmh htbj htwpkn hkbl hsjg hxttlnc hxnvch hxg hxflch hfzqf hfw hfmnp hdx hpj hpkz vzcrr vbwnkhg vbmw vbkgpbgg vbgmnmll vcjmszt vqgn vrhbsrbh vjz vjvhc vmhhj vmjvxhl vmdnsh vnghts vkhvw vkd vgqgw vgl vxz vxcswsgn vxf vfw vfkpht vfddqdp vdh vdpgcgz vpzkwwx rzbwztnr rbqgmr rbhfv rbkrt rcclt rcszs rqqztql rlblp rlcscmpf rwbphms rwvvt rwnvxjqd rwshxfn rwdjf rhvnmr rhfr rvzf rrwt rrfjczf rmns rktqd rsqxqr rsrpjllh rsfqww rgckm rgwc rgsjn rgp rfqsdm rfslqqlf rdjpvf rpbcgms rpqsh rphkqr rpmgm jzr jbxrm jbdwgpv jcx jqpqjm jlncbj jhqvvcpj jvksghb jrjgv jmp jtcq jtppn jnz jnm jnt jnnctnq jklfswl jgrljg jxqmdr jxwcq jxtgjmn jfhhqh jdls jpfgs jppx mzbd mzvjw mbztlgwk mblcst mcf mlqjtgzh mlhpnw mlpfkpw mwscxzx mhnhktbr mvqbncg mvqj mvl mrvrj mrvjwtlb mjcldq mmvh mmvxw mtqh mth mnrt mkjv mkkrfnz mswhpdp mxqmdgpb mfqftxdp mfdwtlgz mdhjcdj mdksgj mpv mprbnjtm mprq mpdtk tzh tztrv tcxggx tqwjqcg tlzdfznm twzxb twcr thzctsxg thtfl tvlft trjbv trg trgk tmcz tmqvwv tmjn tthj tndw tsjlh tsgchwmq tgdlvcg txg tfnjth tfsjqx tdqzbsqh tdlhv tdhjkh tpnlbszm nbh nqcpbrb nqjvs nqstrx nlwt nlftbcn nwwmfjq nwrmdcg nhrddc nhdztjsb nrmmq nrgsgqbk njsljl nnnbjtt nsjc ngwptn nfhngb nfdtddp ndpljpq kzbdccxh kbvj kcbvdrg kch kcp kqzkthdx klhbg klhrcfk klhfgs kwxjxct khhwvdhr kvblgw krwwskvq krrjdt krkd krxbk kmqd kmsnvmqp ktwfg ktmvkwp ktn ktfnkfd ktd knt kkkwn kscxmv kgwx kxqtk kxnwdgqg kfft kdklt sbq sccvpzp sccxjgwh scg sqzsfcwn sqvs slnwbfk swbvpt swl swwfbfbr shb shfvd srrrwpzf stwfcj stscgg snhqqswk ssbqx ssq ssvnjwk ssf sgjctv sgdr sfr sdd sprrl spdg gzpvnnkg gbzk gbmjt gqwjv gqkdjnpt gwprs ghzg ghhxzd ghr grbfbwq grms gjrq gjjvdpm gjtqlbh gjnmkcn gmbwqwk gmcchd gmksgwg gtr gnrl gsjk gskklxkw gxmnj gxp gxpsf gfhthbwj gfvcmj gfrqtm gfdm gdcd gdrbzg gpcpl gpntq xzq xbc xbkthnhk xqrmtcwm xwl xwrtndnd xwnz xhxfbk xvhfmpb xrz xrrwtmjk xmz xmwt xmh xmxfhc xtvzld xtmwc xnbzgll xnxpgjxv xkcckxd xkqkd xkwpmsb xkhb xsgtn xgnlcmdl xgd xfxqrcm xpmrv xpspdz xpg fzlgvz fzklb fbwqd fbh flspqjb flxw fhqc fhvxkgsf fhvpv fhnvtzj fvz fvhrx fjh fnxhm fktvgjtq fkxmxvj fsbxhzcf fsl fxrdwwh fxjkkxnl ffbm ffmqqzn fdtgzh fdknhrtk fdppmrmd fpcp fpjq dzw dznlzlb dznrt dbxnkb dbdm dbpxzn dclltm dctm dllt dltbbdb dlgngxr dwv dhvpzgs dhtbvrmq dhgm dvppsrsq drcghs drvqbv drdfzqb djvgql djx dmqxbnr dmpgr dthxjvhv dtvjwx dtk dtdtpl dtpblt dnxsnj dnd dkm dkpplfz dskpmfbq dsslbstd dsxnfctn dglfssk dgjhvsl dgfh dgd dgp dxzn dxbhlb dxs dflv ddz dpmhsxxf dpth dpf pbvs pbsn pcnjw pcxpr pcpp plnzdcrb plfbsnsp pwmd pjzd pjhjx pjmdzb pjtcnlww pmxhflhd pmxjdzk ptrtpmnz ptsfjnsn ptg pnzzwm pnvdrhf pnkqh pngg pkw pkjgbf pskvkx psg psflr psffj pgcpp pgvrzdk pgnvvtr pgkzv pfrm pfxtdfc pfffd pdzg ppthrb ppkmld<br />
+[/code]</p>
+<h3 style="text-align: justify;">Questão 5: contar números bonitos</h3>
+<blockquote>
+<p style="text-align: justify;">Mas como os Googlons escrevem números? Bem, no Googlon, as palavras também são números dados em base 20, onde cada letra é um dígito, e os dígitos são ordenados do menos significativo para o mais significativo (o inverso do nosso sistema). Ou seja, a primeira posição é a unidade, a segunda posição vale <strong>20</strong>, a terceira vale <strong>400</strong>, e assim por diante. Os valores das letras são dados pela ordem em que elas aparecem no alfabeto Googlon (que é diferente da nossa ordem, como vimos acima). Ou seja, a primeira letra do alfabeto Googlon representa o dígito 0, a segunda representa o dígito 1, e  assim por diante.<br />
+Por exemplo, a palavra <strong>ppj </strong>tem o valor numérico de <strong>3999</strong>.<br />
+OBS: os números nesse problema podem ser grandes, então se você está usando um tipo de dados de tamanho limitado, tenha cuidado com possíveis overflows.<br />
+Os Googlons consideram um número bonito se ele satizfaz essas duas propriedades:</p>
+<ul style="text-align: justify;">
+<li><strong>é maior ou igual a 823262</strong></li>
+<li><strong>é divisível por 5</strong></li>
+</ul>
+<p style="text-align: justify;">Ao consideramos o Texto A como uma lista de números (isto é, interpretando cada palavra como um número usando a convenção explicada acima), notamos que existem <span style="text-decoration: underline;">89 números bonitos distintos</span>.<br />
+E no Texto B, quantos números bonitos distintos existem?</p>
+</blockquote>
+<p style="text-align: justify;">Nessa questão devemos verificar se a palavra é um número bonito. Para isso, devemos primeiro transformar a palavra para um número na base 20 e depois verificar as regras dadas.</p>
+<p style="text-align: justify;">Para resolver essa questão, criei mais uma constante:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class GGD2011Quiz {</p>
+<p>	private final String ALPHABET = &quot;zbcqlwhvrjmtnksgxfdp&quot;;</p>
+<p>	public int countNumbers(String fileName) throws IOException {</p>
+<p>		String[] words = readFile(fileName);</p>
+<p>		final BigInteger val = new BigInteger(&quot;823262&quot;);<br />
+		final BigInteger five = new BigInteger(&quot;5&quot;);<br />
+		final BigInteger zero = new BigInteger(&quot;0&quot;);<br />
+		BigInteger num;<br />
+		Set&lt;BigInteger&gt; distincts = new HashSet&lt;BigInteger&gt;();</p>
+<p>		for (String word : words) {</p>
+<p>			num = getNumberBase20(word);</p>
+<p>			if (num.compareTo(val) &gt;= 0 &amp;&amp; num.mod(five).compareTo(zero) == 0) {<br />
+				distincts.add(num);<br />
+			}<br />
+		}</p>
+<p>		return distincts.size();<br />
+	}</p>
+<p>	private BigInteger getNumberBase20(String word) {</p>
+<p>		int base;<br />
+		char c;<br />
+		BigInteger result = new BigInteger(&quot;0&quot;);<br />
+		BigInteger aux = new BigInteger(&quot;20&quot;);<br />
+		BigInteger num = null;</p>
+<p>		for (int i = 0; i &lt; word.length(); i++) {</p>
+<p>			c = word.charAt(i);<br />
+			base = ALPHABET.indexOf(c);<br />
+			num = new BigInteger(String.valueOf(base));<br />
+			result = result.add(aux.pow(i).multiply(num));<br />
+		}</p>
+<p>		return result;<br />
+	}</p>
+<p>}<br />
+[/code]</p>
+<p style="text-align: justify;">Também criei um método para transformar uma palavra na base 20. Também é importante apenas contar os números distintos.</p>
+<p style="text-align: justify;">E como os números podem ser grandes, usei <em>BigInteger</em> em vez de <em>long</em>.</p>
+<p style="text-align: justify;">O teste:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="true"]<br />
+public class TestGGD2011Quiz {</p>
+<p>	private GGD2011Quiz ggd2001Quiz = new GGD2011Quiz();</p>
+<p>	private final String fileName = &quot;files/textA.txt&quot;;</p>
+<p>	@Test<br />
+    public void testCountNumbers() throws IOException{</p>
+<p>        assertEquals(64, ggd2001Quiz.countNumbers(fileName));<br />
+    }</p>
+<p>}<br />
+[/code]</p>
+<p style="text-align: justify;">E a resposta para o texto B é: 85.</p>
+<h3 style="text-align: justify;">Conclusão:</h3>
+<p style="text-align: justify;">Bem, essas foram minhas respostas. Não sei se estão certas, mas essa foi a maneira que resolvi.</p>
+<p style="text-align: justify;">Se você não concorda com as soluções ou resolveu a provinha em outra linguagem, deixe um comentário com o link para o seu código! :)</p>
+<p style="text-align: justify;">E o código completo que fiz está disponível no github: <a href="https://github.com/loiane/ggd2011" target="_blank">https://github.com/loiane/ggd2011</a></p>
+<p style="text-align: justify;">Bons códigos!</p>

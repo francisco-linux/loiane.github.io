@@ -1,0 +1,389 @@
+---
+layout: post
+title: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+date: 2011-08-02 07:00:22.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 4
+tags:
+- CNPJ
+- CPF
+- Ext JS 4
+- ExtJS 4
+- Form
+meta:
+   _edit_last: '1'
+   _aioseop_keywords: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+   _aioseop_title: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+   _aioseop_description: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+   _revision-control: a:1:{i:0;s:8:"defaults";}
+   _syntaxhighlighter_encoded: '1'
+   ratings_users: '0'
+   ratings_score: '0'
+   ratings_average: '0'
+   views: '14951'
+   _yoast_wpseo_metadesc: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+   _yoast_wpseo_metakeywords: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+   _yoast_wpseo_title: 'ExtJS 4 Form: Exemplo Campos CPF e CNPJ'
+language: pt-br
+tag: pt-br
+---
+<p style="text-align: justify;">Neste post vou mostrar como usar campos do tipo CPF ou CNPJ com validação em um Form do Ext JS 4.</p>
+<p style="text-align: justify;">Campos de CPF e CNPJ são bem comuns no uso de sistemas brasileiros. E sempre fazer aquele algoritmo de validação é um pouco chato. Existem 2 plugin/extensões do Ext JS 4 para facilitar a inserção desses campos em um form e ainda já faz a validação se o CPF ou CNPJ é válido.</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/extjs4_cpf_cnpj_loiane.png"><img class="aligncenter size-full wp-image-2797" title="extjs4_cpf_cnpj_loiane" src="{{ site.baseurl }}/images/assets/extjs4_cpf_cnpj_loiane.png" alt="" width="255" height="136" /></a></p>
+<p style="text-align: justify;">Show me the code!</p>
+<h1 style="text-align: justify;">Campo CPF:</h1>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('Ux.CpfField', {<br />
+ extend: 'Ext.form.field.Text',<br />
+ alias: ['widget.cpffield'],</p>
+<p> autocomplete: &quot;off&quot;,<br />
+ soNumero: false,<br />
+ maxLength: (this.soNumero) ? 11 : 14,</p>
+<p> initComponent: function(){<br />
+var me = this;</p>
+<p>Ext.apply(Ext.form.VTypes, {<br />
+ cpf: function(b, a) {<br />
+return me.validacpf(b);<br />
+ },<br />
+ cpfText: &quot;CPF inválido!&quot;<br />
+});</p>
+<p>Ext.apply(me, { vtype: 'cpf' });<br />
+me.callParent();<br />
+ },<br />
+ initEvents: function() {<br />
+var me = this;<br />
+var el = me.inputEl;</p>
+<p>el.on(&quot;keydown&quot;, me.stopEventFunction, me);<br />
+el.on(&quot;keyup&quot;, me.formatCPF, me);<br />
+el.on(&quot;keypress&quot;, me.stopEventFunction, me);<br />
+el.on(&quot;focus&quot;, me.startCPF, me);<br />
+el.on(&quot;blur&quot;, me.clearCPF, me);</p>
+<p>me.callParent();<br />
+ },<br />
+ KEY_RANGES: {<br />
+numeric: [48, 57],<br />
+padnum: [96, 105]<br />
+ },<br />
+ isInRange: function(a, b) {<br />
+return a &gt;= b[0] &amp;&amp; a &lt;= b[1];<br />
+ },<br />
+ stopEventFunction: function(a) {<br />
+var me = this;</p>
+<p>var b = a.getKey();<br />
+if (me.isInRange(b, me.KEY_RANGES.padnum)) {<br />
+ b -= 48;<br />
+}<br />
+if (((b &gt;= 41 &amp;&amp; b &lt;= 122) || b == 32 || b == 8 || b &gt; 186) &amp;&amp; (!a.altKey &amp;&amp; !a.ctrlKey)) {<br />
+ a.stopEvent();<br />
+}<br />
+ },<br />
+ startCPF: function() {<br />
+var me = this;<br />
+var a = me.inputEl.dom;</p>
+<p>if (a.value == &quot;&quot;) {<br />
+ a.value = &quot;&quot;;<br />
+ if (me.soNumero) {<br />
+a.value = &quot;00000000000&quot;;<br />
+ } else {<br />
+a.value = &quot;000.000.000-00&quot;;<br />
+ }<br />
+}<br />
+ },<br />
+ clearCPF: function() {<br />
+var me = this;<br />
+var a = me.inputEl.dom;<br />
+if (a.value == &quot;000.000.000-00&quot; || a.value == &quot;00000000000&quot;){<br />
+ a.value = &quot;&quot;;<br />
+ me.validate();<br />
+}<br />
+ },<br />
+ formatCPF: function(k) {<br />
+var me = this;<br />
+var j = k.getKey();<br />
+if (me.isInRange(j, me.KEY_RANGES.padnum)) {<br />
+ j -= 48;<br />
+}<br />
+var d = (me.isInRange(j, me.KEY_RANGES.numeric) ? String.fromCharCode(j) : &quot;&quot;);<br />
+var e = me.inputEl.dom;<br />
+var h = (e.value.replace(/\D/g, &quot;&quot;).substr(1) + d).replace(/\D/g, &quot;&quot;);<br />
+var a = h.length;<br />
+if (d == &quot;&quot; &amp;&amp; a &gt; 0 &amp;&amp; j == 8) {<br />
+ a--;<br />
+ h = h.substr(0, a);<br />
+ k.stopEvent();<br />
+}<br />
+if (e.maxLength + 1 &amp;&amp; a &gt;= e.maxLength) {<br />
+ return false;<br />
+}<br />
+if (a &lt; 11) {<br />
+ var b = &quot;&quot;;<br />
+ for (var c = 0; c &lt; 11 - a; c++) {<br />
+b = b + &quot;0&quot;;<br />
+ }<br />
+ h = b + h;<br />
+ a = 11;<br />
+}<br />
+if (me.soNumero) {<br />
+ e.value = h;<br />
+} else {<br />
+ var l = &quot;&quot;;<br />
+ l = h.substr(0, 3) + &quot;.&quot; + h.substr(3, 3) + &quot;.&quot; + h.substr(6, 3) + &quot;-&quot; + h.substr(9);<br />
+ e.value = l;<br />
+}<br />
+ },<br />
+ validacpf: function(e) {<br />
+if (e == &quot;&quot;)<br />
+ return true;<br />
+var b;<br />
+s = e.replace(/\D/g, &quot;&quot;);<br />
+if (parseInt(s, 10) == 0) {<br />
+ return false;<br />
+}</p>
+<p>var iguais = true;<br />
+for (i = 0; i &lt; s.length - 1; i++){<br />
+ if (s.charAt(i) != s.charAt(i + 1)){<br />
+iguais = false;<br />
+ }<br />
+}</p>
+<p>if (iguais)<br />
+ return false;</p>
+<p>var h = s.substr(0, 9);<br />
+var a = s.substr(9, 2);<br />
+var d = 0;<br />
+for (b = 0; b &lt; 9; b++) {<br />
+ d += h.charAt(b) * (10 - b);<br />
+}<br />
+if (d == 0) {<br />
+ return false;<br />
+}<br />
+d = 11 - (d % 11);<br />
+if (d &gt; 9) {<br />
+ d = 0;<br />
+}<br />
+if (a.charAt(0) != d) {<br />
+ return false;<br />
+}<br />
+d *= 2;<br />
+for (b = 0; b &lt; 9; b++) {<br />
+ d += h.charAt(b) * (11 - b);<br />
+}<br />
+d = 11 - (d % 11);<br />
+if (d &gt; 9) {<br />
+ d = 0;<br />
+}<br />
+if (a.charAt(1) != d) {<br />
+ return false;<br />
+}<br />
+return true;<br />
+ }<br />
+});<br />
+[/code]</p>
+<h1 style="text-align: justify;">Campo CNPJ:</h1>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.define('Ux.CnpjField', {<br />
+ extend: 'Ext.form.field.Text',<br />
+ alias: ['widget.cnpjfield'],</p>
+<p> autocomplete: &quot;off&quot;,<br />
+ soNumero: false,<br />
+ maxLength: (this.soNumero) ? 15 : 19,</p>
+<p> initComponent: function(){<br />
+var me = this;</p>
+<p>Ext.apply(Ext.form.VTypes, {<br />
+ cnpj: function(b, a) {<br />
+return me.verificaCNPJ(b);<br />
+ },<br />
+ cnpjText: &quot;CNPJ não é válido!&quot;<br />
+});</p>
+<p>Ext.apply(me, { vtype: 'cnpj' });</p>
+<p>me.callParent();<br />
+ },<br />
+ initEvents: function() {<br />
+var me = this;<br />
+var el = me.inputEl;</p>
+<p>el.on(&quot;keydown&quot;, me.stopEventFunction, me);<br />
+  el.on(&quot;keyup&quot;, me.formatCNPJ, me);<br />
+      el.on(&quot;keypress&quot;, me.stopEventFunction, me);<br />
+      el.on(&quot;focus&quot;, me.startCNPJ, me);<br />
+      el.on(&quot;blur&quot;, me.clearCNPJ, me);</p>
+<p>      me.callParent();<br />
+   },<br />
+   KEY_RANGES: {<br />
+      numeric: [48, 57],<br />
+      padnum: [96, 105]<br />
+   },<br />
+   isInRange: function(a, b) {<br />
+      return a &gt;= b[0] &amp;&amp; a &lt;= b[1];<br />
+   },<br />
+   stopEventFunction: function(a) {<br />
+      var me = this;</p>
+<p>      var b = a.getKey();<br />
+      if (me.isInRange(b, me.KEY_RANGES.padnum)) {<br />
+         b -= 48;<br />
+      }<br />
+      if (((b &gt;= 41 &amp;&amp; b &lt;= 122) || b == 32 || b == 8 || b &gt; 186) &amp;&amp; (!a.altKey &amp;&amp; !a.ctrlKey)) {<br />
+         a.stopEvent();<br />
+      }<br />
+   },<br />
+   startCNPJ: function() {<br />
+      var me = this;<br />
+      var a = me.inputEl.dom;</p>
+<p>      if (a.value == &quot;&quot;) {<br />
+         a.value = &quot;&quot;;<br />
+         if (me.soNumero) {<br />
+            a.value = &quot;000000000000000&quot;;<br />
+         } else {<br />
+            a.value = &quot;000.000.000/0000-00&quot;;<br />
+         }<br />
+      }<br />
+   },<br />
+   clearCNPJ: function() {<br />
+      var me = this;<br />
+      var a = me.inputEl.dom;<br />
+      if (a.value == &quot;000.000.000/0000-00&quot; || a.value == &quot;000000000000000&quot;){<br />
+         a.value = &quot;&quot;;<br />
+         me.validate();<br />
+      }<br />
+   },<br />
+   formatCNPJ: function(k) {<br />
+      var me = this;<br />
+      var e = me.inputEl.dom;</p>
+<p>      var j = k.getKey();<br />
+      if (me.isInRange(j, me.KEY_RANGES.padnum)) {<br />
+         j -= 48;<br />
+      }<br />
+      var d = (me.isInRange(j, me.KEY_RANGES.numeric) ? String.fromCharCode(j) : &quot;&quot;);<br />
+      var h = (e.value.replace(/\D/g, &quot;&quot;).substr(1) + d).replace(/\D/g, &quot;&quot;);</p>
+<p>      var a = h.length;<br />
+      if (d == &quot;&quot; &amp;&amp; a &gt; 0 &amp;&amp; j == 8) {<br />
+         a--;<br />
+         h = h.substr(0, a);<br />
+         k.stopEvent();<br />
+      }<br />
+      if (e.maxLength + 1 &amp;&amp; a &gt;= e.maxLength) {<br />
+         return false;<br />
+      }<br />
+      if (a &lt; 15) {<br />
+         var b = &quot;&quot;;<br />
+         for (var c = 0; c &lt; 15 - a; c++) {<br />
+            b = b + &quot;0&quot;;<br />
+         }<br />
+         h = b + h;<br />
+         a = 15;<br />
+      }<br />
+      if (me.soNumero) {<br />
+         e.value = h;<br />
+      } else {<br />
+         var l = &quot;&quot;;<br />
+         l = h.substr(0, 3) + &quot;.&quot; + h.substr(3, 3) + &quot;.&quot; + h.substr(6, 3) + &quot;/&quot; + h.substr(9, 4) + &quot;-&quot; + h.substr(13);<br />
+         e.value = l;<br />
+      }<br />
+   },<br />
+   verificaCNPJ: function(a) {<br />
+      var me = this;<br />
+      if (a == &quot;&quot;) return true;</p>
+<p>      a = a.replace(/\D/g, &quot;&quot;);<br />
+      a = a.replace(/^0+/, &quot;&quot;);<br />
+      if (parseInt(a, 10) == 0) {<br />
+         return false;<br />
+      } else {<br />
+         g = a.length - 2;<br />
+         if (me.testaCNPJ(a, g) == 1) {<br />
+            g = a.length - 1;<br />
+            if (me.testaCNPJ(a, g) == 1) {<br />
+               return true;<br />
+            } else {<br />
+               return false;<br />
+            }<br />
+         } else {<br />
+            return false;<br />
+         }<br />
+      }<br />
+   },<br />
+   testaCNPJ: function(a, d) {<br />
+      var b = 0;<br />
+      var e = 2;<br />
+      var c;<br />
+      for (f = d; f &gt; 0; f--) {<br />
+         b += parseInt(a.charAt(f - 1),10) * e;<br />
+         if (e &gt; 8) {<br />
+            e = 2;<br />
+         } else {<br />
+            e++;<br />
+         }<br />
+      }<br />
+      b %= 11;<br />
+      if (b == 0 || b == 1) {<br />
+         b = 0;<br />
+      } else {<br />
+         b = 11 - b;<br />
+      }<br />
+      if (b != parseInt(a.charAt(d),10)) {<br />
+         return (0);<br />
+      } else {<br />
+         return (1);<br />
+      }<br />
+   }<br />
+});<br />
+[/code]</p>
+<h1 style="text-align: justify;">Arquivo da Aplicação - Form:</h1>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="25,29"]<br />
+Ext.Loader.setConfig({enabled: true});</p>
+<p>Ext.require([<br />
+	'Ux.CpfField',<br />
+	'Ux.CnpjField'<br />
+]);</p>
+<p>Ext.onReady(function() {</p>
+<p>	Ext.create('Ext.form.Panel', {<br />
+		renderTo: Ext.getBody(),<br />
+		title: 'Exemplo Campos CPF e CNPJ',<br />
+		width: 250,<br />
+		bodyPadding: 5,<br />
+		fieldDefaults: {<br />
+			labelAlign: 'left',<br />
+			labelWidth: 50,<br />
+			anchor: '100%',<br />
+			msgTarget: 'under'<br />
+		},<br />
+		defaultType: 'textfield',<br />
+		items: [{<br />
+			fieldLabel: 'CPF',<br />
+			name: 'campoCPF',<br />
+			xtype: 'cpffield'<br />
+		},{<br />
+			fieldLabel: 'CNPJ',<br />
+			name: 'campoCNPJ',<br />
+			xtype: 'cnpjfield'<br />
+		}]<br />
+	});</p>
+<p>});<br />
+[/code]</p>
+<h1 style="text-align: justify;">HTML:</h1>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;ext4/resources/css/ext-all.css&quot; /&gt;<br />
+    &lt;style type=&quot;text/css&quot;&gt;<br />
+	    body {<br />
+			padding:20px;<br />
+		}<br />
+    &lt;/style&gt;</p>
+<p>    &lt;script type=&quot;text/javascript&quot; src=&quot;ext4/ext-all.js&quot;&gt;&lt;/script&gt;<br />
+    &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<h2 style="text-align: justify;">Estrutura de diretórios do exemplo:</h2>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/07/extjs4_cpf_cnpj_loiane_01.png"><img class="aligncenter size-full wp-image-2798" title="extjs4_cpf_cnpj_loiane_01" src="{{ site.baseurl }}/images/assets/extjs4_cpf_cnpj_loiane_01.png" alt="" width="165" height="191" /></a></p>
+<p style="text-align: justify;">Obs.: usei um projeto js no Eclipse para desenvolver esse exemplo.</p>
+<h2 style="text-align: justify;">Download do código fonte:</h2>
+<p style="text-align: justify;"><strong>Github</strong>:<a href="https://github.com/loiane/extjs4-cpf-cnpj-fields" title="https://github.com/loiane/extjs4-cpf-cnpj-fields" target="_blank">https://github.com/loiane/extjs4-cpf-cnpj-fields</a></p>
+<p style="text-align: justify;"><strong>Google Code</strong>:<a href="https://code.google.com/p/extjs4-cpf-cnpj-fields/downloads/list" title="https://code.google.com/p/extjs4-cpf-cnpj-fields/downloads/list" target="_blank">https://code.google.com/p/extjs4-cpf-cnpj-fields/downloads/list</a></p>
+<blockquote><p><em><strong>Disclaimer</strong></em>: <em>não sou a autora desses plugins de CPF e CNPJ; apenas postei os exemplos de como usá-los aqui no blog. Quaisquer dúvidas em relação ao código do plugin, compatibilidade com outras versões do Ext JS, etc, favor perguntar no fórum do ExtJS BR nos seguintes tópicos:</em></p>
+<p><em>CPF: <a href="http://www.extjs.com.br/forum/index.php?topic=5125.0" target="_blank">http://www.extjs.com.br/forum/index.php?topic=5125.0</a></em></p>
+<p><em>CNPJ: <a href="http://www.extjs.com.br/forum/index.php?topic=5124.0" target="_blank">http://www.extjs.com.br/forum/index.php?topic=5124.0</a></em></p></blockquote>
+<p style="text-align: justify;">Bons códigos!</p>
