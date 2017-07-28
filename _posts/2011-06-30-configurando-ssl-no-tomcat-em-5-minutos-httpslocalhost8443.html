@@ -1,0 +1,128 @@
+---
+layout: post
+title: Configurando SSL no Tomcat em 5 minutos (https://localhost:8443)
+date: 2011-06-30 07:00:05.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Tomcat
+- Tutoriais
+tags:
+- https://localhost:8443
+- SSL
+- Tomcat
+meta:
+_thumbnail_id: '2577'
+_edit_last: '1'
+_revision-control: a:1:{i:0;s:8:"defaults";}
+_aioseop_keywords: SSL, Tomcat, https://localhost:8443
+_aioseop_description: Configurando SSL no Tomcat em 5 minutos (https://localhost:8443)
+_aioseop_title: Configurando SSL no Tomcat em 5 minutos (https://localhost:8443)
+_syntaxhighlighter_encoded: '1'
+ratings_users: '0'
+ratings_score: '0'
+ratings_average: '0'
+views: '32839'
+_yoast_wpseo_metadesc: Configurando SSL no Tomcat em 5 minutos (https://localhost:8443)
+_yoast_wpseo_metakeywords: SSL, Tomcat, https://localhost:8443
+_yoast_wpseo_title: Configurando SSL no Tomcat em 5 minutos (https://localhost:8443)
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p>Este tutorial em como objetivo mostrar como configurar <strong>SSL </strong>(acesso <strong>https://localhost:8443</strong>) no <strong>Tomcat </strong>em 5 minutos.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/06/apache-tomcat.png"><img class="aligncenter size-full wp-image-2577" title="apache-tomcat" src="{{ site.baseurl }}/images/assets/apache-tomcat.png" alt="" width="208" height="207" /></a></p>
+<p>Para esse tutorial, você irá precisar:</p>
+<ul>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java SDK</a> (usei versão 6 para esse tutorial)</li>
+<li><a href="http://tomcat.apache.org/" target="_blank">Tomcat </a>(usei versão 7 tutorial)</li>
+</ul>
+<p>A configuração consiste em 3 passos básicos:</p>
+<ol>
+<li>Criar um arquivo <strong>keystore </strong>usando Java</li>
+<li>Configurar o Tomcat para usar o keystore</li>
+<li>Testar</li>
+<li>(Bônus) Configurar sua web app para usar SSL (acesso através https://localhost:8443/suaApp)</li>
+</ol>
+<h2>1 - Criando um arquivo keystore usando Java</h2>
+<p>Abra o terminal no seu computador e digite:</p>
+<p><strong>Windows</strong>:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+cd %JAVA_HOME%/bin<br />
+[/code]</p>
+<p><strong>Linux or Mac OS</strong>:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+cd $JAVA_HOME/bin<br />
+[/code]</p>
+<p>O $JAVA_HOME no Mac está localizado em "<strong>/System/Library/Frameworks/JavaVM.framework/Versions/{your java version}/Home/</strong>"</p>
+<p>Você irá mudar o diretório corrente para o diretório de instalação Java para a pasta <strong>bin</strong>. Dentro da pasta bin existe um arquivo chamado <strong>keytool</strong>. Esse arquivo é responsável por gerar o arquivo keystore.</p>
+<p>Vamos agora gerar o keystore. Digite no terminal:</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+keytool -genkey -alias tomcat -keyalg RSA<br />
+[/code]</p>
+<p>Quando der "Enter" no comando acima, irá aparecer algumas perguntas. Primeiro irá pedir para criar uma senha (escolhi "password" mesmo):</p>
+<p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+loiane:bin loiane$ keytool -genkey -alias tomcat -keyalg RSA<br />
+Enter keystore password:password<br />
+Re-enter new password: password<br />
+What is your first and last name?<br />
+[Unknown]:Loiane Groner<br />
+What is the name of your organizational unit?<br />
+[Unknown]:home<br />
+What is the name of your organization?<br />
+[Unknown]:home<br />
+What is the name of your City or Locality?<br />
+[Unknown]:Sao Paulo<br />
+What is the name of your State or Province?<br />
+[Unknown]:SP<br />
+What is the two-letter country code for this unit?<br />
+[Unknown]:BR<br />
+Is CN=Loiane Groner, OU=home, O=home, L=Sao Paulo, ST=SP, C=BR correct?<br />
+[no]:yes</p>
+<p>Enter key password for<br />
+	(RETURN if same as keystore password):password<br />
+Re-enter new password: password<br />
+[/code]</p>
+<p>O arquivo .keystore será criado no seu diretório home. No WIndows será algo do tipo C:\Documents and Settings\&lt;username&gt;; no Mac será /Users/&lt;username&gt; e no Linux será /home/&lt;username&gt;.</p>
+<h2>2 - Configurando o Tomcat para usar o keystore</h2>
+<p>Abra o diretório de instalação do Tomcat e abra a pasta <strong><em>conf </em></strong>. Dentro dessa pasta irá encontrar um arquivo chamado <em><strong>server.xml</strong></em>. Vamos editar esse arquivo.</p>
+<p>Ache a seguinte declaração:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;!--<br />
+&lt;Connector port=&quot;8443&quot; protocol=&quot;HTTP/1.1&quot; SSLEnabled=&quot;true&quot;<br />
+maxThreads=&quot;150&quot; scheme=&quot;https&quot; secure=&quot;true&quot;<br />
+clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; /&gt;<br />
+--&gt;<br />
+[/code]</p>
+<p>Descomente o código acima e altere para ficar como abaixo - detalhe para o diretório onde está o keystore e a senha que setou quando criou o keystore:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="3,4,5"]<br />
+Connector SSLEnabled=&quot;true&quot; acceptCount=&quot;100&quot; clientAuth=&quot;false&quot;<br />
+disableUploadTimeout=&quot;true&quot; enableLookups=&quot;false&quot; maxThreads=&quot;25&quot;<br />
+port=&quot;8443&quot; keystoreFile=&quot;/Users/loiane/.keystore&quot; keystorePass=&quot;password&quot;<br />
+protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; scheme=&quot;https&quot;<br />
+secure=&quot;true&quot; sslProtocol=&quot;TLS&quot; /&gt;<br />
+[/code]</p>
+<p>Note que adicionamos as declarações <em><strong>keystoreFile</strong></em>, <em><strong>keystorePass </strong></em>e mudamos o <em><strong>protocol </strong></em>.</p>
+<h2>3 - Vamos testar!</h2>
+<p>Inicie o serviço do Tomcar e tente acessar <span style="text-decoration: underline;"><strong>https://localhost:8443</strong></span>. Deverá abrir a homepage local do Tomcat.</p>
+<p>Note também que se tentar acessar pela porta padrão 8080 deverá funcionar também:<span style="text-decoration: underline;"><strong>http://localhost:8080</strong></span></p>
+<h2>4 - BÔNUS - Configurando sua web app para usar SSL (acesso através https://localhost:8443/suaApp)</h2>
+<p>Para forçar sua aplicação web a funcionar com SSL, adicione o código abaixo no arquivo <strong>web.xml</strong> da sua aplicação (antes do final da tag <em>web-app</em>):</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;security-constraint&gt;<br />
+	&lt;web-resource-collection&gt;<br />
+		&lt;web-resource-name&gt;securedapp&lt;/web-resource-name&gt;<br />
+		&lt;url-pattern&gt;/*&lt;/url-pattern&gt;<br />
+	&lt;/web-resource-collection&gt;<br />
+	&lt;user-data-constraint&gt;<br />
+		&lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;<br />
+	&lt;/user-data-constraint&gt;<br />
+&lt;/security-constraint&gt;<br />
+[/code]</p>
+<p>A tag <em><strong>url pattern</strong></em> tem o valor <strong>/*</strong> para que qualquer página ou arquivo da sua aplicação seja seguro (só poderá ser acessado através de <strong>https</strong>). A tag <em><strong>transport-guarantee</strong></em> foi setado como <strong>CONFIDENTIAL </strong>para fazer com que a aplicação seja acessada através de <strong>SSL</strong>.</p>
+<p>Se desejar desativar o acesso SSL da aplicação, não precisa deletar o código do arquivo web.xml, basta trocar o <strong>CONFIDENTIAL</strong> para <strong>NONE</strong>.</p>
+<p><em><strong>Referência</strong></em>: <a href="http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html">http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html</a> (o tutorial da página do Tomcat é um pouco confuso, por isso decidi escrever esse).</p>
+<p>Bons códigos!</p>
