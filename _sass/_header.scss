@@ -1,8 +1,14 @@
 /*
  * HEADER
  */
+
+$syntax-hue:          220;
+$syntax-saturation:   13%;
+$syntax-brightness:   18%;
+$syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
+
 .banner {
-  background: #3a4250;
+  background: $syntax-bg;
   position: fixed;
   z-index: 9999;
   top: 0;
@@ -19,7 +25,7 @@
 .header {
   padding: 30px 0;
   color: #fff;
-  background: #3a4250;
+  background: $syntax-bg;
   z-index: 9999;
   position: fixed;
   top: 0;
@@ -136,4 +142,9 @@
 .copy-span {
   margin: 0 10px 0 0;
   padding-bottom: 7px;
+}
+
+.nav-span {
+  position: absolute;
+  top: 12px;
 }

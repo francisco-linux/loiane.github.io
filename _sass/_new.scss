@@ -1,3 +1,8 @@
+$syntax-hue:          220;
+$syntax-saturation:   13%;
+$syntax-brightness:   18%;
+$syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
+
 .post-card {
   background: #fff;
   border: 1px solid #d9e1ef;
@@ -75,7 +80,7 @@
   font-family: 'tt-medium';
   &__external {
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 20px;
     width: 15px;
     opacity: .2;
@@ -89,16 +94,16 @@
     padding: 5px 20px;
     font-size: 16px;
     transition: all .2s ease;
-    background: #3a4250;
+    background: $syntax-bg;
     &--active {
-      background: darken(#3a4250, 4%);
+      background: lighten($syntax-bg, 4%);
     }
     img {
       margin: 0 10px 0 0;
     }
     &:hover {
       color: #fff;
-      background: darken(#3a4250, 2%);
+      background: lighten($syntax-bg, 2%);
     }
   }
 }
@@ -143,7 +148,7 @@
     width: 100%;
     input.email {
       -webkit-appearance: none;
-      background: rgba(0,0,0,0.1);
+      background: lighten($syntax-bg, 4%);
       outline: 0;
       width: 100%;
       margin: 0;
@@ -323,7 +328,7 @@
     float: left;
     padding: 15px 0;
     text-align: center;
-    width: 25%;
+    width: 20%;
     transition: all .2s ease;
     @media screen and (max-width: 600px) {
       width: 50%;

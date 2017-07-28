@@ -11,7 +11,7 @@
   <nav class="nav">
     <a href="/" class="nav__link{% if page.url == '/' %} nav__link--active{% endif %}">
       <i class="mdi mdi-file-document-box mdi-24px blog_link"></i>
-      Blog
+      <span class="nav-span">Blog</span>
     </a>
     <!-- a href="/about" class="nav__link{% if page.url == '/about' %} nav__link--active{% endif %}">
       <img src="{{ site.baseurl }}/img/nav/about.svg" alt="">
@@ -24,12 +24,12 @@
     <a href="//www.packtpub.com/books/info/authors/loiane-groner" target="_blank" class="nav__link{% if page.url == '/books' %} nav__link--active{% endif %}">
       <i class="mdi mdi-library mdi-24px books_link"></i>
       <i class="mdi mdi-open-in-new nav__external"></i>
-      My Books
+      <span class="nav-span">My Books</span>
     </a>
     <a href="//loiane.training/" target="_blank" class="nav__link{% if page.url == '/courses' %} nav__link--active{% endif %}">
       <i class="mdi mdi-video mdi-24px courses_link"></i>
       <i class="mdi mdi-open-in-new nav__external"></i>
-      Courses (Pt-br)
+      <span class="nav-span">Courses (Pt-br)</span>
     </a>
   </nav>
   <div class="header__links">
@@ -60,7 +60,7 @@
 </header>
 <div class="banner">
   <form class="search">
-    <input type="text" placeholder="Search posts">
+    <input type="text" placeholder="Search...">
     <ul></ul>
   </form>
 </div>
