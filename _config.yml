@@ -21,5 +21,12 @@ encoding: "utf-8"
 markdown: kramdown
 highlighter: rouge
 
+# html minify
+compress_html:
+  clippings: all
+  comments: all
+  endings: []
+  profile: false
+
 # Gems
 plugins: [jekyll-paginate]
