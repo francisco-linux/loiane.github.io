@@ -1,0 +1,88 @@
+---
+layout: post
+title: Validação de documentos XML com Schema – Introdução ao XML - Parte VIII
+date: 2009-04-17 09:43:33.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Tutoriais
+- XML
+tags:
+- DTD
+- Schema
+- Tutoriais
+- XML
+meta:
+aktt_notify_twitter: 'no'
+syntaxhighlighter_encoded: '1'
+_edit_last: '1'
+_aioseop_keywords: xml schema, exemplo schema, shema, construir schema
+_aioseop_description: "Vimos no post anterior como criar um DTD. Como a linguagem
+do DTD é diferente do XML, algumas pessoas têm dificuldade de compreendê-la. O
+XML Schema é uma linguagem baseada na linguagem XML, e é muito mais poderosa e
+muito mais precisa que o DTD. Com o XML Schema você pode, além de especificar
+a sintaxe (como no DTD), você pode: especificar o tipo de dado de qualquer elemento,
+utilizar vários namespaces, criar tipos de dados simples e complexos, especificar
+o número mínimo e o número máximo de vezes que um elemento pode aparecer no documento,
+criar tipo de listas, restringir os valores de um elemento, e muito mais.\r\n\r\nO
+objetivo deste post é mostrar um overview dessa poderosa linguagem, que é bem
+utilizada para validação de documentos XML."
+_aioseop_title: Validação de documentos XML com Schema – Introdução ao XML
+series_part: '8'
+gwo4wp: a:4:{s:7:"enabled";s:0:"";s:14:"control_script";s:0:"";s:15:"tracking_script";s:0:"";s:17:"conversion_script";s:0:"";}
+_sexybookmarks_shortUrl: http://tinyurl.com/3ak8ke3
+_sexybookmarks_permaHash: 6a2020f820905b96955d0763fb5917cb
+views: '23564'
+_yoast_wpseo_metakeywords: xml schema, exemplo schema, shema, construir schema
+_yoast_wpseo_metadesc: 'Vimos no post anterior como criar um DTD. Como a linguagem
+do DTD é diferente do XML, algumas pessoas têm dificuldade de compreendê-la. O
+XML Schema é uma linguagem baseada na linguagem XML, e é muito mais poderosa e
+muito mais precisa que o DTD. Com o XML Schema você pode, além de especificar
+a sintaxe (como no DTD), você pode: especificar o tipo de dado de qualquer elemento,
+utilizar vários namespaces, criar tipos de dados simples e complexos, especificar
+o número mínimo e o número máximo de vezes que um elemento pode aparecer no documento,
+criar tipo de listas, restringir os valores de um elemento, e muito mais. O objetivo
+deste post é mostrar um overview dessa poderosa linguagem, que é bem utilizada
+para validação de documentos XML.'
+_yoast_wpseo_title: Validação de documentos XML com Schema – Introdução ao XML
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Vimos no post anterior como criar um DTD. Como a linguagem do DTD é diferente do XML, algumas pessoas têm dificuldade de compreendê-la. O XML Schema é uma linguagem baseada na linguagem XML, e é muito mais poderosa e muito mais precisa que o DTD. Com o XML Schema você pode, além de especificar a sintaxe (como no DTD), você pode: especificar o tipo de dado de qualquer elemento, utilizar vários namespaces, criar tipos de dados simples e complexos, especificar o número mínimo e o número máximo de vezes que um elemento pode aparecer no documento, criar tipo de listas, restringir os valores de um elemento, e muito mais.</p>
+<p style="text-align: justify;">O objetivo deste post é mostrar um overview dessa poderosa linguagem, que é bem utilizada para validação de documentos XML.</p>
+<p style="text-align: justify;">Bem, vamos considerar o XML abaixo como exemplo para o post:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-395" title="schema8" src="{{ site.baseurl }}/images/assets/schema8.png" alt="schema8" width="530" height="430" /></p>
+<p style="text-align: justify;">Existem diferentes maneiras de se ecrever um XML Schema. Vamos considerar a maneira que é mais similar para quem já conhece a linguagem utilizada no DTD.<br />
+Vamos começar com a declaração dos elementos e atributos que encontramos no XML acima.</p>
+<p style="text-align: justify;">Os elementos que existem no XML de exemplo são:biblioteca, livro, isbn, titulo, autor, dataNascimento, falecimento, personagem, nome, caracteristica. E os atributos são: id, disponivel e ling.</p>
+<p style="text-align: justify;">Antes de começarmos a definir o Schema, precisamos entender quais são os tipos de elementos que existem: 'empty' (vazio) quando nenhum elemento filho ou texto são esperado, 'simple' (simples) quando são aceitos apenas texto, 'complex' (complexo) quando apenas subelementos são aceitos e 'mixed' (misto) quando tanto texto quanto subelementos são aceitos.<br />
+O XML Schema considera os elementos que tem apenas texto e nenhum atributo como tipo simples, enquanto todos os outros elementos são tipos complexos.</p>
+<p style="text-align: justify;">Para definir um elemento, utilizamos um xs:element (definição), incluindo diretamente no elemento xs:schema do documento XML Schema:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-396" title="schema1" src="{{ site.baseurl }}/images/assets/schema1.png" alt="schema1" width="427" height="84" /></p>
+<p style="text-align: justify;">O valor usado para referenciar o tipo do elemento (xs:string) possui como prefixo xs, que é o prefixo associado com o W3C XML Schema.</p>
+<p style="text-align: justify;">Vamos agora definir todos os tipos simples do XML utilizado como exemplo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-397" title="schema2" src="{{ site.baseurl }}/images/assets/schema2.png" alt="schema2" width="482" height="168" /></p>
+<p style="text-align: justify;">Vamos agora definir o elemento titulo. Como este possui um atributo, é um tipo complexo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-398" title="schema3" src="{{ site.baseurl }}/images/assets/schema3.png" alt="schema3" width="419" height="139" /></p>
+<p style="text-align: justify;">Traduzindo o que foi escrito acima: o elementos titulo é um tipo complexo que possui conteúdo simples obtido pela extensão do tipo pré-definido xs:string, e um atributo lang que já foi declarado no schema.</p>
+<p style="text-align: justify;">Os outros elementos (biblioteca, livro, autor e personagem) são tipos complexos com conteúdos de tipos complexos. Estes elementos são definidos pela sequência de elementos e atributos que os compõe.</p>
+<p style="text-align: justify;">O elemento biblioteca é definido como:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-399" title="schema4" src="{{ site.baseurl }}/images/assets/schema4.png" alt="schema4" width="549" height="114" /></p>
+<p style="text-align: justify;">A definição acima pode ser lida como: o elemento biblioteca é um tipo complexo composto por uma sequência de 1 ou mais (maxOccurs) elementos livro.</p>
+<p style="text-align: justify;">Agora vamos declarar o elemento autor, que possui um atributo que podemos considerar como uma data e opcional:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-400" title="schema5" src="{{ site.baseurl }}/images/assets/schema5.png" alt="schema5" width="489" height="154" /></p>
+<p style="text-align: justify;">Isso significa que o elemento autor é um tipo complexo composto de uma sequência de três elementos (nome, DataNascimnento e falecimento), além do atributo id. O elemento falecimento é opcional, pode ocorrer nenhuma vez (minOccurs="0").</p>
+<p style="text-align: justify;">Os atributos precisam ser definidos pós a sequência. Os outros elementos, como livro e personagem, podem ser definidos da mesma maneira.<br />
+O nosso schema completo pode ser visto abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-401" title="schema7" src="{{ site.baseurl }}/images/assets/schema7.png" alt="schema7" width="734" height="872" /></p>
+<p style="text-align: justify;">Conclusão:</p>
+<p style="text-align: justify;">Esse foi apenas um overview de como construir um XML Schema.<br />
+Como o assunto é muito extenso, se você tiver curiosidade, pode acessar a especificação completa neste link: <a href="http://www.w3.org/XML/Schema" target="_blank">http://www.w3.org/XML/Schema</a></p>
+<p style="text-align: justify;">Este foi o último post sobre a introdução sobre XML. Os próximos post serão sobre como manipular um arquivo XML com Java e alguns frameworks.</p>
+<p>Você pode baixar os arquivos deste post <a href="http://www.loiane.com/downloads/Xml_Schema.zip" target="_blank">aqui</a>:</p>
+<p><a href="http://www.loiane.com/downloads/Xml_Schema.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p style="text-align: justify;">Até a próxima!</p></p></p>

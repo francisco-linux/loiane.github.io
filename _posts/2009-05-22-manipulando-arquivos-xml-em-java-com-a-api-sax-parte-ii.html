@@ -1,0 +1,110 @@
+---
+layout: post
+title: Manipulando arquivos XML em Java com a API SAX - Parte II
+date: 2009-05-22 17:07:47.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Java
+- XML
+tags:
+- DOM
+- Java
+- Programação
+- SAX
+- Tutoriais
+- XML
+meta:
+views: '15916'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p>No post <a href="http://www.loiane.com/2009/05/manipulando-arquivos-xml-em-java-com-a-api-sax-parte-i/" target="_blank">anterior</a>, você viu como funcionar a API SAX do Java.</p>
+<p>Neste post você irá aprender como ler um documento XML utilizando a interface SAX.<br />
+Para isso, você irá precisar:</p>
+<p>* JDK 1.4 ou superior<br />
+* Editor de texto ou uma IDE Java de sua escolha</p>
+<p>Para este post, vamos utilizar este XML como exemplo:<br />
+<img class="aligncenter size-full wp-image-447" title="dom05" src="{{ site.baseurl }}/images/assets/dom05.png" alt="dom05" width="470" height="261" /></p>
+<p>A figura abaixo exemplifica o processo de parsear um XML com a API SAX (fonte: SUN):<br />
+<img class="aligncenter size-full wp-image-548" title="javatechandxml_illus3" src="{{ site.baseurl }}/images/assets/javatechandxml_illus3.gif" alt="javatechandxml_illus3" width="450" height="266" /></p>
+<p><a href="http://www.loiane.com/2009/05/manipulando-arquivos-xml-em-java-com-a-api-dom-parte-ii/" target="_blank">O processo é bem parecido com a API DOM</a>, ou seja, com apenas 3 passos, podemos ler um arquivo XML:</p>
+<p> 1.Criar um SAXParserFactory: este objeto cria um SAXParser<br />
+ 2. Criar um SAXParser: este objeto faz o parse<br />
+ 3. Parsear o arquivo; e o resto é "automático" (dispara os eventos).</p>
+<p>[code lang="java"]<br />
+SAXParserFactory spf = SAXParserFactory.newInstance();<br />
+SAXParser parser = spf.newSAXParser();<br />
+parser.parse(&amp;amp;quot;contato.xml&amp;amp;quot;, this );<br />
+[/code]</p>
+<p>Agora, precisamos os método para tratar os eventos:</p>
+<p>Primeiro vamos criar o método startDocument. Vamos apenas mostrar uma mensagem que o parse começou a ler o arquivo XML:<br />
+[code lang="java"]<br />
+public void startDocument() {<br />
+	System.out.println(&amp;amp;quot;Iniciando a leitura do XML&amp;amp;quot;);<br />
+}<br />
+[/code]</p>
+<p>Vamos criar também o método endDocument, que mostra quando o parse terminou de ler o arquivo XML:<br />
+[code lang="java"]<br />
+public void endDocument() {<br />
+	System.out.println(&amp;amp;quot;Acabou a leitura do XML&amp;amp;quot;);<br />
+}<br />
+[/code]</p>
+<p>Agora, vamos criar o método que trata quando o parser encontra a abertura de uma tag. Vamos aproveitar e guardar as infomações encontradas em um objeto do tipo contato, para possível uso futuro. Além disso, vamos imprimir as informações encontradas no console:<br />
+[code lang="java"]<br />
+public void startElement(String uri, String localName, String tag, Attributes atributos){</p>
+<p>	//cria um contato<br />
+	if (tag.equalsIgnoreCase(NO_CONTATO)){<br />
+		contatoTemp = new Contato();<br />
+	}</p>
+<p>	//imprime o caminho da tag<br />
+	System.out.print(&amp;amp;quot;\n&amp;amp;quot; + tag + &amp;amp;quot;: &amp;amp;quot;);</p>
+<p>	//se o elemento possui atributos, imprime<br />
+	for (int i=0; i&amp;amp;lt; atributos.getLength(); i++){<br />
+		System.out.print(&amp;amp;quot; &amp;amp;quot; + atributos.getQName(i) + &amp;amp;quot;=&amp;amp;quot; + atributos.getValue(i));<br />
+		if (atributos.getQName(i).equalsIgnoreCase(ATT_ID)){<br />
+			contatoTemp.setId(Integer.parseInt(atributos.getValue(i)));<br />
+		} else if (atributos.getQName(i).equalsIgnoreCase(ATT_GRAVADO)){<br />
+			contatoTemp.setGravado(atributos.getValue(i));<br />
+		}<br />
+	}</p>
+<p>}<br />
+[/code]</p>
+<p>Vamos criar também o método que trata quando o parser encontra o final de uma tag. No caso do exemplo utilizado, quando encontramos o final de uma tag (exceto a tag contato), significa que já temos uma informação coletada, então vamos guardar essa informação no atributo do objeto Contato, e após guardar essa informação, vamos limpar o buffer para que este possa coletar uma nova informação. Se o parser encontrar o final da tag contato (), significa que o objeto já possui todas as informações necessárias, então vamos adicioná-lo numa lista de contatos:<br />
+[code lang="java"]<br />
+public void endElement(String uri, String localName, String tag){</p>
+<p>	//adiciona o contato na lista<br />
+	if (tag.equalsIgnoreCase(NO_CONTATO)){<br />
+		contatos.add(contatoTemp);<br />
+		System.out.println();<br />
+	}<br />
+	//senão, seta os atributos do contato<br />
+	else if (tag.equalsIgnoreCase(NO_NOME)){<br />
+		contatoTemp.setNome(valorAtual.toString().trim());<br />
+	} else if (tag.equalsIgnoreCase(NO_ENDERECO)){<br />
+		contatoTemp.setEndereco(valorAtual.toString().trim());<br />
+	} else if (tag.equalsIgnoreCase(NO_TELEFONE)){<br />
+		contatoTemp.setTelefone(valorAtual.toString().trim());<br />
+	} else if (tag.equalsIgnoreCase(NO_EMAIL)){<br />
+		contatoTemp.setEmail(valorAtual.toString().trim());<br />
+	}</p>
+<p>	//limpa o valor Atual<br />
+	valorAtual.delete(0, valorAtual.length());<br />
+}<br />
+[/code]</p>
+<p>E por último, vamos criar o método que trata quando algum caracter ou informação é encontrada pelo parser. Como este método pode ser chamado algumas vezes pelo parser, vamos guardar a informação encontrada no buffer, que assim que terminar (encontrar o final de uma tag), poderemos utilizar essa informação, como visto no método acima declarado.<br />
+[code lang="java"]<br />
+public void characters(char[] ch, int start, int length) {<br />
+	System.out.print(String.copyValueOf(ch,start,length).trim());</p>
+<p>	valorAtual.append(ch,start,length);</p>
+<p>}<br />
+[/code]</p>
+<p>Viu como é simples? O importante é guardar a informação à medida que for reconhecida pelo parser, pois, se perder alguma informação, náo tem como voltar atrás, como na árvore DOM.</p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/ManipulacaoXMLComSAX.zip" target="_blank">aqui </a>(formato projeto Eclipse)<br />
+<a href="http://www.loiane.com/downloads/ManipulacaoXMLComSAX.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p>Até a próxima!</p>
+<p>Nos vemos no Falando em Java 2009, dia 24 de maio (próximo domingo) em São Paulo! :)</p>

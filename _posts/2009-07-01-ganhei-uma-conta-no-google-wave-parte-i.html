@@ -1,0 +1,70 @@
+---
+layout: post
+title: Ganhei uma conta no Google Wave!
+date: 2009-07-01 11:39:08.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Google Wave
+tags:
+- google
+- Google Wave
+- Wave
+meta:
+views: '8576'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-735" title="wavelogo" src="{{ site.baseurl }}/images/assets/wavelogo1.png" alt="wavelogo" width="74" height="74" />Na segunda feira (29/06), recebi um email dizendo que tinha sido convidada para fazer o cadastro no google wave. Fiz o cadastro e hoje pela manhã, lá estava na minha inbox, uma mensagem dizendo que minha conta tinha sido criada. Criaram uma conta com o username que escolhi e ainda criaram uma outra conta para testes.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-730" title="wave01" src="{{ site.baseurl }}/images/assets/wave01.PNG" alt="wave01" width="578" height="616" /></p>
+<p style="text-align: justify;">Todos os participantes do Google IO e do Google Developer's Day ganharam uma conta para testar e ajudar no reporte de bugs, pois a versão ainda é Dev preview:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-731" title="wave02" src="{{ site.baseurl }}/images/assets/wave02.PNG" alt="wave02" width="598" height="353" /></p>
+<p style="text-align: justify;"><em><strong>Mas afinal, o que é Google Wave?</strong></em></p>
+<p style="text-align: justify;">O Google Wave são três coisas: ferramenta, plataforma e protocolo. A definição é: uma nova plataforma de comunicação e colaboração baseada em documentos XML hospedados (chamadas waves), com suporte a modificações simultâneas e atualizações com baixa latência.</p>
+<p style="text-align: justify;">Tem previsão para lançamento agora no segundo semestre de 2009.</p>
+<p style="text-align: justify;"><strong><em>Ferramenta</em></strong></p>
+<blockquote>
+<p style="text-align: justify;">Google Wave é um programa de email + wiki + rede social + chat instantâneo + ferramenta de edição e compartilhamento de documentos de forma colaborativa. Ele usa JavaScript e HTML 5 no lado do cliente, rodando em browsers como Chrome, Firefox, Safari e plataformas móveis (iPhone, Android), e usa Java + Python no lado do servidor, que também pode ser implementado com qualquer linguagem que o cliente queira. A ferramenta foi construída usando o GWT (Google Web Toolkit), mas também utiliza o Google Gears para as operações de drag and drop, que ainda não foram incluídas no HTML 5. É necessário um servidor dedicado para tratar as comunicações simultâneas, necessárias principalmente em equipes maiores. O servidor pode estar em uma nuvem (cloud), dentro de uma empresa privada, ou simplesmente na casa de alguém.</p>
+</blockquote>
+<p style="text-align: justify;"><em>Testei no explorer e realmente não funciona!</em></p>
+<p style="text-align: justify;"><strong><em>Plataforma</em></strong></p>
+<blockquote>
+<p style="text-align: justify;">O Google Wave vem com uma API pública, e a empresa prometeu liberar o código inteiro da plataforma antes do produto ir ao ar. Como uma plataforma, o Wave permite que desenvolvedores alterem o código base e extenda o mesmo com gadgets e robôs. Gadgets são pequenos programas que rodam dentro de uma wave, enquanto robôs são “participantes automatizados da wave.”. O Wave também pode ser embutido em outros meios, como blogs.</p>
+</blockquote>
+<p style="text-align: justify;"><strong><em>Protocolo</em></strong></p>
+<p style="text-align: justify;">Os principais elementos do modelo de dados do Google Wave são:</p>
+<ul>
+<blockquote></blockquote>
+<li style="text-align: justify;"> Wave - Cada wave possui um ID globalmente único, que consiste em um conjunto de wavelets.</li>
+<li style="text-align: justify;"> Wavelet - Uma wavelet possui um ID único dentro da wave, e é composto de uma lista de participantes e um conjunto de documentos. Wavelet é a entidade onde é aplicado Controle de Concorrência / Transformações Operacionais.</li>
+<li style="text-align: justify;"> Participante - Um participante é identificado por um endereço de wave, que é uma string com o mesmo formato de um email (parte-local@dominio). Um participante pode ser um usuário, um grupo ou um robô. Não pode haver mais de um mesmo participante dentro da lista de participantes.</li>
+<li style="text-align: justify;"> Documento - Um documento possui um ID único dentro da wavelet que o contém, e é composto de um documento XML e um conjunto de anotações "de separação". Essas anotações são ponteiros para o documento XML e são independentes da estrutura dele. Elas são usadas para representar a formatação do texto, sugestões de ortografia e links. Documentos formam uma árvore dentro de um wavelet.</li>
+</ul>
+<p style="text-align: justify;">
+<p style="text-align: justify;"><em><strong>Terminologia</strong></em></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-732" title="waveentities" src="{{ site.baseurl }}/images/assets/waveentities.png" alt="waveentities" width="456" height="289" /></p>
+<ul>
+<blockquote></blockquote>
+<li style="text-align: justify;"><strong>Wave</strong>: refere-se a uma thread. Pode incluir apenas uma pessoa, ou pode incluir um grupo de usuários ou até mesmo robôs. A melhor comparação é que uma wave é como todo o histórico de uma conversa com um apessoa em um messenger. Tudo o que discutiu-se com essa pessoa num único chat é uma wave.</li>
+<li style="text-align: justify;"><strong>Wavelet</strong>: também é uma thread, mas refere-se apenas a uma parte da conversa (ou parte da wave). É como uma única conversa do messenger - uma pequena parte da conversa inteira e de um histórico maior. As wavlets podem ser criadas e gerenciadas separadamente de uma wave.</li>
+<li style="text-align: justify;"><strong>Blip</strong>: menor ainda que uma wavlet, uma blip é um única e singular mensagem. É como se fosse uma única linha de uma conversa de um messenger. Blips pode ter outras blips anexadas, chamadas de filhas. Também podem ser publicadas ou 'despublicadas' (como se você digitasse uma mensagem e não enviasse).</li>
+<li style="text-align: justify;"><strong>Documento</strong>: um documento refere-se ao conteúdo de uma blip. Refere-se aos caracteres, palavras e arquivos associados a blip.</li>
+<li style="text-align: justify;"><strong>Extensão</strong>: é uma mini aplicação que funciona numa wave, são as aplicação que você pode executar emquanto utiliza o Wave. Podem ser de dois tipos: Gadgets ou Robôs (Robots).</li>
+<li style="text-align: justify;"><strong>Gadgets</strong>: é uma aplicação que os usuários podem participar, e a maioria é contruída em cima da plataforma OpenSocial do Google.</li>
+<li style="text-align: justify;"><strong>Robôs/Robots</strong>: é um participante automatizado da wave. Podem conversar com os usuários e interagir. Podem fornecer informações de fontes externas (como o Twitter) ou podem verificar o conteúdo exitente numa wave e executar ações baseadas nesse conteúdo.</li>
+</ul>
+<p style="text-align: justify;">Quem quiser ver um preview:</p>
+<p style="text-align: justify;"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="560" height="340" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/v_UyVmITiYQ&amp;hl=pt-br&amp;fs=1&amp;" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="560" height="340" src="http://www.youtube.com/v/v_UyVmITiYQ&amp;hl=pt-br&amp;fs=1&amp;" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
+<p style="text-align: justify;"><strong><em>Conclusão</em></strong></p>
+<p style="text-align: justify;">Estou fazendo alguns testes com as contas que me deram, já achei alguns bugs e algumas coisas que ainda não funcionam. No próximo post, vou postar alguns screenshots.<br />
+Até agora, parece uma ferramenta muito promissora, acho que vai revolucionar o modo como as pessoas utilizam o email hoje em dia.</p>
+<p style="text-align: justify;">E quem já tiver, e quiser me adicionar para testar e brincar, fique à vontade. Meu username é <em>loiane</em>.</p>
+<p style="text-align: justify;">Até a próxima! :)</p>
+<p style="text-align: justify;">Referências:<br />
+<a href="http://wave.google.com/" target="_blank">http://wave.google.com/</a><br />
+<a href="http://mashable.com/2009/05/28/google-wave-guide/" target="_blank">http://mashable.com/2009/05/28/google-wave-guide/</a><br />
+<a href="http://www.infoq.com/br/news/2009/06/wave" target="_blank"> http://www.infoq.com/br/news/2009/06/wave</a></p></p>

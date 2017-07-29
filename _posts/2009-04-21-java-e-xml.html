@@ -1,0 +1,58 @@
+---
+layout: post
+title: Java e XML
+date: 2009-04-21 09:47:49.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Java
+- XML
+tags:
+- DOM
+- DTD
+- Java
+- SAX
+- Schema
+- XML
+meta:
+views: '10935'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Agora que você já tem conhecimento básico sobre XML, podemos começar a ver como podemos usar XML nas aplicações Java. Você vai aprender a ler e a criar documentos Java com algumas APIs Java.</p>
+<p style="text-align: justify;">O objetivo deste post é mostrar o que é um parser XML.</p>
+<p style="text-align: justify;"><em><strong>O que é um Parser?</strong></em></p>
+<p style="text-align: justify;">Um parser é nada mais e nada menos que um pedaço de código que faz a leitura de um documento XML e analisa a sua estrutura.</p>
+<p style="text-align: justify;"><strong><em>Como utilizar um parser?</em></strong></p>
+<p style="text-align: justify;">Em geral, você executa os seguintes passos para usar um parser: criar um objeto do tipo parser; Aponta o parser para o seu documento XML; Processa os resultados.<br />
+É claro que a última parte é a mais complicada (rs)! Depois que você sabe qual é o conteúdo do XML, você pode fazer várias coisas.</p>
+<p style="text-align: justify;"><strong><em>Tipos de parsers</em></strong></p>
+<p style="text-align: justify;">Os parsers são organizados em algumas categorias:<br />
+- Parsers que fazem validação e parsers que não fazem validação<br />
+- Parsers que suportam a linguagem de XML Schema<br />
+- Parsers que suportam o DOM (Document Object Model)<br />
+- Parsers que suportam o SAX (Simple API for XML)</p>
+<p style="text-align: justify;"><strong><em>Parsers que fazem validação e parsers que não fazem validação</em></strong></p>
+<p style="text-align: justify;">Bem, como já vimos nos posts antigos, existem três diferentes tipos de documentos XML:<br />
+- Documentos bem formados (<a href="http://www.loiane.com/2009/03/documento-xml-bem-formado-introducao-ao-xml-parte-iv/">aqui</a>), que seguem as regras básicas do XML;<br />
+- Documentos válidos, que são documentos bem formados, além de seguirem um conjunto de regras especificados (<a href="http://www.loiane.com/2009/03/validacao-de-documentos-xml-%E2%80%93-introducao-ao-xml-parte-v/" target="_blank">aqui</a>) em um DTD (<a href="http://www.loiane.com/2009/04/validacao-de-documentos-xml-com-dtd-%E2%80%93-introducao-ao-xml-parte-vii/" target="_blank">aqui</a>) ou XML Schema (<a href="http://www.loiane.com/2009/04/validacao-de-documentos-xml-com-schema-%E2%80%93-introducao-ao-xml-parte-viii/" target="_blank">aqui</a>);<br />
+- Documento inválidos: os que não seguem as regras dos documentos acima.</p>
+<p style="text-align: justify;">Se um parser XML encontra alguma coisa que torna o XML um documento não bem formado, a especificação XML requer que o parser reporte um erro fatal (<em>fatal error</em>). Os parsers que fazem validação, validam o documento XML à medida que fazem sua leitura, ou seja, se um documento XML é bem formado, um parser que não faz validação, não se importa se o documento segue as regras especificadas em um DTD ou Schema.</p>
+<p style="text-align: justify;">Mas por qual razão deveria utilizar um parser que não faz validação? Duas boas razões: velocidade e eficiência. Você perde um pouco da eficiência quando o parser tem que ler um DTD ou Schema, e depois configurar as regras de formação na engine que faz com que todo elemento e atributo do documento XML esteja correto de acordo com as regras. Se você tem certeza de que o documento é válido (por exemplo, o documento pode ter sido gerado por uma outra aplicação que pegou as informações de um banco de dados), você pode colocar a validação em off. Dependendo de como as regras são (podem ser bem complicadas), você pode economizar um tempo significativo e também memória.</p>
+<p style="text-align: justify;">Se você escreveu um código que tem como input de informações um documento XML, e este código requer que este documento XML siga as regras de um DTD ou Schema, você provavelmente deverá validar todo o documento, independente do custo computacional para fazer isto. Mas é claro que isso vai depender da aplicação.</p>
+<p style="text-align: justify;"><strong><em>Parsers que suportam a linguagem de XML Schema</em></strong></p>
+<p style="text-align: justify;">A especificação original do XML definiu o DTD como a maneira de definir como um documento XML deveria ser. Os DTDs têm uma sintaxe diferente dos documentos XML, dificultando o entendimento em algumas vezes. Para contornar essas limitações, O W3C criou a linguagem XML Schema. A linguagem XML Schema é muito rica, os documentos de XML Schema podem ser bem complexos. Por esta razão, os parsers que dão suporte a Schema costumam ser maiores.</p>
+<p style="text-align: justify;"><strong><em>Parsers que suportam o DOM (Document Object Model)</em></strong></p>
+<p style="text-align: justify;">O DOM é uma recomendação oficial do W3C. É definida uma interface que permite aos programas acessarem e fazer updates na estrutura do XML.<br />
+Este assunto será abordado com mais detalhes em um post futuro.</p>
+<p style="text-align: justify;"><strong><em>Parsers que suportam o SAX (Simple API for XML)</em></strong></p>
+<p style="text-align: justify;">SAX é uma alternativa para se trabalhar com documentos XML. Foi designado para ter uma memória menor, mas deixa mais trabalho para o programador. O SAX e o DOM dão complementares, cada um é apropriado para diferentes ocasiões.<br />
+Este assunto também será abordado em um post futuro.</p>
+<p style="text-align: justify;"><strong><em>Conclusão</em></strong></p>
+<p style="text-align: justify;">Agora você já sabe o que é um parser.<br />
+Os posts futuros abordarão DOM, SAX, outras APIs Java e frameworks open-source que facilitam muito o nosso trabalho ao manipular arquivos XML.</p>
+<p style="text-align: justify;">Até a próxima!</p></p></p></p>

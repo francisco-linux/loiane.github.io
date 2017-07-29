@@ -1,0 +1,52 @@
+---
+layout: post
+title: Firebug + JSON
+date: 2009-08-24 08:00:37.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- JSON
+tags:
+- dica
+- firebug
+- firefox
+- javascript
+- JSON
+- Programação
+meta:
+views: '5506'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Como saber se os valores que a aplicação/página está enviando para o controler ou recebendo estão corretos?</p>
+<p style="text-align: justify;"><img class="size-full wp-image-914 alignleft" title="firebug" src="{{ site.baseurl }}/images/assets/firebug.jpg" alt="firebug" width="153" height="109" />Essa semana fiquei quase o dia inteiro tentando corrigir um bug numa página e estava certo de que o problema estava no código da página, e não na lógica de negócio que havia implementado. Depois de um certo tempo, tive a idéia de verificar se os valores que a página estava recebendo eram os valores corretos (isso deveria ter sido a primeira coisa que deveria ter feito). Enfim, após verificar, vi que os valores estavam errados e finalmente pude corrigir o código.</p>
+<p style="text-align: justify;">A mágica que usei pra isso? Não, não foi debugando o código. É uma ferramenta mil e uma utilizades que todo desenvolvedor deveria ter instalado no <a href="http://br.mozdev.org/firefox/download.html" target="_blank">Firefox</a>: o famoso e tão querido <a href="http://getfirebug.com/" target="_blank">Firebug</a>!</p>
+<p style="text-align: justify;">Além das funcionalidades de inspecionar HTML, CSS, etc, também possui a funcionalidade do console, que mostra erros de javascript e ainda todo o conteúdo que é enviado e recebido por uma requisição.</p>
+<p style="text-align: justify;">Como ultimamente tenho trabalhado bastante com <a href="http://www.loiane.com/2009/06/breve-introducao-ao-json/" target="_blank">JSON</a>, utilizo mais a ferramenta para verificar o JSON retornado e para debugar código javascript. A partir da versão 1.4 do Firebug, adicionaram uma nova aba ao console, que dá pra visualizar o objeto JSON como se fosse um objeto, mostrando sua estrutura, e assim ficou muito mais simples.</p>
+<p style="text-align: justify;">O exemplo que vou utilizar neste post, é o projeto '<a href="http://www.loiane.com/2009/07/como-construir-um-grid-dinamico-utilizando-ext-js/" target="_blank">Como construir um grid dinâmico utilizando Ext JS</a>'.</p>
+<p style="text-align: justify;">O primeiro passo, é ativar a opção console para a página do projeto:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-903" title="firebug_json_02" src="{{ site.baseurl }}/images/assets/firebug_json_02.jpg" alt="firebug_json_02" width="471" height="298" /></p>
+<p style="text-align: justify;">Após a ativação, vamos dar um refresh na pagina. Observe que já aparecem duas ações executadas pela página.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-904" title="firebug_json_01" src="{{ site.baseurl }}/images/assets/firebug_json_01.jpg" alt="firebug_json_01" width="602" height="148" /></p>
+<p style="text-align: justify;">Vamos dar uma olhada na primeira ação GET, que foi a chamada do método getColumnsJson.</p>
+<p style="text-align: justify;">A resposta do método está em formato JSON, que são as colunas retornadas pelo método:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-905" title="firebug_json_03" src="{{ site.baseurl }}/images/assets/firebug_json_03.jpg" alt="firebug_json_03" width="604" height="191" /></p>
+<p style="text-align: justify;">Com a nova aba, veja como fica muito mais amigável verificar a estrutura do objeto em formato JSON:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-906" title="firebug_json_04" src="{{ site.baseurl }}/images/assets/firebug_json_04.jpg" alt="firebug_json_04" width="602" height="192" /></p>
+<p style="text-align: justify;">Como pode-se notar, a raiz do objeto (rows), possui três objetos do tipo ColumnModel:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-907" title="firebug_json_05" src="{{ site.baseurl }}/images/assets/firebug_json_05.jpg" alt="firebug_json_05" width="584" height="420" /></p>
+<p style="text-align: justify;">Viu como é muito mais simples e muito mais amigável? Essa aba para visualizar os objetos JSON vai nos poupar um bom tempo! rs</p>
+<p style="text-align: justify;">Vamos dar uma olhada agora na chamada do método getStoreFieldJson. Pode-se verificar os parâmetros enviados no request: meta e start:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-908" title="firebug_json_07" src="{{ site.baseurl }}/images/assets/firebug_json_07.jpg" alt="firebug_json_07" width="603" height="260" /></p>
+<p style="text-align: justify;">A resposta: objeto metadata em formato JSON (um pouco 'complicado' analisar o retorno desse jeito):</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-910" title="firebug_json_06" src="{{ site.baseurl }}/images/assets/firebug_json_06.jpg" alt="firebug_json_06" width="605" height="261" /></p>
+<p style="text-align: justify;">E o objeto JSON estruturado (muito melhor do que a imagem anterior):</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-911" title="firebug_json_08" src="{{ site.baseurl }}/images/assets/firebug_json_08.jpg" alt="firebug_json_08" width="608" height="554" /></p>
+<p style="text-align: justify;">Viu como é simples? Na página de plugins para o Firefox, ainda existem outros plugins que são 'complementos' para a barra do Firebug.</p>
+<p style="text-align: justify;">Não deixe de explorar as outras opções do Firebug, como já foi dito, é uma ferramenta vital para quem desenvolve para a web.</p>
+<p style="text-align: justify;">Até a próxima!</p>
+<p style="text-align: justify;">:)</p>

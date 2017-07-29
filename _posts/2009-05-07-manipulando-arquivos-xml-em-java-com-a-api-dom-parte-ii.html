@@ -1,0 +1,174 @@
+---
+layout: post
+title: Manipulando arquivos XML em Java com a API DOM - Parte II
+date: 2009-05-07 10:25:24.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Java
+- XML
+tags:
+- DOM
+- Java
+- Programação
+- Tutoriais
+- XML
+meta:
+views: '23951'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p>No post anterior, você viu como funcionar a API DOM do Java.</p>
+<p>Neste post você irá aprender como ler um documento XML utilizando a interface DOM.<br />
+Para isso, você irá precisar:</p>
+<ul>
+<li> JDK 1.4 ou superior</li>
+<li> Editor de texto ou uma IDE Java de sua escolha</li>
+</ul>
+<p>Para este post, vamos utilizar este XML como exemplo:</p>
+<p><img class="aligncenter size-full wp-image-447" title="dom05" src="{{ site.baseurl }}/images/assets/dom05.png" alt="dom05" width="470" height="261" /></p>
+<p style="text-align: justify;">Para trabalhar com a informação de um arquivo XML, é ncessário primeiro fazer o parse para criar um objeto Document. Como o objeto Document é uma interface, não podemos instanciar diretamente. Geralmente, utilizamos uma Factory. O processo exato pode variar de implementação para implementação, mas as idéias são as mesmas.</p>
+<p>A figura abaixo exemplifica o processo de parsear um XML com a API DOM (fonte: SUN):</p>
+<p><img class="aligncenter size-full wp-image-443" title="javatechandxml_illus4" src="{{ site.baseurl }}/images/assets/javatechandxml_illus4.gif" alt="javatechandxml_illus4" width="450" height="249" /></p>
+<p>Os três passos em um ambiente java são:</p>
+<ol>
+<li> - Criar um DocumentBuilderFactory: este objeto cria um DocumentBuilder</li>
+<li> Criar um DocumentBuilder: este objeto faz o parse para criar um objeto do tipo Document</li>
+<li> Parsear o arquivo para criar um objeto Document.</li>
+</ol>
+<p>[code lang="java"]<br />
+//fazer o parse do arquivo e criar o documento XML<br />
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();<br />
+DocumentBuilder db = dbf.newDocumentBuilder();<br />
+Document doc = db.parse(arquivoXML);<br />
+[/code]</p>
+<p style="text-align: justify;">Uma vez que o é feito o parse do documento e o objeto Document é criado, a aplicação pode explorar a estrutura da árvore XML, exibindo a informação na tela, guardando os dados em um objeto, etc.<br />
+Todo documento XML inicia-se pelo elemento raiz. Um documento XML bem formado possui apenas um elemento raiz, também conhecido como DocumentElement. Então, o primeiro passo é a nossa aplicação obter esse elemento.</p>
+<p>[code lang="java"]<br />
+//Passo 1: obter o elemento raiz<br />
+Element raiz = doc.getDocumentElement();<br />
+System.out.println(&amp;amp;quot;O elemento raiz é: &amp;amp;quot; + raiz.getNodeName());<br />
+[/code]</p>
+<p style="text-align: justify;">Após a determinação do element raiz, podemos obter a lista de elementos filhos. O DOM fornece um tipo especial de interface de coleção chamada NodeList usada para referenciar uma lista de referências do tipo Node. Ou seja, sempre que desejarmos obter os filhos de um elemento, devemos utilizar esse método, mesmo sabendo que este determinado elemento possui apenas 1 subelemento.</p>
+<p>Vamos obter agora os elementos do tipo contato:</p>
+<p>[code lang="java"]<br />
+//Passo 2: localizar os elementos filhos da agenda<br />
+NodeList listaContatos = raiz.getElementsByTagName(&amp;amp;quot;contato&amp;amp;quot;);<br />
+[/code]</p>
+<p>Como temos uma coleção de elementos contato, vamos percorrer cada um deles para obter as informações que queremos:</p>
+<p>[code lang="java"]<br />
+//Passo 3: obter os elementos de cada elemento contato<br />
+for (int i=0; i&amp;amp;lt;listaContatos.getLength(); i++){</p>
+<p>//como cada elemento do NodeList é um nó, precisamos fazer o cast<br />
+Element contato = (Element) listaContatos.item(i);<br />
+[/code]</p>
+<p>Agora que já temos acesso ao elemento contato, vamos começar a extrair as informações. Nosso primeiro passo é obter o valor do atributo id:</p>
+<p>[code lang="java"]<br />
+//Passo 4: obter o atributo id do contato<br />
+Attr id = contato.getAttributeNode(&amp;amp;quot;id&amp;amp;quot;);<br />
+System.out.println(&amp;amp;quot;Contato id: &amp;amp;quot; + id.getNodeValue());<br />
+[/code]</p>
+<p style="text-align: justify;">Após obtermos o atributo, vamos começar a extrair as informações dos elementos do contato. Para isso, vamos obter um NodeList com os elementos do tipo 'nome'. Como sabemos que o arquivo XML tem apenas um elemento do tipo nome para cada elemento do tipo contato, podemos fazer referência diretamente para o primeiro elemento dessa lista. Como visto no post passado, um nó do tipo elemento possui valor null, então não podemos pegar diretamente o valor desse nó, temos que pegar o valor do nó texto, que obtemos através do método <em>getFirstChild()</em>:</p>
+<p>[code lang="java"]<br />
+//Passo 5: obtém o nome do contato<br />
+NodeList listaNomes = contato.getElementsByTagName(&amp;amp;quot;nome&amp;amp;quot;);<br />
+Node nome = listaNomes.item(0).getFirstChild();<br />
+System.out.println(&amp;amp;quot;Nome: &amp;amp;quot; + nome.getNodeValue());<br />
+[/code]</p>
+<p>Fazemos isso para cada informação que desejamos extrair: endereco, telefone e email. Apenas precisamos modificar a String passada como argumento pelo método <em>getElementsByTagName</em>. Fica assim:</p>
+<p>[code lang="java"]<br />
+//Passo 6: obtém o endereço do contato<br />
+NodeList listaEndereco = contato.getElementsByTagName(&amp;amp;quot;endereco&amp;amp;quot;);<br />
+Node endereco = listaEndereco.item(0).getFirstChild();<br />
+System.out.println(&amp;amp;quot;Endereço: &amp;amp;quot; + endereco.getNodeValue());</p>
+<p>//Passo 7: obtém o telefone do contato<br />
+NodeList listaTelefone = contato.getElementsByTagName(&amp;amp;quot;telefone&amp;amp;quot;);<br />
+Node telefone = listaTelefone.item(0).getFirstChild();<br />
+System.out.println(&amp;amp;quot;Telefone: &amp;amp;quot; + telefone.getNodeValue());</p>
+<p>//Passo 8: obtém o email do contato<br />
+NodeList listaEmail = contato.getElementsByTagName(&amp;amp;quot;email&amp;amp;quot;);<br />
+Node email = listaEmail.item(0).getFirstChild();<br />
+System.out.println(&amp;amp;quot;Email: &amp;amp;quot; + email.getNodeValue());<br />
+[/code]</p>
+<p>E acabamos de extrair todas as informações do XML!</p>
+<p>O código de parsing também precisa considerar a captura de erros de exceção para reportar os vários erros que podem acontecer, como por exemplo:</p>
+<ul>
+<li> ParserConfigurationException – acionado quando o DocumentBuilderFactory não consegue criar o parser.</li>
+<li> SaxParseException – ocorrendo quando o parser encontra um problema na formatação do arquivo XML. O objeto Exception carrega informações sobre a localização do erro no arquivo.</li>
+<li> IOException – Acionado quando um erro de arquivo ocorre.</li>
+</ul>
+<p>Todo o código acima está dentro de um bloco try-catch:</p>
+<p>[code lang="java"]<br />
+} catch (ParserConfigurationException e) {<br />
+System.out.println(&amp;amp;quot;O parser não foi configurado corretamente.&amp;amp;quot;);<br />
+e.printStackTrace();<br />
+} catch (SAXException e) {<br />
+System.out.println(&amp;amp;quot;Problema ao fazer o parse do arquivo.&amp;amp;quot;);<br />
+e.printStackTrace();<br />
+} catch (IOException e) {<br />
+System.out.println(&amp;amp;quot;O arquivo não pode ser lido.&amp;amp;quot;);<br />
+e.printStackTrace();<br />
+}<br />
+[/code]</p>
+<p>Podemos melhorar o código na hora de obter as informações do contato, criando um método genérico para extrair o valor de uma tag específica:</p>
+<p>[code lang="java"]<br />
+public String obterValorElemento(Element elemento, String nomeElemento){<br />
+//obtém a lista de elementos<br />
+NodeList listaElemento = elemento.getElementsByTagName(nomeElemento);<br />
+if (listaElemento == null){<br />
+return null;<br />
+}<br />
+//obtém o elemento<br />
+Element noElemento = (Element) listaElemento.item(0);<br />
+if (noElemento == null){<br />
+return null;<br />
+}<br />
+//obtém o nó com a informação<br />
+Node no = noElemento.getFirstChild();<br />
+return no.getNodeValue();<br />
+}<br />
+[/code]</p>
+<p>Podemos melhorar mais ainda construindo um código que retorne uma lista de objetos do tipo Contato. Para isso, precisamos também contruir uma classe do tipo Contato:</p>
+<p>[code lang="java"]<br />
+public class Contato {</p>
+<p>private int id;<br />
+private String nome;<br />
+private String endereco;<br />
+private String telefone;<br />
+private String email;</p>
+<p>//métodos getters e setters<br />
+}<br />
+[/code]</p>
+<p>O método:</p>
+<p>[code lang="java"]<br />
+public Contato criaContato(Element elemento){<br />
+Contato contato = new Contato();<br />
+contato.setId(Integer.parseInt(elemento.getAttributeNode(&amp;amp;quot;id&amp;amp;quot;).getNodeValue()));<br />
+contato.setNome(obterValorElemento(elemento,&amp;amp;quot;nome&amp;amp;quot;));<br />
+contato.setEndereco(obterValorElemento(elemento,&amp;amp;quot;endereco&amp;amp;quot;));<br />
+contato.setTelefone(obterValorElemento(elemento,&amp;amp;quot;telefone&amp;amp;quot;));<br />
+contato.setEmail(obterValorElemento(elemento,&amp;amp;quot;email&amp;amp;quot;));<br />
+return contato;<br />
+}<br />
+[/code]</p>
+<p>E nosso novo código:</p>
+<p>[code lang="java"]<br />
+//Passo 3: obter os elementos de cada elemento contato<br />
+for (int i=0; i&amp;amp;lt;listaContatos.getLength(); i++){</p>
+<p>//como cada elemento do NodeList é um nó, precisamos fazer o cast<br />
+Element elementoContato = (Element) listaContatos.item(i);</p>
+<p>//cria um objeto Contato com as informações do elemento contato<br />
+Contato contato = criaContato(elementoContato);<br />
+System.out.println(contato);<br />
+}<br />
+[/code]</p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/ManipulacaoXMLComDOM.zip" target="_blank">aqui</a> (projeto no formato da IDE Eclipse, compilado com Java 5):</p>
+<p><a href="http://www.loiane.com/downloads/ManipulacaoXMLComDOM.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p style="text-align: justify;">Até a próxima!</p>
+<p>No proximo post sobre esta série, um passo a passo de como modificar um XML utilizando a API DOM.</p>
+<p>Até a próxima!</p>
+<p>:)</p>

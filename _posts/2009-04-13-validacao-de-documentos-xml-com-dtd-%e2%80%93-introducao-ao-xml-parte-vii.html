@@ -1,0 +1,60 @@
+---
+layout: post
+title: Validação de documentos XML com DTD – Introdução ao XML - Parte VII
+date: 2009-04-13 11:02:52.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Tutoriais
+- XML
+tags:
+- DTD
+- Schema
+- Tutoriais
+- XML
+meta:
+aktt_notify_twitter: 'no'
+syntaxhighlighter_encoded: '1'
+_edit_last: '1'
+gwo4wp: a:4:{s:7:"enabled";s:0:"";s:14:"control_script";s:0:"";s:15:"tracking_script";s:0:"";s:17:"conversion_script";s:0:"";}
+series_part: '7'
+_sexybookmarks_shortUrl: http://tinyurl.com/3yk84bv
+_sexybookmarks_permaHash: 3ec3dfbfcea631570a4a5d36719de588
+views: '19960'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p>Agora que já sabemos <a href="http://www.loiane.com/2009/04/construindo-um-dtd-%e2%80%93-introducao-ao-xml-parte-vi/" target="_blank">como construir um DTD</a>, vamos construir um, ou seja, mão na massa!</p>
+<p>O primeiro passo é definir como vai ser nosso XML.</p>
+<p style="text-align: justify;">Suponha que você queira criar um XML que tenha as informações de um cliente. Entre essas informações, você quer incluir o nome do cliente e os dados para contato. Ainda quebramos o nome do cliente em primeiro, meio e último nome; e o contato em endereço e telefone. Ainda, quebramos o endereço em rua, numero, complemento, bairro, cidade, estado e cep. Também quebramos o telefone em residencial, comercial e celular. A figura abaixo representa o nosso modelo:</p>
+<p><img class="aligncenter size-full wp-image-352" style="float: none; padding-left: 110px;" title="gif_1" src="{{ site.baseurl }}/images/assets/gif_1.gif" alt="gif_1" width="429" height="488" /></p>
+<p>Vamos então declarar os elementos desse XML conforme foi visto neste post.</p>
+<p><img class="aligncenter size-full wp-image-363" title="dtd1" src="{{ site.baseurl }}/images/assets/dtd1.png" alt="dtd1" width="513" height="96" /></p>
+<p>O primeiro passo foi feito! Declaramos toda a árvore de elementos. Agora precisamos especificar o tipo dos elementos que não possuem outros elementos contidos nestes:</p>
+<p><img class="aligncenter size-full wp-image-364" title="dtd2" src="{{ site.baseurl }}/images/assets/dtd2.png" alt="dtd2" width="526" height="195" /></p>
+<p style="text-align: justify;">Pronto, já temos um DTD básico formado. Vamos então acrescentar alguns atributos aos elementos.</p>
+<p style="text-align: justify;">O cliente terá um atributo id que será sua identificação única, além da situação, que indica se é um cliente ativo ou inativo (não é mais cliente) e também tem como valor padrão o valor ‘ativo’. O cliente também terá um atributo que indica em qual loja realizou a compra (São Paulo, Rio de Janeiro, Belo Horizonte, Vitória), mas como nossa aplicação apenas tratará cliente de São Paulo, o atributo sempre terá esse valor.</p>
+<p style="text-align: justify;">O endereço terá um atributo que indica o tipo do endereço: residencial ou comercial. E terá também, um atributo que indica se aquele endereço é o endereço para correspondência. Observação: se um cliente tiver mais de um endereço, não é necessário indicar o atributo de correspondência em todos, apenas no que for afirmativo.</p>
+<p style="text-align: justify;">Acrescentando os atributos ao DTD:</p>
+<p><img class="aligncenter size-full wp-image-376" title="dtd6" src="{{ site.baseurl }}/images/assets/dtd6.png" alt="dtd6" width="526" height="106" /></p>
+<p>Vamos adicionar novas restrições aos elementos agora:<br />
+- O elemento meio é opcional, afinal, uma pessoa pode não ter nome do meio;<br />
+- Como já foi dito, um cliente pode possuir um ou mais endereços;<br />
+- Não é necessário preencher o campo complemento;<br />
+- O cliente pode ter nenhum ou vários números de celular;<br />
+- O cliente pode não ter um telefone comercial;</p>
+<p>Fazemos então as alterações e teremos o seguinte DTD, que é o nosso DTD completo!</p>
+<p><img class="aligncenter size-full wp-image-365" title="dtd3" src="{{ site.baseurl }}/images/assets/dtd3.png" alt="dtd3" width="526" height="401" /></p>
+<p>Prontinho! Agora vamos criar um XML que seja compatível com nosso DTD. Abaixo, o XML mais simples que podemos gerar a partir do DTD criado:</p>
+<p><img class="aligncenter size-full wp-image-366" title="dtd4" src="{{ site.baseurl }}/images/assets/dtd4.png" alt="dtd4" width="526" height="313" /></p>
+<p>Ah, lembra que no post passado foi dito que um XML poderia ter um DTD embutido? Eis um exemplo bem simples:</p>
+<p><img class="aligncenter size-full wp-image-367" title="dtd5" src="{{ site.baseurl }}/images/assets/dtd5.png" alt="dtd5" width="526" height="165" /></p>
+<p>Conclusão</p>
+<p>Vimos neste post como construir um DTD na prática. No próximo post, vamos ver uma alternativa ao DTD, o XML Schema.</p>
+<p>Você pode baixar os arquivos deste post <a href="http://www.loiane.com/downloads/DTD.zip" target="_blank">aqui</a>:</p>
+<p><a href="http://www.loiane.com/downloads/DTD.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p>Até a próxima!</p>

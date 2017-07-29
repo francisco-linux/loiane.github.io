@@ -1,0 +1,32 @@
+---
+layout: post
+title: 'Ext JS: Eventos disparados pelos componentes'
+date: 2009-10-28 08:59:57.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- dica
+- Ext JS 3
+- firebug
+- firefox
+- javascript
+meta:
+views: '3477'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p><img class="aligncenter size-full wp-image-1080" title="mb_extjs_splash" src="{{ site.baseurl }}/images/assets/mb_extjs_splash.jpg" alt="mb_extjs_splash" width="143" height="90" /></p>
+<h3>Dica Rápida</h3>
+<p>Às vezes precisamos saber quais eventos foram disparados por um determinado componente do <a href="http://www.extjs.com/" target="_blank">Ext JS</a>, seja por motivos de debug ou por curiosidade mesmo.</p>
+<p>É bem fácil de saber, basta usar o seguinte código:</p>
+<p>[code]Ext.util.Observable.capture(Ext.getCmp('id_meu_grid'), console.info)[/code]</p>
+<p>Por exemplo: Você tem um <a href="http://www.loiane.com/2009/06/como-montar-um-grid-utilizando-ext-js/" target="_blank">grid</a> com o id "<em>id_meu_grid</em>". Basta abrir a página que contém o componente (neste caso, o grid), abrir o <a href="http://getfirebug.com/" target="_blank">Firebug</a>, abrir a aba do console e digitar o código acima.</p>
+<p>A partir daí, é só <a href="http://www.loiane.com/2009/08/firebug-json/" target="_blank">realizar algumas ações</a>/actions e ver o que acontece!</p>
+<p>Bons códigos e bom debug!</p>
+<p>:)</p>

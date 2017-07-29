@@ -1,0 +1,144 @@
+---
+layout: post
+title: Como Montar um Grid utilizando Ext JS
+date: 2009-06-17 08:00:08.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- Ext JS 3
+- grid
+- javascript
+- Tutoriais
+meta:
+views: '13553'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">O post <a href="http://www.loiane.com/2009/06/comecando-com-ext-js/" target="_blank">Começando com Ext JS</a> mostrou como configurar sua aplicação para começar a trabalhar com <a href="http://extjs.com/" target="_blank">Ext JS</a>.<br />
+O post de hoje tem como objetivo introduzir como apresentar dados ao usuário utilizando o widget grid da biblioteca <a href="http://extjs.com/" target="_blank">Ext JS</a>.</p>
+<p style="text-align: justify;">O grid, é sem sombra de dúvidas, um dos componentes mais utilizados do <a href="http://extjs.com/" target="_blank">Ext JS</a>. Quando temos um conjunto de dados e temos que apresentá-los ao usuário, uma maneira simples e clara de fazer isso é através de um grid (tabela, planilha). A biblioteca <a href="http://extjs.com/" target="_blank">Ext JS</a> já possui um componente que facilita a montagem desses dados em forma de grid.</p>
+<p style="text-align: justify;">Para montar esse grid com Ext JS, utilizamos dois componentes:</p>
+<ul>
+<li> Um <a href="http://extjs.com/deploy/ext/docs/output/Ext.data.Store.html" target="_blank">Store</a> que atua como um banco de dado em memória, com os dados que queremos disponibilizar na tela;</li>
+<li> Um <a href="http://extjs.com/deploy/ext/docs/output/Ext.GridPanel.html" target="_blank">Grid Panel</a> que fornece uma maneira para apresentar os dados armazenados no store.</li>
+</ul>
+<p style="text-align: justify;">Terminologia utilizada:</p>
+<ul>
+<li> Columns: refere-se a uma coluna de dados, e pode conter informações relevantes de como exibir a coluna (seus dados e o cabeçalho, inclusive). No Ext JS, essa informação faz parte do componente ColumnModel.</li>
+<li> Fields: também refere-se a uma coluna e seus dados, porém, refere-se aos valores da coluna. No Ext JS é utilizada no reader, para carregar os valores dos dados.</li>
+</ul>
+<p style="text-align: justify;">Antes de começarmos, o projeto deve estar configurado para o uso do Ext JS. Você pode ver como configurar aqui.<br />
+Vamos começar a montar o nosso primeiro grid em Ext JS.</p>
+<p style="text-align: justify;">Fazendo o setup do data store</p>
+<p style="text-align: justify;">A primeira coisa que precisamos fazer é coletar os dados que vão ser exibidos no grid. Os tipos de data store disponíveis no Ext JS nos possibilita ler dos dados armazenados em vários formatos, como XML e utilizando JSON. Entre os data store disponíveis por padrão, têm-se:</p>
+<ul>
+<li> Dados simples (array)</li>
+<li>XML</li>
+<li>JSON</li>
+</ul>
+<p style="text-align: justify;"><em><strong>Adicionando os dados no data store</strong></em></p>
+<p style="text-align: justify;">Neste primeiro exemplo (do post de hoje), vou utilizar um data store que obtém os dados de um array simples, que representa uma agenda, com nome, telefone, email e data de aniversário dos contatos:</p>
+<p>[code lang="javascript"]<br />
+//array contendo os dados que serão exibidos no grid<br />
+var myData = [<br />
+['Maria','11-12345678','maria@provedor.com','01/02/1984'],<br />
+['Pedro','12-55698745','pedro@provedor.com','12/04/1983'],<br />
+['João','21-78542359','joao@provedor.com','23/05/1986'],<br />
+['Tiago','27-25854567','tiago@provedor.com','07/01/1982'],<br />
+['Carla','33-31595187','carla@provedor.com','30/10/1984'],<br />
+['Estela','21-98652938','estela@provedor.com','29/06/1985'],<br />
+['Lucas','71-87241548','lucas@provedor.com','25/11/1984'],<br />
+['Mariana','85-33984526','mariana@provedor.com','02/12/1983']<br />
+];<br />
+[/code]</p>
+<p style="text-align: justify;">O data store precisa de duas coisas: os dados em si, e uma descrição dos dados, que chamamos de fields:</p>
+<p>[code lang="javascript"]<br />
+//data store que lê os dados e possui sua descrição - fields<br />
+var store = new Ext.data.SimpleStore({<br />
+fields: [<br />
+'nome',<br />
+'telefone',<br />
+'email',<br />
+{name: 'aniversario', type: 'date', dateFormat: 'd/m/Y'}<br />
+]<br />
+});<br />
+[/code]</p>
+<p style="text-align: justify;"><em><strong>Definindo os dados no data store</strong></em></p>
+<p style="text-align: justify;">O reader precisa saber quais são os campos/fields que deve ler como dados para o data store, então vamos defini-los.</p>
+<p style="text-align: justify;">Os fields são definidos utilizando um array de objetos, ou se for apenas string que vamos ler, podemos apenas especificar o nome do campo. Todos os campos, exceto o campo aniversário (data), podem ser definidos apenas com o nome do campo. Por exemplo, para o campo nome, podemo definir um objeto assim:</p>
+<p>[code lang="javascript"]{name: 'nome', type: 'string'}[/code]</p>
+<p style="text-align: justify;">Entretanto, por estarmos lendo apenas uma string, podemos simplificar definindo o campo nome apenas assim:</p>
+<p>[code lang="javascript"]'nome'[/code]</p>
+<p style="text-align: justify;">O campo aniversário é um pouco diferente, porque queremos tratá-lo como um tipo data. Para um campo do tipo 'date', existem várias opções para definir o formato da data, e o o atributo dateFormat que precisa ser definido. Se você já trabalha com PHP, estes formatos de data são bem familiares, pois o Ext JS utiliza a mesma f<a href="http://www.php.net/date" target="_blank">ormatação para datas que o PHP</a> usa.</p>
+<p>[code lang="javascript"]{name: 'aniversario', type: 'date', dateFormat: 'd/m/Y'}[/code]</p>
+<p style="text-align: justify;">O Ext JS possui alguns tipos de dados definidos:</p>
+<ul>
+<li> string</li>
+<li>int (utiliza a função parseInt do javascript)</li>
+<li>float (utiliza a função parseFloat do javascript)</li>
+<li>boolean (true/false)</li>
+<li>date (necessita configuar o atributo de configuração dateFomart)</li>
+</ul>
+<p style="text-align: justify;"><em><strong>Exibindo o GridPanel</strong></em></p>
+<p style="text-align: justify;">Até agora definimos apenas os dados que serão exibidos pelo grid. O componente que "junta tudo" é o GridPanel, que é responsável por posicionar os dados em colunas e linhas, adicionar o header/cabeçalho, e empacotar tudo e exibir para o usuário.</p>
+<p>[code lang="javascript"]<br />
+// cria o grid<br />
+var grid = new Ext.grid.GridPanel({<br />
+store: store,<br />
+columns: [<br />
+{header: &amp;quot;NOME&amp;quot;, width: 170, sortable: true, dataIndex: 'nome'},<br />
+{header: &amp;quot;TELEFONE&amp;quot;, width: 150, sortable: true, dataIndex: 'telefone'},<br />
+{header: &amp;quot;EMAIL&amp;quot;, width: 150, sortable: true, dataIndex: 'email'},<br />
+{header: &amp;quot;DATA NASC.&amp;quot;, width: 100, sortable: true, dataIndex: 'aniversario',<br />
+renderer: Ext.util.Format.dateRenderer('d/m/Y')}<br />
+],<br />
+title: 'Grid Simples Extjs',<br />
+height:230,<br />
+width:590,<br />
+renderTo: document.body,<br />
+frame:true<br />
+});<br />
+[/code]</p>
+<p style="text-align: justify;">Mas como o grid funciona?</p>
+<p style="text-align: justify;">O nosso data store é passado para o grid que possui um modelo de colunas que determina como as colunas e o cabeçalho serão exibidos. Este modelo é diferente dos fields definidos no reader, que definia como o reader deveria ler os dados.</p>
+<p style="text-align: justify;">O GridPanel possui alguns atributos que precisam ser configurados:</p>
+<ul>
+<li> renderTo: onde o grid deve ser exibido.</li>
+<li>frame: apenas adiciona uma borda em volta do grid</li>
+<li>height and width: tamanho da altura e largura do grid em pixels</li>
+<li>store: os dados que serão exibidos</li>
+<li>columns: definido pelo componente ColumnModel. É um array de objetos que definem as colunas do grid</li>
+<li>title: título do grid. Se não for definido, aparece apenas o grid</li>
+</ul>
+<p style="text-align: justify;"><strong><em>Configurando o <a href="http://extjs.com/deploy/ext/docs/output/Ext.grid.ColumnModel.html" target="_blank">ColumnModel</a> do GridPanel</em></strong></p>
+<p style="text-align: justify;">Para definir as colunas do grid, precisamos criar um array de objetos que definem como essas colunas serão exibidas e tratadas.</p>
+<p style="text-align: justify;">O objeto que define cada coluna por ter várias configurações, mas no mínimo requere que o header e o dataIndex estejam definidos. O atributo header define apenas o texto que irá aparecer no cabeçalho. O atributo dataIndex indica qual campo/field será usado para a coluna.</p>
+<p style="text-align: justify;">Você também pode conferir alguns outras opções de configuração do ColumnModel:</p>
+<ul>
+<li> sortable: indica se é permitido fazer a ordenação da coluna</li>
+<li>width: o tamanho inidical da coluna em pixels</li>
+<li>hidden: true se não deseja exibir a coluna</li>
+<li>align: alinhamento do texto</li>
+<li>renderer: utilizada para formatar o dado. Qualquer tipo de dado pode ser transformado. Você utilizar as funções de formatação prontas do Ext JS ou criar uma função.</li>
+</ul>
+<p style="text-align: justify;"><strong><em>Resultado</em></strong></p>
+<p style="text-align: justify;">Juntando todo o código que fizemos, temos o seguinte resultado no browser:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-655" title="grid_simples_01" src="{{ site.baseurl }}/images/assets/grid_simples_01.png" alt="grid_simples_01" width="589" height="230" /></p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/gridsimples.zip" target="_blank">aqui </a>(formato projeto Eclipse)</p>
+<p><a href="http://www.loiane.com/downloads/gridsimples.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p style="text-align: justify;">E se ainda não sabe como fazer para importar o projeto no eclipse e executar, pode conferir <a href="http://www.loiane.com/2009/06/como-importar-projetos-j2ee-para-o-eclipse-e-executa-los/" target="_blank">aqui</a>.</p>
+<p style="text-align: justify;"><strong><em>Conclusão:</em></strong></p>
+<p style="text-align: justify;">Viu como é fácil e pouco código? Essa biblioteca nos poupa de fazer código braçal para fazer um grid bonitinho assim. :)<br />
+Passei a última semana estudando o widget de grid e tive um ótimo resultado. Vale a pena, principalmente se você quer poupar tempo ou não gosta muito de javascript puro!<br />
+E ainda podemos fazer integração com java e frameworks como Spring e Struts. Assim, podemos fazer toda a parte da lógica de negócio com java e utilizar a biblioteca para deixar a interface mais rica e mais bonita para o usuário.</p>
+<p style="text-align: justify;"><em>Referências:<br />
+- <a href="http://extjs.com/deploy/ext/docs/" target="_blank">Documentação Ext JS</a><br />
+- <a href="http://extjs.com/deploy/dev/examples/samples.html" target="_blank">Ext JS samples</a><br />
+- <a href="http://www.packtpub.com/learning-ext-js/book" target="_blank">Learning Ext JS</a></em></p>
+<p style="text-align: justify;">Até a próxima!</p>

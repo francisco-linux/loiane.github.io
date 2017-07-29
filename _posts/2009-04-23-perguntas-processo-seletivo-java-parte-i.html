@@ -1,0 +1,52 @@
+---
+layout: post
+title: Perguntas processo seletivo Java - Parte I
+date: 2009-04-23 11:03:08.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Carreira
+tags:
+- C++
+- Carreira
+- entrevista emprego
+- inglês
+- Java
+- Orientação Objetos
+meta:
+views: '7143'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Este é o primeiro post com a compilação de algumas perguntas técnicas em inglês sobre Java.<br />
+Estas perguntas, além de já ter sido utilizadas em entrevistas, são também uma forma de conhecer mais a linguagem.<br />
+Quando comecei a estudar algumas dessas perguntas, percebi que alguns termos e algumas explicações eu não sabia, apesar de trabalhar com Java já há algum tempo. E isso também está me motivando a aprender mais a fundo algumas coisas.<br />
+Espero que gostem da compilação que fiz! :)</p>
+<p style="text-align: justify;">Lembrem-se também que estas respostas não são para você ler durante a entrevista. O objetivo é aprender os termos em inglês e ter uma idéia de que resposta dar.</p>
+<p style="text-align: justify;">Bem, vamos começar então! Hoje vou postar algumas perguntas relacionadas à tecnologia Java em geral e OO.</p>
+<p style="text-align: justify;"><em><strong>Question: What is the difference between C++ and Java?</strong></em></p>
+<p style="text-align: justify;">A: Both C++ and Java use similar syntax and are Object Oriented, but:</p>
+<ul style="text-align: justify;">
+<li> Java does not support pointers. Pointers are inherently tricky to use and troublesome.</li>
+<li> Java does not support multiple inheritances because it causes more problems than it solves. Instead Java supports multiple interface inheritance, which allows an object to inherit many method signatures from different interfaces with the condition that the inheriting object must implement those inherited methods. The multiple interface inheritance also allows an object to behave polymorphically on those methods.</li>
+<li> Java does not support destructors but adds a finalize() method. Finalize methods are invoked by the garbage collector prior to reclaiming the memory occupied by the object, which has the finalize() method. This means you do not know when the objects are going to be finalized. Avoid using finalize() method to release nonmemory resources like file handles, sockets, database connections etc because Java has only a finite number of these resources and you do not know when the garbage collection is going to kick in to release these resources through the finalize() method.</li>
+<li>Java does not include structures or unions because the traditional data structures are implemented as an object oriented framework.</li>
+<li> All the code in Java program is encapsulated within classes therefore Java does not have global variables or functions.</li>
+<li>C++ requires explicit memory management, while Java includes automatic garbage collection.</li>
+</ul>
+<p style="text-align: justify;"><em><strong>Question: What are the advantages of Object Oriented Programming Languages (OOPL)?</strong></em></p>
+<p style="text-align: justify;">A: The Object Oriented Programming Languages directly represent the real life objects like Car, Jeep, Account, Customer etc. The features of the OO programming languages like polymorphism, inheritance and encapsulation make it powerful. [Tip: remember pie which, stands for Polymorphism, Inheritance and Encapsulation are the 3 pillars of OOPL]</p>
+<p style="text-align: justify;"><strong><em>Question: How does the Object Oriented approach improve software development?</em></strong></p>
+<p style="text-align: justify;">A: The key benefits are:</p>
+<ul style="text-align: justify;">
+<li> Re-use of previous work: using implementation inheritance and object composition.</li>
+<li> Real mapping to the problem domain: Objects map to real world and represent vehicles, customers, products etc: with encapsulation.</li>
+<li>Modular Architecture: Objects, systems, frameworks etc are the building blocks of larger systems.</li>
+</ul>
+<p style="text-align: justify;">
+<p style="text-align: justify;">
+<p style="text-align: justify;"><em>Até a próxima!</em></p></p>

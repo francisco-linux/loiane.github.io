@@ -1,0 +1,67 @@
+---
+layout: post
+title: Manipulando arquivos XML em Java com a API SAX – Parte I
+date: 2009-05-21 09:00:01.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Java
+- XML
+tags:
+- DOM
+- Java
+- Programação
+- SAX
+- XML
+meta:
+views: '13174'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">O padrão SAX cresceu a partir do método DOM, que era muito complexo e inadequado para várias aplicações. Além disso, até então, cada parser XML para Java tinha seu próprio padrão de interface. Originalmente a API SAX foi desenvolvida para o ambiente Java. SAX foi a primeira interface totalmente adaptada para XML. Atualmente SAX tornou-se um padrão de fato e as suas versões mais recentes estão disponíveis para vários outros ambientes de programação.</p>
+<p>API SAX é um mecanismo serial e orientado a eventos, que faz o acesso de elemento a elemento do documento XML a ser processado. Processadores XML, que implementam a interface SAX, geram eventos à medida que encontram elementos, atributos ou textos no documento. Existem eventos para início de elemento, término de elemento, atributos, conteúdo de textos, entidades, entre outros. As aplicações, que utilizam a interface SAX, precisam escutar estes eventos e fazer o relacionamento da sua própria estrutura de dados com a estrutura do XML.</p>
+<p><em>Como SAX funciona</em>:<br />
+- Quando você criar um parser SAX, o parser te comunica (gera um evento) quando acha algum nó no documento XML.<br />
+- O SAX não constrói uma árvore na memória com o conteúdo do arquivo XML. Quando encontra algum nó no XML, te comunica e você decide o que fazer com aquela informação.<br />
+- Um parser SAX não cria nenhum objeto. Você tem a opção de criar os objetos que você quer, mas é sua decisão, e não do parser.<br />
+- SAX começa a enviar os eventos na mesma hora que faz o parser do documento. Você não precisa esperar o parser terminar de ler o arquivo por inteiro.</p>
+<p><em><strong>Eventos SAX</strong></em></p>
+<p>A API SAX define uma série de eventos. O seu trabalho é escrever código que responda ou trate esses eventos. Se você não tratar algum evento, o parser descarta-o, e você não precisa se preocupar sobre o uso de memória e objetos, como fazia com DOM.</p>
+<p>Os eventos em SAX são definidos como métodos anexados às interfaces Java específicas. Uma aplicação implementa alguns destes métodos e é registrada como um manipulador de evento com o parser.<br />
+O modelo SAX agrupa seus eventos em algumas interfaces:</p>
+<ul>
+<li>DocumentHandler - Define métodos disparados que são disparados pelos principais eventos durante o parsing.</li>
+<li>DTDHandler – define eventos relacionados a DTD.</li>
+<li>EntityResolver – define eventos relacionados à carga de entidades. Estes eventos são exigidos para carregar entidades especiais, como de um banco de dados.</li>
+<li>ErrorHandler – define eventos de erro. As aplicações devem se registrar para estes eventos quando implementam uma rotina específica de tratamento de erro.</li>
+</ul>
+<p style="text-align: justify;">Numa aplicação de XML baseada no SAX, você irá gastar mais tempo tratando 5 eventos básicos:</p>
+<ul>
+<li>startDocument() -Indica que o parser achou o início do documento XML. Este evento não lhe passa qualquer informação, apenas indica que o parser vai começar a escanear o arquivo XML.</li>
+<li>endDocument() - Indica que o parser achou e fim do documento XML.</li>
+<li>startElement(...) - Indica que o parser achou o início de uma tag (tag de abertura/início). Este evento fornece o nome do elemento, o nome e valor dos atributos deste elemento, e também pode fornecer as informações sobre o namespace.</li>
+<li>characters(...) - Indica que o parser achou algum Texto (Informação).</li>
+<li>endElement(...) -Indica que o parser achou o fim de uma tag/elemento. Este evento fornece o nome do elemento, e também pode fornecer as informações sobre o namespace.</li>
+</ul>
+<p style="text-align: justify;"><em><strong>Exemplo SAX e XML</strong></em></p>
+<p>Vamos pegar o XML abaixo como exemplo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-428" title="dom04" src="{{ site.baseurl }}/images/assets/dom04.png" alt="dom04" width="334" height="73" /></p>
+<p style="text-align: justify;">Os métodos chamados neste exemplo são os seguintes em ordem:</p>
+<ol>
+<li>statDocument()</li>
+<li>startElement chamado com name="exemplo" e attrib contendo um único valor para id</li>
+<li>startElement chamado com name="no_de_texto"</li>
+<li>characters chamado uma ou mais vezes com o conteúdo "Olá mundo"</li>
+<li>endElement chamado com name=”no_de_texto”</li>
+<li>endElement chamado com name=”exemplo”</li>
+<li>endDocument()</li>
+</ol>
+<p style="text-align: justify;">O problema da programação em SAX é que o programador tem apenas uma passada para fazer o que precisa. Caso se esteja procurando no_de_texto que contem o valor “Hello World”, por exemplo, quando o programador detectou a palavra, o elemento exemplo (assim como o valor do id) já havia passado, se ele não guardou o id do exemplo em algum lugar, não tem volta.</p>
+<p>A interface SAX pode ser utilizada por aplicações que têm a necessidade de processar os documentos XML de modo sequencial. Esta interface é também mais indicada para aplicações do lado servidor (que processam muitos documentos simultaneamente) ou aplicações que não suportam a representação em memória de todo o documento XML.</p>
+<p>E no próximo post sobre a série, um passo a passo em java de como manipular um documento XML utilizando a interface SAX.</p>
+<p>Até a próxima!</p>
+<p style="text-align: justify;">:)</p>

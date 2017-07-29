@@ -1,0 +1,118 @@
+---
+layout: post
+title: 'Documento XML Bem Formado - Introdução ao XML: Parte IV'
+date: 2009-03-05 15:37:56.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Tutoriais
+- XML
+tags:
+- Tutoriais
+- XML
+meta:
+aktt_notify_twitter: 'no'
+_edit_last: '1'
+gwo4wp: a:4:{s:7:"enabled";s:0:"";s:14:"control_script";s:0:"";s:15:"tracking_script";s:0:"";s:17:"conversion_script";s:0:"";}
+series_part: '4'
+syntaxhighlighter_encoded: '1'
+_sexybookmarks_shortUrl: http://tinyurl.com/299usma
+_sexybookmarks_permaHash: 5f3f872e1dfff986709c29c6adeec436
+views: '18129'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Já sabemos como escrever um documento XML. Agora falata saber como criar um documento XML bem formado, ou seja, um documento que obedece algumas regras de formação.<em><strong><br />
+</strong></em></p>
+<p style="text-align: justify;">Antes de apresentar algumas regras básicas, precisamos saber o que é exatamente um documento XML bem formado. Os documentos XML bem formados seguem as regras de sintaxe do XML, mas não possuem um DTD ou Schema, ou seja, não possuem um documento de validação (assunto do próximo post, aguardem!).</p>
+<p style="text-align: justify;">Algumas regras serão listadas agora.</p>
+<p style="text-align: justify;"><em><strong>O documento XML deve começar com uma declaração XML</strong></em></p>
+<p style="text-align: justify;">A pesar da declaração não ser obrigatória, o W3C recomenda que você deve ter uma declaração no documento, e que esta deve ser ser a primeira coisa a aparecer no XML (comentários antes da declaração não são válidos).<br />
+Exemplo de XML inválido:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-257" title="01" src="{{ site.baseurl }}/images/assets/01.png" alt="01" width="349" height="72" /></p>
+<p style="text-align: justify;"><strong><em>O Elemento Raiz deve conter todos os outros elementos<br />
+</em></strong></p>
+<p style="text-align: justify;">Um documento XML deve conter apenas um único elemento raiz. (root), que contém todo o texto e outros elementos do documento.</p>
+<p style="text-align: justify;">Exemplo de XML bem formado:</p>
+<p><img class="aligncenter size-full wp-image-258" title="03" src="{{ site.baseurl }}/images/assets/03.png" alt="03" width="345" height="58" /></p>
+<p style="text-align: justify;">O XML abaixo não contém apenas um único elemento raiz, portanto, não é um documento bem formado:</p>
+<p><img class="aligncenter size-full wp-image-259" title="02" src="{{ site.baseurl }}/images/assets/02.png" alt="02" width="343" height="68" /></p>
+<p style="text-align: justify;"><strong>O documento XML deve ter pelo menos 1 elemento</strong></p>
+<p style="text-align: justify;">Para ser um documento válido, o XML deve conter pelo menos 1 elemento. O primeiro elemento deve ser o elemento raiz.<br />
+O exemplo abaixo mostra o menor XML bem formado possível:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-260" title="07" src="{{ site.baseurl }}/images/assets/07.png" alt="07" width="347" height="69" /></p>
+<p style="text-align: justify;"><em><strong>Elementos devem ter tags inicial e final</strong></em></p>
+<p style="text-align: justify;">Não pode existir um elemento sem a tag final. A tag final é indicada por uma barra “/”, antes do nome da tag.</p>
+<p style="text-align: justify;">O XML abaixo não é bem formado porque o elemento <em>&lt;frase&gt;</em> não possui a tag final (<em>&lt;/frase&gt;</em>).</p>
+<p><img class="aligncenter size-full wp-image-261" title="04" src="{{ site.baseurl }}/images/assets/04.png" alt="04" width="347" height="81" /></p>
+<p style="text-align: justify;">Se um elemento não possui informação (nó de texto), é chamado de elemento vazio. O elemento vazio é indicado por ter uma barra “/” no final da tag inicil, como exemplificado no elemento <em>&lt;frase/&gt;</em> no XML abaixo:</p>
+<p><img class="aligncenter size-full wp-image-262" title="05" src="{{ site.baseurl }}/images/assets/05.png" alt="05" width="348" height="94" /></p>
+<p style="text-align: justify;">
+<p style="text-align: justify;"><strong><em>As tags são case-sensitive</em></strong></p>
+<p style="text-align: justify;">No XML a tag &lt;b&gt; é diferente da tag &lt;B&gt;.</p>
+<p style="text-align: justify;">O XML abaixo mostra um exemplo que não é bem formado:</p>
+<p><img class="aligncenter size-full wp-image-263" title="06" src="{{ site.baseurl }}/images/assets/06.png" alt="06" width="345" height="59" /></p>
+<p style="text-align: justify;"><em><strong>Elementos não podem se sobrepor</strong></em></p>
+<p style="text-align: justify;">Se a tag inicial está dentro de um elemento, a tag final também deve estar dentro do mesmo elemento. Simplificando: os elementos, delimitados pelas tags inicial e final, devem estar aninhados.</p>
+<p style="text-align: justify;">Exemplo de XML mal formado:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-267" title="08" src="{{ site.baseurl }}/images/assets/08.png" alt="08" width="346" height="116" /></p>
+<p style="text-align: justify;">
+<p style="text-align: justify;">Exemplo de XML bem formado:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-268" title="09" src="{{ site.baseurl }}/images/assets/09.png" alt="09" width="347" height="104" /></p>
+<p style="text-align: justify;"><em><strong>Os atributos devem estar entre aspas</strong></em></p>
+<p style="text-align: justify;">Existem duas regras para atributos nos documentos XML:</p>
+<ol style="text-align: justify;">
+<li>Atributos devem ser valorados</li>
+<li>Os valores devem estar entre aspas</li>
+</ol>
+<p style="text-align: justify;">O XML abaixo é um exemplo de XML mal formado:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-270" title="10" src="{{ site.baseurl }}/images/assets/10.png" alt="10" width="348" height="59" /></p>
+<p style="text-align: justify;">
+<p style="text-align: justify;">Você pode usar aspas simples (' ') ou aspas duplas (“ ”).</p>
+<p style="text-align: justify;">O exemplo abaixo é um exemplo de documento bem formado:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-271" title="11" src="{{ site.baseurl }}/images/assets/11.png" alt="11" width="372" height="93" /></p>
+<p style="text-align: justify;"><strong><em>Os atributos devem ser únicos</em></strong></p>
+<p style="text-align: justify;">Os atributos não devem aparecer mais de uma vez em uma mesma tag de abertura.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-272" title="12" src="{{ site.baseurl }}/images/assets/12.png" alt="12" width="372" height="58" /></p>
+<p style="text-align: justify;">A pesar de terem a mesma grafia, os atributos abaixo são diferentes (lembre-se que o XML é case-sensitive). Mesmo assim, não é uma boa prática.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-273" title="13" src="{{ site.baseurl }}/images/assets/13.png" alt="13" width="489" height="58" /></p>
+<p style="text-align: justify;"><strong><em>Utilize &lt; e &amp; apenas para iniciar uma tag e entidade</em></strong></p>
+<p style="text-align: justify;">Os processadores XML sempre assumem que o carácter &lt; inicia uma tag e que o carácter &amp; inicia uma referência a uma entidade. Por este motivo, utilize as entidades pré-definidas.<br />
+Se por algum motivo o valor de um atributo ou elemento utilizar algum dos caracteres <em>&lt; &gt; “ ‘ e &amp;</em>, utilize as entidades pré-definidas, pois os processadores dão importância a esses caracteres.</p>
+<p style="text-align: justify;">
+<p style="text-align: justify;"><strong><em>NAMESPACES</em></strong></p>
+<p style="text-align: justify;">O XML é muito poderoso porque dá muita flexibilidade. Você e outras milhares de pessoas podem criar suas próprias tags para descrever uma informação. Com o passar do tempo, os autores do XML perceberam que os primeiros criadores do XML não tinham antecipado: conflito entre tags.</p>
+<p style="text-align: justify;">Por exemplo: em uma empresa de TI,o departamento de recursos humanos utiliza um XMLque contém as informações de um funcionário:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-275" title="14" src="{{ site.baseurl }}/images/assets/14.png" alt="14" width="514" height="285" /></p>
+<p style="text-align: justify;">
+<p style="text-align: justify;">Agora, suponha que o chefe dessa empresa também tenha um controle sobre os funcionários, e, além dos dados de cada empregado, ele também adiciona um comentário (<em>&lt;comentario&gt;</em>) sobre a conduta de cada um. Se ele usar o mesmo XML do exemplo acima, haverá um conflito de tags.</p>
+<p style="text-align: justify;">O recurso utilizado para resolver esse conflito chama-se namespace. Os namespaces fornecem uma maneira para garantir que um conjunto de tags não irá conflitar com outro conjunto. Basta definir um prefixo para as tags e seus atributos.</p>
+<p style="text-align: justify;">Então vamos recriar o XML do exemplo para que não exista mais conflitos.</p>
+<p style="text-align: justify;">O primeiro passo é criar um namespace e prefixo para indicar o conjunto de tags que faz parte do XML utilizado pelo departamento de recursos humanos. Após definir o namespace <em>rh</em>, deve-se colocar o “rh:” como prefixo de todas as tags e respectivos atributos.<br />
+Agora que já está claro que as tags pertencem ao XML utilizado pelo RH, o chefe pode adicionar o seu próprio namespace ao documento XML (<em>cf</em>). Após a adição do próprio namespace, é só adicionar as tags que deseja.<br />
+O resultado final é o XML abaixo:</p>
+<p><img class="aligncenter size-full wp-image-199" title="xml12" src="{{ site.baseurl }}/images/assets/xml12.png" alt="xml12" width="573" height="475" /></p>
+<p style="text-align: justify;">
+<p style="text-align: justify;">Também é possível definir um namespace padrão (<em>default</em>). Quando isso acontecer, os elementos e atributos que não possuem prefixo pertencem ao namespace padrão.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-277" title="16" src="{{ site.baseurl }}/images/assets/16.png" alt="16" width="516" height="297" /></p>
+<p style="text-align: justify;">Para o caso do XML do RH e do chefe, também seria possível definir um namespace padrão para o XML do RH e utilizar um namespace com prefixo para o elemento do chefe. Assim, todos os elementos do namespace padrão não precisaria de prefixo, apenas o elemento do chefe &lt;cf:comentario&gt;. O XML resultante seria o XML acima, acrescentanto as linhas verdes destacadas no XML com 2 namespaces.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-276" title="15" src="{{ site.baseurl }}/images/assets/15.png" alt="15" width="515" height="319" /></p>
+<p style="text-align: justify;">
+<p style="text-align: justify;">Resumindo:</p>
+<ul style="text-align: justify;">
+<li><em>xmlns="identificador" (namespace default)</em> =&gt; associa o identificador com todos os elementos que não possuem prefixo. Ex: <em>&lt;nome&gt;</em></li>
+<li><em>xmlns:prefixo="identificador"</em> =&gt; associa o identificador com os elementos e atributos cujo nome local é precedido do prefixo. Ex <em>&lt;rh:nome&gt;</em></li>
+</ul>
+<p style="text-align: justify;">Os nomes indentificadores de um namespace parecem com uma URL, mas não são (algumas vezes pode acontecer da URL conter alguma informação sobre o documento). Você pode definir um namespace como <em>xmlns="loiane”</em> que vai funcionar da mesma maneira. A única coisa é que importante sobre os namespaces é que cada um tem que ser único, por isso que muitas vezes são utilizadas URLs.</p>
+<p style="text-align: justify;"><strong><em>Conclusão</em></strong></p>
+<p style="text-align: justify;">Este post abordou algumas regras para criação de documentos XML válidos.<br />
+Além das regras citadas no post, existem várias outras. Caso deseje conferir todas as regras definidas pelo W3C, você pode ver a especificação neste link: <a href="http://www.w3.org/TR/REC-xml" target="_blank">http://www.w3.org/TR/REC-xml</a> (em inglês).</p>
+<p style="text-align: justify;">A especificação completa sobre namespaces pode ser encontrada neste link: <a href="http://www.w3.org/TR/REC-xml-names/" target="_blank">http://www.w3.org/TR/REC-xml-names/</a>. Ainda existe debate sobre este assunto (em sua maioria, porque o uso de namespaces pode tornar a criação de DTDs mais difícil), porém, é uma recomendação oficial da W3C.</p>
+<p style="text-align: justify;">A W3C possui um validador XML online. Muito bom pra quem quiser testar se o seu XML está bem formado. Link: <a href="http://www.w3schools.com/dom/dom_validate.asp" target="_blank">http://www.w3schools.com/dom/dom_validate.asp</a></p>
+<p>Até a próxima!</p>
+<p style="text-align: justify;">O próximo post da série será sobre como criar documentos XML válidos através de DTD e Schema.</p>
+<p style="text-align: justify;">Até a próxima!</p></p></p></p></p>

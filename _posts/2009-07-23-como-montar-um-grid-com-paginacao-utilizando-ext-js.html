@@ -1,0 +1,48 @@
+---
+layout: post
+title: Como Montar um Grid com Paginação utilizando Ext JS
+date: 2009-07-23 12:08:07.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- Ext JS 3
+- Java
+- javascript
+- JSON
+- Json-lib
+- spring
+meta:
+views: '7605'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Até agora, apresentei aqui no blog alguns exemplos de como utilizar o widget grid da biblioteca Ext JS, mas em todos os exemplos, o volume de dados (número de linhas do grid) é muuuuito pequeno, não simbolizando um exemplo que utilizamos no 'mundo real'.</p>
+<p style="text-align: justify;">Pode até ser uma exceção, mas quando construímos um grid/tabela para apresentar dados para o usuário, não queremos apenas mostrar 10 linhas. A quantidade de informação que podemos obter do banco é enorme, às vezes milhares de registros ou até mesmo milhões.</p>
+<p style="text-align: justify;">Carregar todas essas informações de uma só vez na memória pode causar algumas complicações, como uma <em>exception</em> de estouro de memória. A barra de paginação do grid do Ext JS permite que a aplicação busque apenas as informações que serão exibidas na página naquele momento.</p>
+<p style="text-align: justify;">E este é o objetivo do post de hoje: mostrar como agregar uma barra de paginação ao grid do Ext JS.</p>
+<p style="text-align: justify;">Vou pegar como base, o <a href="http://www.loiane.com/2009/07/como-montar-um-grid-utilizando-ext-js-json-spring/" target="_blank">último projeto aqui do blog</a>. A partir dele, vou fazer algumas modificações.</p>
+<p style="text-align: justify;">A primeira delas é no arquivo javascript do Ext JS. Apenas duas pequenas mudanças são necessárias:</p>
+<p style="text-align: justify;">Acrescentar a barra de paginação no grid:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-827" title="gridpaginacao04" src="{{ site.baseurl }}/images/assets/gridpaginacao04.PNG" alt="gridpaginacao04" width="595" height="395" /></p>
+<p style="text-align: justify;">E passar os parâmetros para carregar os dados: start (dado inicial) e limit (limite de dados).</p>
+<p style="text-align: justify;">A próxima modificação é na classe GerenciaContatos. Modifiquei o método para gerar 10 contatos por vez. Acrescentei um índice após o nome de cada contato para mostrar a numeração de cada um (<span style="text-decoration: line-through;">gambiarra</span>).</p>
+<p style="text-align: justify;">O limite de dados total são 50 contatos. Você pode fazer esse controle pelo parâmetro 'limit' ou também pode fazer o controle na aplicação (a gosto do freguês).</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-828" title="gridpaginacao05" src="{{ site.baseurl }}/images/assets/gridpaginacao05.PNG" alt="gridpaginacao05" width="500" height="319" /></p>
+<p style="text-align: justify;">E no ContatoController basta obter o parâmetro 'start' e passar para o método que cria os contatos (ou faz a busca no banco de dados). Lembrando que o retorno é em formato JSON:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-829" title="gridpaginacao06" src="{{ site.baseurl }}/images/assets/gridpaginacao06.PNG" alt="gridpaginacao06" width="526" height="192" /></p>
+<p style="text-align: justify;">Pronto! Se executar a aplicação, o grid vai se parecer assim:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-830" title="gridpaginacao01" src="{{ site.baseurl }}/images/assets/gridpaginacao01.PNG" alt="gridpaginacao01" width="351" height="296" /></p>
+<p style="text-align: justify;">Se não gostar da barra de paginação na parte de baixo do grid, tem como mudar. Basta modificar a configuração do grid. Mude o bbar (bottom bar) para tbar (topbar):</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-831" title="gridpaginacao03" src="{{ site.baseurl }}/images/assets/gridpaginacao03.PNG" alt="gridpaginacao03" width="364" height="121" />E vai ficar assim:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-832" title="gridpaginacao02" src="{{ site.baseurl }}/images/assets/gridpaginacao02.PNG" alt="gridpaginacao02" width="349" height="297" /></p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/gridpaginacao.zip" target="_blank">aqui </a>(formato projeto Eclipse) – 4,86MB</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/downloads/gridpaginacao.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p style="text-align: justify;">E se ainda não sabe como fazer para importar o projeto no eclipse e executar, pode conferir <a href="http://www.loiane.com/2009/06/como-importar-projetos-j2ee-para-o-eclipse-e-executa-los/" target="_blank">aqui</a>.</p>
+<p style="text-align: justify;">Até a próxima!</p>
+<p style="text-align: justify;"><img class="wp-smiley" src="{{ site.baseurl }}/images/assets/icon_smile.gif" alt=":)" /></p>

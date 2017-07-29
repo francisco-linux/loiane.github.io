@@ -1,0 +1,126 @@
+---
+layout: post
+title: Manipulando arquivos XML em Java com a API DOM - Parte III
+date: 2009-05-18 14:22:45.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Java
+- XML
+tags:
+- DOM
+- Java
+- Programação
+- Tutoriais
+- XML
+meta:
+views: '17104'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p class="title">No post <a rel="bookmark" href="../2009/05/manipulando-arquivos-xml-em-java-com-a-api-dom-parte-ii/">Manipulando arquivos XML em Java com a API DOM - Parte II</a> vimos como fazer a leitura de um arquivo XML utilizando a API DOM presente no java (a partir versão 1.4). Neste post (último sobre a API DOM) vamos ver como editar um arquivo XML após tê-lo na árvore DOM.</p>
+<p class="title">Às vezes precisamos editar alguma informação do XML, modificar alguma informação, ou adicionar, ou até mesmo excluir algum dado do XML.</p>
+<p class="title">Vamos utilizar o XML abaixo como exemplo de arquivo inicial. O arquivo está nomeado como "contatos.xml":</p>
+<p class="title"><img class="aligncenter size-full wp-image-526" title="contatos_xml" src="{{ site.baseurl }}/images/assets/contatos_xml.png" alt="contatos_xml" width="549" height="356" /></p>
+<p>Antes de começarmos a modificar o XML, temos que ter o arquivo na árvore DOM, para isso, vamos carregar o arquivo na memória:</p>
+<p>[code lang="java"]<br />
+//fazer o parse do arquivo e criar o documento XML<br />
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();<br />
+DocumentBuilder db = dbf.newDocumentBuilder();<br />
+Document doc = db.parse(&amp;amp;amp;quot;contato.xml&amp;amp;amp;quot;);<br />
+[/code]</p>
+<p>Após carregar o arquivo, vamos chegar no nó que desejamos modificar. Vamos aproveitar e imprimir as informações no console para verificação:</p>
+<p>[code lang="java"]<br />
+//Passo 1: obter o elemento raiz<br />
+Element raiz = doc.getDocumentElement();</p>
+<p>//Passo 2: localizar os elementos filhos da agenda<br />
+NodeList listaContatos = raiz.getElementsByTagName(&amp;amp;amp;quot;contato&amp;amp;amp;quot;);</p>
+<p>//Passo 3: obter os elementos de cada elemento contato<br />
+for (int i=0; i&amp;amp;amp;lt;listaContatos.getLength(); i++){</p>
+<p>//como cada elemento do NodeList é um nó, precisamos fazer o cast<br />
+Element elementoContato = (Element) listaContatos.item(i);</p>
+<p>//cria um objeto Contato com as informações do elemento contato<br />
+Contato contato = criaContato(elementoContato);<br />
+System.out.println(contato);<br />
+[/code]</p>
+<p>Se um contato já estiver gravado (atributo gravado="SIM"), então vamos removê-lo do arquivo. Para isso, utilizamos o método <em>removeChild(Node noASerRemovido)</em>. Se o contato ainda não estiver gravado, vamos modificar o atributo para "SIM":</p>
+<p>[code lang="java"]<br />
+//remove o elemento do XML se contato já está gravado<br />
+//caso contrário, marca como gravado<br />
+if (contato.isGravado()){<br />
+raiz.removeChild(elementoContato);<br />
+i--; //atualiza, já que alterou o lenght<br />
+} else{<br />
+elementoContato.setAttribute(&amp;amp;amp;quot;gravado&amp;amp;amp;quot;, &amp;amp;amp;quot;SIM&amp;amp;amp;quot;);<br />
+}<br />
+[/code]</p>
+<p>Vamos agora substituir o telefone do contato de id="03". Para isso, vamos criar um novo Elemento <em>telefone</em> (lembrando que também temos que cria um Nó de texto para relacionar ao elemento Telefone (pode relembrar como é árvore DOM <a href="http://www.loiane.com/2009/04/manipulando-arquivos-xml-em-java-com-a-api-dom-parte-i/" target="_blank">aqui</a>)). Após criar o novo elemento telefone, vamos subtituir o novo elmento pelo elemento que já existe; para isso, utilizamos o método <em>replaceChild(Node novoNo, Node antigoNo)</em>:</p>
+<p>[code lang="java"]<br />
+//subtitui o telefone do Pedro da Silva<br />
+if (contato.getId() == 3){<br />
+Element tel = doc.createElement(&amp;amp;amp;quot;telefone&amp;amp;amp;quot;);<br />
+tel.appendChild(doc.createTextNode(&amp;amp;amp;quot;11 99999999&amp;amp;amp;quot;));<br />
+Node telefone = elementoContato.getElementsByTagName(&amp;amp;amp;quot;telefone&amp;amp;amp;quot;).item(0);<br />
+elementoContato.replaceChild(tel, telefone);<br />
+}<br />
+[/code]</p>
+<p>Vamos agora adicionar um novo elemento contato ao elmento raiz <em>agenda</em>. Para isso, vamos seguir a lógica da criação do elemento telefone. Passos a seguir:</p>
+<ol>
+<li>Criação do elemento contato</li>
+<li>Setar os atributos do elmento contato</li>
+<li>Criar o elemento nome + criar o TextNode (valor) do elemento nome</li>
+<li>Criar o elemento endereco + criar o TextNode (valor) do elemento endereco</li>
+<li>Criar o elemento telefone + criar o TextNode (valor) do elemento telefone</li>
+<li>Criar o elemento email + criar o TextNode (valor) do elemento email</li>
+<li>Adicionar o elementos nome, endereco, telefone e email ao elemento contato</li>
+</ol>
+<p>Lembrar que a ordem em que os elementos são inseridos é muito importate!<br />
+Para facilitar e poder reusar o código futuramente, vamos criar um método que faça isso:</p>
+<p>[code lang="java"]<br />
+public Element criaElementoAPartirContato(Contato contato){<br />
+//cria um elemento contato<br />
+Element element = doc.createElement(&amp;amp;amp;quot;contato&amp;amp;amp;quot;);</p>
+<p>//cria o atributo id e gravado<br />
+element.setAttribute(&amp;amp;amp;quot;id&amp;amp;amp;quot;, &amp;amp;amp;quot;04&amp;amp;amp;quot;);<br />
+element.setAttribute(&amp;amp;amp;quot;gravado&amp;amp;amp;quot;, &amp;amp;amp;quot;SIM&amp;amp;amp;quot;);</p>
+<p>//cria os elementos<br />
+Element nome = criaElementoGenerico(&amp;amp;amp;quot;nome&amp;amp;amp;quot;, contato.getNome());<br />
+Element endereco = criaElementoGenerico(&amp;amp;amp;quot;endereco&amp;amp;amp;quot;, contato.getEndereco());<br />
+Element telefone = criaElementoGenerico(&amp;amp;amp;quot;telefone&amp;amp;amp;quot;, contato.getTelefone());<br />
+Element email = criaElementoGenerico(&amp;amp;amp;quot;email&amp;amp;amp;quot;, contato.getEmail());</p>
+<p>//adiciona os elementos ao contato<br />
+element.appendChild(nome);<br />
+element.appendChild(endereco);<br />
+element.appendChild(telefone);<br />
+element.appendChild(email);</p>
+<p>return element;<br />
+}<br />
+[/code]</p>
+<p>Vamos utilizar o método no código principal, adicionando o elmento criado ao elemento raiz:</p>
+<p>[code lang="java"]<br />
+//Cria um novo elemento<br />
+Element novoContato = criaElementoAPartirContato(criaContatoFicticio());<br />
+//adiciona um novo elemento no XML<br />
+raiz.appendChild(novoContato);<br />
+[/code]</p>
+<p>Bem, já vimos como remover, modificar e adicionar elementos ao XML. Agora falta apenas gravar o arquivo modificado em algum lugar!<br />
+Se desejar, pode criar uma classe para montar o XML na mão, ou seja, montar as tags, identação, etc. Mas tem que tomar muito cuidado quando for fazer isso, pois pode acabar modificando a estrutura na serialização (sem querer), e o XML pode ficar inválido.</p>
+<p>Uma maneira que muitos desenvolvedores utilizam é criar uma <em>transformação identidade</em>, ou seja, é uma transformação XSL sem folha de estilo.<br />
+Você cria uma origem (documento DOM) e um destino (arquivo XML), e aplica a transformação sem folha de estilo.</p>
+<p>[code lang="java"]<br />
+//grava o documento XML editado<br />
+DOMSource source = new DOMSource(doc);<br />
+StreamResult result = new StreamResult(new FileOutputStream(&amp;amp;amp;quot;contato_modificado.xml&amp;amp;amp;quot;));<br />
+TransformerFactory transFactory = TransformerFactory.newInstance();<br />
+Transformer transformer = transFactory.newTransformer();<br />
+transformer.transform(source, result);<br />
+[/code]</p>
+<p>Após rodar o programa, vamos ter o seguinte XML modificado:</p>
+<p><img class="aligncenter size-full wp-image-533" title="contatos_mod_xml" src="{{ site.baseurl }}/images/assets/contatos_mod_xml.png" alt="contatos_mod_xml" width="525" height="372" /></p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank">aqui </a>(projeto no formato da IDE Eclipse)<br />
+<a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p>Até a próxima!</p>
