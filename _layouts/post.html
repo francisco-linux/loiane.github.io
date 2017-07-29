@@ -13,13 +13,13 @@ layout: default
         <div class="post-card__container">
           <div class="post-card__meta">
             <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/img/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
+              <img src="{{ site.baseurl }}/images/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
             </div>
             {{ page.date | date: "%-d %b, %Y" }}
           </div>
           <div class="post-card__meta">
             <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/img/tags/time.svg" alt="">
+              <img src="{{ site.baseurl }}/images/tags/time.svg" alt="">
             </div>
             {% assign words = content | strip_html | number_of_words %}
             {% if words < 360 %}
@@ -30,7 +30,7 @@ layout: default
           </div>
           <div class="post-card__meta">
             <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/img/icons/github-dark.svg" alt="">
+              <img src="{{ site.baseurl }}/images/icons/github-dark.svg" alt="">
             </div>
             {% if page.path %}
             <a class="post-card-edit" href="//github.com/loiane/loiane.github.io/blob/master/{{ page.path }}" target="_blank">
@@ -40,7 +40,7 @@ layout: default
           </div>
           <!--<div class="post-card__meta">
             <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/img/icons/comments.svg" alt="">
+              <img src="{{ site.baseurl }}/images/icons/comments.svg" alt="">
             </div>
             <span class="disqus-comment-count" data-disqus-url="http://loiane.com{{ page.url }}"></span>
           </div>-->
@@ -72,7 +72,7 @@ layout: default
       <a href="{{ page.previous.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.previous.title }}">
         <div class="post-card__meta">
           <div class="post-card__tag">
-            <img src="{{ site.baseurl }}/img/tags/{% if page.previous.tag %}{{ page.previous.tag }}{% else %}tag{% endif %}.svg" alt="">
+            <img src="{{ site.baseurl }}/images/tags/{% if page.previous.tag %}{{ page.previous.tag }}{% else %}tag{% endif %}.svg" alt="">
           </div>
           {{ page.previous.date | date: "%b %-d, %Y" }}
         </div>
@@ -90,7 +90,7 @@ layout: default
       <a href="{{ page.next.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.next.title }}">
         <div class="post-card__meta">
           <div class="post-card__tag">
-            <img src="{{ site.baseurl }}/img/tags/{% if page.next.tag %}{{ page.next.tag }}{% else %}tag{% endif %}.svg" alt="">
+            <img src="{{ site.baseurl }}/images/tags/{% if page.next.tag %}{{ page.next.tag }}{% else %}tag{% endif %}.svg" alt="">
           </div>
           {{ page.next.date | date: "%b %-d, %Y" }}
         </div>
