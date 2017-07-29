@@ -1,0 +1,56 @@
+---
+layout: post
+title: 'ExtJS: Exportar de GRID para Excel'
+date: 2010-02-08 09:01:30.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- excel
+- exportar grid excel
+- grid
+- grid extjs
+meta:
+views: '13249'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2010/01/extjs_export_gridpanel_excel.png"><img class="aligncenter size-full wp-image-1450" title="extjs_export_gridpanel_excel" src="{{ site.baseurl }}/images/assets/extjs_export_gridpanel_excel.png" alt="" width="599" height="340" /></a></p>
+<p style="text-align: justify;">Esse tutorial irá abordar como exportar dados de um ExtJS DataGrid para um arquivo Excel.</p>
+<p style="text-align: justify;">Às vezes, o usuário deseja exportar os dados de um graid para um arquivo excel (.xls ou .csv).<br />
+Existe um <a title="plugin ExtJS" href="http://www.extjs.com/forum/showthread.php?t=32400">plugin ExtJS</a> desenvolvido por terceiros que faz isso para você.</p>
+<p style="text-align: justify;">Existem alguns "probleminhas" que você deve saber antes de começar:</p>
+<ul style="text-align: justify;">
+<li>Só funciona em browsers que suportam <a title="data URLs" href="http://en.wikipedia.org/wiki/Data_URI_scheme">data URLs</a> (URL com dados), como Firefox, Opera e IE<strong>8</strong>.</li>
+<li>Testei com as seguintes versões do ExtJS: 2.2.1, 3.0, 3.0.3 e 3.1, mas só funcionou na versão 3.0. Se alguém estiver usando alguma outra versão e conseguir fazer funcionar, me avise, pois posso ter esquecido de algum detalhe.</li>
+<li>Só funcionad com os dados que estão no data Store - se você usar paginação, então crie um método para exportar no lado servidor. Esse plugin apenas é útil para quem desejar exportar uma pequena tabela para o Excel (todos os dados visíveis na tela).</li>
+<li>Se os dados no Store forem voláteis (podem mudar, sofrer update, etc), a URL para exportação deve ser recalculada.</li>
+</ul>
+<p style="text-align: justify;">Vamos começar:</p>
+<p style="text-align: justify;">Primeiro, crie um arquivo javascript no projeto e cole o seguinte código (criei um arquivo exporter.js): <a href="http://github.com/loiane/extjs-export-excel/blob/master/WebContent/js/exporter.js" target="_blank">http://github.com/loiane/extjs-export-excel/blob/master/WebContent/js/exporter.js</a> (esse arquivo tem muitas linhas, por isso não coloquei/colei o conteúdo aqui).</p>
+<p style="text-align: justify;">E no código que contém o grid, adiciona o seguinte código:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+var linkButton = new Ext.LinkButton({<br />
+id: 'grid-excel-button',<br />
+text: 'Export to Excel'<br />
+});</p>
+<p>//create the Grid<br />
+var grid = new Ext.grid.GridPanel({<br />
+bbar: new Ext.Toolbar({<br />
+buttons: [linkButton]<br />
+})<br />
+});</p>
+<p>linkButton.getEl().child('a', true).href = 'data:application/vnd.ms-excel;base64,' +<br />
+Base64.encode(grid.getExcelXml());<br />
+[/code]</p>
+<p style="text-align: justify;">Se tentar exportar a tabela da figura (por exemplo) para o arquivo excel, vai ficar mais ou menos assim:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2010/01/extjs_export_gridpanel_excel_file.png"><img class="aligncenter size-full wp-image-1451" title="extjs_export_gridpanel_excel_file" src="{{ site.baseurl }}/images/assets/extjs_export_gridpanel_excel_file.png" alt="" width="627" height="359" /></a></p>
+<p style="text-align: justify;">Você também pode trocar as cores, fontes, etc. Dê uma olhada no código do exporter.js, tente enterder e faça a mudanças que desejar.</p>
+<p style="text-align: justify;"><a title="Ed Spencer" href="http://edspencer.net/">Ed Spencer</a> também desenvolveu um <a title="similar plugin" href="http://github.com/edspencer/Ext.ux.Exporter">plugin similar</a>. O código fonte dele está mais limpo que este. Porém, o arquivo Excel gerado será o mesmo.</p>
+<p style="text-align: justify;">Você pode fazer o donwload do projeto exemplo (JEE) do meu repositório GitHub: <a href="http://github.com/loiane/extjs-export-excel" target="_blank">http://github.com/loiane/extjs-export-excel</a></p>
+<p style="text-align: justify;">Bons códigos!</p>

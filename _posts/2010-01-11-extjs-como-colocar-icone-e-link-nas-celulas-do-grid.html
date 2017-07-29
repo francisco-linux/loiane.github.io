@@ -1,0 +1,84 @@
+---
+layout: post
+title: 'ExtJS: Como colocar Ícone e Link nas Células do GRID'
+date: 2010-01-11 08:00:16.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- Ext JS 3
+- grid extjs
+meta:
+gwo4wp: a:4:{s:7:"enabled";s:0:"";s:14:"control_script";s:0:"";s:15:"tracking_script";s:0:"";s:17:"conversion_script";s:0:"";}
+_syntaxhighlighter_encoded: '1'
+_edit_last: '1'
+_topsy_long_url: http://www.loiane.com/2010/01/extjs-como-colocar-icone-e-link-nas-celulas-do-grid/
+topsy_short_url: http://bit.ly/6c9YMQ
+_sexybookmarks_shortUrl: http://tinyurl.com/29wjenb
+_sexybookmarks_permaHash: 42c4503259692fd06cd41ba78058e382
+views: '9250'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Esse tutorial aborda como colocar/fazer o display de um ícone ou link em uma célula do componente Grid do ExtJS.</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2009/12/extjs-grid-cell-with-image-and-link.png"><img class="aligncenter size-full wp-image-1370" title="extjs-grid-cell-with-image-and-link" src="{{ site.baseurl }}/images/assets/extjs-grid-cell-with-image-and-link.png" alt="" width="602" height="278" /></a></p>
+<p style="text-align: justify;">Para explicar isso, vamos utilizar um grid com informações básicas de uma pessoa (agenda), e ao invés de apenas mostrar o email do contato, vamos mostrar um icone (envelope), além de colocar um link do tipo <em>mailto</em>. Assim, quando o usuário clicar em cima do link, irá abrir o cliente de email, e este poderá enviar sua mensagem. Um processo bem simples.</p>
+<h3>Como fazer:</h3>
+<p style="text-align: justify;">Primeiro, precisamos de dados para o grid (dados ficticios):</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+//array with data - dummy data<br />
+var myData = [<br />
+['Meyers, Quyn R.',	'(943) 570-5141', 'Proin@nullamagna.ca','05/13/1990'],<br />
+	['Whitney, Tad T.',	'(547) 743-0343', 'vulputate@acurnaUt.org', '05/10/1987'],<br />
+	['Lawrence, Flavia J.',	'(404) 826-4553', 'dapibus.id@accumsan.ca',	'01/05/1988'],<br />
+	['Morales, Susan I.',	'(276) 707-8084', 'tristique@seacmetus.com','03/09/1992'],<br />
+	['Merrill, Desiree Q.', '(911) 546-0559', 'dictum.cursus@vel.ca', '01/07/1981'],<br />
+	['Hampton, Willa Y.',	'(729) 562-8303', 'nascetur@stellus.ca','06/17/1991'],<br />
+	['Brewer, Brynne F.',	'(818) 302-4393', 'ligula@ullamcorper.org',	'04/20/1989'],<br />
+	['Marsh, Drew D.',	'(645) 671-2779', 'et.euismod.et@eget.ca',	'02/13/1990']<br />
+];<br />
+[/code]</p>
+<p style="text-align: justify;">Depois vem a definição do Grid:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+// create grid<br />
+var grid = new Ext.grid.GridPanel({<br />
+store: store,<br />
+columns: [<br />
+{header: 'NAME', width: 170, sortable: true, dataIndex: 'name'},<br />
+{header: 'PHONE #', width: 150, sortable: true, dataIndex: 'phone'},<br />
+{header: 'BIRTHDAY', width: 100, sortable: true, dataIndex: 'birthday',<br />
+	renderer: Ext.util.Format.dateRenderer('d/m/Y')},<br />
+{header: 'EMAIL', width: 160, sortable: true, dataIndex: 'email',<br />
+	renderer: renderIcon }<br />
+],<br />
+title: 'My Contacts',<br />
+autoHeight:true,<br />
+width:600,<br />
+	renderTo: document.body,<br />
+	frame:true<br />
+});<br />
+[/code]</p>
+<h3>Como funciona:</h3>
+<p>[code lang="js" collapse="false" wraplines="false"]<br />
+{header: 'EMAIL', width: 160, sortable: true, dataIndex: 'email', renderer: renderIcon }<br />
+[/code]</p>
+<p style="text-align: justify;">Repare a coluna <strong>email</strong>, na definição do ColumnModel do data grid. Há um atributo chamado renderer. Uma função renderer é um método/função que intercepta e que pode modificar o valor de uma célula antes que esta seja renderizada (apareça no grid).</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+//image path<br />
+var IMG_EMAIL = '/gridcell-with-image/img/email_link.png';</p>
+<p>//renderer function<br />
+function renderIcon(val) {<br />
+return '&lt;a href=&quot;mailto:' + val + '&quot;&gt;'+ '&lt;img src=&quot;' + IMG_EMAIL + '&quot;&gt; ' + val+'&lt;/a&gt;';<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Na função, colocamos apenas um HTML básico de link com função mailto, mais o valor do email e o ícone.</p>
+<p style="text-align: justify;">Muito simples né?</p>
+<p style="text-align: justify;">Agora você pode ficar brincando e criar suas funções renderer!</p>
+<p>Download (J2EE project):&nbsp;<a href="http://github.com/loiane/gridcell-with-image" target="_blank"><img title="public" src="{{ site.baseurl }}/images/assets/public.png" alt="public" height="16" width="16" /> http://github.com/loiane/gridcell-with-image</a></p>
+<p>English: <a href=" http://loianegroner.com/2010/01/how-to-display-an-imagelink-inside-an-ext-js-gridpanels-cell/" target="_blank"> http://loianegroner.com/2010/01/how-to-display-an-imagelink-inside-an-ext-js-gridpanels-cell/</a></p>
+<p style="text-align: justify;">Bons códigos!</p>

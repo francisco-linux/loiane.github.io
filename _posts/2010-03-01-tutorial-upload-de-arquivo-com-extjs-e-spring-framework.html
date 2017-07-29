@@ -1,0 +1,204 @@
+---
+layout: post
+title: 'Tutorial: Upload de Arquivo com ExtJS e Spring Framework'
+date: 2010-03-01 08:30:59.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+- Spring
+tags:
+- ExtJS
+- ExtJS + JEE
+- file upload
+- upload arquivo
+meta:
+views: '11215'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/02/file_upload_spring_extjs_loiane.png"><img class="aligncenter size-full wp-image-1587" style="border: 1px solid black;" title="file_upload_spring_extjs_loiane" src="{{ site.baseurl }}/images/assets/file_upload_spring_extjs_loiane.png" alt="" width="513" height="149" /></a></p>
+<p>Esse tutorial aborda como implementar um form para upload de arquivo usando o form ExtJS no lado cliente e Spring Framework no lado servidor.</p>
+<p>O que você precisa antes de começar esse tutorial?</p>
+<ul>
+<li><a href="http://www.extjs.com/" target="_blank">ExtJS</a></li>
+<li><a href="http://www.springsource.com/download/community" target="_blank">Spring Framework</a> (MVC) e dependências (há uma opção com dependência para download)</li>
+<li><a href="http://commons.apache.org/downloads/download_io.cgi" target="_blank">commons-io-1.4.jar</a></li>
+<li><a href="http://commons.apache.org/downloads/download_fileupload.cgi" target="_blank">commons-fileupload-1.2.jar</a></li>
+</ul>
+<p>Primeiro precisa implementar o form de upload. você pode usar o que está disponível na página de exemplo do ExtJS (<a href="http://www.extjs.com/deploy/dev/examples/form/file-upload.html" target="_blank">File Upload example</a>) para ver as opções disponíveis (Estou usando o terceiro form).<br />
+Abaixo está o código que implementei (ou melhor, copiei da página de exemplo do ExtJS e adaptei de acordo com minha necessidade - Spring):</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.onReady(function(){</p>
+<p>Ext.QuickTips.init();</p>
+<p>var msg = function(title, msg){<br />
+Ext.Msg.show({<br />
+title: title,<br />
+msg: msg,<br />
+minWidth: 200,<br />
+modal: true,<br />
+icon: Ext.Msg.INFO,<br />
+buttons: Ext.Msg.OK<br />
+});<br />
+};</p>
+<p>var fp = new Ext.FormPanel({<br />
+renderTo: 'fi-form',<br />
+fileUpload: true,<br />
+width: 500,<br />
+frame: true,<br />
+title: 'File Upload Form',<br />
+autoHeight: true,<br />
+bodyStyle: 'padding: 10px 10px 0 10px;',<br />
+labelWidth: 50,<br />
+defaults: {<br />
+anchor: '95%',<br />
+allowBlank: false,<br />
+msgTarget: 'side'<br />
+},<br />
+items: [{<br />
+xtype: 'fileuploadfield',<br />
+id: 'form-file',<br />
+emptyText: 'Select a File to import',<br />
+fieldLabel: 'File',<br />
+name: 'file',<br />
+buttonCfg: {<br />
+text: '',<br />
+iconCls: 'upload-icon'<br />
+}<br />
+}],<br />
+buttons: [{<br />
+text: 'Upload',<br />
+handler: function(){<br />
+if(fp.getForm().isValid()){<br />
+	fp.getForm().submit({<br />
+	url: 'fileUpload/import.action',<br />
+	waitMsg: 'Uploading your file...',<br />
+	success: function(fp, o){<br />
+	msg('Success', 'Processed file on the server');<br />
+	}<br />
+	});<br />
+}<br />
+}<br />
+},{<br />
+text: 'Reset',<br />
+handler: function(){<br />
+fp.getForm().reset();<br />
+}<br />
+}]<br />
+});</p>
+<p>});<br />
+[/code]</p>
+<p>E aqui tem o exemplo de como usar (página HTML):</p>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;title&gt;Spring FileUpload Example with ExtJS Form&lt;/title&gt;</p>
+<p>&lt;!-- Ext JS files --&gt;<br />
+	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/extjs-file-import-spring/ext-3.1.1/resources/css/ext-all.css&quot; /&gt;</p>
+<p>	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/extjs-file-import-spring/ext-3.1.1/examples/shared/examples.css&quot; /&gt;<br />
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/extjs-file-import-spring/ext-3.1.1/examples/ux/fileuploadfield/css/fileuploadfield.css&quot;/&gt;</p>
+<p>	&lt;style type=text/css&gt;<br />
+.upload-icon {<br />
+background: url('/extjs-file-import-spring/ext-3.1.1/examples/shared/icons/fam/image_add.png') no-repeat 0 0 !important;<br />
+}<br />
+&lt;/style&gt;</p>
+<p>	&lt;script src=&quot;/extjs-file-import-spring/ext-3.1.1/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;<br />
+	&lt;script src=&quot;/extjs-file-import-spring/ext-3.1.1/ext-all.js&quot;&gt;&lt;/script&gt;</p>
+<p>	&lt;script src=&quot;/extjs-file-import-spring/ext-3.1.1/examples/ux/fileuploadfield/FileUploadField.js&quot;&gt;&lt;/script&gt;</p>
+<p>	&lt;!-- file upload form --&gt;<br />
+	&lt;script src=&quot;/extjs-file-import-spring/js/file-upload.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;/head&gt;<br />
+&lt;body&gt;</p>
+<p>	&lt;h1&gt;Spring File Upload Example Integrated with ExtJS FileUpload Form&lt;/h1&gt;<br />
+	&lt;p&gt;Click on &quot;Browse&quot; button (image) to select a file and click on Upload button&lt;/p&gt;<br />
+	&lt;div id=&quot;fi-form&quot;&gt;&lt;/div&gt;</p>
+<p>&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<p>Antes de começar a codificar o Controoler, é necessário ter um FileUploadBean (não é obrigatório, mas para deixar mais organizado):</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.beans;</p>
+<p>import org.springframework.web.multipart.MultipartFile;</p>
+<p>public class FileUploadBean {</p>
+<p>	private MultipartFile file;</p>
+<p>	public MultipartFile getFile() {<br />
+		return file;<br />
+	}</p>
+<p>	public void setFile(MultipartFile file) {<br />
+		this.file = file;<br />
+	}</p>
+<p>}<br />
+[/code]</p>
+<p>E aqui está o FileUploadController (apenas estou gravando o arquivo que foi feito upload para o diretório C:). Você pode adicionar alguma validação ou processar o arquivo nesta classe (mas por favor, adicione uma classe de serviço para isso - controller é apenas para redirecionar o request! ;)). Você também pode retornar mensagens para o ExtJS dizendo que foi um sucesso ou alguma mensagem de erro.</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.web;</p>
+<p>import java.io.FileOutputStream;<br />
+import java.io.IOException;<br />
+import java.io.InputStream;<br />
+import java.io.OutputStream;</p>
+<p>import javax.servlet.ServletException;<br />
+import javax.servlet.http.HttpServletRequest;<br />
+import javax.servlet.http.HttpServletResponse;</p>
+<p>import org.springframework.validation.BindException;<br />
+import org.springframework.web.bind.ServletRequestDataBinder;<br />
+import org.springframework.web.multipart.MultipartFile;<br />
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;<br />
+import org.springframework.web.servlet.ModelAndView;<br />
+import org.springframework.web.servlet.mvc.SimpleFormController;</p>
+<p>import com.loiane.beans.FileUploadBean;</p>
+<p>public class FileUploadController extends SimpleFormController{</p>
+<p>	protected ModelAndView onSubmit(<br />
+			HttpServletRequest request,<br />
+			HttpServletResponse response,<br />
+			Object command,<br />
+			BindException errors) throws ServletException, IOException {</p>
+<p>		// cast the bean<br />
+		FileUploadBean bean = (FileUploadBean) command;</p>
+<p>		MultipartFile file = bean.getFile();<br />
+		String fileName = null;</p>
+<p>		if (file == null) {<br />
+			System.out.println(&quot;User Did not upload file&quot;);<br />
+		}<br />
+		else {<br />
+			System.out.println(&quot;Uploaded File Name is :&quot; + file.getOriginalFilename());<br />
+		}</p>
+<p>		InputStream inputStream = null;<br />
+		OutputStream outputStream = null;<br />
+		if (file.getSize() &gt; 0) {<br />
+			inputStream = file.getInputStream();<br />
+			String root = &quot;C:\\&quot;;<br />
+			fileName = root + file.getOriginalFilename();<br />
+			outputStream = new FileOutputStream(fileName);<br />
+			int readBytes = 0;<br />
+			byte[] buffer = new byte[10000];<br />
+			while ((readBytes = inputStream.read(buffer, 0 , 10000))!=-1){</p>
+<p>				outputStream.write(buffer, 0, readBytes);<br />
+			}<br />
+			outputStream.close();<br />
+			inputStream.close();<br />
+		}</p>
+<p>		return null;</p>
+<p>	}</p>
+<p>	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder)<br />
+	throws ServletException {<br />
+		// to actually be able to convert Multipart instance to byte[]<br />
+		// we have to register a custom editor<br />
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());<br />
+		// now Spring knows how to handle multipart object and convert them<br />
+	}</p>
+<p>}<br />
+[/code]</p>
+<p>Também é preciso adicionar esse bloco de código no arquivo servlet.xml:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+	&lt;!-- max upload size in bytes --&gt;<br />
+ &lt;bean id=&quot;multipartResolver&quot; class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;<br />
+ 	&lt;property name=&quot;maxUploadSize&quot; value=&quot;1000000&quot;/&gt;<br />
+ &lt;/bean&gt;<br />
+[/code]</p>
+<p>Bem simples!</p>
+<p>Você pode fazer o download do projeto de exemplo do meu github: <a href="http://github.com/loiane/extjs-file-import-spring" target="_blank">http://github.com/loiane/extjs-file-import-spring</a></p>
+<p>Bons códigos!</p>

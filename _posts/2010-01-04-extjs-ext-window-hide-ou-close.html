@@ -1,0 +1,89 @@
+---
+layout: post
+title: 'ExtJS: Ext.Window: hide ou close?'
+date: 2010-01-04 08:00:22.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- Ext JS 3
+- Ext.Window
+meta:
+views: '29259'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Neste curto tutorial, você vai aprender como controlar o componente Ext.Window Panel do ExtJS.<br />
+<a href="http://www.loiane.com/wp-content/uploads/2009/12/ext.window_hide_or_close.png"><img class="aligncenter size-full wp-image-1354" title="ext.window_hide_or_close" src="{{ site.baseurl }}/images/assets/ext.window_hide_or_close.png" alt="" width="511" height="312" /></a></p>
+<p style="text-align: justify;"><strong>Problema</strong>: você criou uma janela com ExtJS, e ela funcionou perfeitamente na primeira vez. Quando a aplicação disparou o evento para abrir a janela pela segunda vez, nada aconteceu, ou você viu um erro no firebug (algum coisa is not defined ou alguma coisa is null). Como reparar isso?</p>
+<p style="text-align: justify;"><strong>Solução</strong>: quando você não diz como o Ext.Window deve trabalhar, o comportamento padrão é fechar (close) o componente, e com isso, destruí-lo (destroy). Devemos então, esconder (hide) o componente, assim, poderemos reutilizá-lo nas próximas vezes.</p>
+<p style="text-align: justify;">Código de Exemplo (referência: http://www.extjs.com/deploy/dev/examples/window/hello.html):</p>
+<p style="text-align: justify;"><strong>HTML</strong>:</p>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;title&gt;Ext.Window: close or hide&lt;/title&gt;</p>
+<p>	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/ext-window/ext-3.0.3/resources/css/ext-all.css&quot; /&gt;</p>
+<p>	&lt;script src=&quot;/ext-window/ext-3.0.3/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;<br />
+	&lt;script src=&quot;/ext-window/ext-3.0.3/ext-all.js&quot;&gt;&lt;/script&gt;</p>
+<p>	&lt;script src=&quot;/ext-window/js/ext-window.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;/head&gt;<br />
+&lt;body&gt;<br />
+	&lt;input type=&quot;button&quot; id=&quot;show-btn&quot; value=&quot;Show Window&quot; /&gt;</p>
+<p>	&lt;div id=&quot;hello-win&quot; class=&quot;x-hidden&quot;&gt;</p>
+<p>&lt;div class=&quot;x-window-header&quot;&gt;Hello Dialog&lt;/div&gt;<br />
+&lt;div id=&quot;hello-tabs&quot;&gt;<br />
+&lt;!-- Auto create tab 1 --&gt;<br />
+&lt;div class=&quot;x-tab&quot; title=&quot;Hello World&quot;&gt;<br />
+&lt;p&gt;Ext.Window Panel: Close or Hide?&lt;/p&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;</p>
+<p>&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/code]</p>
+<p><strong>JS</strong>:</p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+Ext.onReady(function(){</p>
+<p>	Ext.BLANK_IMAGE_URL = '/ext-window/ext-3.0.3/resources/images/default/s.gif';</p>
+<p>var win;<br />
+var button = Ext.get('show-btn');</p>
+<p>var tab = new Ext.TabPanel({<br />
+applyTo: 'hello-tabs',<br />
+autoTabs:true,<br />
+activeTab:0,<br />
+deferredRender:false,<br />
+border:false<br />
+});</p>
+<p>button.on('click', function(){</p>
+<p>// create the window on the first click and reuse on subsequent clicks<br />
+	//cria a janela no primeiro clique e a reusa nos próximos cliques<br />
+if(!win){<br />
+win = new Ext.Window({<br />
+applyTo:'hello-win',<br />
+layout:'fit',<br />
+width:500,<br />
+height:300,<br />
+closeAction:'hide', //'close' - destroy the component<br />
+plain: true,</p>
+<p>items: tab,</p>
+<p>buttons: [{<br />
+text: 'Close',<br />
+handler: function(){<br />
+win.hide();<br />
+}<br />
+}]<br />
+});<br />
+}<br />
+win.show(this);<br />
+});<br />
+});<br />
+[/code]</p>
+<p>Bons códigos!</p>
+<p>English Version of this post: <a href="http://loianegroner.com/2010/01/ext-window-panel-show-or-hide/" target="_blank">Ext.Window Panel: Show or Hide?</a></p>
+<p>Download do projeto: <a href="http://github.com/loiane/ext-window" target="_blank"><img title="public" src="{{ site.baseurl }}/images/assets/public.png" alt="public" width="16" height="16" /> http://github.com/loiane/ext-window</a></p>

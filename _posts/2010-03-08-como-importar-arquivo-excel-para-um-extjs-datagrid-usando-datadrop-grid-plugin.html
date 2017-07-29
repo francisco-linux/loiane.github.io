@@ -1,0 +1,64 @@
+---
+layout: post
+title: Como Importar Arquivo Excel para um ExtJS DataGrid usando DataDrop Grid Plugin
+date: 2010-03-08 10:31:13.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Ext JS 3
+tags:
+- excel
+- ExtJS
+- grid extjs
+- importar excel
+meta:
+views: '7518'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2010/03/extjs_datadrop_excel_grid_plugin.jpg"><img class="aligncenter size-full wp-image-1621" title="extjs_datadrop_excel_grid_plugin" src="{{ site.baseurl }}/images/assets/extjs_datadrop_excel_grid_plugin.jpg" alt="" width="749" height="396" /></a></p>
+<p style="text-align: justify;">Este tutorial mostra como importar dados de uma planilha excel para um grid/tabela do ExtJS usando o plugin DataDrop (por <a href="http://www.vinylfox.com/" target="_blank">Shea Freaderick</a>) - selecionar, clicar e arrastar.</p>
+<p style="text-align: justify;">Semana passada estava procurando um plugin que permite importar dados do excel diretamente para um grid.</p>
+<p style="text-align: justify;">Não achei nenhum plugin que fizesse isso no <a href="http://www.extjs.com/forum/" target="_blank">forum ExtJS</a> que funcione como o <a href="http://www.loiane.com/2010/02/extjs-exportar-de-grid-para-excel/" target="_blank">plugin para exportar dados do grid para excel</a>; isto é, em plugin que não precise de nenhum código no lado servidor –  bem, se quisesse algum código do lado servidor eu poderia simplesmente usar o <a href="http://www.loiane.com/2010/03/tutorial-upload-de-arquivo-com-extjs-e-spring-framework/" target="_blank">plugin para fazer upload de arquivo</a> e fazer toda a parte da lógica no lado servidor (com Java, PHP ou qualquer outra linguagem), mas não era isso que eu estava procurando.</p>
+<p style="text-align: justify;">Entretanto, achei um plugin muito interessante. Na verdade, esse plugin é tudo de bom. Até agora, é o plugin mais legal que já vi para data grid do ExtJS! Realmente é incrível e virei super fã dos envolvidos no desenvolvimento deste.</p>
+<p style="text-align: justify;"><strong>Ok, mas o que é este plugin de que tanto estou falando?</strong></p>
+<p style="text-align: justify;">É chamado de <a href="http://www.vinylfox.com/datadrop-drag-grid-data-from-spreadsheet/" target="_blank">DataDrop</a> desenvolvido por <a href="http://www.vinylfox.com/" target="_blank">Shea Frederick</a> (também conhecido como <a href="http://www.vinylfox.com/" target="_blank">VinylFox</a> no fórum do ExtJS) e você pode fazer drag e drop a partir de uma planilha excel. Muito legal!</p>
+<p style="text-align: justify;">Esse plugin é muito útil se você precisa importar dados do excel de maneira super rápida. Mas no meu ponto de vista, se você precisar importar uma quantidade grande de dados de uma planilha, esse plugin não é muito prático, quer dizer, não é prático selecionar várias linhas e colunas da planilha (digamos, umas 10 mil linhas - isso vai ser um pouco chato de fazer). Bem, de qualquer maneira, o plugin funciona!</p>
+<p style="text-align: justify;"><strong>O que é preciso para usar o plugin?</strong></p>
+<p style="text-align: justify;"><strong>1 - Download do plugin do repositório do autor (</strong><a href="http://code.google.com/p/ext-ux-datadrop/" target="_blank"><strong>Google code</strong></a><strong>)</strong></p>
+<p style="text-align: justify;"><strong>2 - Adicionar os imports dos arquivos javascript na sua página html (juntamente com os outros imports de outros arquivos ExtJS)</strong></p>
+<p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+	&lt;script src=&quot;/extjs-grid-dragdrop-excel/js/datadrop-plugin/Override.js&quot;&gt;&lt;/script&gt;<br />
+	&lt;script src=&quot;/extjs-grid-dragdrop-excel/js/datadrop-plugin/Ext.ux.DataDrop.js&quot;&gt;&lt;/script&gt;<br />
+[/code]</p>
+<p style="text-align: justify;"><strong>3 - Adicionar o “</strong><em><strong>Ext.ux.grid.DataDrop</strong></em><strong>” na declaração de plugins do datagrid:</strong></p>
+<p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="11"]<br />
+// create grid<br />
+var grid = new Ext.grid.GridPanel({<br />
+store: store,<br />
+columns: [<br />
+{header: &quot;NAME&quot;, width: 170, sortable: true, dataIndex: 'name'},<br />
+{header: &quot;PHONE #&quot;, width: 150, sortable: true, dataIndex: 'phone'},<br />
+{header: &quot;EMAIL&quot;, width: 150, sortable: true, dataIndex: 'email'},<br />
+{header: &quot;BIRTHDAY&quot;, width: 100, sortable: true, dataIndex: 'birthday',<br />
+	renderer: Ext.util.Format.dateRenderer('m/d/Y')}<br />
+],<br />
+plugins: [Ext.ux.grid.DataDrop],<br />
+title: 'My Contacts',<br />
+autoHeight:true,<br />
+width:590,<br />
+		renderTo: document.body,<br />
+		frame:true<br />
+});<br />
+[/code]</p>
+<p style="text-align: justify;">Você pode fazer o donwload do exemplo que fiz a partir do meu respositório GitHub: <a href="http://github.com/loiane/extjs-grid-dragdrop-excel" target="_blank">http://github.com/loiane/extjs-grid-dragdrop-excel</a></p>
+<p style="text-align: justify;"><strong>Outras observações:</strong></p>
+<p style="text-align: justify;">No <a href="http://www.vinylfox.com/datadrop-drag-grid-data-from-spreadsheet/" target="_blank">website do VinylFox</a>, tem um vídeo que demonstra como o plugin funciona, e ele usa o Open Office.</p>
+<p style="text-align: justify;">Na minha primeira tentativa para fazer o plugin funcionar, tentei selecionar dados do Microsoft Excel e fazer o drag e drop no grid, mas não sabia como arrastar os dados do excel (sim, eu sei, sou totalmente newbie quando se trata de M$ Excel– só sei fazer matemática básica – realmente vergonhoso! :( ) – Com Open Office e Lotus Symphony é tão simples, você pode selecionar e clicar em qualquer lugar da seleção para arrastar!</p>
+<p style="text-align: justify;">If you are newbie just like me, Bem, se você for um newbie como eu, fiz um pequeno vídeo demonstrando como fazer (tem que clicar na borda da seleção para arrastar):</p>
+<p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/Seq7rQgILvg&amp;hl=pt_BR&amp;fs=1&amp;color1=0x2b405b&amp;color2=0x6b8ab6" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/Seq7rQgILvg&amp;hl=pt_BR&amp;fs=1&amp;color1=0x2b405b&amp;color2=0x6b8ab6" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
+<p style="text-align: justify;">Bons códigos!</p>
