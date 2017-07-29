@@ -10,7 +10,7 @@ twitter_username: loiane
 github_username:  loiane
 include: [_pages]
 exclude: ['node_modules']
-paginate: 11
+paginate: 12
 paginate_path: "/page:num/"
 permalink: /:year/:month/:title
 sass:
