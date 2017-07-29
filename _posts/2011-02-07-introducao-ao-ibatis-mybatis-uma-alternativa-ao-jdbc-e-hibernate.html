@@ -1,0 +1,68 @@
+---
+layout: post
+title: Introdução ao iBatis (MyBatis), uma alternativa ao JDBC e Hibernate
+date: 2011-02-07 08:00:10.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- iBatis (MyBatis)
+tags:
+- banco de dados
+- framework de persistência
+- iBatis
+- Java
+- MyBatis
+- persistência de dados
+meta:
+_edit_last: '1'
+views: '12308'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Escrevi alguns artigos/tutoriais sobre <a href="http://ibatis.apache.org/" target="_blank">iBatis</a>/<a href="http://www.mybatis.org/" target="_blank">MyBatis</a>. Este é o primeiro e tem objetivo introduzir o que é o framework e porquê deveria utilizá-lo...</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"><img class="aligncenter size-full wp-image-2152" title="ibatis_mybatis_loiane" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane.png" alt="" width="274" height="149" /></a></p>
+<p style="text-align: justify;">Para aqueles que ainda não conhecem, o <a href="http://ibatis.apache.org/" target="_blank">iBatis</a>/<a href="http://www.mybatis.org/" target="_blank">MyBatis </a>é um framework de persistência – uma alternativa ao JDBC e ao Hibernate. Tem suporte para Java e .NET. Aqui no blog vou focar no Java!</p>
+<p style="text-align: justify;">Estou trabalhando há 2 anos com esse framework e tenho gostado muito. É bem leve e muito potente!</p>
+<p style="text-align: justify;">Mas por que <a href="http://ibatis.apache.org/" target="_blank">iBatis</a>/<a href="http://www.mybatis.org/" target="_blank">MyBatis</a>? Tem dois nomes? Até Junho de 2010, o iBatis estava sob a licença Apache, e após esse período decidiram migrar para o Google Code, e também mudaram o nome para MyBatis. Exceto pelo schema dos arquivos de configuração, o framework não mudou.</p>
+<p style="text-align: justify;">Bem, como este é apenas um post de introdução, peguei algumas fontes na rede e vou citá-las aqui no blog (traduzido e adaptado). Os próximos posts (tutoriais) que vou publicar são projetos que implementei para exemplificar.</p>
+<h3>O que é MyBatis/iBatis?</h3>
+<blockquote>
+<p style="text-align: justify;">O MyBatis é um framework de persistência que facilita o uso entre um banco de dados relacional e aplicações orientadas a objetos. O MyBatis mapeia objetos com stored procedures ou queries SQL utilizando um XML como arquivo de configuração. A maior vantagem do MyBatis sobre outras ferramentas é a simplicidade.<br />
+Para usar o MyBatis, você depende apenas dos seus própios objetos, próprio código SQL e XML. A curva de aprendizagem é muito pequena. Você tem poder total sobre as suas queries SQL e stored procedures.<br />
+(www.mybatis.org)</p>
+</blockquote>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/flow_mybatis.png"><img class="aligncenter size-full wp-image-2153" title="flow_mybatis" src="{{ site.baseurl }}/images/assets/flow_mybatis.png" alt="" width="420" height="360" /></a></p>
+<blockquote><p><strong><em> O que é iBatis ?</em></strong></p>
+<ul>
+<li>Um framework JDBC</li>
+<li>O desenvolvedor escreve o código SQL, e o iBATIS executa usando JDBC.</li>
+<li>Não precisa de try/catch/finally/try/catch.</li>
+<li>Mapeador SQL</li>
+<li>Automaticamente mapeia as propriedades dos objetos com parâmetros da query SQL.</li>
+<li>Automaticamente mapeia os resultados da query com os objetos.</li>
+<li>Tem suporte ao problema das queries com relacionamento N+1.</li>
+<li>Gerente de transações</li>
+<li>iBATIS fornece o gerenciamento de transactions para operações no banco de dados se não houver outro gerenciador disponível .</li>
+<li>IBATIS usará outro gerenciador de transactions se disponível (Spring, EJB CMT, etc.).</li>
+<li>Ótima integração com Spring,mas também pode ser usado sem o Spring (o Spring foi um dos primeiros frameworks a dar suporte ao iBATIS).</li>
+</ul>
+<p><strong><em>O que o iBATIS não é ?</em></strong></p>
+<ul>
+<li>Um ORM</li>
+<li>Não gera SQL</li>
+<li>Não tem uma linguagem propretária</li>
+<li>Não sabe sobre a identidade do objeto</li>
+<li>Não faz persistência de objetos automaticamente</li>
+<li>Não faz cache de objetos</li>
+</ul>
+<p style="text-align: justify;">(<a href="http://www.developersbook.com" target="_blank">http://www.developersbook.com</a> )</p>
+</blockquote>
+<h3>Quem está usandoiBatis/MyBatis?</h3>
+<p>Você pode conferir a lista neste link: <a href="http://www.apachebookstore.com/confluence/oss/pages/viewpage.action?pageId=25" target="_blank">http://www.apachebookstore.com/confluence/oss/pages/viewpage.action?pageId=25</a></p>
+<p>O maior caso é o <a href="http://www.myspace.com/" target="_blank">MySpace</a>, com milhões de usuário. Muito legal!</p>
+<p style="text-align: justify;">Este artigo foi apenas uma introdução. Nos próximos vamos começar a colocar a mão na massa! ;)</p>
+<p style="text-align: justify;">Até a próxima!</p>

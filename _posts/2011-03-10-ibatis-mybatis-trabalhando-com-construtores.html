@@ -1,0 +1,117 @@
+---
+layout: post
+title: 'IBatis (MyBatis): Trabalhando com Construtores'
+date: 2011-03-10 08:00:57.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- iBatis (MyBatis)
+tags:
+- annotations
+- banco de dados
+- constructor
+- iBatis
+- ibatis annotation
+- Java
+- MyBatis
+- MyBatis annotation
+- MySQL
+meta:
+_edit_last: '1'
+_syntaxhighlighter_encoded: '1'
+_thumbnail_id: '2152'
+views: '3125'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Este tutorial tem como objetivo fazer o setup de uma aplicação Java usando <a href="http://www.mybatis.org/" target="_blank">iBatis</a> (<a href="http://www.mybatis.org/" target="_blank">MyBatis</a>) demonstrando o uso de contrutores com argumentos (parâmetros).</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"><img class="aligncenter size-full wp-image-2152" title="ibatis_mybatis_loiane" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane.png" alt="" width="274" height="149" /></a></p>
+<p><a href="http://loianegroner.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"></a></p>
+<h2>Pré-Requisitos</h2>
+<p>Para este tutorial usei:</p>
+<p>IDE: <a href="http://eclipse.org/" target="_blank">Eclipse</a> (você pode usar a sua IDE favorita)<br />
+DataBase: <a href="http://dev.mysql.com/downloads/" target="_blank">MySQL</a><br />
+Libs/jars: <a href="http://www.mybatis.org/" target="_blank">Mybatis</a>, <a href="http://dev.mysql.com/downloads/" target="_blank">MySQL</a> conector e <a href="http://www.junit.org/" target="_blank">JUnit</a> (para testes)</p>
+<p>No Eclipse, a estrutura do seu projeto vai ficar assim:</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_constructor_project.png"><img class="aligncenter size-full wp-image-2329" title="ibatis_mybatis_loiane_constructor_project" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_constructor_project.png" alt="" width="255" height="373" /></a></p>
+<p><a href="http://loianegroner.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_handling_joins.png"></a></p>
+<h2>Dados de Exemplo</h2>
+<p>Execute o script que está dentro da pasta sql antes de começar o projeto. Este arquivo contém os dados de exemplo usados neste tutorial.</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_constructor.PNG.png"><img class="aligncenter size-full wp-image-2349" title="ibatis_mybatis_loiane_constructor.PNG" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_constructor.PNG.png" alt="" width="140" height="129" /></a></p>
+<h2>1 - Blog POJO</h2>
+<p>Representei o POJO que vamos usar neste tutorial com um diagrama UML, mas você pode fazer o download do código fonte completo no final deste tutorial.<br />
+<a href="http://loianegroner.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_uml_handlingjoins.png"></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_constructor_uml.png"><img class="aligncenter size-full wp-image-2346" title="ibatis_mybatis_loiane_constructor_uml" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_constructor_uml.png" alt="" width="511" height="224" /></a></p>
+<p style="text-align: justify;">Como podem ver, não temos um construtor padrão na classe Blog, apenas temos um construtor com argumentos. Alguns frameworks de persistência não suportam esse tipo de situação, mas você precisa ter cuidado ao implementar a lógica de negócio.</p>
+<p style="text-align: justify;">Vamos dizer que você tem dois atributos na sua classe que são obrigatórios (não podem ser nulos), e apenas um construtor padrão (aquele new Blog()). Nada te impede de instanciar a classe e tentar fazer um insert ou update no banco. E aí você tem uma exception. Para prevenir esse tipo de situação, você pode criar um construtor com argumentos e não ter o construtor padrão.</p>
+<h2>2 - Blog Mapper - XML</h2>
+<blockquote>
+<div id="_mcePaste" style="text-align: justify;">Para injetar os resultados no construtor, o MyBatis precisa identificar o contrutor pelo tipo e seus parâmetros. Em Java não existe uma maneira para introspectar (ou refletir) o nome de parâmetros. Quando for cirar um elemento construtor, tenha certeza de que os argumentos estão na ordem correta (declaração) e que todos os tipos de dados estão especificados.</div>
+</blockquote>
+<p>Usar construtor não impede que você tenha outros results mapeados. Você ainda pode ter outros atributos, association, collection, etc.</p>
+<p style="text-align: justify;">O nosso arquivo Blog.xml com um elemento constructor declarado:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+&lt;!DOCTYPE mapper<br />
+PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;<br />
+	&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</p>
+<p>&lt;mapper namespace=&quot;Blog&quot;&gt;</p>
+<p>	&lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+		&lt;constructor&gt;<br />
+			&lt;idArg column=&quot;id&quot; javaType=&quot;int&quot;/&gt;<br />
+			&lt;arg column=&quot;url&quot; javaType=&quot;String&quot;/&gt;<br />
+		&lt;/constructor&gt;<br />
+	&lt;result property=&quot;name&quot;/&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;select id=&quot;selectBlog&quot; resultMap=&quot;resultBlog&quot;&gt;<br />
+	SELECT idBlog as id, name, url FROM BLOG<br />
+&lt;/select&gt;</p>
+<p>&lt;/mapper&gt;<br />
+[/code]</p>
+<h2>3 - Blog Mapper - Annotations</h2>
+<p>Agora que fizemos as configurações em XML, vamos ver como fica usando annotations.</p>
+<p>Esse é o código para a classe BlogMapper.java:<br />
+[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.data;</p>
+<p>import java.util.List;</p>
+<p>import org.apache.ibatis.annotations.Arg;<br />
+import org.apache.ibatis.annotations.ConstructorArgs;<br />
+import org.apache.ibatis.annotations.Select;</p>
+<p>import com.loiane.model.Blog;</p>
+<p>public interface BlogMapper {</p>
+<p>	/**<br />
+	 * Returns the list of all Blog instances from the database.<br />
+	 * @return the list of all Blog instances from the database.<br />
+	 */<br />
+	@Select(&quot;SELECT idBlog as id, name, url FROM BLOG &quot;)<br />
+	@ConstructorArgs(value = {<br />
+@Arg(column=&quot;id&quot;,javaType=Integer.class),<br />
+@Arg(column=&quot;url&quot;,javaType=String.class)<br />
+})<br />
+	List&lt;Blog&gt; selectAllBlogs();<br />
+}<br />
+[/code]<br />
+Vamos dar uma olhada nas annotations @ConstructorArgs e @Arg:</p>
+<h3>@ConstructorArgs</h3>
+<p>Coleta um grupo de results para serem passados para um construtor.</p>
+<p>Atributos: value, que é um array de Args.</p>
+<p>Equivalente em XML: constructor</p>
+<h3>@Arg</h3>
+<p>Apenas um argumento do construtor que faz parte do array de Args do ContructorArgs.</p>
+<p>Atributos: id, column, javaType, jdbcType, typeHandler.</p>
+<p>O atributo id é um valor booleano que identifica a propriedade a ser usada em comparações, similar ao elemento idArg no XML;</p>
+<p>Equivalente em XML: idArg, arg</p>
+<p>Não precisamos usar a annotation @Results pois os outros atributos possuem o mesmo nome no result set. Mas se precisa, pode usar como fizemos em exemplos anteriores.</p>
+<p><strong>Download</strong></p>
+<div>
+<p>Se desejar, pode fazer o download do código completo na minha conta do GitHub: <a href="https://github.com/loiane/ibatis-constructor" target="_blank">https://github.com/loiane/ibatis-constructor</a></p>
+<p>Se desejar fazer o download do arquivo zip do projeto, clique em download (depois é só importar no Eclipse ou outra IDE):</p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank"><img title="donwload-github-example-loiane" src="{{ site.baseurl }}/images/assets/donwload-github-example-loiane.png" alt="" width="572" height="219" /></a></p>
+<p><a href="http://loianegroner.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank"></a></p>
+<p>Mais artigos sobre iBatis estão por vir. Fique ligado!</p>
+<p>Bons códigos! :)</p>
+</div>

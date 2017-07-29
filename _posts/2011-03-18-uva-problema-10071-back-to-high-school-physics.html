@@ -1,0 +1,107 @@
+---
+layout: post
+title: 'UVa: Problema 10071 - Back to High School Physics'
+date: 2011-03-18 08:00:40.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- UVa Online Judge
+tags:
+- algoritmos
+- Back to High School Physics
+- cinemática
+- deslocamente-velocidade-aceleração
+- física
+- Java
+- UVa 10071
+- UVa Online Judge
+meta:
+_edit_last: '1'
+_syntaxhighlighter_encoded: '1'
+views: '4819'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Mais um problema resolvido do UVa. Neste post vamos resolver o problema <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=1012" target="_blank">10071 - Back to High School Physics</a> (De volta para a física do ensino médio) em Java.</p>
+<h3 style="text-align: justify;">Descrição do problema:</h3>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/logouva_10071.jpg"><img class="alignleft size-full wp-image-2371" title="logouva_10071" src="{{ site.baseurl }}/images/assets/logouva_10071.jpg" alt="" width="94" height="95" /></a>Uma partícula tem uma velocidade inicial e aceleração constante. Se a velocidade após um certo tempo é v, qual será o deslocamento após o dobro desse tempo?</p>
+<p style="text-align: justify;">A entrada do problema consiste em dois inteiros, um em cada linha. Esse dois inteiros representam v (-100 &lt;= v &lt;= 10) e t (0&lt;=t&lt;= 200).</p>
+<p style="text-align: justify;">A saída deve ser o valor do deslocamento no dobro de tempo.</p>
+<h3 style="text-align: justify;">Entendendo o Problema:</h3>
+<p style="text-align: justify;">Esse é um problema de física sobre deslocamento, velocidade e aceleração. <a href="http://pt.wikipedia.org/wiki/Cinem%C3%A1tica" target="_blank">Lembra-se das aulas de física</a>?</p>
+<p style="text-align: justify;">Para resolver esse problema, vamos usar a famos fórmula d=v*t + 1/2*a*t^2:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/dvt.gif"><img class="aligncenter size-full wp-image-2369" title="dvt" src="{{ site.baseurl }}/images/assets/dvt.gif" alt="" width="180" height="76" /></a>No problema não temos aceleração, então podemos simplificar a equação para d = v*t.</p>
+<p style="text-align: justify;">Mas queremos saber o deslocamento no dobro do tempo, então basta multiplicar o resultado por 2: d = v*t*2.</p>
+<h3 style="text-align: justify;">Dicas:</h3>
+<ul style="text-align: justify;">
+<li>Leia a entrada até o fim com BufferedReader, ou seja, até que readLine() seja null</li>
+<li>Faça o output da fórmula simplificada</li>
+<li>Tempo de execução: 1.584s</li>
+</ul>
+<h3 style="text-align: justify;">Código:</h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.volume0;</p>
+<p>import java.io.BufferedReader;<br />
+import java.io.IOException;<br />
+import java.io.InputStreamReader;</p>
+<p>/**<br />
+ * Problem 10071 - Back to High School Physics<br />
+ *<br />
+ * Simplest problem ever... just output 2*v*t<br />
+ *<br />
+ * Problem Link:<br />
+ * http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=1012<br />
+ *<br />
+ * Runtime: 1.584s<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class P10071 {</p>
+<p>	public static void main(String[] args) throws IOException<br />
+	{<br />
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));<br />
+		String line;<br />
+		String[] num;<br />
+		int v, t;<br />
+		while ((line = in.readLine()) != null)<br />
+		{<br />
+			num = line.split(&quot; &quot;);<br />
+			v = Integer.parseInt(num[0]);<br />
+			t = Integer.parseInt(num[1]);<br />
+			System.out.println(calcDistance(v,t));<br />
+		}<br />
+	}</p>
+<p>	public static int calcDistance(int v, int t){<br />
+		return v*t*2;<br />
+	}<br />
+}<br />
+[/code]</p>
+<h3 style="text-align: justify;">Testando Entrada e Saída:</h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.test.volume0;</p>
+<p>import static org.junit.Assert.assertEquals;</p>
+<p>import org.junit.Test;</p>
+<p>import com.loiane.volume0.P10071;</p>
+<p>/**<br />
+ * Test Case<br />
+ * Problem 10071 - Back to High School Physics<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class TestP10071 {</p>
+<p>	@Test<br />
+public void testProblem10071(){</p>
+<p>assertEquals(0, P10071.calcDistance(0, 0));<br />
+assertEquals(120, P10071.calcDistance(5, 12));<br />
+}<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Bons códigos!</p>

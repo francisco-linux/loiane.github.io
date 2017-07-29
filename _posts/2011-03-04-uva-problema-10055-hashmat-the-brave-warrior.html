@@ -1,0 +1,103 @@
+---
+layout: post
+title: 'UVa: Problema 10055 - Hashmat the Brave Warrior'
+date: 2011-03-04 08:00:30.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- UVa Online Judge
+tags:
+- algoritmos
+- diferença absotula
+- Hashmat the Brave Warrior
+- Java
+- Math.abs
+- UVa 10055
+- UVa Online Judge
+meta:
+views: '3082'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Vamos resolver o <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=996" target="_blank">problema nº 10055</a>, chamado de <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=996" target="_blank">Hashmat the Brave Warrior</a> em java.</p>
+<p style="text-align: justify;">No <a href="http://www.loiane.com/2011/02/uva-comecando-com-problemas-de-torneio-de-programacao-problema-3n-1/" target="_blank">primeiro post</a>, comentei sobre o <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=29&amp;page=show_problem&amp;problem=36" target="_blank">primeiro problema que geralmente é resolvido no UVa</a>. Vou começar a postar uma série de posts sobre da categoria <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=93" target="_blank">AOAPC I: Beginning Algorithm Contests</a>. O primeiro volume é o volume 0 - Getting Started. Assim vamos aumentando gradativamente a dificuldade e vamos abordar vários algoritmos, de fácil e difícil.</p>
+<h3><strong>Descrição do Problema</strong>:</h3>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/logouva_10055.jpg"><img class="alignleft size-full wp-image-2360" title="logouva_10055" src="{{ site.baseurl }}/images/assets/logouva_10055.jpg" alt="" width="104" height="105" /></a>Hashmat é um guerreiro que move de um lugar para outro para lutar com seus oponentes. Antes de lutar, ele faz apenas um cálculo: a diferença entre a quantidade de soldados que ele tem e a quantidade de soldados do oponente. Com esse número calculado, ele decide se deve lutar ou não.</p>
+<p style="text-align: justify;">No input teremos dois números: n1 e n2. Esse números representam o número de soldados do Hashmat e do oponente ou vice versa. Os números não são maiores que 2^32. Devemos ler a entrada até que não tenha mais nada para ler.</p>
+<p style="text-align: justify;">No output (saída) teremos que imprimir a diferença entre os números.</p>
+<h3><strong>Dicas para resolver o problema em Java</strong>:</h3>
+<ul style="text-align: justify;">
+<li>Usar BufferedReader e ler até que seja null. Fazer o parser da entrada.</li>
+<li>Usar long em vez de int</li>
+<li>Calcular a difereça absoluta entre os dois números, já que podem vir com a ordem inversa - usar Math.abs();</li>
+<li>Runtime - tempo de execução: 1.980s -Limite: 3s - dicas para melhorar o runtime?</li>
+<li>Lembre-se que para submeter um problema para o Uva, mude o nome da classe para Main e pacote default (não pode pertencer a nenhuma pacote).</li>
+</ul>
+<h3><strong>Código:</strong></h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.volume0;</p>
+<p>import java.io.BufferedReader;<br />
+import java.io.IOException;<br />
+import java.io.InputStreamReader;</p>
+<p>/**<br />
+ * Problem 10055 - Hashmat the Brave Warrior<br />
+ *<br />
+ * Use long long data type + absolute function.<br />
+ *<br />
+ * Problem Link:<br />
+ * http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=94&amp;page=show_problem&amp;problem=996<br />
+ *<br />
+ * Runtime: 1.980s<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class P10055 {</p>
+<p>	public static void main(String[] args) throws IOException<br />
+	{<br />
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));<br />
+		String line;<br />
+		long n1, n2;<br />
+		String[] num;<br />
+		while ((line = in.readLine()) != null)<br />
+		{<br />
+			num = line.split(&quot; &quot;);<br />
+			n1 = Long.parseLong(num[0]);<br />
+			n2 = Long.parseLong(num[1]);<br />
+			System.out.println(calcAbsDiff(n1,n2));<br />
+		}<br />
+	}</p>
+<p>	public static long calcAbsDiff(long n1, long n2){<br />
+		return Math.abs(n2-n1);<br />
+	}<br />
+}<br />
+[/code]</p>
+<h3><strong>Testando a entrada e saída</strong>:</h3>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.test.volume0;</p>
+<p>import static org.junit.Assert.assertEquals;</p>
+<p>import org.junit.Test;</p>
+<p>import com.loiane.volume0.P10055;</p>
+<p>/**<br />
+ * Test Case<br />
+ * Problem 10055 - Hashmat the Brave Warrior<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class TestP10055 {</p>
+<p>	@Test<br />
+public void testProblem10055(){</p>
+<p>assertEquals(2, P10055.calcAbsDiff(10, 12));<br />
+assertEquals(4, P10055.calcAbsDiff(10, 14));<br />
+assertEquals(100, P10055.calcAbsDiff(100, 200));<br />
+}<br />
+}<br />
+[/code]</p>
+<p style="text-align: justify;">Bons códigos!</p>

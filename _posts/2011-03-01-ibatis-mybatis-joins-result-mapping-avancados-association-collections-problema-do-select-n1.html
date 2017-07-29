@@ -1,0 +1,447 @@
+---
+layout: post
+title: 'IBatis (MyBatis) Joins: Result Mapping Avançados, Association, Collections,
+Problema Do Select N+1'
+date: 2011-03-01 08:00:19.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- iBatis (MyBatis)
+tags:
+- annotations
+- database
+- delete
+- iBatis
+- ibatis annotation
+- insert
+- Java
+- many-to-many
+- MyBatis
+- MyBatis annotation
+- MySQL
+- one-to-many
+- One-to-one
+- select
+- update
+meta:
+views: '8598'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Este tutorial tem como objetivo mostrar como fazer o setup do <a href="http://www.mybatis.org/" target="_blank">iBatis</a> (<a href="http://www.mybatis.org/" target="_blank">MyBatis</a>) usando um projeto Java simples, e também mostrará exemplos de como configurar mapeamentos avançados (result mapping), association (1 pra 1), collections (1 pra n, n para n), problema do select n+1 usando configuração em XML e annotations.</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"><img class="aligncenter size-full wp-image-2152" title="ibatis_mybatis_loiane" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane.png" alt="" width="274" height="149" /></a></p>
+<h2 style="text-align: justify;">Pré-Requisitos</h2>
+<p style="text-align: justify;">
+<p>Para este tutorial usei:</p>
+<p>IDE: <a href="http://eclipse.org/" target="_blank">Eclipse</a> (você pode usar a sua IDE favorita)<br />
+DataBase: <a href="http://dev.mysql.com/downloads/" target="_blank">MySQL</a><br />
+Libs/jars: <a href="http://www.mybatis.org/" target="_blank">Mybatis</a>, <a href="http://dev.mysql.com/downloads/" target="_blank">MySQL</a> conector e <a href="http://www.junit.org/" target="_blank">JUnit</a> (para testes)</p>
+<p>No Eclipse, a estrutura do seu projeto vai ficar assim:</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_handling_joins.png"><img class="aligncenter size-full wp-image-2265" title="ibatis_mybatis_loiane_handling_joins" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_handling_joins.png" alt="" width="260" height="493" /></a></p>
+<h2 style="text-align: justify;"><span style="font-size: 13px; font-weight: normal;"></p>
+<h2 style="font-size: 1.5em;">Dados de Exemplo</h2>
+<p>Execute o script que está dentro da pasta sql antes de começar o projeto. Este arquivo contém os dados de exemplo usados neste tutorial.</p>
+<p></span></h2>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_loiane_advancedresultmapping.png"><img class="aligncenter size-full wp-image-2266" title="ibatis_loiane_advancedresultmapping" src="{{ site.baseurl }}/images/assets/ibatis_loiane_advancedresultmapping.png" alt="" width="474" height="314" /></a></p>
+<h2>1 - POJOs - Beans</h2>
+<p style="text-align: justify;">Vou representar os Beans com um diagrama UML para melhor visualização. O código fonte completo pode ser baixado no final do tutorial.</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_uml_handlingjoins.png"><img class="aligncenter size-full wp-image-2267" title="ibatis_mybatis_loiane_uml_handlingjoins" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_uml_handlingjoins.png" alt="" width="386" height="414" /></a></p>
+<p style="text-align: justify;">O objetivo desse post é demonstrar como obter os dados do Blog do banco de dados, mas como pode perceber, a classe Blog contém uma association com Autor (Author), e uma coleção de Posts (que por sua vez contém uma coleção de Tags). Vamos tentar popular esses objetos.</p>
+<p style="text-align: justify;">Para popular esses objetos, vamos usar as seguintes relação: 1-1, 1-n, n-n usando iBatis/Mybatis.</p>
+<h2>2 - Mapeamento Avançado - Result Mapping</h2>
+<p style="text-align: justify;">Como já mencionei em posts anteriores, o resultMap é o elemento mais importante e mais poderoso do Mybatis.</p>
+<blockquote>
+<p style="text-align: justify;">O MyBatis foi criado com uma idéia em mente: os Banco de Dados às vezes não são como você quer ou precisa que eles sejam. Enquanto todos desejam que os bancos estejam na terceira forma normal, muitas vezes não estão. E seria ótimo se fosse possível ter um único mapeamento do banco de dados para todas as aplicações que o utilizam, mas não é assim que as coisas funcionam. Os Result Maps são a resposta do MyBatis para esses problemas.</p>
+<p style="text-align: justify;">O elemento resultMap tem alguns sub-elementos. Os elementos abaixo são alguns dos sub-elementos:</p>
+<ul>
+<li>constructor – usado para injeção de resultados no construtor da classe através de instanciação da mesma.</li>
+<li>nested result mappings– associação (association) de resultMaps no próprio elemento, ou podem fazer referência a outro resultMap</li>
+<li>collection – uma coleção de tipos complexos ou coleção de resultMaps, ou ainda referência a outros resultMaps</li>
+<li>discriminator – utiliza uma valor do result para determinar qual ResultMap usar (Vamos ver discriminator mais de perto no próximo post)</li>
+<li>nested result mappings – um resultMap pode fazer referência a outros resultMaps</li>
+</ul>
+<p style="text-align: justify;"><strong><span style="text-decoration: underline;">Boas Práticas:</span></strong> Sempre construa os ResultMaps de forma incremental. Testes unitários pode te ajudar bastante nisso. Se tentar implementar um resultMap de uma vez, pode ser que alguma coisa esteja errada e será difícil de achar o erro. Comece de maneira simples, e dê um passo de cada vez, evolua seu ResultMap aos poucos. A melhor maneira para verificar se você está no caminho certo é om testes unitários.</p>
+</blockquote>
+<p><!-- p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica} span.s1 {font: 11.0px Symbol} span.s2 {font: 11.0px Courier} span.Apple-tab-span {white-space:pre} --> <!-- p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica} --></p>
+<p style="text-align: justify;">O nosso objetivo é implementar o seguinte resultMap.</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idBlog&quot; /&gt;<br />
+	&lt;result property=&quot;name&quot; column=&quot;blogname&quot; /&gt;<br />
+	&lt;result property=&quot;url&quot; column=&quot;blogurl&quot; /&gt;<br />
+	&lt;association property=&quot;author&quot; column=&quot;idBlog&quot; javaType=&quot;Author&quot;<br />
+		select=&quot;selectAuthor&quot; /&gt;<br />
+	&lt;collection property=&quot;posts&quot; column=&quot;idBlog&quot; javaType=&quot;ArrayList&quot;<br />
+		ofType=&quot;Post&quot; select=&quot;selectPosts&quot; resultMap=&quot;resultTag&quot; /&gt;<br />
+&lt;/resultMap&gt;<br />
+[/code]</p>
+<p style="text-align: justify;">Seguindo as boas práticas, vamos dar um passo por vez. Vamos começar buscando no banco de dados as informações do Blog apenas. O ResultMap inicial vai  ficar assim:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idBlog&quot; /&gt;<br />
+	&lt;result property=&quot;name&quot; column=&quot;blogname&quot; /&gt;<br />
+	&lt;result property=&quot;url&quot; column=&quot;blogurl&quot; /&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;select id=&quot;selectBlog&quot; resultMap=&quot;resultBlog&quot;&gt;<br />
+	SELECT idBlog, name as blogname, url as blogurl FROM BLOG<br />
+&lt;/select&gt;<br />
+[/code]</p>
+<p style="text-align: justify;">Até agora tudo bem, já vimos um select simples em posts anteriores. Vamos para o próximo passo.</p>
+<h3>Association</h3>
+<p style="text-align: justify;">Vamos tentar buscar as informações do Blog e do Autor agora.</p>
+<blockquote>
+<p style="text-align: justify;">O elemento de association trabalha com o relacionamento "<strong>tem-um</strong>". Por exemplo, neste post, um Blog tem um Autor. Uma mapeamento de association funciona como qualquer outro result. Você precisa especificar a propriedade target (atributo da classe Blog neste caso), a coluna para obter o valor (neste caso o ID do blog para fazer o filtro), o javaType da propriedade (que o MyBatis consegue descobrir sozinho na maioria das vezes) - neste caso é Author, o jdbcType se for necessário, e um typeHandler se precisar substituir os valores do result.</p>
+<p style="text-align: justify;">Onde  o elemento association é diferente é o que você "falar" pro MyBatis conseguir fazer o load do objeto. O Mybatis pode fazer isso de duas maneiras:</p>
+<ul>
+<li>Nested Select: Select Aninhado - executando um outro mapeamento SQL que retorna o tipo desejado.</li>
+<li>Nested Results: Result aninhado - usando mapeamentos do result (result mapping) para tratar os subconjuntos repetidos da query com join.</li>
+</ul>
+</blockquote>
+<p>Vamos dar uma olhada no Nested Select primeiro.</p>
+<p>Aqui está o nosso resultMap com a association do </p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idBlog&quot; /&gt;<br />
+	&lt;result property=&quot;name&quot; column=&quot;blogname&quot; /&gt;<br />
+	&lt;result property=&quot;url&quot; column=&quot;blogurl&quot; /&gt;<br />
+	&lt;association property=&quot;author&quot; column=&quot;idBlog&quot; javaType=&quot;Author&quot;<br />
+		select=&quot;selectAuthor&quot; /&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;select id=&quot;selectBlog&quot; resultMap=&quot;resultBlog&quot;&gt;<br />
+	SELECT idBlog, name as blogname, url as blogurl FROM BLOG<br />
+&lt;/select&gt;</p>
+<p>&lt;select id=&quot;selectAuthor&quot; parameterType=&quot;int&quot; resultType=&quot;Author&quot;&gt;<br />
+	SELECT idAuthor as id, name, email FROM AUTHOR WHERE idBlog = #{idBlog}<br />
+&lt;/select&gt;<br />
+[/code]</p>
+<p>Dê uma olhada no atributo <em>select="selectAuthor"</em>. Significa que o MyBatis irá executar a query para obter os autores que escrever para o Blog. Para fazer o relacionamento entre Blog e Author especificamos o atributo <em>column="idBlog"</em>, para filtrar os autores.</p>
+<p>Note que também especificamos o javaType="Author". Estamos usando um Alias (Lembra?). Se não tiver um alias, é preciso colocar o nome completo da classe (com o nome do pacote junto: com.loiane.model.Author).</p>
+<blockquote><p>É isso. Temos 2 queries com select statements: uma para carregar os dados do blog, e outra para carregar o autor, e o resultMap do Blog descreve que o MyBatis deve usar o "selectAuthor” statement para obter as informações do Author.</p></blockquote>
+<blockquote><p>Essa abordagem é bem simples, mas não terá boa performance para grande conjunto de dados ou listas. Este problema é conhecido como o <strong><em>Problema do Select N+1</em></strong>. Este problema é causado:</p>
+<ul>
+<li>Você executa um SQL que retorna uma lista de registros (o "+1").</li>
+<li>Para cada registro retornado, você executa um SELECT que carrega os detalhes (o “N”).</li>
+</ul>
+<p>Este problema pode resultar em centenas ou milhares de SELECTs que serão executados. Isso às vezes não é o desejado. A parte boa é que o iBatis pode executar queries como essa, mas você deve estar atento o quando isso é custoso em termos de performance, ou seja, péssima performance.</p></blockquote>
+<p>Vou mostrar aqui no post como evitar esse problema, mas antes vamos ver como lidar com Lists ou coleções.</p>
+<h3>Collection</h3>
+<p>Já estamos buscando informações do Blog e do Author no banco de dados. Agora temos que buscar as informações do Post. Um Blog contém uma lista de Posts e estes, por sua vez, contém uma lista de Tags. Estamos lidando com 2 relacionamentos agora: <strong>1-N</strong> (Blog-Posts) e <strong>N-N</strong> (Posts-Tags). Vamos ver como se faz isso usando MyBatis.</p>
+<p>Vamos ainda usar um Nested Select para fazer isso.</p>
+<p>Dê uma olhada no resultMap com o Post collection:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idBlog&quot; /&gt;<br />
+	&lt;result property=&quot;name&quot; column=&quot;blogname&quot; /&gt;<br />
+	&lt;result property=&quot;url&quot; column=&quot;blogurl&quot; /&gt;<br />
+	&lt;association property=&quot;author&quot; column=&quot;idBlog&quot; javaType=&quot;Author&quot;<br />
+		select=&quot;selectAuthor&quot; /&gt;<br />
+	&lt;collection property=&quot;posts&quot; column=&quot;idBlog&quot; javaType=&quot;ArrayList&quot;<br />
+		ofType=&quot;Post&quot; select=&quot;selectPosts&quot; resultMap=&quot;resultTag&quot; /&gt;<br />
+&lt;/resultMap&gt;<br />
+[/code]</p>
+<blockquote><p>O elemento collection funciona quase da mesma maneira que o association. Vamos focar nas diferenças.</p>
+<p>Primeiro, estamos usando o elemento collection. Depois irá notar que existe o atributo "ofType". Este atributo é necessário para notar a diferença entre o tipo de propriedade do JavaBean (atributo) e o tipo que a coleção contém.</p></blockquote>
+<p>Para lidar com o relacionamento N-N entre Post e Tag, vamos usar também um elemento collection, mas não vamos usar nested results para isso.</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;resultMap id=&quot;resultPosts&quot; type=&quot;Post&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idPost&quot; /&gt;<br />
+	&lt;result property=&quot;title&quot; column=&quot;title&quot; /&gt;<br />
+	&lt;collection property=&quot;tags&quot; column=&quot;idPost&quot; javaType=&quot;ArrayList&quot;<br />
+		ofType=&quot;Tag&quot; resultMap=&quot;resultTag&quot; /&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;resultMap id=&quot;resultTag&quot; type=&quot;Tag&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idTag&quot; /&gt;<br />
+	&lt;result property=&quot;value&quot; column=&quot;value&quot; /&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;select id=&quot;selectPosts&quot; parameterType=&quot;int&quot; resultType=&quot;Post&quot;<br />
+	resultMap=&quot;resultPosts&quot;&gt;<br />
+	SELECT<br />
+	P.idPost as idPost, P.title as title,<br />
+	T.idTag as idTag, T.value as value<br />
+	FROM Post P<br />
+	left outer join Post_Tag PT on P.idPost = PT.idPost<br />
+	left outer join Tag T on PT.idTag = T.idTag<br />
+	WHERE P.idBlog = #{idBlog}<br />
+&lt;/select&gt;<br />
+[/code]</p>
+<p>Pronto! Vamos ver como o arquivo <strong>Blog.xml</strong> se parece:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+&lt;!DOCTYPE mapper<br />
+PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;<br />
+	&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</p>
+<p>&lt;mapper namespace=&quot;Blog&quot;&gt;</p>
+<p>	&lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idBlog&quot;/&gt;<br />
+	&lt;result property=&quot;name&quot; column=&quot;blogname&quot;/&gt;<br />
+	&lt;result property=&quot;url&quot; column=&quot;blogurl&quot;/&gt;<br />
+	&lt;association property=&quot;author&quot; column=&quot;idBlog&quot; javaType=&quot;Author&quot; select=&quot;selectAuthor&quot;/&gt;<br />
+	&lt;collection property=&quot;posts&quot; column=&quot;idBlog&quot; javaType=&quot;ArrayList&quot; ofType=&quot;Post&quot;<br />
+		select=&quot;selectPosts&quot; resultMap=&quot;resultTag&quot;/&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;resultMap id=&quot;resultPosts&quot; type=&quot;Post&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idPost&quot;/&gt;<br />
+	&lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;<br />
+	&lt;collection property=&quot;tags&quot; column=&quot;idPost&quot; javaType=&quot;ArrayList&quot; ofType=&quot;Tag&quot;<br />
+		resultMap=&quot;resultTag&quot;/&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>	&lt;resultMap id=&quot;resultTag&quot; type=&quot;Tag&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idTag&quot;/&gt;<br />
+	&lt;result property=&quot;value&quot; column=&quot;value&quot;/&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>&lt;select id=&quot;selectBlog&quot; resultMap=&quot;resultBlog&quot;&gt;<br />
+	SELECT idBlog, name as blogname, url as blogurl FROM BLOG<br />
+&lt;/select&gt;</p>
+<p> &lt;select id=&quot;selectAuthor&quot; parameterType=&quot;int&quot; resultType=&quot;Author&quot;&gt;<br />
+ 		SELECT idAuthor as id, name, email FROM AUTHOR WHERE idBlog = #{idBlog}<br />
+ &lt;/select&gt;</p>
+<p> &lt;select id=&quot;selectPosts&quot; parameterType=&quot;int&quot; resultType=&quot;Post&quot; resultMap=&quot;resultPosts&quot;&gt;<br />
+ 		SELECT<br />
+			P.idPost as idPost, P.title as title,<br />
+		T.idTag as idTag, T.value as value<br />
+		FROM Post P<br />
+		left outer join Post_Tag PT on P.idPost = PT.idPost<br />
+			left outer join Tag T on PT.idTag = T.idTag<br />
+		WHERE P.idBlog = #{idBlog}<br />
+ &lt;/select&gt;</p>
+<p>&lt;/mapper&gt;<br />
+[/code]</p>
+<h3>Solução para o Problema de Selects N+1</h3>
+<p>Como resolver este problem?</p>
+<p>Usando <strong>Nested Results</strong>: - usando mapeamentos aninhados para lidar com subconjuntos repetidos no resultado dos joins.</p>
+<p>O que precisamos fazer é escrever uma única query para obter todas as informações de uma vez, e o ResultMap lida com o resultado.</p>
+<blockquote>
+<div id="_mcePaste"><strong><em>Muito Importante</em></strong>: o elemento ID tem um papel muito importante no nested result mappeing. Você <strong>sempre</strong> deve especificar uma ou mais propriedades que podem ser usadas para identificar os resultados como únicos. A verdade é que o MyBatis ainda funciona se você não especificar, mas isso vai custar a performance. A chave primária é uma escolha óbvia para essa situação (mesmo que seja uma chave composta).</div>
+</blockquote>
+<div>O arquivo Blog.xml ficaria assim usando NestedResult (BlogBestPractice.xml):</div>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+&lt;!DOCTYPE mapper<br />
+PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;<br />
+	&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</p>
+<p>&lt;mapper namespace=&quot;BlogBestPractice&quot;&gt;</p>
+<p> &lt;resultMap id=&quot;resultBlog&quot; type=&quot;Blog&quot;&gt;<br />
+	&lt;id property=&quot;id&quot; column=&quot;idBlog&quot;/&gt;<br />
+	&lt;result property=&quot;name&quot; column=&quot;blogName&quot;/&gt;<br />
+	&lt;result property=&quot;url&quot; column=&quot;url&quot;/&gt;<br />
+	&lt;association property=&quot;author&quot; column=&quot;idBlog&quot; javaType=&quot;Author&quot;&gt;<br />
+		&lt;id property=&quot;id&quot; column=&quot;idAuthor&quot;/&gt;<br />
+			&lt;result property=&quot;name&quot; column=&quot;authorName&quot;/&gt;<br />
+			&lt;result property=&quot;email&quot; column=&quot;email&quot;/&gt;<br />
+	&lt;/association&gt;<br />
+	&lt;collection property=&quot;posts&quot; column=&quot;idBlog&quot; javaType=&quot;ArrayList&quot; ofType=&quot;Post&quot;&gt;<br />
+		&lt;id property=&quot;id&quot; column=&quot;idPost&quot;/&gt;<br />
+		&lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;<br />
+		&lt;collection property=&quot;tags&quot; column=&quot;idBlog&quot; javaType=&quot;ArrayList&quot; ofType=&quot;Tag&quot;&gt;<br />
+			&lt;id property=&quot;id&quot; column=&quot;idTag&quot;/&gt;<br />
+			&lt;result property=&quot;value&quot; column=&quot;value&quot;/&gt;<br />
+		&lt;/collection&gt;<br />
+	&lt;/collection&gt;<br />
+&lt;/resultMap&gt;</p>
+<p>	&lt;select id=&quot;selectBlogBestPractice&quot; resultMap=&quot;resultBlog&quot;&gt;<br />
+	SELECT<br />
+		B.idBlog as idBlog, B.name as blogName, B.url as url,<br />
+		A.idAuthor as idAuthor, A.name as authorName, A.email as email ,<br />
+	P.idPost as idPost, P.title as title,<br />
+		T.idTag as idTag, T.value as value<br />
+		FROM BLOG as B<br />
+		left outer join Author A on B.idBlog = A.idBlog<br />
+		left outer join Post P on P.idBlog = B.idBlog<br />
+		left outer join Post_Tag PT on P.idPost = PT.idPost<br />
+			left outer join Tag T on PT.idTag = T.idTag<br />
+&lt;/select&gt;</p>
+<p>&lt;/mapper&gt;<br />
+[/code]</p>
+<div>Note que isso é uma boa prática. É melhor evitar o problema N+1, a não ser que essa seja a solução escolhida, mas fique atento à performance.</div>
+<h2>3 - BlogDAO</h2>
+<div>Agora que temos tudo configurado, vamos escrever o DAO:</div>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.dao;</p>
+<p>import java.util.List;</p>
+<p>import org.apache.ibatis.session.SqlSession;<br />
+import org.apache.ibatis.session.SqlSessionFactory;</p>
+<p>import com.loiane.model.Blog;</p>
+<p>public class BlogDAO {</p>
+<p>	/**<br />
+	 * Returns the list of all Contact instances from the database.<br />
+	 * @return the list of all Contact instances from the database.<br />
+	 */<br />
+	@SuppressWarnings(&quot;unchecked&quot;)<br />
+	public List&lt;Blog&gt; select(){</p>
+<p>		SqlSessionFactory sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();<br />
+		SqlSession session = sqlSessionFactory.openSession();</p>
+<p>		try {<br />
+			List&lt;Blog&gt; list = session.selectList(&quot;Blog.selectBlog&quot;);<br />
+			return list;<br />
+		} finally {<br />
+			session.close();<br />
+		}<br />
+	}</p>
+<p>	/**<br />
+	 * Returns the list of all Contact instances from the database avoiding the N + 1<br />
+	 * problem<br />
+	 * @return the list of all Contact instances from the database.<br />
+	 */<br />
+	@SuppressWarnings(&quot;unchecked&quot;)<br />
+	public List&lt;Blog&gt; selectN1ProblemSolution(){</p>
+<p>		SqlSessionFactory sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();<br />
+		SqlSession session = sqlSessionFactory.openSession();</p>
+<p>		try {<br />
+			List&lt;Blog&gt; list = session.selectList(&quot;BlogBestPractice.selectBlogBestPractice&quot;);<br />
+			return list;<br />
+		} finally {<br />
+			session.close();<br />
+		}<br />
+	}<br />
+}<br />
+[/code]</p>
+<div>Existem 2 métodos nesse DAO: o primeiro faz o select usando a primeira abordagem (com problema do select n+1) e o segundo busca os dados usando a query que evita o problema do n+1.</div>
+<h2>4 - Annotations</h2>
+<div>Como já publiquei um artigo que explica anotações básicas no MyBatis, vou apenas listas as diferenças, ok?</div>
+<div>Vamos escrever 2 selects (um pro Blog, um pro Author e outro para Posts e Tags, assim como fizemos no Blog.xml):</div>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.data;</p>
+<p>import java.util.List;</p>
+<p>import org.apache.ibatis.annotations.Many;<br />
+import org.apache.ibatis.annotations.One;<br />
+import org.apache.ibatis.annotations.Result;<br />
+import org.apache.ibatis.annotations.Results;<br />
+import org.apache.ibatis.annotations.Select;</p>
+<p>import com.loiane.model.Author;<br />
+import com.loiane.model.Blog;<br />
+import com.loiane.model.Post;</p>
+<p>public interface BlogMapper {</p>
+<p>	final String SELECT_POSTS = &quot;SELECTP.idPost as idPost, P.title as title, T.idTag as idTag, T.value as value &quot; +<br />
+			&quot;FROM Post P left outer join Post_Tag PT on P.idPost = PT.idPost &quot; +<br />
+			&quot;left outer join Tag T on PT.idTag = T.idTag WHERE P.idBlog = #{idBlog}&quot;;</p>
+<p>	/**<br />
+	 * Returns the list of all Blog instances from the database.<br />
+	 * @return the list of all Blog instances from the database.<br />
+	 */<br />
+	@Select(&quot;SELECT idBlog, name as blogname, url as blogurl FROM BLOG&quot;)<br />
+	@Results(value = {<br />
+		@Result(property=&quot;id&quot;, column=&quot;idBlog&quot;),<br />
+		@Result(property=&quot;name&quot;, column=&quot;blogname&quot;),<br />
+		@Result(property=&quot;url&quot;, column=&quot;blogurl&quot;),<br />
+		@Result(property=&quot;author&quot;, column=&quot;idBlog&quot;, javaType=Author.class, one=@One(select=&quot;selectAuthor&quot;)),<br />
+		@Result(property=&quot;posts&quot;, column=&quot;idBlog&quot;, javaType=List.class, many=@Many(select=&quot;selectBlogPosts&quot;))<br />
+	})<br />
+	List&lt;Blog&gt; selectAllBlogs();</p>
+<p>	/**<br />
+	 * Returns the list of all Author instances from the database of a Blog<br />
+	 * @param idBlog<br />
+	 * @return the list of all Author instances from the database of a Blog<br />
+	 */<br />
+	@Select(&quot;SELECT idAuthor as id, name, email FROM AUTHOR WHERE idBlog = #{idBlog}&quot;)<br />
+	Author selectAuthor(String idBlog);</p>
+<p>	/**<br />
+	 * Returns the list of all Post instances from the database of a Blog<br />
+	 * @param idBlog<br />
+	 * @return the list of all Post instances from the database of a Blog<br />
+	 */<br />
+	@Select(SELECT_POSTS)<br />
+	@Results(value = {<br />
+		@Result(property=&quot;id&quot;, column=&quot;idPost&quot;),<br />
+		@Result(property=&quot;title&quot;, column=&quot;title&quot;),<br />
+		@Result(property=&quot;tags&quot;, column=&quot;idPost&quot;, javaType=List.class, many=@Many)<br />
+	})<br />
+	List&lt;Post&gt; selectBlogPosts(String idBlog);</p>
+<p>}<br />
+[/code]</p>
+<div>Vamos tratar os relacionamentos <strong>1-1</strong> e <strong>1-N</strong> com as annotations <strong>@One</strong> e <strong>@Many</strong>.</div>
+<div>Vamos recapitular a annotation @Result:</div>
+<h3><strong>@</strong><span style="font-weight: normal;">Result</span></h3>
+<blockquote>
+<div>Um único mapeamento entre coluna e atributo.</div>
+<div>Atributos: id, column, property, javaType, jdbcType, typeHandler, <strong>one</strong>, <strong>many</strong>.</div>
+<div>O atributo id é um valor booleano que indica se a propriedade deve ser usado para comparações. (similar à tag &lt;id&gt; na configuração em XML).</div>
+<div>O atributo <strong>one </strong>é para association, similar à tag &lt;association&gt;, e o atributo <strong>many</strong> é usado para collection, similar à tag &lt;collection&gt;. Foram nomeados assim para evitar conflitos.</div>
+</blockquote>
+<h3>@One</h3>
+<blockquote>
+<div>Mapeamento entre uma única propriedade de um tipo complexo.</div>
+<div>Atributos: select, nome da query que deve ser executada para obter o resultado (nome do método do mapper).</div>
+</blockquote>
+<h3>@Many</h3>
+<blockquote>
+<div>Mapeamento entre uma propriedade que é uma collection de um tipo complexo.</div>
+<div>Atributos: select, nome da query que deve ser executada para obter o resultado (nome do método do mapper).</div>
+</blockquote>
+<h2 style="font-size: 1.5em;">5 - SqlMapConfig.xml</h2>
+<p>O arquivo SqlMapConfig.xml vai ficar assim:</p>
+<p>[code lang="xml" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+&lt;!DOCTYPE configuration<br />
+	PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;<br />
+	&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</p>
+<p>&lt;configuration&gt;</p>
+<p>	&lt;typeAliases&gt;<br />
+		&lt;typeAlias alias=&quot;Blog&quot; type=&quot;com.loiane.model.Blog&quot;/&gt;<br />
+		&lt;typeAlias alias=&quot;Author&quot; type=&quot;com.loiane.model.Author&quot;/&gt;<br />
+		&lt;typeAlias alias=&quot;Post&quot; type=&quot;com.loiane.model.Post&quot;/&gt;<br />
+		&lt;typeAlias alias=&quot;Tag&quot; type=&quot;com.loiane.model.Tag&quot;/&gt;<br />
+	&lt;/typeAliases&gt;</p>
+<p>	&lt;environments default=&quot;development&quot;&gt;<br />
+		&lt;environment id=&quot;development&quot;&gt;<br />
+		&lt;transactionManager type=&quot;JDBC&quot;/&gt;<br />
+			&lt;dataSource type=&quot;POOLED&quot;&gt;<br />
+				&lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;<br />
+				&lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/blog_ibatis&quot;/&gt;<br />
+				&lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;<br />
+				&lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;<br />
+			&lt;/dataSource&gt;<br />
+	 &lt;/environment&gt;<br />
+	&lt;/environments&gt;</p>
+<p>&lt;mappers&gt;<br />
+	 &lt;mapper resource=&quot;com/loiane/data/Blog.xml&quot;/&gt;<br />
+	 &lt;mapper resource=&quot;com/loiane/data/BlogBestPractice.xml&quot;/&gt;<br />
+&lt;/mappers&gt;</p>
+<p>&lt;/configuration&gt;<br />
+[/code]</p>
+<h2>6 - MyBatisConnectionFactory</h2>
+<div>No arquivo SqlMapConfig.xml definimos os alias e 2 mappers em XML. Mas agora também estamos usando annotation no mesmo projeto.</div>
+<div>Precisamos setar o novo mapper no MyBatisConnectionFactory.</div>
+<div>Assim podemos usar ambos no projeto: XML e annotation.</div>
+<div>Opinião pessoal: use apenas um (XML ou annotations), fica meio confuso usar os dois.</div>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="27"]<br />
+package com.loiane.dao;</p>
+<p>import java.io.FileNotFoundException;<br />
+import java.io.IOException;<br />
+import java.io.Reader;</p>
+<p>import org.apache.ibatis.io.Resources;<br />
+import org.apache.ibatis.session.SqlSessionFactory;<br />
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;</p>
+<p>import com.loiane.data.BlogMapper;</p>
+<p>public class MyBatisConnectionFactory {</p>
+<p>	private static SqlSessionFactory sqlSessionFactory;</p>
+<p>	static {</p>
+<p>		try {</p>
+<p>			String resource = &quot;SqlMapConfig.xml&quot;;<br />
+			Reader reader = Resources.getResourceAsReader(resource);</p>
+<p>			if (sqlSessionFactory == null) {<br />
+				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);</p>
+<p>				sqlSessionFactory.getConfiguration().addMapper(BlogMapper.class);<br />
+			}<br />
+		}</p>
+<p>		catch (FileNotFoundException fileNotFoundException) {<br />
+			fileNotFoundException.printStackTrace();<br />
+		}<br />
+		catch (IOException iOException) {<br />
+			iOException.printStackTrace();<br />
+		}<br />
+	}</p>
+<p>	public static SqlSessionFactory getSqlSessionFactory() {</p>
+<p>		return sqlSessionFactory;<br />
+	}<br />
+}<br />
+[/code]</p>
+<h2 style="text-align: justify;">Download</h2>
+<p style="text-align: justify;">Se desejar fazer o download do código fonte completo, basta ir até a minha conta no GitHub: <a href="https://github.com/loiane/ibatis-handling-joins" target="_blank">https://github.com/loiane/ibatis-handling-joins</a></p>
+<p style="text-align: justify;">Se quiser fazer o download o aqruivo zip com o projeto, clique no botão de Downloads (depois é só importar pro Eclipse ou outra IDE):</p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank"><img class="aligncenter size-full wp-image-2175" title="donwload-github-example-loiane" src="{{ site.baseurl }}/images/assets/donwload-github-example-loiane.png" alt="" width="572" height="219" /></a></p>
+<p style="text-align: justify;">Mais tutoriais sobre iBatis/MyBatis estão vindo! Fique ligado! :)</p>
+<p style="text-align: justify;">Bons códigos! :)</p>

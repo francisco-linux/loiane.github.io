@@ -1,0 +1,152 @@
+---
+layout: post
+title: 'UVa: Começando com Problemas de Torneio de Programação - Problema 3n + 1'
+date: 2011-02-24 09:54:10.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- UVa Online Judge
+tags:
+- 3n + 1
+- algoritmos
+- Conjectura de Collatz
+- Java
+- The 3n + 1 problem
+- UVa Online Judge
+meta:
+_edit_last: '1'
+_thumbnail_id: '2337'
+views: '7249'
+tag: pt-br
+language: pt-br
+display_name: Loiane
+first_name: Loiane
+last_name: ''
+---
+<p style="text-align: justify;">Tempos atrás perguntei no twitter se o pessoal estaria interessado em artigos/tutoriais sobre problemas torneio de programação. Mas não no sentido de dicas para torneios, e sim focando nos algoritmos.</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/logouva.jpg"><img class="alignleft size-full wp-image-2337" title="logouva" src="{{ site.baseurl }}/images/assets/logouva.jpg" alt="" width="104" height="105" /></a></p>
+<p style="text-align: justify;">Já <a href="http://www.loiane.com/projetos/uva-online-judge/" target="_blank">publiquei aqui no blog</a> uma página com alguns problemas do UVa Online Judge que resolvi em Java. E esse problemas são ótimos para melhorar a lógica de programação, além da oportunidade de aprender mais algoritmos. E isso é super importante para a nossa carreira, pois não fazemos aplicações que requerem apenas trabalho braçal, mas sim intelectual.</p>
+<p style="text-align: justify;">O UVa Online Judge é um dos juízes online mais utilizados, e tem dezenas de problemas para serem resolvidos, desde problemas fáceis à problemas difíceis.</p>
+<p style="text-align: justify;">Alguns algoritmos que são usados para resolver esses problemas: adhoc (simulação), ordenação e busca, grafos, teoria matemática, etc. Esses algoritmos também são legais para ter uma idéia de como podem ser usados num contexto mais ou menos real, já que na faculdade a gente aprende a fazer algoritmo de grafos, mas geralmente não estão contextualizados.</p>
+<p style="text-align: justify;">Aqui no blog, vou focar em Java. A linguagem mais apropriada para torneios é C, C++, mas aqui faço por hobby.</p>
+<p style="text-align: justify;">Vamos então começar com o problema mais clássico, que é o primeiro a ser resolvido que é o número 100: <strong>3n + 1</strong>.</p>
+<p style="text-align: justify;">Link do problema no UVa <a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=29&amp;page=show_problem&amp;problem=36" target="_blank">aqui</a>.</p>
+<p style="text-align: justify;">Este problema também é conhecido como <a href="http://en.wikipedia.org/wiki/Collatz_conjecture" target="_blank">Conjectura de Collatz</a> e nunca foi resolvido.</p>
+<p style="text-align: justify;">O problema consiste no seguinte:</p>
+<ul>
+<li>Se o número é par, então divida por dois.</li>
+<li>Se o número é ímpar, então multiplique por três e some por um.</li>
+</ul>
+<p><a href="http://www.loiane.com/wp-content/uploads/2011/02/3nplus1.png"><img class="aligncenter size-full wp-image-2333" title="3nplus1" src="{{ site.baseurl }}/images/assets/3nplus1.png" alt="" width="308" height="60" /></a></p>
+<p>O problema no Uva pede para contar o número de <a href="http://en.wikipedia.org/wiki/Collatz_conjecture#m-cycles" target="_blank">m-ciclos</a> em um determinado intervalo de inteiros n, m.</p>
+<p>Vamos então ao código:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.uva;</p>
+<p>import java.io.BufferedReader;<br />
+import java.io.IOException;<br />
+import java.io.InputStreamReader;</p>
+<p>/**<br />
+ * Problem 100 - The 3n + 1 problem<br />
+ *<br />
+ * Problem Link:<br />
+ * http://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=3&amp;page=show_problem&amp;problem=36<br />
+ *<br />
+ * Run time: 0.208s<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class Main {</p>
+<p>	static int[] cache = new int[1000001];</p>
+<p>	public static void main(String[] args) throws IOException {</p>
+<p>		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));<br />
+		String s;<br />
+		long i, j;<br />
+		String[] tokens;<br />
+		final String regexWhitespace = &quot;\\s+&quot;;<br />
+		final String whiteSpace = &quot; &quot;;</p>
+<p>		while ((s = bf.readLine()) != null){<br />
+			s = s.trim().replaceAll(regexWhitespace, whiteSpace);<br />
+			tokens = s.trim().split(whiteSpace);<br />
+			i = Long.parseLong(tokens[0]);<br />
+			j = Long.parseLong(tokens[1]);</p>
+<p>			System.out.println(i + whiteSpace + j + whiteSpace + countCycle(i,j));<br />
+		}<br />
+	}</p>
+<p>	static int countCycle (long n, long m){<br />
+		long i, j;<br />
+		int max = 0;<br />
+		int aux;</p>
+<p>		if (n &gt; m){<br />
+			i = m;<br />
+			j = n;<br />
+		} else{<br />
+			i = n;<br />
+			j = m;<br />
+		}</p>
+<p>		for (long k=i; k&lt;=j; k++){<br />
+			aux = collatz(k);<br />
+			if (max &lt; aux){<br />
+				max = aux;<br />
+			}<br />
+		}</p>
+<p>		return max;<br />
+	}</p>
+<p>	static int collatz(long n){</p>
+<p>		long index = n;</p>
+<p>		if (cache[(int) n] != 0){<br />
+			return cache[(int) n];<br />
+		}</p>
+<p>		int count = 1;<br />
+		while (n &gt; 1){<br />
+			if ((n % 2) == 0){<br />
+				n /= 2;<br />
+			} else{<br />
+				n = (n*3)+1;<br />
+			}<br />
+			count++;<br />
+		}<br />
+		cache[(int) index] = count;<br />
+		return count;<br />
+	}</p>
+<p>}<br />
+[/code]</p>
+<ul>
+<li style="text-align: justify;">O problema consiste na leitura de dois números inteiros: i e j por linha. Não temos um número exato de linhas, por isso lemos até acabar, ou seja, a entrada for nula.</li>
+<li style="text-align: justify;">Uma dica para leitura de números: BufferedReader + Long.parseLong() é mais rápido do que Scanner.</li>
+<li style="text-align: justify;">Fazemos trim e eliminamos todos os espaços da linha pois não sabemos se pode vir algum "lixo".</li>
+<li style="text-align: justify;">No método countCycle verificamos qual número é maior (i ou j) para fazermos o passe no loop (pode vir com a ordem trocada, não sabemos).</li>
+<li style="text-align: justify;">O método collatz faz o cálculo que queremos.</li>
+<li style="text-align: justify;">Usamos um cache de tamanho 1.000.000, pois isso vai nos ajudar a ganhar tempo. Por exemplo, suponha que tenha uma entrada 1 100, então vamos calcular esse período e guardar no cache. Depois temos uma entrada 1 200, ou seja, podemos usar o que já calculamos antes e calcular apenas o período novo (101 a 200).</li>
+<li style="text-align: justify;">O limite de run time desse problema é de 3s. O algoritmo acima foi executado em 0.208 (o que é um tempo bom para Java).</li>
+<li style="text-align: justify;">Outra dica: toda classe submetida para o UVa em Java deve ter o nome Main, isso é padrão. Se tentar submeter com outro nome, não vai funcionar. O arquivo também não pode conter nenhum comentário. Também não podem pertencer à nenhuma pacote, tem que ser default.</li>
+</ul>
+<p>Testando o input e output:</p>
+<p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
+package com.loiane.uva;</p>
+<p>import static org.junit.Assert.assertEquals;</p>
+<p>import org.junit.Test;</p>
+<p>/**<br />
+ * Test Case<br />
+ * Problem 100 - The 3n + 1 problem<br />
+ *<br />
+ * @author Loiane Groner<br />
+ * http://loiane.com<br />
+ * http://loianegroner.com<br />
+ */<br />
+public class TestProblem100 {</p>
+<p>	@Test<br />
+	public void testProblem100(){</p>
+<p>		assertEquals(20, Main.countCycle(1, 10));<br />
+		assertEquals(125, Main.countCycle(100, 200));<br />
+		assertEquals(89, Main.countCycle(201, 210));<br />
+		assertEquals(174, Main.countCycle(900, 1000));<br />
+	}<br />
+}<br />
+[/code]</p>
+<p>É isso pessoal! Conto com o feedback de vocês para saber se querem que continue com essa série.</p>
+<p>Em cada problema podemos mostrar um algoritmo novo! Esses algoritmos também são ótimos para treinar TDD. :)</p>
+<p>Bons códigos!</p>
+<p style="text-align: justify;">
