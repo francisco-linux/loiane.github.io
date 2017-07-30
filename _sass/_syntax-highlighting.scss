@@ -4,10 +4,12 @@
  */
 p {
   > code {
-    background-color: #f4f7fd;
-    padding: 8px 10px 5px 10px;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    background-color: #e8f2fb;
+    padding: 6px 8px 4px 8px;
     border-radius: 3px;
     line-height: 24px;
+    font-weight: bold;
     @media screen and (max-width: 850px) {
       padding: 6px 8px 4px 8px;
     }
@@ -15,7 +17,8 @@ p {
 }
 
 code {
-  font-size: 14px;
+  font-size: 16px;
+  // font-weight: bold;
   // font-family: "Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace;
   color: #384454;
 }
@@ -31,13 +34,13 @@ pre,
 
 
 pre code {
-  padding: 48px 64px;
+  padding: 10px 64px;
   display: block;
   color: #c4d1e1;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   @media screen and (max-width: 850px) {
-    padding: 40px 40px;
+    padding: 10px 40px;
   }
 }
 
