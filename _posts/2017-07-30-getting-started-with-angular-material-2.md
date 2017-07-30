@@ -171,7 +171,7 @@ If you are using VSCode and the [Angular Languague Service](https://marketplace.
 
 This is because the `md-*` components are not known by Angular, hence we need to import them in our module.
 
-We can verify in the [Angular Material docs](https://material.angular.io/components) which are the Material modules we need to import. 
+We can verify in the [Angular Material docs](https://material.angular.io/components) which are the Material modules we need to import in our project. 
 
 For the `md-toolbar`, we can go to [Toolbar API tab link](https://material.angular.io/components/toolbar/api) and we will see that we need to import `MdToolbarModule`.
 
@@ -195,9 +195,9 @@ export class HomeModule { }
 
 Suppose we have another module that is also going to use the `md-toolbar` component. We would need to import `MdToolbarModule` again in that module. 
 
-To avoid repeating the same import in several different modules in our project, we are going to create a shared MaterialModule. This way, we only need to import the component we need once and we can import this module in any other module that is needed.
+To avoid repeating the same import in several different modules in our project, we are going to create a shared MaterialModule (this is the second option, and I personally prefer using this one). This way, we only need to import the component we need once and we can import this module in any other module that is needed.
 
-To do, we will use Angular CLI to create a new module:
+To do so, we will use Angular CLI to create a new module:
 
 ```bash
 ng g m app-material
