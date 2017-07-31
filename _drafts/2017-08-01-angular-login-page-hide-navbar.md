@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Post Name"
-date: 2017-08-30 09:35:12.000000000 -02:00
-path: 2017-07-27-post-name.md
+title: "Angular Login Page: How to Hide the NavBar"
+date: 2017-08-01 09:35:12.000000000 -02:00
+path: 2017-08-01-angular-login-page-hide-navbar.md
 tag: angular
 ---
 

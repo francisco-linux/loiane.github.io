@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Post Name"
-date: 2017-08-30 09:35:12.000000000 -02:00
-path: 2017-07-27-post-name.md
+title: "Angular ProTip: RxJS Imports"
+date: 2017-07-27 09:35:12.000000000 -02:00
+path: 2017-08-02-angular-rxjs-imports.md
 tag: angular
 ---
 
