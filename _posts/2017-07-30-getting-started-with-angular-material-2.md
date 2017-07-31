@@ -165,7 +165,7 @@ Open `home.component.html` add add the following code:
 </md-toolbar>  
 ```
 
-If you are using VSCode and the [Angular Languague Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extension, you will get some compilation errors in you HTML template:
+If you are using VSCode and the [Angular Languague Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extension, you will get some compilation errors in your HTML template:
 
 <img src="/images/2017/angular-material-02.png">
 
@@ -248,7 +248,7 @@ export class HomeModule { }
 
 #### Configuring the routes and app.component
 
-Since we create a `home.component`, this is going to be the main Component for the `home.module`. So we need to add the `home.component` in our `HomeRoutingModule`:
+Since we created a `home.component`, this is going to be the main Component for the `home.module`. So we need to add the `home.component` in our `HomeRoutingModule`:
 
 ```js
 import { HomeComponent } from './home/home.component';
@@ -286,7 +286,7 @@ const routes: Routes = [
 
 When we load our application in the browser (path ''), the HomeModule will be lazy loaded and the HomeComponent will be rendered.
 
-If we do a `ng serve` and open `http://localhost:4200/` we will be able to see a purple toolbar:
+If we execute `ng serve` and open `http://localhost:4200/` we will be able to see a purple-ish toolbar:
 
 <img src="/images/2017/angular-material-03.png">
 
