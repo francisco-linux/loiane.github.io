@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Angular Login Page: How to Hide the NavBar"
-date: 2017-08-01 09:35:12.000000000 -02:00
+date: 2017-07-31 09:35:12.000000000 -02:00
 path: 2017-08-01-angular-login-page-hide-navbar.md
 tag: angular
 ---
@@ -19,6 +19,7 @@ Intro.
 
 
 ### Title 1
+
 
 ```js
 // js code
