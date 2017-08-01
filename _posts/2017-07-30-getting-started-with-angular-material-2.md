@@ -329,7 +329,7 @@ Let's go back to `home.component.html` and enhance our example. Our template sho
     <md-card-title>Angular</md-card-title>
     <md-card-subtitle>Material 2</md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="http://loiane.com/images/tags/angular.svg" height="300px">
+  <img md-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">
   <md-card-content>
     <p>
       Material Design components for Angular

@@ -15,7 +15,7 @@ Intro.
 {:toc}
 </div>
 
-> Want the code? Go [straight to GitHub](https://github.com/loiane/repo) or view the [live demo](http://loiane.com/repo/)
+> Want the code? Go [straight to GitHub](https://github.com/loiane/repo) or view the [live demo](https://loiane.com/repo/)
 
 
 ### Title 1
@@ -27,4 +27,4 @@ Intro.
 
 More text
 
-> View the full source code [on GitHub](https://github.com/loiane/repo) or check out the [live demo](http://loiane.com/repo/)!
+> View the full source code [on GitHub](https://github.com/loiane/repo) or check out the [live demo](https://loiane.com/repo/)!
