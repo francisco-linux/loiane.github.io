@@ -19,23 +19,23 @@ You can find me on the social networks below. But I'm usually more active on <a 
 
 * <a href="http://twitter.com/loiane" target="_blank" alt="Loiane Groner on Twitter">
   <i class="mdi mdi-twitter mdi-24px"></i>
-  http://twitter.com/loiane
+  twitter.com/loiane
 </a>
 * <a href="http://github.com/loiane" target="_blank" alt="Loiane Groner on GitHub">
   <i class="mdi mdi-github-circle mdi-24px"></i>
-  http://github.com/loiane
+  github.com/loiane
 </a>
 * <a href="http://youtube.com/loianegroner" target="_blank" alt="Loiane Groner on YouTube">
   <i class="mdi mdi-youtube-play mdi-24px"></i>
-  http://youtube.com/loianegroner
+  youtube.com/loianegroner
 </a>
 * <a href="http://facebook.com/loianegroner" target="_blank" alt="Loiane Groner on Facebook">
   <i class="mdi mdi-facebook-box mdi-24px"></i>
-  http://facebook.com/loianegroner
+  facebook.com/loianegroner
 </a>
 * <a href="http://www.linkedin.com/in/loiane" target="_blank" alt="Loiane Groner on Linkedin">
   <i class="mdi mdi-linkedin-box mdi-24px"></i>
-  http://www.linkedin.com/in/loiane
+  linkedin.com/in/loiane
 </a>
 
 Happy coding!
