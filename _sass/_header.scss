@@ -78,6 +78,18 @@ $syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
       display: none;
     }
   }
+  &__youtube {
+    position: absolute;
+    bottom: 100px;
+    left: 30px;
+    right: 30px;
+    height: 30px;
+    text-align: center;
+    overflow: hidden;
+    @media screen and (max-width: 850px) {
+      display: none;
+    }
+  }
   &__links {
     position: absolute;
     bottom: 40px;
