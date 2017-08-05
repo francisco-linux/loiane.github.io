@@ -1,6 +1,12 @@
 /**
  * POSTS
  */
+
+$syntax-hue:          220;
+$syntax-saturation:   13%;
+$syntax-brightness:   18%;
+$syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
+
 .posts {
   overflow: hidden;
   display: flex;
@@ -114,11 +120,13 @@
 
     blockquote {
       background: #ddf2fd;
-      padding: 30px 60px;
-      margin: 40px 0 40px -64px;
-      border-left: 4px solid $green;
+      padding: 30px;
+      margin: 40px 0;
+      /*border-left: 3px solid $green;*/
+      border-radius: 4px;
       position: relative;
       text-align: left;
+
       @media only screen and (max-width: 500px) {
 
       }
@@ -146,11 +154,11 @@
     pre {
       position: relative;
       overflow: visible;
-      margin: 48px 0 48px -57px;
+      margin: 40px 0;
+      border-radius: 4px;
       white-space: pre;
       word-wrap: normal;
-      background: #2f3644;
-      border-radius: 0 4px 4px 0;
+      background: $syntax-bg;
       color: #C1C2C3;
       @media screen and (max-width: 850px) {
         margin: 48px -50px;
