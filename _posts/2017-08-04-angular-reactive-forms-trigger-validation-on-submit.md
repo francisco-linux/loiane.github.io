@@ -422,40 +422,40 @@ The HTML code is the same as the second example, so we'll focus only on the comp
 First, we need to declare a boolean atribute:
 
 ```js
-private formSumitAttempt: boolean;
+private formSubmitAttempt: boolean;
 ```
 
 We will also change the logic for the `onSubmit` method:
 
 ```js
 onSubmit() {
-  this.formSumitAttempt = true;
+  this.formSubmitAttempt = true;
   if (this.form.valid) {
     console.log('form submitted');
   }
 }
 ```
 
-Whenever the user tries to submit the form, we will flag `formSumitAttempt` as true. This way, we do not need to execute the `validateAllFormFields` method from the previous example.
+Whenever the user tries to submit the form, we will flag `formSubmitAttempt` as true. This way, we do not need to execute the `validateAllFormFields` method from the previous example.
 
 Since we have a new variable to help us verifying if we need to display the validation messages or not, we also need to change the expression that returns if a field is valid or not:
 
 ```js
 isFieldValid(field: string) {
   return (!this.form.get(field).valid && this.form.get(field).touched) ||
-    (this.form.get(field).untouched && this.formSumitAttempt);
+    (this.form.get(field).untouched && this.formSubmitAttempt);
 }
 ```
 In this case, we add a new condition to the field validation. If the user attempts to submit the form and the field has not been touched, then the validation error messages will be displayed on the HTML template.
 
-It is important to combine the `formSumitAttempt` with the oposite state we used in the first part of the condition. For this example it is `touched` and `untouched`, but if you use `dirty` for the first condition, you need to combine `formSumitAttempt` with the control `pristine` state.
+It is important to combine the `formSubmitAttempt` with the oposite state we used in the first part of the condition. For this example it is `touched` and `untouched`, but if you use `dirty` for the first condition, you need to combine `formSubmitAttempt` with the control `pristine` state.
 
 And at last, when the user clicks on the reset button:
 
 ```js
 reset() {
   this.form.reset();
-  this.formSumitAttempt = false;
+  this.formSubmitAttempt = false;
 }
 ```
 
