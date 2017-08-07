@@ -383,6 +383,8 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 > This extension is also part of the Angular extension package I created to work with Angular projects: [Angular Extension Pack](https://marketplace.visualstudio.com/items?itemName=loiane.angular-extension-pack)
 
+### Source code and live demo
+
 > <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-material-example) or check out the [live demo](https://angular-material-example.firebaseapp.com)
 
 References: 
