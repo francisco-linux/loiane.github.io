@@ -2,7 +2,7 @@
 layout: post
 title: "Getting Started with Angular Material 2"
 date: 2017-07-30 09:35:12.000000000 -02:00
-path: 2017-07-30-getting-started-with-angular-material-2
+path: 2017-07-30-getting-started-with-angular-material-2.md
 image: /images/2017/angular-material-04.png
 tag: angular
 ---
@@ -16,7 +16,7 @@ This article will show you how to setup your Angular project (v2+) using Angular
 {:toc}
 </div>
 
-> <i class="mdi mdi-github-circle"></i>  Want the code? Go [straight to GitHub repo](https://github.com/loiane/angular-material-example) or view the [live demo](https://angular-material-example.firebaseapp.com)
+> <i class="mdi mdi-github-circle mdi-24px"></i>  Want the code? Go [straight to GitHub repo](https://github.com/loiane/angular-material-example) or view the [live demo](https://angular-material-example.firebaseapp.com)
 
 ### 1: Create your Angular project with Angular CLI
 
@@ -383,7 +383,7 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 > This extension is also part of the Angular extension package I created to work with Angular projects: [Angular Extension Pack](https://marketplace.visualstudio.com/items?itemName=loiane.angular-extension-pack)
 
-> <i class="mdi mdi-github-circle"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-material-example) or check out the [live demo](https://angular-material-example.firebaseapp.com)
+> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-material-example) or check out the [live demo](https://angular-material-example.firebaseapp.com)
 
 References: 
 * [Angular Material 2 docs](https://material.angular.io/components)
