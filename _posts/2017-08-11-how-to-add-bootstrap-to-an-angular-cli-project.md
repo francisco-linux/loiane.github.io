@@ -48,7 +48,7 @@ npm install bootstrap@next --save
 
 #### 2.1: Alternative: Local Bootstrap CSS
 
-As an alternative, you can also download the Bootstrap CSS and add it locally to your project. I donwloaded Boostrap [from the website](getbootstrap.com) and created a folder `styles` (same level as `styles.css`):
+As an alternative, you can also download the Bootstrap CSS and add it locally to your project. I donwloaded Bootstrap [from the website](getbootstrap.com) and created a folder `styles` (same level as `styles.css`):
 
 <img src="/images/2017/angular-cli-bootstrap-01.png">
 
@@ -130,7 +130,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   // ...
 })
-export class AppBoostrapModule {}
+export class AppBootstrapModule {}
 ```
 
 Because we call the `.forRoot()` method for each module (due the ngx-bootstrap module providers), the functionalities will be available in all components and modules of your project (global scope).
@@ -154,16 +154,16 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule]
 })
-export class AppBoostrapModule {}
+export class AppBootstrapModule {}
 ```
 
 At last, don't forget to import your bootstrap module in you `app.module.ts`.
 
 ```js
-import { AppBoostrapModule } from './app-boostrap/app-boostrap.module';
+import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
 
 @NgModule({
-  imports: [BrowserModule, AppBoostrapModule],
+  imports: [BrowserModule, AppBootstrapModule],
   // ...
 })
 export class AppModule {}
