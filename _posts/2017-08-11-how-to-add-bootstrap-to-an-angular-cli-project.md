@@ -48,7 +48,7 @@ npm install bootstrap@next --save
 
 #### 2.1: Alternative: Local Bootstrap CSS
 
-As an alternative, you can also download the Bootstrap CSS and add it locally to your project. I donwloaded Bootstrap [from the website](getbootstrap.com) and created a folder `styles` (same level as `styles.css`):
+As an alternative, you can also download the Bootstrap CSS and add it locally to your project. I donwloaded Bootstrap [from the website](https://getbootstrap.com/) and created a folder `styles` (same level as `styles.css`):
 
 <img src="/images/2017/angular-cli-bootstrap-01.png">
 
