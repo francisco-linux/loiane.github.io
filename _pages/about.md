@@ -15,25 +15,25 @@ I offer some free online courses in Portuguese at ([https://loiane.training](htt
 
 #### Contact
 
-You can find me on the social networks below. But I'm usually more active on <a href="http://twitter.com/loiane" target="_blank">twitter</a>! :)
+You can find me on the social networks below. But I'm usually more active on <a href="http://twitter.com/loiane" target="_blank" rel="noopener">twitter</a>! :)
 
-* <a href="http://twitter.com/loiane" target="_blank" alt="Loiane Groner on Twitter">
+* <a href="http://twitter.com/loiane" target="_blank" rel="noopener" alt="Loiane Groner on Twitter">
   <i class="mdi mdi-twitter mdi-24px"></i>
   twitter.com/loiane
 </a>
-* <a href="http://github.com/loiane" target="_blank" alt="Loiane Groner on GitHub">
+* <a href="http://github.com/loiane" target="_blank" rel="noopener" alt="Loiane Groner on GitHub">
   <i class="mdi mdi-github-circle mdi-24px"></i>
   github.com/loiane
 </a>
-* <a href="http://youtube.com/loianegroner" target="_blank" alt="Loiane Groner on YouTube">
+* <a href="http://youtube.com/loianegroner" target="_blank" rel="noopener" alt="Loiane Groner on YouTube">
   <i class="mdi mdi-youtube-play mdi-24px"></i>
   youtube.com/loianegroner
 </a>
-* <a href="http://facebook.com/loianegroner" target="_blank" alt="Loiane Groner on Facebook">
+* <a href="http://facebook.com/loianegroner" target="_blank" rel="noopener" alt="Loiane Groner on Facebook">
   <i class="mdi mdi-facebook-box mdi-24px"></i>
   facebook.com/loianegroner
 </a>
-* <a href="http://www.linkedin.com/in/loiane" target="_blank" alt="Loiane Groner on Linkedin">
+* <a href="http://www.linkedin.com/in/loiane" target="_blank" rel="noopener" alt="Loiane Groner on Linkedin">
   <i class="mdi mdi-linkedin-box mdi-24px"></i>
   linkedin.com/in/loiane
 </a>
