@@ -27,7 +27,7 @@ const CACHE_APP = [
   '/categories/angular'*/
 ];
 
-self.addEventListener('install', function(e) {
+/*self.addEventListener('install', function(e) {
   e.waitUntil(
     Promise.all([
       caches.open(STATIC_CACHE_NAME),
@@ -81,3 +81,4 @@ this.addEventListener('fetch', function(event) {
       })
   );
 });
+*/
