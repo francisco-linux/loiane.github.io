@@ -11,12 +11,10 @@ https://coryrylan.com/blog/custom-preloading-and-lazy-loading-strategies-with-an
 https://www.dev6.com/blog
 
 lazy loading sdubmodules
-Angular Login Page: How to Hide the NavBar
 2017-08-05-firebase-hosting-continous-integration-angular-cli-greenkeeper.md
 2017-08-10-angular-rxjs-multiple-http-requests.md
 Flex Box intro
 http://4dev.tech/
-Angular 2 Reactive Forms trigger validation on submit
 
 https://malcoded.com/blog
 

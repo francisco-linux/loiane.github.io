@@ -1,0 +1,21 @@
+---
+layout: default
+permalink: /categories/angular
+---
+
+{% include components/categories.html %}
+
+{%
+	include components/category-title.html
+	category="PWA"
+	icon="pwa"
+	text="All articles on Progressive Web Apps (PWA)"
+%}
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.tag == 'pwa' %}
+			{% include components/post-card.html %}
+		{% endif %}
+  {% endfor %}
+</div>
