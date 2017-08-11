@@ -19,7 +19,7 @@ layout: default
           Prev
         </a>
       {% else %}
-        <span>
+        <span aria-disabled="true">
           <img src="{{ site.baseurl }}/images/icons/prev.svg" alt="">
           Prev
         </span>
@@ -29,7 +29,7 @@ layout: default
     {% for page in (1..paginator.total_pages) %}
       {% if page == paginator.page %}
         <li class="pagination-item">
-          <span id="current-page">{{ page }}</span>
+          <span id="current-page" aria-disabled="true">{{ page }}</span>
         </li>
       {% elsif page == 1 %}
         <li class="pagination-item">
@@ -49,7 +49,7 @@ layout: default
           <img src="{{ site.baseurl }}/images/icons/next.svg" alt="">
         </a>
       {% else %}
-        <span>
+        <span aria-disabled="true">
           Next
           <img src="{{ site.baseurl }}/images/icons/next.svg" alt="">
         </span>
