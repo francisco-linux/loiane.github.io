@@ -1,6 +1,12 @@
 {
   "name": "Loiane",
-  "short_name": "loiane",
+  "short_name": "Loiane",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "Scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "images/favicons/android-chrome-192x192.png",
@@ -13,8 +19,5 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff"
+  "splash_pages": null
 }
