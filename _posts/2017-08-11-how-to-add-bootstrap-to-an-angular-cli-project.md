@@ -40,7 +40,7 @@ For Bootstrap 3:
 npm install bootstrap --save
 ```
 
-For Bootstrap 4 (currently in alpha):
+For Bootstrap 4 (currently in beta):
 
 ```bash
 npm install bootstrap@next --save
