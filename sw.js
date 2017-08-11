@@ -21,10 +21,10 @@ const CACHE_STATIC = [
 
 const CACHE_APP = [
   '/',
-  '/index.html',
+  '/index.html'/*,
   '/about',
   '/speaking',
-  '/categories/angular'
+  '/categories/angular'*/
 ];
 
 self.addEventListener('install', function(e) {
