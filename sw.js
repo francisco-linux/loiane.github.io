@@ -1,7 +1,10 @@
-const APP_CACHE_NAME = 'loiane-com-app';
-const STATIC_CACHE_NAME = 'loiane-com-static';
+const VERSION = '0.0.1';
 
-const CACHE_STATIC = [
+const APP_CACHE_NAME = 'loiane-com-app';
+
+const CACHE_APP = [
+  '/',
+  '/index.html',
   '/images/loiane.jpg',
   '/css/main.css',
   '/fonts/tt-regular-webfont.woff2',
@@ -19,66 +22,41 @@ const CACHE_STATIC = [
   '/js/bundle.min.js'
 ];
 
-const CACHE_APP = [
-  '/',
-  '/index.html'/*,
-  '/about',
-  '/speaking',
-  '/categories/angular'*/
-];
-
-/*self.addEventListener('install', function(e) {
+self.addEventListener('install', e => {
   e.waitUntil(
-    Promise.all([
-      caches.open(STATIC_CACHE_NAME),
-      caches.open(APP_CACHE_NAME),
-      self.skipWaiting()
-    ]).then(function(storage) {
-      var static_cache = storage[0];
-      var app_cache = storage[1];
-      return Promise.all([
-        static_cache.addAll(CACHE_STATIC),
-        app_cache.addAll(CACHE_APP)
-      ]);
+    caches.open(APP_CACHE_NAME).then(cache => {
+      return cache
+        .addAll(CACHE_APP)
+        .then(self.skipWaiting())
+        .catch(err => console.log(err));
     })
   );
 });
 
-self.addEventListener('install', function(e) {
-  e.waitUntil(
-    Promise.all([
-      caches.open(STATIC_CACHE_NAME),
-      caches.open(APP_CACHE_NAME),
-      self.skipWaiting()
-    ]).then(function(storage) {
-      var static_cache = storage[0];
-      var app_cache = storage[1];
-      return Promise.all([
-        static_cache.addAll(CACHE_STATIC),
-        app_cache.addAll(CACHE_APP)
-      ]);
-    })
-  );
+self.addEventListener('activate', function(event) {
+  return self.clients.claim();
 });
 
 this.addEventListener('fetch', function(event) {
-  var response;
+  // Ignore non-get request like when accessing the admin panel
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  // Don't try to handle non-secure assets because fetch will fail
+  if (/http:/.test(event.request.url)) {
+    return;
+  }
+
   event.respondWith(
-    caches
-      .match(event.request)
-      .then(function(match) {
-        return match || fetch(event.request);
-      })
-      .catch(function() {
-        return fetch(event.request);
-      })
-      .then(function(r) {
-        response = r;
-        caches.open(cacheName).then(function(cache) {
-          cache.put(event.request, response);
+    caches.open(APP_CACHE_NAME).then(function(cache) {
+      return fetch(event.request)
+        .then(function(networkResponse) {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        })
+        .catch(function() {
+          return cache.match(event.request);
         });
-        return response.clone();
-      })
+    })
   );
 });
-*/
