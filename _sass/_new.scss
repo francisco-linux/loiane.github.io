@@ -21,7 +21,7 @@ $syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
     border-right: 0;
   }
   &-edit {
-    color: #8598b9 !important;
+    color: #545e6f !important;
   }
   &__container {
     margin: 20px 0 0;
@@ -31,7 +31,7 @@ $syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
   &__meta {
     font-size: 14px;
     height: 32px;
-    color: #8598b9;
+    color: #545e6f;
     position: relative;
     padding: 0 0 0 40px;
     margin: 5px 20px 5px 0;
