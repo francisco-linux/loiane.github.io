@@ -2,6 +2,7 @@
 layout: post
 title: "Angular Tips: Avoiding duplication of RxJS operator imports"
 date: 2017-08-01 08:35:12.000000000 -02:00
+lastmod: 2017-08-03 08:35:12.000000000 -02:00
 path: 2017-08-01-angular-rxjs-imports.md
 image: /images/2017/angular-rxjs-imports.png
 tag: angular
