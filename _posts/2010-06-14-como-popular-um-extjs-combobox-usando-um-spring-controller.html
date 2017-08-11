@@ -27,15 +27,15 @@ last_name: ''
 <p>Para popular/carregar um ExtJS ComboBox usando  um Controller Spring, é necessário criar um request em Ajax usando <em>Ext.data.HttpProxy</em><em> </em>e como response/resposta do server, você pode retornar um objeto JSON (ou um XML – neste exemplo, vou usar JSON, mas funcionar da memsa maneira que XML). Usando um J<em>sonReader (ou XMLReader)</em>, pode-se ler os valores dos erver e popular o <em>ComboBox</em>. É a mesma lógica utilizada para popular um ExtJS DataGrid.</p>
 <p>Frameworks/Bibliotecas que estou usando nesse tutorial:</p>
 <ul>
-<li>ExtJS (download daúltima versão <a href="http://www.extjs.com/products/js/download.php" target="_blank">aqui</a>);</li>
-<li><a href="http://www.springsource.org/download" target="_blank">Spring MVC 3</a></li>
-<li><a href="http://jackson.codehaus.org/" target="_blank">Jackson</a> (usado para retornar o JSON do Controller)</li>
+<li>ExtJS (download daúltima versão <a href="http://www.extjs.com/products/js/download.php" target="_blank" rel="noopener">aqui</a>);</li>
+<li><a href="http://www.springsource.org/download" target="_blank" rel="noopener">Spring MVC 3</a></li>
+<li><a href="http://jackson.codehaus.org/" target="_blank" rel="noopener">Jackson</a> (usado para retornar o JSON do Controller)</li>
 </ul>
-<p>Se você estiver usando Spring 2.5, pode conferir outros exemplo de como popular um JSONStore <a href="http://www.loiane.com/sitemap-loiane/" target="_blank">other examples</a> e retornar JSON do Spring <a href="http://www.loiane.com/2009/07/json-spring/" target="_blank">JSON from Spring using Spring-JSON lib</a>.</p>
+<p>Se você estiver usando Spring 2.5, pode conferir outros exemplo de como popular um JSONStore <a href="http://www.loiane.com/sitemap-loiane/" target="_blank" rel="noopener">other examples</a> e retornar JSON do Spring <a href="http://www.loiane.com/2009/07/json-spring/" target="_blank" rel="noopener">JSON from Spring using Spring-JSON lib</a>.</p>
 <p>Neste exemplo, vamos criar um combobox para listar todos os estados brasileiros. O screenshot pode ser conferido na figura abaixo:</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2010/06/ExtJS_ComboBox_SpringController_Loiane_01.gif"><img class="aligncenter size-full wp-image-1713" title="ExtJS_ComboBox_SpringController_Loiane_01" src="{{ site.baseurl }}/images/assets/ExtJS_ComboBox_SpringController_Loiane_01.gif" alt="" width="250" height="380" /></a></p>
 <p><a href="http://loianegroner.com/wp-content/uploads/2010/05/ExtJS_ComboBox_SpringController_Loiane_01.gif"></a></p>
-<p>O primeiro passo é crier um <a href="http://en.wikipedia.org/wiki/Plain_Old_Java_Object" target="_blank">POJO </a>(Objeto java com constructor e métodos getters e setters dos atributos):</p>
+<p>O primeiro passo é crier um <a href="http://en.wikipedia.org/wiki/Plain_Old_Java_Object" target="_blank" rel="noopener">POJO </a>(Objeto java com constructor e métodos getters e setters dos atributos):</p>
 <p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 public class State {</p>
 <p>	private String code;<br />
@@ -65,7 +65,7 @@ public class StateController {</p>
 	}<br />
 }<br />
 [/code]</p>
-<p>A anotação @ResponseBody converte automaticamento o objeto Map em um objeto JSON, por causa do framework Jackson. Você pode ver mais sobre as simplificações Ajax do Spring 3 <a href="http://blog.springsource.com/2010/01/25/ajax-simplifications-in-spring-3-0/" target="_blank">neste link</a>. E este é o objeto JSON que foi retornado do método loadStates para o browser:</p>
+<p>A anotação @ResponseBody converte automaticamento o objeto Map em um objeto JSON, por causa do framework Jackson. Você pode ver mais sobre as simplificações Ajax do Spring 3 <a href="http://blog.springsource.com/2010/01/25/ajax-simplifications-in-spring-3-0/" target="_blank" rel="noopener">neste link</a>. E este é o objeto JSON que foi retornado do método loadStates para o browser:</p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 {&quot;states&quot;:[{&quot;name&quot;:&quot;Acre&quot;,&quot;code&quot;:&quot;AC&quot;},{&quot;name&quot;:&quot;Alagoas&quot;,&quot;code&quot;:&quot;AL&quot;},{&quot;name&quot;:&quot;Amapá&quot;,&quot;code&quot;:&quot;AP&quot;},{&quot;name&quot;:&quot;Amazonas&quot;,&quot;code&quot;:&quot;AM&quot;},{&quot;name&quot;:&quot;Bahia&quot;,&quot;code&quot;:&quot;BA&quot;},{&quot;name&quot;:&quot;Ceará&quot;,&quot;code&quot;:&quot;CE&quot;},{&quot;name&quot;:&quot;Distrito Federal&quot;,&quot;code&quot;:&quot;DF&quot;},{&quot;name&quot;:&quot;Espírito Santo&quot;,&quot;code&quot;:&quot;ES&quot;},{&quot;name&quot;:&quot;Goiás&quot;,&quot;code&quot;:&quot;GO&quot;},{&quot;name&quot;:&quot;Maranhão&quot;,&quot;code&quot;:&quot;MA&quot;},{&quot;name&quot;:&quot;Mato Grosso&quot;,&quot;code&quot;:&quot;MT&quot;},{&quot;name&quot;:&quot;Mato Grosso do Sul&quot;,&quot;code&quot;:&quot;MS&quot;},{&quot;name&quot;:&quot;Minas Gerais&quot;,&quot;code&quot;:&quot;MG&quot;},{&quot;name&quot;:&quot;Pará&quot;,&quot;code&quot;:&quot;PA&quot;},{&quot;name&quot;:&quot;Paraíba&quot;,&quot;code&quot;:&quot;PB&quot;},{&quot;name&quot;:&quot;Paraná&quot;,&quot;code&quot;:&quot;PR&quot;},{&quot;name&quot;:&quot;Pernambuco&quot;,&quot;code&quot;:&quot;PE&quot;},{&quot;name&quot;:&quot;Piauí&quot;,&quot;code&quot;:&quot;PI&quot;},{&quot;name&quot;:&quot;Rio de Janeiro&quot;,&quot;code&quot;:&quot;RJ&quot;},{&quot;name&quot;:&quot;Rio Grande do Norte&quot;,&quot;code&quot;:&quot;RN&quot;},{&quot;name&quot;:&quot;Rio Grande do Sul&quot;,&quot;code&quot;:&quot;RS&quot;},{&quot;name&quot;:&quot;Rondônia&quot;,&quot;code&quot;:&quot;RO&quot;},{&quot;name&quot;:&quot;Roraima&quot;,&quot;code&quot;:&quot;RR&quot;},{&quot;name&quot;:&quot;Santa Catarina&quot;,&quot;code&quot;:&quot;SC&quot;},{&quot;name&quot;:&quot;São Paulo&quot;,&quot;code&quot;:&quot;SP&quot;},{&quot;name&quot;:&quot;Sergipe&quot;,&quot;code&quot;:&quot;SE&quot;},{&quot;name&quot;:&quot;Tocantins&quot;,&quot;code&quot;:&quot;TO&quot;}]}<br />
 [/code]</p>
@@ -149,6 +149,6 @@ Ext.onReady(function(){</p>
 <p>	stateForm.render(document.body);</p>
 <p>});<br />
 [/code]</p>
-<p>Você pode fazer o download do projeto complete (incluindo todos os jars e arquivos ExtJS nencessários) do meu repositório do GitHub: <a href="http://github.com/loiane/extjs-combobox" target="_blank">http://github.com/loiane/extjs-combobox</a><br />
+<p>Você pode fazer o download do projeto complete (incluindo todos os jars e arquivos ExtJS nencessários) do meu repositório do GitHub: <a href="http://github.com/loiane/extjs-combobox" target="_blank" rel="noopener">http://github.com/loiane/extjs-combobox</a><br />
 Este projeto foi desenvolvido no Eclipse e usei o TomCat como webserver.</p>
 <p>Bons códigos!</p>

@@ -36,7 +36,7 @@ last_name: ''
 <p>Ok, você já tentou fazer isso, o usuário foi autenticado com sucesso, mas o usuário não é redirecionado para a página principal da aplicação. Como consertar isso?</p>
 <p>Não importa de você setou a opção default-target-url no arquivo applicationContext-security.xml, ou setou uma URL para redirecionamento no lado do servidor. Não vai funcionar.</p>
 <p>O problema é que o ExtJS faz uma chamada/request Ajax, e nenhum redirecionamento irá funcionar no lado servidor (spring). Você deve fazer esse redirecionamento no lado cliente, que é no código ExtJS/javascript.</p>
-<p>Primeiro, você precisa crier o form do login. Você pode utilizar o código de exemplo disponibilizado pelo ExtJS: <a href="http://www.extjs.com/learn/Tutorial:Basic_Login" target="_blank">http://www.extjs.com/learn/Tutorial:Basic_Login</a> e customizá-lo/modificá-lo para funcinoar com o Spring Security.</p>
+<p>Primeiro, você precisa crier o form do login. Você pode utilizar o código de exemplo disponibilizado pelo ExtJS: <a href="http://www.extjs.com/learn/Tutorial:Basic_Login" target="_blank" rel="noopener">http://www.extjs.com/learn/Tutorial:Basic_Login</a> e customizá-lo/modificá-lo para funcinoar com o Spring Security.</p>
 <p>Se der uma olhada no arquivo login.jsp (padrão do Spring Security), você irá perceber três pontos chaves do form:</p>
 <ol>
 <li>URL / form action: <strong>j_spring_security_check</strong></li>
@@ -192,5 +192,5 @@ These passwords are from spring security app example<br />
 &lt;/beans&gt;<br />
 [/code]</p>
 <p>Agora irá logar normalmente com o form de login do ExtJS.</p>
-<p>Fiz uma pequena aplicação de exemplo. Se desejar, pode fazer o download do meu repositório no GitHub: <a href="http://github.com/loiane/spring-security-extjs-login" target="_blank">http://github.com/loiane/spring-security-extjs-login</a></p>
+<p>Fiz uma pequena aplicação de exemplo. Se desejar, pode fazer o download do meu repositório no GitHub: <a href="http://github.com/loiane/spring-security-extjs-login" target="_blank" rel="noopener">http://github.com/loiane/spring-security-extjs-login</a></p>
 <p>Bons códigos!</p>

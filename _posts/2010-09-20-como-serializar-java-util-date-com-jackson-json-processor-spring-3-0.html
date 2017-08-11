@@ -58,7 +58,7 @@ Inc.&quot;,&quot;visible&quot;:1,&quot;id&quot;:9,&quot;size&quot;:&quot;large&q
 large&quot;,&quot;date&quot;:1178679600000}],&quot;success&quot;:true}<br />
 [/code]</p>
 <p>Dê uma olhada no atributo date/data que foi serializado: <em><strong>"date":1188615600000</strong>.</em> Jackson usa a estratégia padrão para determinar o tipo de serialização. Lembrando que Data não é um tipo "primitivo" do JSON.</p>
-<p>Uma anotação que encontrará no Jackson é <strong><em><a href="http://jackson.codehaus.org/1.2.1/javadoc/org/codehaus/jackson/map/annotate/JsonSerialize.html" target="_blank">@JsonSerialize</a></em></strong>. Você usa essa anotação para dizer quais são os aspectos da serialização. No meu caso, usei o método get do meu objeto:</p>
+<p>Uma anotação que encontrará no Jackson é <strong><em><a href="http://jackson.codehaus.org/1.2.1/javadoc/org/codehaus/jackson/map/annotate/JsonSerialize.html" target="_blank" rel="noopener">@JsonSerialize</a></em></strong>. Você usa essa anotação para dizer quais são os aspectos da serialização. No meu caso, usei o método get do meu objeto:</p>
 <p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 @JsonSerialize(using=JsonDateSerializer.class)<br />
 public Date getDate() {<br />

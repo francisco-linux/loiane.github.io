@@ -18,15 +18,15 @@ first_name: Loiane
 last_name: ''
 ---
 <p>Este post mostrará como redimensionar um ExtJS Panel, Grid, ou qualquer outro componente quando redimensionar a janela do browser sem utilizar Ext.Viewport.</p>
-<p style="text-align: center;"><a title="Como Redimensionar ExtJS Panel, Grid, ou Outro Componente Quando Redimensionar o Browser" href="http://www.loiane.com/wp-content/uploads/2010/08/extjs-fit-to-parent_loiane_01.jpg" target="_blank"><img class="aligncenter size-full wp-image-1760" title="extjs-fit-to-parent_loiane_01" src="{{ site.baseurl }}/images/assets/extjs-fit-to-parent_loiane_01.jpg" alt="Como Redimensionar ExtJS Panel, Grid, ou Outro Componente Quando Redimensionar o Browser" width="491" height="419" /></a></p>
+<p style="text-align: center;"><a title="Como Redimensionar ExtJS Panel, Grid, ou Outro Componente Quando Redimensionar o Browser" href="http://www.loiane.com/wp-content/uploads/2010/08/extjs-fit-to-parent_loiane_01.jpg" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1760" title="extjs-fit-to-parent_loiane_01" src="{{ site.baseurl }}/images/assets/extjs-fit-to-parent_loiane_01.jpg" alt="Como Redimensionar ExtJS Panel, Grid, ou Outro Componente Quando Redimensionar o Browser" width="491" height="419" /></a></p>
 <p style="text-align: center;">
 <h3>Problema:</h3>
 <p style="text-align: justify;">Você tem uma página legada e quer trocar um grid feito em html por um grid em ExtJS (porque possui recursos bem legais). Ou a página possui algum design e você apenas quer usar um componente em ExtJS. Em ambos os casos, você deseja renderizar o componente ExtJS em um DIV específico. E você também quer que este componente ExtJS seja redimensionado quando o browser for redimensionado.</p>
 <p style="text-align: justify;">Como fazer isso, sendo que este não é comportamento padrão de um componente ExtJS? Só para esclarecer, os componentes ExtJS só sofrem redimensionamento se estiverem dentro de um Viewport, e este ocupa todo o espaço disponível na tela, não sendo possível utilizar nenhum outro design em HTML, JPEG, etc.</p>
 <h3 style="text-align: justify;">Solução:</h3>
-<p style="text-align: justify;"><strong><em>Condor </em></strong>(do <a href="http://www.sencha.com/forum/member.php?343-Condor" target="_blank"><strong>ExtJS </strong></a><a href="http://www.sencha.com/forum/member.php?343-Condor" target="_blank"><strong>Community Support Team</strong></a>) desenvolveu um plugin que consegue resolver este problema.</p>
+<p style="text-align: justify;"><strong><em>Condor </em></strong>(do <a href="http://www.sencha.com/forum/member.php?343-Condor" target="_blank" rel="noopener"><strong>ExtJS </strong></a><a href="http://www.sencha.com/forum/member.php?343-Condor" target="_blank" rel="noopener"><strong>Community Support Team</strong></a>) desenvolveu um plugin que consegue resolver este problema.</p>
 <p style="text-align: justify;">Gastei algum tempo para entender como o plugin funciona, e finalmente consegui fazê-lo funcionar do jeito que desejava.</p>
-<p style="text-align: justify;">Bem, em primeiro lugar, recomendo que passe algum tempo lendo a thread do forum para enteder bem o cenário: <a href="http://www.sencha.com/forum/showthread.php?28318" target="_blank">http://www.sencha.com/forum/showthread.php?28318</a> (se tiver alguma pergunta, por favor, publique diretamente no fórum para que o autor do plugin e outros membros lhe forneçam o suporte que precisa).</p>
+<p style="text-align: justify;">Bem, em primeiro lugar, recomendo que passe algum tempo lendo a thread do forum para enteder bem o cenário: <a href="http://www.sencha.com/forum/showthread.php?28318" target="_blank" rel="noopener">http://www.sencha.com/forum/showthread.php?28318</a> (se tiver alguma pergunta, por favor, publique diretamente no fórum para que o autor do plugin e outros membros lhe forneçam o suporte que precisa).</p>
 <h3>Como fazer o plugin funcionar:</h3>
 <p>É preciso aplicar o seguinte estilo (css) no DIV  (o atributo de largura - width é com o designer; o outros estilos são obrigatórios para fazer o plugin funcionar):</p>
 <p>[code lang="html" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
@@ -74,6 +74,6 @@ stateId: 'grid'<br />
 [/code]</p>
 <p>Pronto! Quando redimensionar browser, o componente ExtJS fará também!</p>
 <p>Testei no Firefox, Chrome e IE6.</p>
-<p>Você també pode fazer o download do projeto de exemplo no meu <strong>GitHub</strong>: <a href="http://github.com/loiane/extjs-fit-to-parent" target="_blank">http://github.com/loiane/extjs-fit-to-parent</a></p>
+<p>Você també pode fazer o download do projeto de exemplo no meu <strong>GitHub</strong>: <a href="http://github.com/loiane/extjs-fit-to-parent" target="_blank" rel="noopener">http://github.com/loiane/extjs-fit-to-parent</a></p>
 <p>PS.: Se quiser usar todo o espaço disponível na tela, utilize <strong>Viewport</strong>.</p>
 <p>Bons códigos!</p>

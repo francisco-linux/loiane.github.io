@@ -16,7 +16,7 @@ language: pt-br
 tag: pt-br
 ---
 <p>Ei pessoal,</p>
-<p>Hoje vou falar de um probleminha que tive quando usei o Sencha Architect para fazer um projeto simples de exemplo usando as ActionColumns dor Grid. Bem, esse problema não se aplica apenas se você usa o Sencha Architect, se você codificar na mão também terá esse problema. Na verdade até <a title="ExtJS 4: Problema com Grid ActionColumn + MVC" href="http://www.loiane.com/2012/03/extjs-4-problema-com-grid-actioncolumn-mvc/" target="_blank">já escrevi um post sobre isso aqui no blog</a>, mas na hora de usar o Sencha Architect, tive que buscar uma <a href="http://mitchellsimoens.com/2012/02/ext-js-4/actioncolumn-and-mvc/" target="_blank">solução melhor  e mais elegante</a>.</p>
+<p>Hoje vou falar de um probleminha que tive quando usei o Sencha Architect para fazer um projeto simples de exemplo usando as ActionColumns dor Grid. Bem, esse problema não se aplica apenas se você usa o Sencha Architect, se você codificar na mão também terá esse problema. Na verdade até <a title="ExtJS 4: Problema com Grid ActionColumn + MVC" href="http://www.loiane.com/2012/03/extjs-4-problema-com-grid-actioncolumn-mvc/" target="_blank" rel="noopener">já escrevi um post sobre isso aqui no blog</a>, mas na hora de usar o Sencha Architect, tive que buscar uma <a href="http://mitchellsimoens.com/2012/02/ext-js-4/actioncolumn-and-mvc/" target="_blank" rel="noopener">solução melhor  e mais elegante</a>.</p>
 <p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2012/07/sencha-architect2-actioncolumn-loiane.png"><img class="aligncenter  wp-image-4921" title="sencha-architect2-actioncolumn-loiane" src="{{ site.baseurl }}/images/assets/sencha-architect2-actioncolumn-loiane-1024x753.png" alt="" width="491" height="362" /></a></p>
 <p>O problema é que temos que "<em>escutar</em>" os eventos dos componentes UI no Controller, certo? Então se a gente usar o ActionColumn, vamos querer escutar o evento disparado por ele quando clicarmos em cima do botão do ActionColumn. Mas o "<em>control</em>" do Controller não reconhece o evento. A solução então é disparar um evento customizado assim:</p>
 <p>ActionColumn:</p>
@@ -71,5 +71,5 @@ init: function(application) {<br />
     }<br />
 }<br />
 [/code]</p>
-<p>Você pode conferir o <a title="Exemplo ExtJS 4 + Sencha Architect 2: Basic Array Grid (usando ActionColumn)" href="http://www.loiane.com/2012/07/exemplo-extjs-4-sencha-architect-2-basic-array-grid-usando-actioncolumn/" target="_blank">exemplo completo aqui</a>.</p>
+<p>Você pode conferir o <a title="Exemplo ExtJS 4 + Sencha Architect 2: Basic Array Grid (usando ActionColumn)" href="http://www.loiane.com/2012/07/exemplo-extjs-4-sencha-architect-2-basic-array-grid-usando-actioncolumn/" target="_blank" rel="noopener">exemplo completo aqui</a>.</p>
 <p>Até a próxima! :)</p>

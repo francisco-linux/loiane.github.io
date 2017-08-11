@@ -58,7 +58,7 @@ i--; //atualiza, já que alterou o lenght<br />
 elementoContato.setAttribute(&amp;amp;amp;quot;gravado&amp;amp;amp;quot;, &amp;amp;amp;quot;SIM&amp;amp;amp;quot;);<br />
 }<br />
 [/code]</p>
-<p>Vamos agora substituir o telefone do contato de id="03". Para isso, vamos criar um novo Elemento <em>telefone</em> (lembrando que também temos que cria um Nó de texto para relacionar ao elemento Telefone (pode relembrar como é árvore DOM <a href="http://www.loiane.com/2009/04/manipulando-arquivos-xml-em-java-com-a-api-dom-parte-i/" target="_blank">aqui</a>)). Após criar o novo elemento telefone, vamos subtituir o novo elmento pelo elemento que já existe; para isso, utilizamos o método <em>replaceChild(Node novoNo, Node antigoNo)</em>:</p>
+<p>Vamos agora substituir o telefone do contato de id="03". Para isso, vamos criar um novo Elemento <em>telefone</em> (lembrando que também temos que cria um Nó de texto para relacionar ao elemento Telefone (pode relembrar como é árvore DOM <a href="http://www.loiane.com/2009/04/manipulando-arquivos-xml-em-java-com-a-api-dom-parte-i/" target="_blank" rel="noopener">aqui</a>)). Após criar o novo elemento telefone, vamos subtituir o novo elmento pelo elemento que já existe; para isso, utilizamos o método <em>replaceChild(Node novoNo, Node antigoNo)</em>:</p>
 <p>[code lang="java"]<br />
 //subtitui o telefone do Pedro da Silva<br />
 if (contato.getId() == 3){<br />
@@ -121,6 +121,6 @@ transformer.transform(source, result);<br />
 [/code]</p>
 <p>Após rodar o programa, vamos ter o seguinte XML modificado:</p>
 <p><img class="aligncenter size-full wp-image-533" title="contatos_mod_xml" src="{{ site.baseurl }}/images/assets/contatos_mod_xml.png" alt="contatos_mod_xml" width="525" height="372" /></p>
-<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank">aqui </a>(projeto no formato da IDE Eclipse)<br />
-<a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank" rel="noopener">aqui </a>(projeto no formato da IDE Eclipse)<br />
+<a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank" rel="noopener"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
 <p>Até a próxima!</p>

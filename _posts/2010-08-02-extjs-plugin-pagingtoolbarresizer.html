@@ -27,11 +27,11 @@ last_name: ''
 <p style="text-align: justify;">O componente ExtJS PagingToolbar permite ao desenvolvedor setar um valor predeterminado para o tamanho da página (atributo <strong>page size</strong>), que é o número total de itens/registros que serão exibidos pelo grid de vez só (por página).</p>
 <p style="text-align: justify;">Suponha que queremos exibir 10.000 (dez mil) itens no grid e que vamos usar o recurso de paginação. Vamos exibir apenas 50 itens por página. Se fizer a matemática, são 200 página no total a serem exibidas. Até agora nenhum problema, pois este é o comportamento normal do componente de paginação.</p>
 <p style="text-align: justify;">O usuário Pessoa1 quer ver 100 itens por página, e o usuário Pessoa2 quer visualizar 150 itens por página. Pode ser que depois de 10 minutos eles mudem de opinião e queiram visualizar um outro número de itens por página. Se você for fazer uma pesquisa no Ebay (ou americanas.com, saraiva, etc), vai ver uma opção de quantos itens deseja ver ao mesmo tempo. E é isto que desejamos fazer.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/08/extjs_plugin_ebay.png" target="_blank"><img class="aligncenter size-full wp-image-1742" title="extjs_plugin_ebay" src="{{ site.baseurl }}/images/assets/extjs_plugin_ebay.png" alt="" width="506" height="224" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/08/extjs_plugin_ebay.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1742" title="extjs_plugin_ebay" src="{{ site.baseurl }}/images/assets/extjs_plugin_ebay.png" alt="" width="506" height="224" /></a></p>
 <p style="text-align: center;">
 <h3>A solução/plugin:</h3>
 <p style="text-align: justify;">Por esta razão, implementei o plugin PagingToolbarResizer, que adiciona uma (dropdown) na barra de paginação (paging toolbar) com algumas opções de quantos itens serão exibidos por página. O plugin deve ser acoplado no objeto PagingToolbar e é totalmente customizável.</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/08/extjs_plugin_pagingtoolbarresizer.png" target="_blank"><img class="aligncenter size-full wp-image-1743" title="extjs_plugin_pagingtoolbarresizer" src="{{ site.baseurl }}/images/assets/extjs_plugin_pagingtoolbarresizer.png" alt="" width="493" height="351" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/08/extjs_plugin_pagingtoolbarresizer.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1743" title="extjs_plugin_pagingtoolbarresizer" src="{{ site.baseurl }}/images/assets/extjs_plugin_pagingtoolbarresizer.png" alt="" width="493" height="351" /></a></p>
 <p>Vamos dar uma olhada nas opções de configuração:</p>
 <ul>
 <li><strong><em>options</em></strong>: pode ser uma <em>store</em> ou um array de inteiros. Se desejar obter a lista de opções de um banco de dados, por exemplo, deve usar uma <em>store</em>, caso contrário, use um array. Os valores padrões são: [5, 10, 15, 20, 25, 30, 50, 75, 100, 200, 300, 500, 1000].</li>
@@ -64,11 +64,11 @@ plugins : [new Ext.ux.plugin.PagingToolbarResizer( {options : [ 5, 10, 15, 20, 2
 [/code]</p>
 <h3>Links:</h3>
 <ul>
-<li><strong><a href="http://loianegroner.com/extjs-plugins/pagingtoolbarresizer/" target="_blank">Página "</a></strong><em><a href="http://loianegroner.com/extjs-plugins/pagingtoolbarresizer/" target="_blank"><strong>oficial</strong></a></em><a href="http://loianegroner.com/extjs-plugins/pagingtoolbarresizer/" target="_blank"><strong>" do plugin - está em Inglês</strong></a></li>
-<li>Você também pode conferir um <a href="http://loianegroner.com/extjs/examples/PagingToolbarResizer/" target="_blank"><strong>exemplo ao vivo - em execução</strong></a> (é o mesmo exemplo do PagingToolbar, que irá encontrar em <a href="http://www.sencha.com/deploy/dev/examples/grid/paging.html" target="_blank"><strong>Sencha website - ExtJS examples - PagingToolbar</strong></a>). Só adicionei o plugin.</li>
-<li><strong><a href="http://www.sencha.com/forum/showthread.php?105843-PagingToolbarResizer-plugin" target="_blank">A thread no forum oficial do ExtJS</a></strong></li>
-<li><strong><a href="http://github.com/loiane/Ext.ux.plugin.PagingToolbarResizer" target="_blank">Repositório no GitHub</a></strong></li>
+<li><strong><a href="http://loianegroner.com/extjs-plugins/pagingtoolbarresizer/" target="_blank" rel="noopener">Página "</a></strong><em><a href="http://loianegroner.com/extjs-plugins/pagingtoolbarresizer/" target="_blank" rel="noopener"><strong>oficial</strong></a></em><a href="http://loianegroner.com/extjs-plugins/pagingtoolbarresizer/" target="_blank" rel="noopener"><strong>" do plugin - está em Inglês</strong></a></li>
+<li>Você também pode conferir um <a href="http://loianegroner.com/extjs/examples/PagingToolbarResizer/" target="_blank" rel="noopener"><strong>exemplo ao vivo - em execução</strong></a> (é o mesmo exemplo do PagingToolbar, que irá encontrar em <a href="http://www.sencha.com/deploy/dev/examples/grid/paging.html" target="_blank" rel="noopener"><strong>Sencha website - ExtJS examples - PagingToolbar</strong></a>). Só adicionei o plugin.</li>
+<li><strong><a href="http://www.sencha.com/forum/showthread.php?105843-PagingToolbarResizer-plugin" target="_blank" rel="noopener">A thread no forum oficial do ExtJS</a></strong></li>
+<li><strong><a href="http://github.com/loiane/Ext.ux.plugin.PagingToolbarResizer" target="_blank" rel="noopener">Repositório no GitHub</a></strong></li>
 </ul>
 <h3 style="text-align: justify;">E também pode fazer o download neste link:</h3>
-<p style="text-align: justify;"><a href="http://loianegroner.com/extjs/PagingToolbarResizer.zip" target="_blank">http://loianegroner.com/extjs/PagingToolbarResizer.zip</a></p>
+<p style="text-align: justify;"><a href="http://loianegroner.com/extjs/PagingToolbarResizer.zip" target="_blank" rel="noopener">http://loianegroner.com/extjs/PagingToolbarResizer.zip</a></p>
 <p style="text-align: justify;">Espero que ajude alguém! :)</p>

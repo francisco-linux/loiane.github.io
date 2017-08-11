@@ -20,13 +20,13 @@ display_name: Loiane
 first_name: Loiane
 last_name: ''
 ---
-<p style="text-align: justify;">O post <a href="http://www.loiane.com/2009/06/comecando-com-ext-js/" target="_blank">Começando com Ext JS</a> mostrou como configurar sua aplicação para começar a trabalhar com <a href="http://extjs.com/" target="_blank">Ext JS</a>.<br />
-O post de hoje tem como objetivo introduzir como apresentar dados ao usuário utilizando o widget grid da biblioteca <a href="http://extjs.com/" target="_blank">Ext JS</a>.</p>
-<p style="text-align: justify;">O grid, é sem sombra de dúvidas, um dos componentes mais utilizados do <a href="http://extjs.com/" target="_blank">Ext JS</a>. Quando temos um conjunto de dados e temos que apresentá-los ao usuário, uma maneira simples e clara de fazer isso é através de um grid (tabela, planilha). A biblioteca <a href="http://extjs.com/" target="_blank">Ext JS</a> já possui um componente que facilita a montagem desses dados em forma de grid.</p>
+<p style="text-align: justify;">O post <a href="http://www.loiane.com/2009/06/comecando-com-ext-js/" target="_blank" rel="noopener">Começando com Ext JS</a> mostrou como configurar sua aplicação para começar a trabalhar com <a href="http://extjs.com/" target="_blank" rel="noopener">Ext JS</a>.<br />
+O post de hoje tem como objetivo introduzir como apresentar dados ao usuário utilizando o widget grid da biblioteca <a href="http://extjs.com/" target="_blank" rel="noopener">Ext JS</a>.</p>
+<p style="text-align: justify;">O grid, é sem sombra de dúvidas, um dos componentes mais utilizados do <a href="http://extjs.com/" target="_blank" rel="noopener">Ext JS</a>. Quando temos um conjunto de dados e temos que apresentá-los ao usuário, uma maneira simples e clara de fazer isso é através de um grid (tabela, planilha). A biblioteca <a href="http://extjs.com/" target="_blank" rel="noopener">Ext JS</a> já possui um componente que facilita a montagem desses dados em forma de grid.</p>
 <p style="text-align: justify;">Para montar esse grid com Ext JS, utilizamos dois componentes:</p>
 <ul>
-<li> Um <a href="http://extjs.com/deploy/ext/docs/output/Ext.data.Store.html" target="_blank">Store</a> que atua como um banco de dado em memória, com os dados que queremos disponibilizar na tela;</li>
-<li> Um <a href="http://extjs.com/deploy/ext/docs/output/Ext.GridPanel.html" target="_blank">Grid Panel</a> que fornece uma maneira para apresentar os dados armazenados no store.</li>
+<li> Um <a href="http://extjs.com/deploy/ext/docs/output/Ext.data.Store.html" target="_blank" rel="noopener">Store</a> que atua como um banco de dado em memória, com os dados que queremos disponibilizar na tela;</li>
+<li> Um <a href="http://extjs.com/deploy/ext/docs/output/Ext.GridPanel.html" target="_blank" rel="noopener">Grid Panel</a> que fornece uma maneira para apresentar os dados armazenados no store.</li>
 </ul>
 <p style="text-align: justify;">Terminologia utilizada:</p>
 <ul>
@@ -75,7 +75,7 @@ fields: [<br />
 <p>[code lang="javascript"]{name: 'nome', type: 'string'}[/code]</p>
 <p style="text-align: justify;">Entretanto, por estarmos lendo apenas uma string, podemos simplificar definindo o campo nome apenas assim:</p>
 <p>[code lang="javascript"]'nome'[/code]</p>
-<p style="text-align: justify;">O campo aniversário é um pouco diferente, porque queremos tratá-lo como um tipo data. Para um campo do tipo 'date', existem várias opções para definir o formato da data, e o o atributo dateFormat que precisa ser definido. Se você já trabalha com PHP, estes formatos de data são bem familiares, pois o Ext JS utiliza a mesma f<a href="http://www.php.net/date" target="_blank">ormatação para datas que o PHP</a> usa.</p>
+<p style="text-align: justify;">O campo aniversário é um pouco diferente, porque queremos tratá-lo como um tipo data. Para um campo do tipo 'date', existem várias opções para definir o formato da data, e o o atributo dateFormat que precisa ser definido. Se você já trabalha com PHP, estes formatos de data são bem familiares, pois o Ext JS utiliza a mesma f<a href="http://www.php.net/date" target="_blank" rel="noopener">ormatação para datas que o PHP</a> usa.</p>
 <p>[code lang="javascript"]{name: 'aniversario', type: 'date', dateFormat: 'd/m/Y'}[/code]</p>
 <p style="text-align: justify;">O Ext JS possui alguns tipos de dados definidos:</p>
 <ul>
@@ -116,7 +116,7 @@ frame:true<br />
 <li>columns: definido pelo componente ColumnModel. É um array de objetos que definem as colunas do grid</li>
 <li>title: título do grid. Se não for definido, aparece apenas o grid</li>
 </ul>
-<p style="text-align: justify;"><strong><em>Configurando o <a href="http://extjs.com/deploy/ext/docs/output/Ext.grid.ColumnModel.html" target="_blank">ColumnModel</a> do GridPanel</em></strong></p>
+<p style="text-align: justify;"><strong><em>Configurando o <a href="http://extjs.com/deploy/ext/docs/output/Ext.grid.ColumnModel.html" target="_blank" rel="noopener">ColumnModel</a> do GridPanel</em></strong></p>
 <p style="text-align: justify;">Para definir as colunas do grid, precisamos criar um array de objetos que definem como essas colunas serão exibidas e tratadas.</p>
 <p style="text-align: justify;">O objeto que define cada coluna por ter várias configurações, mas no mínimo requere que o header e o dataIndex estejam definidos. O atributo header define apenas o texto que irá aparecer no cabeçalho. O atributo dataIndex indica qual campo/field será usado para a coluna.</p>
 <p style="text-align: justify;">Você também pode conferir alguns outras opções de configuração do ColumnModel:</p>
@@ -130,15 +130,15 @@ frame:true<br />
 <p style="text-align: justify;"><strong><em>Resultado</em></strong></p>
 <p style="text-align: justify;">Juntando todo o código que fizemos, temos o seguinte resultado no browser:</p>
 <p style="text-align: justify;"><img class="aligncenter size-full wp-image-655" title="grid_simples_01" src="{{ site.baseurl }}/images/assets/grid_simples_01.png" alt="grid_simples_01" width="589" height="230" /></p>
-<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/gridsimples.zip" target="_blank">aqui </a>(formato projeto Eclipse)</p>
-<p><a href="http://www.loiane.com/downloads/gridsimples.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
-<p style="text-align: justify;">E se ainda não sabe como fazer para importar o projeto no eclipse e executar, pode conferir <a href="http://www.loiane.com/2009/06/como-importar-projetos-j2ee-para-o-eclipse-e-executa-los/" target="_blank">aqui</a>.</p>
+<p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/gridsimples.zip" target="_blank" rel="noopener">aqui </a>(formato projeto Eclipse)</p>
+<p><a href="http://www.loiane.com/downloads/gridsimples.zip" target="_blank" rel="noopener"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p style="text-align: justify;">E se ainda não sabe como fazer para importar o projeto no eclipse e executar, pode conferir <a href="http://www.loiane.com/2009/06/como-importar-projetos-j2ee-para-o-eclipse-e-executa-los/" target="_blank" rel="noopener">aqui</a>.</p>
 <p style="text-align: justify;"><strong><em>Conclusão:</em></strong></p>
 <p style="text-align: justify;">Viu como é fácil e pouco código? Essa biblioteca nos poupa de fazer código braçal para fazer um grid bonitinho assim. :)<br />
 Passei a última semana estudando o widget de grid e tive um ótimo resultado. Vale a pena, principalmente se você quer poupar tempo ou não gosta muito de javascript puro!<br />
 E ainda podemos fazer integração com java e frameworks como Spring e Struts. Assim, podemos fazer toda a parte da lógica de negócio com java e utilizar a biblioteca para deixar a interface mais rica e mais bonita para o usuário.</p>
 <p style="text-align: justify;"><em>Referências:<br />
-- <a href="http://extjs.com/deploy/ext/docs/" target="_blank">Documentação Ext JS</a><br />
-- <a href="http://extjs.com/deploy/dev/examples/samples.html" target="_blank">Ext JS samples</a><br />
-- <a href="http://www.packtpub.com/learning-ext-js/book" target="_blank">Learning Ext JS</a></em></p>
+- <a href="http://extjs.com/deploy/ext/docs/" target="_blank" rel="noopener">Documentação Ext JS</a><br />
+- <a href="http://extjs.com/deploy/dev/examples/samples.html" target="_blank" rel="noopener">Ext JS samples</a><br />
+- <a href="http://www.packtpub.com/learning-ext-js/book" target="_blank" rel="noopener">Learning Ext JS</a></em></p>
 <p style="text-align: justify;">Até a próxima!</p>

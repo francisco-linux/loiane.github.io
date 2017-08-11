@@ -16,7 +16,7 @@ tag: pt-br
 ---
 <p>Oi Pessoal,</p>
 <p>Recebi alguns pedidos e sugestões de post para o blog que é fazer uma página de Login com Sencha Touch 2. E aqui estou escrevendo um post sobre isso! :)</p>
-<p>Hoje então vou mostrar passo a passo como fazer uma página bem simples de login com Sencha Touch - para caso alguém queira usar de base. Não vou falar sobre autenticação, pois senão já entra em um assunto muito amplo e que vai depender da tecnologia usada no server side. Também não vou explicar muito a fundo, pois todos os conceitos abordei nos cursos de <a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank">Ext JS 4</a> e <a href="http://www.loiane.com/2012/03/curso-de-sencha-touch-2-gratuito/" target="_blank">Sencha Touch 2</a>, então espero que tenha um conhecimento básico de certas coisas! :)</p>
+<p>Hoje então vou mostrar passo a passo como fazer uma página bem simples de login com Sencha Touch - para caso alguém queira usar de base. Não vou falar sobre autenticação, pois senão já entra em um assunto muito amplo e que vai depender da tecnologia usada no server side. Também não vou explicar muito a fundo, pois todos os conceitos abordei nos cursos de <a href="http://www.loiane.com/2011/11/curso-de-extjs-4-gratuito/" target="_blank" rel="noopener">Ext JS 4</a> e <a href="http://www.loiane.com/2012/03/curso-de-sencha-touch-2-gratuito/" target="_blank" rel="noopener">Sencha Touch 2</a>, então espero que tenha um conhecimento básico de certas coisas! :)</p>
 <p>PS.: para quem já usa o Sencha Architect 3, deixo a dica que o SA3 já vem com um template para Login. O que vou mostrar hoje é um pouco diferente! :)</p>
 <h1>Views</h1>
 <p>O projeto consiste em 3 views: a página de login, uma página principal que está vazia (e é onde seria colocado o conteúdo da app) com um botão de logout, e um Viewport que vai ter a página de login e a página principal fazendo o wrapper da app.</p>
@@ -117,8 +117,8 @@ tag: pt-br
 
 });</pre>
 <h2>Viewport</h2>
-<p>O Viewport é apenas um container que irá juntar as duas views que já criamos e será o reponsável pela navegação da app. Para isso, vou usar o <a title="[Curso de ExtJS 4] Aula 38: Card Layout" href="http://www.loiane.com/2013/09/curso-de-extjs-4-aula-38-card-layout/" target="_blank">Card Layout</a>, assim apenas uma view fica visível por vez.</p>
-<p>No <a title="[Curso de ExtJS 4] Aula 38: Card Layout" href="http://www.loiane.com/2013/09/curso-de-extjs-4-aula-38-card-layout/" target="_blank">Card Layout</a>, a primeira view é a view ativa por padrão, então quando o usuário carregar a app, a página de login será a view exibida e a view Main ficará escondida (só para o exemplo viu, isso não é coisa que se deva fazer em app que vai para produção :) ).</p>
+<p>O Viewport é apenas um container que irá juntar as duas views que já criamos e será o reponsável pela navegação da app. Para isso, vou usar o <a title="[Curso de ExtJS 4] Aula 38: Card Layout" href="http://www.loiane.com/2013/09/curso-de-extjs-4-aula-38-card-layout/" target="_blank" rel="noopener">Card Layout</a>, assim apenas uma view fica visível por vez.</p>
+<p>No <a title="[Curso de ExtJS 4] Aula 38: Card Layout" href="http://www.loiane.com/2013/09/curso-de-extjs-4-aula-38-card-layout/" target="_blank" rel="noopener">Card Layout</a>, a primeira view é a view ativa por padrão, então quando o usuário carregar a app, a página de login será a view exibida e a view Main ficará escondida (só para o exemplo viu, isso não é coisa que se deva fazer em app que vai para produção :) ).</p>
 <pre class="toolbar:2 lang:js decode:true">Ext.define('MyApp.view.MyViewport', {
     extend: 'Ext.Container',
     alias: 'widget.myviewport',
@@ -270,5 +270,5 @@ tag: pt-br
 </ul>
 <p>Linhas 52 - 58 : função que faz logout. Apenas coloca a view Login como view ativa do Viewport.</p>
 <h1>Download Código</h1>
-<p>O código está disponível no github: <a href="https://github.com/loiane/sencha-touch2-examples-architect/tree/master/SenchaTouchLogin" target="_blank">https://github.com/loiane/sencha-touch2-examples-architect/tree/master/SenchaTouchLogin</a></p>
+<p>O código está disponível no github: <a href="https://github.com/loiane/sencha-touch2-examples-architect/tree/master/SenchaTouchLogin" target="_blank" rel="noopener">https://github.com/loiane/sencha-touch2-examples-architect/tree/master/SenchaTouchLogin</a></p>
 <p>Até a próxima! :)</p>

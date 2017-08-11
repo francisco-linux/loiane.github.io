@@ -23,7 +23,7 @@ display_name: Loiane
 first_name: Loiane
 last_name: ''
 ---
-<p style="text-align: justify;">No <a href="http://www.loiane.com/2009/06/como-montar-um-grid-utilizando-ext-js/" target="_blank">primeiro exemplo de grid utilizando Ext JS</a>, foi utilizado um array simples para popular a tabela. Porém, pode ser que alguma aplicação precise mostrar uma tabela/grid de dados estáticos, mas na<br />
+<p style="text-align: justify;">No <a href="http://www.loiane.com/2009/06/como-montar-um-grid-utilizando-ext-js/" target="_blank" rel="noopener">primeiro exemplo de grid utilizando Ext JS</a>, foi utilizado um array simples para popular a tabela. Porém, pode ser que alguma aplicação precise mostrar uma tabela/grid de dados estáticos, mas na<br />
 maioria dos casos, precisamos buscar essas informações em um banco de dados.</p>
 <p style="text-align: justify;">O post de hoje tem como objetivo mostrar como construir um grid em Ext JS utilizando as informações contidas em um objeto Json, que foi gerado pelo java.</p>
 <p style="text-align: justify;">Vamos pegar o código utilizado para contruir o grid com um array simples e fazer algumas modificações para obter os dados do Json:</p>
@@ -40,15 +40,15 @@ maioria dos casos, precisamos buscar essas informações em um banco de dados.</
 <p style="text-align: justify;">A classe ContatoJson possui um único método que tem como objetivo gerar o objeto em formato Json:</p>
 <p style="text-align: justify;"><img class="aligncenter size-full wp-image-719" title="gridjson05" src="{{ site.baseurl }}/images/assets/gridjson05.PNG" alt="gridjson05" width="637" height="217" /></p>
 <p style="text-align: justify;">Note a linha: <em>JSONArray jsonArray = JSONArray.fromObject(contatos);</em></p>
-<p style="text-align: justify;">Utilizei a biblioteca json-lib para fazer o parse. Para maiores informações, consulte: <a href="http://json-lib.sourceforge.net/" target="_blank">http://json-lib.sourceforge.net/</a></p>
+<p style="text-align: justify;">Utilizei a biblioteca json-lib para fazer o parse. Para maiores informações, consulte: <a href="http://json-lib.sourceforge.net/" target="_blank" rel="noopener">http://json-lib.sourceforge.net/</a></p>
 <p style="text-align: justify;">A classe Contato é apenas um POJO com 4 atributos: nome, email, telefone, aniversário. E a classe GeradorContatos também possui um único método que gera alguns contatos.</p>
 <p style="text-align: justify;">Na url, você pode colocar também o nome do arquivo que já possui a informação em formato json:</p>
 <p style="text-align: justify;"><img class="aligncenter size-full wp-image-720" title="gridjson03" src="{{ site.baseurl }}/images/assets/gridjson03.PNG" alt="gridjson03" width="486" height="339" /></p>
 <p style="text-align: justify;">E o resultado:</p>
 <p style="text-align: justify;"><img class="aligncenter size-full wp-image-721" title="gridjson04" src="{{ site.baseurl }}/images/assets/gridjson04.PNG" alt="gridjson04" width="590" height="231" /></p>
 <p style="text-align: justify;">Como já dito em posts anteriores, você também pode colocar a url de uma action do Struts ou Spring, e utilizar em seus projetos MVC.</p>
-<p style="text-align: justify;">O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/gridjson.zip" target="_blank">aqui </a>(formato projeto Eclipse)</p>
-<p style="text-align: justify;"><a href="http://www.loiane.com/downloads/gridjson.zip" target="_blank"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
-<p style="text-align: justify;">E se ainda não sabe como fazer para importar o projeto no eclipse e executar, pode conferir <a href="http://www.loiane.com/2009/06/como-importar-projetos-j2ee-para-o-eclipse-e-executa-los/" target="_blank">aqui</a>.</p>
+<p style="text-align: justify;">O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/gridjson.zip" target="_blank" rel="noopener">aqui </a>(formato projeto Eclipse)</p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/downloads/gridjson.zip" target="_blank" rel="noopener"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<p style="text-align: justify;">E se ainda não sabe como fazer para importar o projeto no eclipse e executar, pode conferir <a href="http://www.loiane.com/2009/06/como-importar-projetos-j2ee-para-o-eclipse-e-executa-los/" target="_blank" rel="noopener">aqui</a>.</p>
 <p style="text-align: justify;">Até a próxima!</p>
 <p style="text-align: justify;">:)</p>

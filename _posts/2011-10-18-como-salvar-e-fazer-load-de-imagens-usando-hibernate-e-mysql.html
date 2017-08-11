@@ -35,21 +35,21 @@ meta:
 language: pt-br
 tag: pt-br
 ---
-<p>Este tutorial tem como objetivo mostrar como salvar e fazer load (select) de imagens no banco de dados usando <a href="http://www.hibernate.org/" target="_blank">Hibernate </a>e <a href="http://www.mysql.com/" target="_blank">MySQL</a>.</p>
+<p>Este tutorial tem como objetivo mostrar como salvar e fazer load (select) de imagens no banco de dados usando <a href="http://www.hibernate.org/" target="_blank" rel="noopener">Hibernate </a>e <a href="http://www.mysql.com/" target="_blank" rel="noopener">MySQL</a>.</p>
 <h3>Requerimentos</h3>
 <p>Para este projeto de exemplo, vamos precisar:</p>
 <ul>
-<li><a href="http://www.eclipse.org/" target="_blank">Eclipse IDE</a> (você pode usar a sua IDE favorita);</li>
-<li><a href="http://www.mysql.com/" target="_blank">MySQL</a> (pode usar outro banco de dados, tenha em mente que terá que mudar o tipo de dado da imagem);</li>
-<li><a href="http://www.hibernate.org/" target="_blank">Hibernate </a>jars e dependências (no download do projeto já tem todos os arquivos incluídos);</li>
-<li><a href="http://www.junit.org/" target="_blank">JUnit </a>- para testar (jar também incluído no projeto).</li>
+<li><a href="http://www.eclipse.org/" target="_blank" rel="noopener">Eclipse IDE</a> (você pode usar a sua IDE favorita);</li>
+<li><a href="http://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> (pode usar outro banco de dados, tenha em mente que terá que mudar o tipo de dado da imagem);</li>
+<li><a href="http://www.hibernate.org/" target="_blank" rel="noopener">Hibernate </a>jars e dependências (no download do projeto já tem todos os arquivos incluídos);</li>
+<li><a href="http://www.junit.org/" target="_blank" rel="noopener">JUnit </a>- para testar (jar também incluído no projeto).</li>
 </ul>
 <h3>PrintScreen do Projeto</h3>
 <p>Ao final, nosso projeto deve ficar com a seguinte estrutura:</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-01.png"><img class="aligncenter size-full wp-image-3050" title="hibernate-image-loiane-01" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-01.png" alt="" width="257" height="326" /></a></p>
 <h3>Modelo do Banco de Dados</h3>
 <p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-02.png"><img class="aligncenter size-full wp-image-3051" title="hibernate-image-loiane-02" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-02.png" alt="" width="192" height="127" /></a></p>
-<p>Antes de começarmos a ver o código, precisamos rodar o seguinte script no <a href="http://www.mysql.com/" target="_blank">MySQL</a> para criar a tabela Book (livro):</p>
+<p>Antes de começarmos a ver o código, precisamos rodar o seguinte script no <a href="http://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> para criar a tabela Book (livro):</p>
 <p>[code lang="sql" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 DROP SCHEMA IF EXISTS `blog` ;<br />
 CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;<br />
@@ -68,7 +68,7 @@ ENGINE = InnoDB;<br />
 <p>Essa tabela Book será usada nesse tutorial.</p>
 <h3>Book POJO</h3>
 <p>Vamos usar essa class para representar a tabela <strong>Book</strong> (livro). Um livro tem um <em>ID</em>, um nome (<em>name</em>) e uma imagem (<em>image</em>), que é representada por um array de <em>bytes</em>.</p>
-<p>Como o objetivo é persistir uma imagem no banco de dados, temos que usar o tipo <em><strong>BLOB</strong></em>. O <a href="http://www.mysql.com/" target="_blank">MySQL</a> tem algumas variações de <em>BLOBs</em>. Você pode ver as diferenças entre os tipos <a href="http://dev.mysql.com/doc/refman/5.0/en/blob.html" target="_blank">aqui</a>. Nesse exemplo vamos usar o <em><strong>Medium Blob</strong></em>, que pode armazenar <em> L + 3 bytes, onde L &lt; 2^24</em>.</p>
+<p>Como o objetivo é persistir uma imagem no banco de dados, temos que usar o tipo <em><strong>BLOB</strong></em>. O <a href="http://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> tem algumas variações de <em>BLOBs</em>. Você pode ver as diferenças entre os tipos <a href="http://dev.mysql.com/doc/refman/5.0/en/blob.html" target="_blank" rel="noopener">aqui</a>. Nesse exemplo vamos usar o <em><strong>Medium Blob</strong></em>, que pode armazenar <em> L + 3 bytes, onde L &lt; 2^24</em>.</p>
 <p>Não esqueça de adicionar o <em>column definition</em> na annotation <em>Column</em>.</p>
 <p>[code lang="java" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="22,23"]<br />
 package com.loiane.model;</p>
@@ -269,7 +269,7 @@ import com.loiane.model.Book;</p>
 	}<br />
 }<br />
 [/code]</p>
-<p>Outra maneira de manualmente verificar se a imagem foi realmente salva é ir no <a href="http://www.mysql.com/" target="_blank">MySQL</a> e olhar na tabela:</p>
+<p>Outra maneira de manualmente verificar se a imagem foi realmente salva é ir no <a href="http://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> e olhar na tabela:</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-03.png"><img class="aligncenter size-full wp-image-3052" title="hibernate-image-loiane-03" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-03.png" alt="" width="337" height="83" /></a></p>
 <p>e se clicarmos com o botão direito...</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-04.png"><img class="aligncenter size-full wp-image-3053" title="hibernate-image-loiane-04" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-04.png" alt="" width="313" height="336" /></a></p>
@@ -277,6 +277,6 @@ import com.loiane.model.Book;</p>
 <p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/10/hibernate-image-loiane-05.png"><img class="aligncenter size-full wp-image-3054" title="hibernate-image-loiane-05" src="{{ site.baseurl }}/images/assets/hibernate-image-loiane-05.png" alt="" width="568" height="333" /></a></p>
 <h3>Download do Código Fonte</h3>
 <p>Você pode fazer download do código fonte completo (ou fazer um <em>fork/clone</em> do projeto - <em>git</em>) (todos os repositórios possuem o mesmo código fonte):</p>
-<p><em><strong>Github</strong></em>: <a href="https://github.com/loiane/hibernate-image-example" target="_blank">https://github.com/loiane/hibernate-image-example</a></p>
-<p><em><strong>BitBucket</strong></em>: <a href="https://bitbucket.org/loiane/hibernate-image-example/downloads" target="_blank">https://bitbucket.org/loiane/hibernate-image-example/downloads</a></p>
+<p><em><strong>Github</strong></em>: <a href="https://github.com/loiane/hibernate-image-example" target="_blank" rel="noopener">https://github.com/loiane/hibernate-image-example</a></p>
+<p><em><strong>BitBucket</strong></em>: <a href="https://bitbucket.org/loiane/hibernate-image-example/downloads" target="_blank" rel="noopener">https://bitbucket.org/loiane/hibernate-image-example/downloads</a></p>
 <p>Bons códigos!</p>

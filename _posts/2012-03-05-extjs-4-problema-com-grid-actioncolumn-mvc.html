@@ -21,7 +21,7 @@ tag: pt-br
 <h2>O Problema:</h2>
 <p>Os exemplos da Sencha que usam action column não usam o MVC como arquitetura. Todo o código fica em apenas em um arquivo. Até aí não tem problema nenhum. Mas como no ExtJS 4 é aconselhável que você use a arquitetura MVC para o seu código ExtJS, temos que usá-la né?</p>
 <p>No MVC, todas as ações tomadas pelo usuário precisam ser controladas pelo Controller. Ou seja, se o usuário clicar no botão da actioncolumn do grid, o controller precisa capturar esse evento e tomar alguma decisão.</p>
-<p>Vamos ao primeiro passo antes de mostrar o problema: o código abaixo foi retirado do <a href="http://dev.sencha.com/deploy/ext-4.0.7-gpl/examples/grid/array-grid.html" target="_blank">exemplo array-grid</a>, um dos exemplos disponíveis na docmentação do ExtJS 4. Esse array grid possui 2 action columns, como mostradas abaixo:</p>
+<p>Vamos ao primeiro passo antes de mostrar o problema: o código abaixo foi retirado do <a href="http://dev.sencha.com/deploy/ext-4.0.7-gpl/examples/grid/array-grid.html" target="_blank" rel="noopener">exemplo array-grid</a>, um dos exemplos disponíveis na docmentação do ExtJS 4. Esse array grid possui 2 action columns, como mostradas abaixo:</p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 {<br />
     xtype: 'actioncolumn',<br />
@@ -210,7 +210,7 @@ init: function() {<br />
 <p>Essa é uma <del>gambiarra</del> solução muitíssimo feia, mas o pessoal tem usado muito essa. Pelo menos funciona!</p>
 <h3>3ª Solução</h3>
 <p>Ah, esse é uma solução mesmo, e não <del>gambiarra</del> solução temporária que será permanente!</p>
-<p>Em vez de usar o ActionColumn da API nativa do ExtJS, use o <a href="https://github.com/lucianlature/Ext.plugin.extjs4.ActionButtonColumn" target="_blank">plugin Ext.ux.grid.column.ActionButtonColumn</a>, que substitui o Action Column por um botão de verdade, que é um componente do ExtJS 4 e assim podemos tratar o evento no controller como um botão normalmente!</p>
+<p>Em vez de usar o ActionColumn da API nativa do ExtJS, use o <a href="https://github.com/lucianlature/Ext.plugin.extjs4.ActionButtonColumn" target="_blank" rel="noopener">plugin Ext.ux.grid.column.ActionButtonColumn</a>, que substitui o Action Column por um botão de verdade, que é um componente do ExtJS 4 e assim podemos tratar o evento no controller como um botão normalmente!</p>
 <p><strong>GridX.js</strong></p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false" highlight="2,7"]<br />
 {<br />

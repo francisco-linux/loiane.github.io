@@ -28,12 +28,12 @@ first_name: Loiane
 last_name: ''
 ---
 <div>
-<p>Este tutorial tem como objetivo mostrar como fazer o setup do <a href="http://www.mybatis.org/" target="_blank">iBatis</a> (MyBatis) em uma aplicação Java e mostrar exemplos simples de como fazer insert, update, select e delete usando annotations.</p>
+<p>Este tutorial tem como objetivo mostrar como fazer o setup do <a href="http://www.mybatis.org/" target="_blank" rel="noopener">iBatis</a> (MyBatis) em uma aplicação Java e mostrar exemplos simples de como fazer insert, update, select e delete usando annotations.</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"><img class="aligncenter size-full wp-image-2152" title="ibatis_mybatis_loiane" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane.png" alt="" width="274" height="149" /></a></p>
 <p>Este é o terceiro tutorial da série sobre iBatis/MyBatis.  Você pode ler os dois primeiros nos links:</p>
 <ol>
-<li><strong><a title="Edit “Introdução ao iBatis (MyBatis), uma alternativa ao JDBC e Hibernate”" href="http://www.loiane.com/2011/02/introducao-ao-ibatis-mybatis-uma-alternativa-ao-jdbc-e-hibernate/" target="_blank">Introdução ao iBatis (MyBatis), uma alternativa ao JDBC e Hibernate</a></strong></li>
-<li><strong><a title="Edit “Começando com iBatis (MyBatis): Configuração em XML”" href="http://www.loiane.com/2011/02/comecando-com-ibatis-mybatis-configuracao-em-xml/" target="_blank">Começando com iBatis (MyBatis): Configuração em XML</a></strong></li>
+<li><strong><a title="Edit “Introdução ao iBatis (MyBatis), uma alternativa ao JDBC e Hibernate”" href="http://www.loiane.com/2011/02/introducao-ao-ibatis-mybatis-uma-alternativa-ao-jdbc-e-hibernate/" target="_blank" rel="noopener">Introdução ao iBatis (MyBatis), uma alternativa ao JDBC e Hibernate</a></strong></li>
+<li><strong><a title="Edit “Começando com iBatis (MyBatis): Configuração em XML”" href="http://www.loiane.com/2011/02/comecando-com-ibatis-mybatis-configuracao-em-xml/" target="_blank" rel="noopener">Começando com iBatis (MyBatis): Configuração em XML</a></strong></li>
 </ol>
 <p>iBatis/ MyBatis oferecem a partir da versão 3 uma nova feature: annotations. Mas o MyBatis simplesmente NÃO tem nenhuma documentação ou exemplos com annotations. Comecei a procurar em listas de discussão algo sobre o assunto e consegui pouca informação, que usei para escrever esse tutorial.</p>
 <p>Outra coisa que você vai notar é a limitação em relação às annotations. Vou demonstrar algumas funcionalidades aqui. Nos próximos tutoriais, você vai perceber que pode fazer muitas coisas com este poderoso framework, mas terá que usar configuração em XML se quiser mais flexibilidade. Todo o poder do iBatis está no XML.</p>
@@ -41,9 +41,9 @@ last_name: ''
 <p>Uma última observação antes de começar: este tutorial é o mesmo do tutorial anterior, a única diferença é que vamos usar annotations, e não XML.</p>
 <h2>Pre-Requisitos</h2>
 <p>Para este tutorial usei:</p>
-<p>IDE: <a href="http://eclipse.org/" target="_blank">Eclipse</a> (você pode usar a sua IDE favorita)<br />
-DataBase: <a href="http://dev.mysql.com/downloads/" target="_blank">MySQL</a><br />
-Libs/jars: <a href="http://www.mybatis.org/" target="_blank">Mybatis</a>, <a href="http://dev.mysql.com/downloads/" target="_blank">MySQL</a> conector e <a href="http://www.junit.org/" target="_blank">JUnit</a> (para testes)</p>
+<p>IDE: <a href="http://eclipse.org/" target="_blank" rel="noopener">Eclipse</a> (você pode usar a sua IDE favorita)<br />
+DataBase: <a href="http://dev.mysql.com/downloads/" target="_blank" rel="noopener">MySQL</a><br />
+Libs/jars: <a href="http://www.mybatis.org/" target="_blank" rel="noopener">Mybatis</a>, <a href="http://dev.mysql.com/downloads/" target="_blank" rel="noopener">MySQL</a> conector e <a href="http://www.junit.org/" target="_blank" rel="noopener">JUnit</a> (para testes)</p>
 <p>No Eclipse, a estrutura do seu projeto vai ficar assim:</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_annotations.png"><img class="aligncenter size-full wp-image-2231" title="ibatis_mybatis_loiane_annotations" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_annotations.png" alt="" width="271" height="373" /></a></p>
 <h2>Dados de Exemplo</h2>
@@ -298,9 +298,9 @@ import com.loiane.model.Contact;</p>
 [/code]</p>
 <h2>Download</h2>
 <p>Infelizmente, não existe uma boa documentação ou exemplos que ensinem a usar annotações no site oficial do MyBatis. Nos próximos exemplos, vou usar o XML como configuração padrão, e quando possível, irei também demonstrar o uso das annotations para cada caso.</p>
-<p>Se desejar fazer o download completo do projeto com todos os fontes e jars necessários para executar o projeto, você pode fazer o download a partir da minha conta no GitHub:<a href="https://github.com/loiane/ibatis-annotations-helloworld" target="_blank">https://github.com/loiane/ibatis-annotations-helloworld</a></p>
+<p>Se desejar fazer o download completo do projeto com todos os fontes e jars necessários para executar o projeto, você pode fazer o download a partir da minha conta no GitHub:<a href="https://github.com/loiane/ibatis-annotations-helloworld" target="_blank" rel="noopener">https://github.com/loiane/ibatis-annotations-helloworld</a></p>
 <p>Se desejar fazer o download do aquivo zip, basta clicar no botão de download - depois é só importar o arquivo para o Eclipse (ou outra IDE):</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank"><img class="aligncenter" title="donwload-github-example-loiane" src="{{ site.baseurl }}/images/assets/donwload-github-example-loiane.png" alt="" width="572" height="219" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank" rel="noopener"><img class="aligncenter" title="donwload-github-example-loiane" src="{{ site.baseurl }}/images/assets/donwload-github-example-loiane.png" alt="" width="572" height="219" /></a></p>
 <p>O próximo tutorial também será sobre iBatis. A estimativa é que essa série tenha cerca de 10 tutoriais (este é o terceiro). Vamos explorar bem o iBatis!</p>
 <p>Bons códigos! :)</p>
 </div>

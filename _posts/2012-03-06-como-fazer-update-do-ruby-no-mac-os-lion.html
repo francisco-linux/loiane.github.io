@@ -20,11 +20,11 @@ tag: pt-br
 <p>Meu ambiente: tinha o Snow Leopard instalado e fiz update para o Lion. Também tenho o XCode instalado no meu Mac. Aparentemente, ter o XCode instalado no Mac pode gerar alguns problemas na hora de fazer o update do Ruby.</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2012/03/logo.png"><img class="aligncenter size-full wp-image-3692" title="logo" src="{{ site.baseurl }}/images/assets/logo.png" alt="" width="200" height="200" /></a></p>
 <p>Vamos lá então. Eis o passo a passo para fazer update para o Ruby 1.9.3 no Mac OS:</p>
-<p>1- Primeiro temos que instalar o <a href="http://beginrescueend.com/rvm/install/" target="_blank">RVM</a>, mas para instalar o <a href="http://beginrescueend.com/rvm/install/" target="_blank">RVM</a>, precisamos ter o git instalado na máquina, pois é a maneira mais recomendada de fazer o download do <a href="http://beginrescueend.com/rvm/install/" target="_blank">RVM</a>. Para verificar se tem o git instalado, abra o terminal e digite:</p>
+<p>1- Primeiro temos que instalar o <a href="http://beginrescueend.com/rvm/install/" target="_blank" rel="noopener">RVM</a>, mas para instalar o <a href="http://beginrescueend.com/rvm/install/" target="_blank" rel="noopener">RVM</a>, precisamos ter o git instalado na máquina, pois é a maneira mais recomendada de fazer o download do <a href="http://beginrescueend.com/rvm/install/" target="_blank" rel="noopener">RVM</a>. Para verificar se tem o git instalado, abra o terminal e digite:</p>
 <p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 git --version<br />
 [/code]</p>
-<p>Se o resultado for uma versão do git, ótimo, estamos prontos para fazer download do <a href="http://beginrescueend.com/rvm/install/" target="_blank">RVM</a>. Se o resultado for git não foi encontrado, então é preciso fazer o download do <a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3" target="_blank">git-osx-installer</a>. Instale e depois continue com o próximo passo desse tutorial.</p>
+<p>Se o resultado for uma versão do git, ótimo, estamos prontos para fazer download do <a href="http://beginrescueend.com/rvm/install/" target="_blank" rel="noopener">RVM</a>. Se o resultado for git não foi encontrado, então é preciso fazer o download do <a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3" target="_blank" rel="noopener">git-osx-installer</a>. Instale e depois continue com o próximo passo desse tutorial.</p>
 <p>2- Instale o RVM digitando o seguinte comando no terminal:</p>
 <p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)<br />
@@ -57,7 +57,7 @@ rvm install 1.9.3 --with-gcc=clang<br />
 <p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 ERROR: There has been an error while running make. Halting the installation.<br />
 [/code]</p>
-<p>Pesquisando pela net, achei um link (vou deixar nas referências ao final do post), que recomendava ter o <a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a> instalado. Então instalei o <a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>. Para instalar o <a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>, digite no terminal:</p>
+<p>Pesquisando pela net, achei um link (vou deixar nas referências ao final do post), que recomendava ter o <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">homebrew</a> instalado. Então instalei o <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">homebrew</a>. Para instalar o <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">homebrew</a>, digite no terminal:</p>
 <p>[code lang="bash" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
 /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.github.com/gist/323731)&quot;<br />
 [/code]</p>
@@ -109,8 +109,8 @@ rvm default<br />
 <p>Bem, é isso pessoal. Não sou expert em ruby, mas precisava fazer o update no meu Mac e tive os problemas relatados acima. Essa foi a maneira que consegui resolver - não sei se foi o menor caminho, mas foi o caminho que encontrei.</p>
 <p>Abaixo deixo os links de referência que usei para escrever esse post:</p>
 <ul>
-<li><a href="http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac" target="_blank">http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac</a></li>
-<li><a href="http://stackoverflow.com/questions/5671074/rvm-does-not-install-ruby-1-9-2-on-snow-leopard-error-running-make" target="_blank">http://stackoverflow.com/questions/5671074/rvm-does-not-install-ruby-1-9-2-on-snow-leopard-error-running-make</a></li>
-<li><a href="http://stackoverflow.com/questions/8032824/cant-install-ruby-under-lion-with-rvm-gcc-issues" target="_blank">http://stackoverflow.com/questions/8032824/cant-install-ruby-under-lion-with-rvm-gcc-issues</a></li>
+<li><a href="http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac" target="_blank" rel="noopener">http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac</a></li>
+<li><a href="http://stackoverflow.com/questions/5671074/rvm-does-not-install-ruby-1-9-2-on-snow-leopard-error-running-make" target="_blank" rel="noopener">http://stackoverflow.com/questions/5671074/rvm-does-not-install-ruby-1-9-2-on-snow-leopard-error-running-make</a></li>
+<li><a href="http://stackoverflow.com/questions/8032824/cant-install-ruby-under-lion-with-rvm-gcc-issues" target="_blank" rel="noopener">http://stackoverflow.com/questions/8032824/cant-install-ruby-under-lion-with-rvm-gcc-issues</a></li>
 </ul>
 <p>Até a próxima! :)</p>

@@ -20,10 +20,10 @@ display_name: Loiane
 first_name: Loiane
 last_name: ''
 ---
-<p style="text-align: justify;">O Grids é um dos componentes <a href="http://www.extjs.com" target="_blank">Ext JS</a> mais utilizados, e geralmente representam dados/informações que o usuário gostaria de imprimir (como relatórios, por exemplo). Como o grid usualmente é parte de uma aplicação maior (não apenas contém o grid na página), apenas imprimir a página (Ctrl + P) não é uma boa solução, pois é feita apenas a impressão das informações que cabem na página de impressão (e o grid pode conter barras de rolagem, e estas, sairão na página impressa).</p>
+<p style="text-align: justify;">O Grids é um dos componentes <a href="http://www.extjs.com" target="_blank" rel="noopener">Ext JS</a> mais utilizados, e geralmente representam dados/informações que o usuário gostaria de imprimir (como relatórios, por exemplo). Como o grid usualmente é parte de uma aplicação maior (não apenas contém o grid na página), apenas imprimir a página (Ctrl + P) não é uma boa solução, pois é feita apenas a impressão das informações que cabem na página de impressão (e o grid pode conter barras de rolagem, e estas, sairão na página impressa).</p>
 <p style="text-align: justify;">Uma outra solução para impressão de grids, seria construir uma outra página HTML ou JSP, contendo apenas as informações que serão impressas. Mas teríamos que fazer uma requisição ao servidor, buscar os dados e renderezar uma nova página. Pra que então utilizar o ExtJs Grid, se você vai fazer tudo na mão novamente. Dobro de trabalho.</p>
 <p style="text-align: justify;">Recentemente em um projeto, passe por essa situação, então comecei a buscar no Oráculo uma solução. Encontrei duas. Uma vai ser apresentada neste post, e a outra apresentarei no próximo post.</p>
-<p style="text-align: justify;">A primeira solução, com GridPrinter, gera uma página em HTML apenas com as informações do Grid. Porém com uma diferença: o <a href="http://edspencer.net/2009/07/printing-grids-with-ext-js.html" target="_blank">GridPrinter é um plugin Third Party</a> (de terceiros) para o ExtJS, ou seja, não preciso fazer uma requisição ao servidor para renderizar uma nova página. Este plugin, obtém as informações do próprio grid, e gera a página para a impressão, em outra palavras, tudo é feito via javascript/ExtJS, todo o trabalho fica no lado cliente (browser), o que torna a solução bem leve.</p>
+<p style="text-align: justify;">A primeira solução, com GridPrinter, gera uma página em HTML apenas com as informações do Grid. Porém com uma diferença: o <a href="http://edspencer.net/2009/07/printing-grids-with-ext-js.html" target="_blank" rel="noopener">GridPrinter é um plugin Third Party</a> (de terceiros) para o ExtJS, ou seja, não preciso fazer uma requisição ao servidor para renderizar uma nova página. Este plugin, obtém as informações do próprio grid, e gera a página para a impressão, em outra palavras, tudo é feito via javascript/ExtJS, todo o trabalho fica no lado cliente (browser), o que torna a solução bem leve.</p>
 <p style="text-align: justify;">Só tem um porém: como o GridPrinter pega os dados que estão renderizados na página, se você tiver um Grid com paginação, as únicas informações que serão impressas são aquelas que o usuário está visualizando.</p>
 <p style="text-align: justify;">Vamos ao código:</p>
 <h3 style="text-align: justify;">Construindo o Grid</h3>
@@ -79,7 +79,7 @@ width:800,<br />
 &lt;/html&gt;<br />
 [/html]</p>
 <h3 style="text-align: justify;">Fazendo o Setup do Plugin - GridPrinter</h3>
-<p style="text-align: justify;">Você pode fazer o download do GridPrinter - versão original <a href="http://gist.github.com/raw/155789/022585f76bf6b7f3523c41395ec158f19df69f8b/Ext.ux.GridPrinter.js" target="_blank">aqui</a>.</p>
+<p style="text-align: justify;">Você pode fazer o download do GridPrinter - versão original <a href="http://gist.github.com/raw/155789/022585f76bf6b7f3523c41395ec158f19df69f8b/Ext.ux.GridPrinter.js" target="_blank" rel="noopener">aqui</a>.</p>
 <p style="text-align: justify;">Além do arquivo javascript, você precisa adicionar o arquivo de estilos (css):</p>
 <p>[css ruler="false" smarttabs="true" tabsize="4" toolbar="true"]<br />
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,<br />
@@ -120,7 +120,7 @@ border-color: #ededed;<br />
  */<br />
 stylesheetPath: '/gridPrinter-extjs/js/gridPrinter/resources/gridPrinter.css',<br />
 [/js]</p>
-<p style="text-align: justify;">Fiz algumas mudanças no arquivo original. As mudanças são simples de fazer, basta você entender um pouco da lógica utilizando, e é claro, saber o básico de ExtJS. Você pode conferir as pequenas mudanças que fiz fazendo o download no <a href="http://github.com/loiane/gridPrinter-extjs" target="_blank">GitHub</a>.</p>
+<p style="text-align: justify;">Fiz algumas mudanças no arquivo original. As mudanças são simples de fazer, basta você entender um pouco da lógica utilizando, e é claro, saber o básico de ExtJS. Você pode conferir as pequenas mudanças que fiz fazendo o download no <a href="http://github.com/loiane/gridPrinter-extjs" target="_blank" rel="noopener">GitHub</a>.</p>
 <h3 style="text-align: justify;">Resultado</h3>
 <p style="text-align: justify;">O Grid:</p>
 <p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2009/11/grid_printer_extjs_01.jpg"><img class="aligncenter size-full wp-image-1233" title="grid_printer_extjs_01" src="{{ site.baseurl }}/images/assets/grid_printer_extjs_01.jpg" alt="grid_printer_extjs_01" width="604" height="195" /></a></p>
@@ -139,5 +139,5 @@ for (var i=1;i&lt;columns_.length;i++){<br />
 [/js]</p>
 <p>E o resultado:</p>
 <p><a href="http://www.loiane.com/wp-content/uploads/2009/11/grid_printer_extjs_02.jpg"><img class="aligncenter size-full wp-image-1236" title="grid_printer_extjs_02" src="{{ site.baseurl }}/images/assets/grid_printer_extjs_02.jpg" alt="grid_printer_extjs_02" width="597" height="209" /></a></p>
-<p>Você pode baixar o projeto completo no GitHub: <a href="http://github.com/loiane/gridPrinter-extjs" target="_blank"><img class="alignnone size-full wp-image-1238" title="public" src="{{ site.baseurl }}/images/assets/public.png" alt="public" width="16" height="16" /> http://github.com/loiane/gridPrinter-extjs</a></p>
+<p>Você pode baixar o projeto completo no GitHub: <a href="http://github.com/loiane/gridPrinter-extjs" target="_blank" rel="noopener"><img class="alignnone size-full wp-image-1238" title="public" src="{{ site.baseurl }}/images/assets/public.png" alt="public" width="16" height="16" /> http://github.com/loiane/gridPrinter-extjs</a></p>
 <p>Até a próxima!</p>

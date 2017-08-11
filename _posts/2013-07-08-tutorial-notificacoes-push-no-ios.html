@@ -22,9 +22,9 @@ tag: pt-br
 <p>Para este tutorial você vai precisar de:</p>
 <ol>
 <li><span style="line-height: 13px;"><em>um iPhone ou iPad</em> - notificações Push não funcionam no simulador, por isso precisamos de um aparelho Apple para poder testar na prática</span></li>
-<li><em>ser desenvolvedor cadastrado no programa iOS da Apple</em> - para conseguir testar apps num iPhone ou iPad, é necessário criar um App ID e um Provisioning Profile, que só pode ser feito através do developer center da Apple. <a title="Como se tornar um desenvolvedor iOS certificado pela Apple (Se Inscrever no iOS Developer Program – sem Fax!)" href="http://www.loiane.com/2013/01/como-se-tornar-um-desenvolvedor-ios-certificado-pela-apple-se-inscrever-no-ios-developer-program-sem-fax/" target="_blank">Já publiquei aqui no blog como se faz para se tornar um desenvolvedor iOS da Apple</a>.</li>
-<li><em>um servidor que esteja conectado a internet</em> - você pode usar o seu próprio computador. Vou usar o <a href="http://www.apachefriends.org/en/xampp.html" target="_blank">Xampp</a> como webserver.</li>
-<li><em>Mac OS e Xcode</em> - como vamos criar uma aplicação nativa, é necessário ter o <a href="https://developer.apple.com/xcode/" target="_blank">XCode</a> instalado no seu computador, que precisa rodar o Mac OS.</li>
+<li><em>ser desenvolvedor cadastrado no programa iOS da Apple</em> - para conseguir testar apps num iPhone ou iPad, é necessário criar um App ID e um Provisioning Profile, que só pode ser feito através do developer center da Apple. <a title="Como se tornar um desenvolvedor iOS certificado pela Apple (Se Inscrever no iOS Developer Program – sem Fax!)" href="http://www.loiane.com/2013/01/como-se-tornar-um-desenvolvedor-ios-certificado-pela-apple-se-inscrever-no-ios-developer-program-sem-fax/" target="_blank" rel="noopener">Já publiquei aqui no blog como se faz para se tornar um desenvolvedor iOS da Apple</a>.</li>
+<li><em>um servidor que esteja conectado a internet</em> - você pode usar o seu próprio computador. Vou usar o <a href="http://www.apachefriends.org/en/xampp.html" target="_blank" rel="noopener">Xampp</a> como webserver.</li>
+<li><em>Mac OS e Xcode</em> - como vamos criar uma aplicação nativa, é necessário ter o <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">XCode</a> instalado no seu computador, que precisa rodar o Mac OS.</li>
 </ol>
 <p>Nível do tutorial: <strong>Avançado</strong></p>
 <h2>Overview: Como as Notificações Push Funcionam</h2>
@@ -45,7 +45,7 @@ tag: pt-br
 <p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-07.png"><img class="aligncenter  wp-image-6155" alt="ios7-push-07" src="{{ site.baseurl }}/images/assets/ios7-push-07.png" width="525" height="331" /></a></p>
 <p>Você precisa entrar com um passphrase/senha para criptografar o certificado. Escolhi <em><strong>pushchat</strong></em> mesmo para facilitar. Não esqueça disso pois vamos precisar logo mais.</p>
 <h2>Criando um App ID e Certificado SSL</h2>
-<p>Agora vamos criar um App ID e configurar para usar notificações Push. Entre no <a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank">iOS Dev Center</a> e escolha <strong><em>Certificates, Identifiers &amp; Profiles</em></strong>:</p>
+<p>Agora vamos criar um App ID e configurar para usar notificações Push. Entre no <a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank" rel="noopener">iOS Dev Center</a> e escolha <strong><em>Certificates, Identifiers &amp; Profiles</em></strong>:</p>
 <p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-08.png"><img class="aligncenter  wp-image-6156" alt="ios7-push-08" src="{{ site.baseurl }}/images/assets/ios7-push-08-1024x648.png" width="553" height="350" /></a></p>
 <p>Escolha <em><strong>Identifiers</strong></em>:</p>
 <p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-09.png"><img class="aligncenter  wp-image-6157" alt="ios7-push-09" src="{{ site.baseurl }}/images/assets/ios7-push-09-1024x648.png" width="553" height="350" /></a></p>
@@ -134,7 +134,7 @@ tag: pt-br
 <p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/06/ios7-push-02.png"><img class="aligncenter  wp-image-6148" alt="ios7-push-02" src="{{ site.baseurl }}/images/assets/ios7-push-02-1024x900.png" width="430" height="378" /></a></p>
 <p style="text-align: left;">Esse tutorial vale tanto para iOS 6 quanto para iOS 7! :)</p>
 <h3 style="text-align: left;">Download do Código Fonte</h3>
-<p style="text-align: left;">Código Objective-c (Xcode): <a href="https://github.com/loiane/ios-examples/tree/master/PushChat" target="_blank">https://github.com/loiane/ios-examples/tree/master/PushChat</a></p>
-<p style="text-align: left;">Código php: <a href="https://github.com/loiane/ios-examples/tree/master/PushServer" target="_blank">https://github.com/loiane/ios-examples/tree/master/PushServer</a></p>
-<p style="text-align: left;"><a href="http://www.raywenderlich.com/32960/apple-push-notification-services-in-ios-6-tutorial-part-1" target="_blank">Referência</a></p>
+<p style="text-align: left;">Código Objective-c (Xcode): <a href="https://github.com/loiane/ios-examples/tree/master/PushChat" target="_blank" rel="noopener">https://github.com/loiane/ios-examples/tree/master/PushChat</a></p>
+<p style="text-align: left;">Código php: <a href="https://github.com/loiane/ios-examples/tree/master/PushServer" target="_blank" rel="noopener">https://github.com/loiane/ios-examples/tree/master/PushServer</a></p>
+<p style="text-align: left;"><a href="http://www.raywenderlich.com/32960/apple-push-notification-services-in-ios-6-tutorial-part-1" target="_blank" rel="noopener">Referência</a></p>
 <p style="text-align: left;">Até a próxima! :)</p>
