@@ -20,7 +20,7 @@ tag: pt-br
 ---
 <p>Olá pessoal,</p>
 <p>Com a chegada do Ext JS 4, a Sencha introduziu as associações (Associations) no data package. Todo mundo ficou muito contente, mas infelizmente essa parte das Associations não foi 100% implementada como a comunidade esperou.</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2013/11/extjs-associations-writer-loiane.png"><img class="aligncenter size-full wp-image-6799" alt="extjs-associations-writer-loiane" src="{{ site.baseurl }}/images/assets/extjs-associations-writer-loiane.png" width="382" height="223" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2013/11/extjs-associations-writer-loiane.png"><img class="aligncenter size-full wp-image-6799" alt="extjs-associations-writer-loiane" src="{{ site.baseurl }}/assets/images/assets/extjs-associations-writer-loiane.png" width="382" height="223" /></a></p>
 <p>Só se pode carregar dados aninhados (nested data/json) usando Associations (<a href="http://www.loiane.com/2012/02/curso-de-extjs-4-aula-14-data-package-model-associations/" target="_blank" rel="noopener">você pode assistir um tutorial sobre isso aqui</a>). Mas e a parte de salvar, enviar os dados aninhados de volta para o sever, como é que fica? Pois é, não fica, ou seja, não é possível via API nativa do Ext JS.</p>
 <p>Mas...  a gente dá um jeito em tudo. Existem uns workarounds, maneiras de fazer isso funcionar. E não é gambiarra, é apenas modificar o código do Ext JS para que funcione do jeito que a gente quer.</p>
 <p>Para salvar dados via data package existem duas formas: fazer um sync na Store ou chamar o método save do Model. O sync da Store é o mais usado e por isso vou mostrar esse workaround aqui.</p>
@@ -108,7 +108,7 @@ tag: pt-br
 <p>    store.sync();<br />
 });[/code]</p>
 <p>E se a gente usar o nosso Writer customizado na Store, vamos enviar dados assim para o server:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/11/extjs-associations-writer.png"><img class="aligncenter  wp-image-6797" alt="extjs-associations-writer" src="{{ site.baseurl }}/images/assets/extjs-associations-writer.png" width="564" height="194" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2013/11/extjs-associations-writer.png"><img class="aligncenter  wp-image-6797" alt="extjs-associations-writer" src="{{ site.baseurl }}/assets/images/assets/extjs-associations-writer.png" width="564" height="194" /></a></p>
 <p>E no server basta fazer o decode do JSON:</p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]{<br />
    contatos:[<br />

@@ -26,38 +26,38 @@ last_name: ''
 <p style="text-align: justify;">Antes de começar, verifique se a versão do seu eclipse tem suporte para projetos J2EE.<br />
 Você pode verificar isso através do Help -&gt; About Eclipse Software Platform (procure nas Feature Details por 'J2EE').<br />
 Outra forma é verificar se o Eclipse tem a perspectiva J2EE disponível:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-619" title="j2ee_perspective" src="{{ site.baseurl }}/images/assets/j2ee_perspective.png" alt="j2ee_perspective" width="340" height="370" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-619" title="j2ee_perspective" src="{{ site.baseurl }}/assets/images/assets/j2ee_perspective.png" alt="j2ee_perspective" width="340" height="370" /></p>
 <p style="text-align: justify;">Se você não tiver essa opção disponíve, faça o download em: <a href="http://www.eclipse.org/downloads/" target="_blank" rel="noopener">http://www.eclipse.org/downloads/</a><br />
 Escolha a opção 'Eclipse IDE for Java EE Developers'</p>
 <p style="text-align: justify;">Vamos então começar!</p>
 <p style="text-align: justify;">O primeiro passo é colocar a pasta do projeto em algum diretório. Para facilitar, vou deixar dentro da pasta do meu worskpace mesmo:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-620" title="workspace" src="{{ site.baseurl }}/images/assets/workspace.png" alt="workspace" width="300" height="128" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-620" title="workspace" src="{{ site.baseurl }}/assets/images/assets/workspace.png" alt="workspace" width="300" height="128" /></p>
 <p style="text-align: justify;">Depois, no menu da IDE, escolha File -&gt; Import</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-621" title="file_import" src="{{ site.baseurl }}/images/assets/file_import.png" alt="file_import" width="240" height="474" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-621" title="file_import" src="{{ site.baseurl }}/assets/images/assets/file_import.png" alt="file_import" width="240" height="474" /></p>
 <p style="text-align: justify;">Abra a aba 'General' e escolha 'Existing Projects into Workspace' -&gt; Next</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-622" title="import" src="{{ site.baseurl }}/images/assets/import.png" alt="import" width="465" height="528" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-622" title="import" src="{{ site.baseurl }}/assets/images/assets/import.png" alt="import" width="465" height="528" /></p>
 <p style="text-align: justify;">Escolha o diretório onde está a pasta do projeto. Repare que a IDE reconhecerá o projeto:<br />
 Obs.: se você colocar o projeto no desktop, por exemplo, o projeto continuará lá, o Eclipse apenas fara a referência, ou seja, o seu projeto não estará dentro do diretório do workspace. Se você desejar que suas alterações fiquem dentro do workspace, marque a opção 'copy projects into workspace', assim, a IDE criará uma cópia do projeto na pasta do workspace. Como descompactei o arquivo dentro do wokspace mesmo, não marcarei esta opção.<br />
 Depois, clique em Finish.</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-623" title="import2" src="{{ site.baseurl }}/images/assets/import2.png" alt="import2" width="462" height="406" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-623" title="import2" src="{{ site.baseurl }}/assets/images/assets/import2.png" alt="import2" width="462" height="406" /></p>
 <p style="text-align: justify;">Prontinho! O projeto vai aparecer no Project Explorer:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-624" title="project_explorer" src="{{ site.baseurl }}/images/assets/project_explorer.png" alt="project_explorer" width="255" height="229" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-624" title="project_explorer" src="{{ site.baseurl }}/assets/images/assets/project_explorer.png" alt="project_explorer" width="255" height="229" /></p>
 <p style="text-align: justify;">Pode ser que o projeto mostre alguns erros, seja pela versão do java compiler, seja porque não tem referência para um server (estou usando o Tomcat 5.5). Caso apareça algum erro, clique com o botão direito em cima do projeto e escolha Properties (veja a opção), ou Build Path -&gt; Configure Build Path, e acerte os erros.</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-625" title="problems" src="{{ site.baseurl }}/images/assets/problems.png" alt="problems" width="463" height="113" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-625" title="problems" src="{{ site.baseurl }}/assets/images/assets/problems.png" alt="problems" width="463" height="113" /></p>
 <p style="text-align: justify;">Agora o projeto está pronto para ser executado! :)</p>
 <p style="text-align: justify;">Para executar o projeto, siga os passos abaixo:</p>
 <p style="text-align: justify;">Na aba Servers, clique com o botão direito do mouse, escolha New -&gt; Server:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-626" title="newserver" src="{{ site.baseurl }}/images/assets/newserver.png" alt="newserver" width="325" height="96" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-626" title="newserver" src="{{ site.baseurl }}/assets/images/assets/newserver.png" alt="newserver" width="325" height="96" /></p>
 <p style="text-align: justify;">Escolha o server. Neste caso, vou utilizar o Tomcat 5.5 que tenho instalado na máquina:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-627" title="tomcat" src="{{ site.baseurl }}/images/assets/tomcat.png" alt="tomcat" width="490" height="529" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-627" title="tomcat" src="{{ site.baseurl }}/assets/images/assets/tomcat.png" alt="tomcat" width="490" height="529" /></p>
 <p style="text-align: justify;">Se for a primeira vez que esteja configurando o server, a tela abaixo vai aparecer. Escolha o diretório onde você instalou o server.</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-628" title="tomcat_configuracao" src="{{ site.baseurl }}/images/assets/tomcat_configuracao.png" alt="tomcat_configuracao" width="443" height="403" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-628" title="tomcat_configuracao" src="{{ site.baseurl }}/assets/images/assets/tomcat_configuracao.png" alt="tomcat_configuracao" width="443" height="403" /></p>
 <p style="text-align: justify;">Após isso, irá aparecer uma tela para escolher quais projetos você deseja adicionar ao server. Escolha o projeto que você importou e clique em Add:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-629" title="addproject" src="{{ site.baseurl }}/images/assets/addproject.png" alt="addproject" width="359" height="411" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-629" title="addproject" src="{{ site.baseurl }}/assets/images/assets/addproject.png" alt="addproject" width="359" height="411" /></p>
 <p style="text-align: justify;">Mas se você já tem um server configurado, na aba Server, escolha o server, clique com o botão direito e escolha a opção Add and Remove Projects...</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-630" title="addandremove" src="{{ site.baseurl }}/images/assets/addandremove.png" alt="addandremove" width="366" height="400" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-630" title="addandremove" src="{{ site.baseurl }}/assets/images/assets/addandremove.png" alt="addandremove" width="366" height="400" /></p>
 <p style="text-align: justify;">Escolha o projeto que importou e clique em Add.</p>
 <p style="text-align: justify;">Agora basta iniciar o server e rodar a aplicação!</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-631" title="extjs_helloworld1" src="{{ site.baseurl }}/images/assets/extjs_helloworld1.png" alt="extjs_helloworld1" width="526" height="211" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-631" title="extjs_helloworld1" src="{{ site.baseurl }}/assets/images/assets/extjs_helloworld1.png" alt="extjs_helloworld1" width="526" height="211" /></p>
 <p style="text-align: justify;">Até a próxima!</p>
 <p style="text-align: justify;">:)</p>

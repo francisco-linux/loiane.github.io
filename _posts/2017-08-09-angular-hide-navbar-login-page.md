@@ -3,7 +3,7 @@ layout: post
 title: "Angular: Hide Navbar Menu from Login page"
 date: 2017-08-09 08:30:12.000000000 -03:00
 path: 2017-08-09-angular-hide-navbar-login-page.md
-image: /images/2017/angular-login-hide-navbar-04.png
+image: /assets/images/2017/angular-login-hide-navbar-04.png
 tag: angular
 ---
 
@@ -48,17 +48,17 @@ With the commands above all components and services will be created and the `dec
 
 The image below shows the project `src` folder for this first example and also for our second example. Both examples use basically the same components, however, the second example has two extra components.
 
-<img src="/images/2017/angular-login-hide-navbar-01.png">
+<img src="/assets/images/2017/angular-login-hide-navbar-01.png">
 
 The application shall display the navigation bar only when the user is logged in as demonstrated by the following screenshot:
 
-<img src="/images/2017/angular-login-hide-navbar-02.png">
+<img src="/assets/images/2017/angular-login-hide-navbar-02.png">
 
 The toolbar from the screenshot above is displaying both Login and Logout buttons. But we'll get there to fix this later.
 
 If the user is not logged in, the application shall display the login page without the navigation bar as demonstrated below:
 
-<img src="/images/2017/angular-login-hide-navbar-03.png">
+<img src="/assets/images/2017/angular-login-hide-navbar-03.png">
 
 Ok, we have our requirenments, let's start coding!
 
@@ -376,7 +376,7 @@ Our navbar has a title, two menu options (just to look prettier) and a Login + L
 
 If try to execute the application now (`ng serve`) and access the `/login` route we will have the following result:
 
-<img src="/images/2017/angular-login-hide-navbar-04.png">
+<img src="/assets/images/2017/angular-login-hide-navbar-04.png">
 
 We still need to hide the navigation bar.
 
@@ -453,7 +453,7 @@ The code above means we are subscribing to the `isLoggedIn$` and storing its val
 
 Now we have the expected behavior for our example:
 
-<img src="/images/2017/angular-login-hide-navbar-05.png">
+<img src="/assets/images/2017/angular-login-hide-navbar-05.png">
 
 ### Example 2: Using different layouts and routing config
 

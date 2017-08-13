@@ -25,10 +25,10 @@ last_name: ''
 <p style="text-align: justify;">Podemos fazer isso através de um componente chamado Ext.grid.CheckboxSelectionModel.</p>
 <p style="text-align: justify;">Para isso, basta instanciar um objeto do tipo CheckboxSelectionModel (1), adicionar ao grid e às colunas do grid, assim, cada linha terá um checkbox ao lado (2).</p>
 <p style="text-align: justify;">Figura 1:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-962" title="gridSelectionModel01" src="{{ site.baseurl }}/images/assets/gridSelectionModel01.PNG" alt="gridSelectionModel01" width="387" height="19" />Figura 2:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-963" title="gridSelectionModel02" src="{{ site.baseurl }}/images/assets/gridSelectionModel02.PNG" alt="gridSelectionModel02" width="609" height="263" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-962" title="gridSelectionModel01" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel01.PNG" alt="gridSelectionModel01" width="387" height="19" />Figura 2:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-963" title="gridSelectionModel02" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel02.PNG" alt="gridSelectionModel02" width="609" height="263" /></p>
 <p style="text-align: justify;">Agora vai aparecer os checkboxes em cada linha do grid:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-964" title="gridSelectionModel03" src="{{ site.baseurl }}/images/assets/gridSelectionModel03.PNG" alt="gridSelectionModel03" width="610" height="231" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-964" title="gridSelectionModel03" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel03.PNG" alt="gridSelectionModel03" width="610" height="231" /></p>
 <p style="text-align: justify;">
 <p style="text-align: justify;"><em><strong>Coletando os dados selecionados</strong></em></p>
 <p style="text-align: justify;">Existem duas maneiras de obter os dados quando o usuário seleciona uma linha no grid:<br />
@@ -37,41 +37,41 @@ last_name: ''
 <p style="text-align: justify;">Vamos ver cada um agora.</p>
 <p style="text-align: justify;"><em><strong>Evento para cada clique</strong></em></p>
 <p style="text-align: justify;">Disparamos o 'gatilho' através do evendo rowSelect:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-965" title="gridSelectionModel04" src="{{ site.baseurl }}/images/assets/gridSelectionModel04.PNG" alt="gridSelectionModel04" width="517" height="68" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-965" title="gridSelectionModel04" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel04.PNG" alt="gridSelectionModel04" width="517" height="68" /></p>
 <p style="text-align: justify;">Se selecionarmos a primeira linha (lembre-se que a primeira posição de um array do javascript também tem base 0, como no java), irá aparecer uma mensagem que selecionamos a linha 0 (rowIdx == 0):</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-966" title="gridSelectionModel05" src="{{ site.baseurl }}/images/assets/gridSelectionModel05.PNG" alt="gridSelectionModel05" width="612" height="236" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-966" title="gridSelectionModel05" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel05.PNG" alt="gridSelectionModel05" width="612" height="236" /></p>
 <p style="text-align: justify;">Se selecionarmos a terceira linha, agora aparecerá uma mensagem dizendo que selecionamos a segunda linha (repare que a primeira linha continua selecionada, mas agora não fazemos mais nada com ela):</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-967" title="gridSelectionModel06" src="{{ site.baseurl }}/images/assets/gridSelectionModel06.PNG" alt="gridSelectionModel06" width="613" height="236" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-967" title="gridSelectionModel06" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel06.PNG" alt="gridSelectionModel06" width="613" height="236" /></p>
 <p style="text-align: justify;">Vamos mudar o código agora. Cada vez que o usuário selecionar uma linha, aparecerá uma mensagem com os nomes que ele já selecionou, assim, manteremos um histórico:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-968" title="gridSelectionModel07" src="{{ site.baseurl }}/images/assets/gridSelectionModel07.PNG" alt="gridSelectionModel07" width="526" height="191" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-968" title="gridSelectionModel07" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel07.PNG" alt="gridSelectionModel07" width="526" height="191" /></p>
 <p style="text-align: justify;">Vamos selecionar a primeira linha novamente:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-969" title="gridSelectionModel08" src="{{ site.baseurl }}/images/assets/gridSelectionModel08.PNG" alt="gridSelectionModel08" width="611" height="234" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-969" title="gridSelectionModel08" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel08.PNG" alt="gridSelectionModel08" width="611" height="234" /></p>
 <p style="text-align: justify;">Vamos selecionar em seguida a última linha:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-970" title="gridSelectionModel09" src="{{ site.baseurl }}/images/assets/gridSelectionModel09.PNG" alt="gridSelectionModel09" width="609" height="232" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-970" title="gridSelectionModel09" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel09.PNG" alt="gridSelectionModel09" width="609" height="232" /></p>
 <p style="text-align: justify;">E por último, vamos selecionar a terceira linha:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-971" title="gridSelectionModel10" src="{{ site.baseurl }}/images/assets/gridSelectionModel10.PNG" alt="gridSelectionModel10" width="612" height="232" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-971" title="gridSelectionModel10" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel10.PNG" alt="gridSelectionModel10" width="612" height="232" /></p>
 <p style="text-align: justify;">Uma curiosidade: repare que a função grid.getSelections() retorna as linhas na ordem em que foram selecionadas; no nosso caso, linhas 0, 7 e 2.</p>
 <p style="text-align: justify;"><em><strong>Link para obter todos os dados de uma vez</strong></em></p>
 <p style="text-align: justify;">A segunda forma é, em vez de disparar o evento a cada vez que o usuário clicar em uma linha, podemos obter todas as linhas que ele selecionou e fazer alguma coisa com essas informações.<br />
 O código para obter as informações das linhas é o mesmo do último exemplo, porém, vamos utilizá-lo quando o usuário pedir para ver quais foram as linhas selecionadas:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-972" title="gridSelectionModel11" src="{{ site.baseurl }}/images/assets/gridSelectionModel11.PNG" alt="gridSelectionModel11" width="505" height="137" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-972" title="gridSelectionModel11" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel11.PNG" alt="gridSelectionModel11" width="505" height="137" /></p>
 <p style="text-align: justify;">Vamos selecionar algumas linhas e então clicar no link "Ver linhas selecionadas":</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-973" title="gridSelectionModel12" src="{{ site.baseurl }}/images/assets/gridSelectionModel12.PNG" alt="gridSelectionModel12" width="612" height="234" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-973" title="gridSelectionModel12" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel12.PNG" alt="gridSelectionModel12" width="612" height="234" /></p>
 <p style="text-align: justify;">Bem mais útil se queremos enviar essas informações para um servlet e só então manipular.</p>
 <p style="text-align: justify;"><em><strong>Cuidado!</strong></em></p>
 <p style="text-align: justify;">Ao utilizar o CheckboxSelectionModel em um grid com paginação, e for obter as informações pelo número da linha, tome cuidado, pois a primeira linha vai ser a posição 0; mesmo que você esteja exibindo 10 linhas por página e esteja na página 2, o índice não vai ser 10, mas sim 0.<br />
 Se desejar ter esse controle, indico utilizar uma coluna do tipo hidden com um index, assim não vai se perder.</p>
 <p style="text-align: justify;">Campos hidden</p>
 <p style="text-align: justify;">Vamos criar um índice em cada linha de informação do grid e declarar no storeField:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-974" title="gridSelectionModel13" src="{{ site.baseurl }}/images/assets/gridSelectionModel13.PNG" alt="gridSelectionModel13" width="540" height="375" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-974" title="gridSelectionModel13" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel13.PNG" alt="gridSelectionModel13" width="540" height="375" /></p>
 <p style="text-align: justify;">Não acrescentamos o campo no columnModel do grid, desse modo, o id não será visível no grid, mas estará lá.</p>
 <p style="text-align: justify;">Agora vamos alterar nossa função para obter o id, ao invés do nome:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-975" title="gridSelectionModel14" src="{{ site.baseurl }}/images/assets/gridSelectionModel14.PNG" alt="gridSelectionModel14" width="485" height="138" />E teremos:</p>
-<p style="text-align: justify;"><img class="aligncenter size-full wp-image-976" title="gridSelectionModel15" src="{{ site.baseurl }}/images/assets/gridSelectionModel15.PNG" alt="gridSelectionModel15" width="611" height="235" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-975" title="gridSelectionModel14" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel14.PNG" alt="gridSelectionModel14" width="485" height="138" />E teremos:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-976" title="gridSelectionModel15" src="{{ site.baseurl }}/assets/images/assets/gridSelectionModel15.PNG" alt="gridSelectionModel15" width="611" height="235" /></p>
 <p style="text-align: justify;">Pronto, agora não tem mais confusão!</p>
 <p style="text-align: justify;"><em><strong>ExtJS 3</strong></em></p>
 <p style="text-align: justify;">Coloquei o código com o ExtJS 3 e não funciona!</p>
 <p style="text-align: justify;">A função grid.getSelections() não funciona na versão 3 da biblioteca ExtJS. Troque por grid.getSelectionModel().getSelections() que irá funcionar. Essa é uma das incompatibilidades da nova versão, mas todo o resto do seu código funcionará!</p>
 <p>Se desejar, pode fazer o download do código <a href="http://www.loiane.com/downloads/selectionExtJs.zip" target="_blank" rel="noopener">aqui </a>(apenas html e javascript, só abrir o html no browser que irá funcionar!)<a href="http://www.loiane.com/downloads/selectionExtJs.zip" target="_blank" rel="noopener"><br />
-<img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/assets/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
 <p style="text-align: justify;">Até a próxima!</p>

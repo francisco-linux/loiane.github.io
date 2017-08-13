@@ -29,7 +29,7 @@ last_name: ''
 ---
 <p style="text-align: justify;">Este é um tutorial passo a passo de como implementar combo boxes aninhados usando ExtJS (no lado cliente) e Spring MVC 3 e Hibernate 3.5 (no lado servidor).</p>
 <p style="text-align: justify;">Vou usar o exemplo clássico de comboboxs: estados e cidades. neste exemplo, vou usar os estados e cidades do Brasil.</p>
-<p style="text-align: center;"><a href="http://loianegroner.com/wp-content/uploads/2010/09/extjs_linked_comboboxes_spring_loiane02.gif"><img class="size-full wp-image-526 aligncenter" title="extjs_linked_comboboxes_spring_loiane02" src="{{ site.baseurl }}/images/assets/extjs_linked_comboboxes_spring_loiane02.gif" alt="" width="451" height="417" /></a></p>
+<p style="text-align: center;"><a href="http://loianegroner.com/wp-content/uploads/2010/09/extjs_linked_comboboxes_spring_loiane02.gif"><img class="size-full wp-image-526 aligncenter" title="extjs_linked_comboboxes_spring_loiane02" src="{{ site.baseurl }}/assets/images/assets/extjs_linked_comboboxes_spring_loiane02.gif" alt="" width="451" height="417" /></a></p>
 <p style="text-align: justify;">Qual é o objetivo final? Quando o usuário selecionar um estado no primeiro combo box, a aplicação irá carregar o segundo combo box com as cidades que pertencem ao estado selecionado - sem recarregar a página.</p>
 <p style="text-align: justify;">No ExtJS, existem duas maneiras de implentar.</p>
 <p style="text-align: justify;">A primeira é carregar o conteúdo dos dois combo boxes, e quando o usuário selecionar um estados, a aplicação irá filtrar os dados do combo box de cidades para mostrar apenas as cidades que pertencem ao estado selecionado.</p>
@@ -37,7 +37,7 @@ last_name: ''
 <p style="text-align: justify;">Qual é a melhor maneira? Depende da quantidade de dados que será necessário buscar no banco de dados. Por exemplo: você tem um combo box que lista todos os países do mundo. E o segundo combo box representa todas as cidades do mundo (ou cidades de cada país). Neste caso, o cenário número 2 é a melhor opção, porque no cenário 1 seria necessário carregar todas as cidades de uma só vez. Imagina a quantidade enorme de dados que iria carregar do banco de dados? É necessário analisar.</p>
 <p style="text-align: justify;">Ok. Vamos ao código fonte. Vou mostrar como implementar ambos os cenários.</p>
 <p style="text-align: justify;">Mas primeiro, vou mostrar como o projeto está organizado:</p>
-<p style="text-align: justify;"><a href="http://loianegroner.com/wp-content/uploads/2010/09/extjs_linked_comboboxes_spring_loiane01.gif"><img class="aligncenter size-full wp-image-527" title="extjs_linked_comboboxes_spring_loiane01" src="{{ site.baseurl }}/images/assets/extjs_linked_comboboxes_spring_loiane01.gif" alt="" width="235" height="599" /></a></p>
+<p style="text-align: justify;"><a href="http://loianegroner.com/wp-content/uploads/2010/09/extjs_linked_comboboxes_spring_loiane01.gif"><img class="aligncenter size-full wp-image-527" title="extjs_linked_comboboxes_spring_loiane01" src="{{ site.baseurl }}/assets/images/assets/extjs_linked_comboboxes_spring_loiane01.gif" alt="" width="235" height="599" /></a></p>
 <p style="text-align: justify;">Vamos dar uma olhada no código Java.</p>
 <h4>BaseDAO:</h4>
 <p>Contém o hibernate template usado por CityDAO e StateDAO.</p>

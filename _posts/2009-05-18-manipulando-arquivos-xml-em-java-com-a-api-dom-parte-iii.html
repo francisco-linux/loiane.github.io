@@ -25,7 +25,7 @@ last_name: ''
 <p class="title">No post <a rel="bookmark" href="../2009/05/manipulando-arquivos-xml-em-java-com-a-api-dom-parte-ii/">Manipulando arquivos XML em Java com a API DOM - Parte II</a> vimos como fazer a leitura de um arquivo XML utilizando a API DOM presente no java (a partir versão 1.4). Neste post (último sobre a API DOM) vamos ver como editar um arquivo XML após tê-lo na árvore DOM.</p>
 <p class="title">Às vezes precisamos editar alguma informação do XML, modificar alguma informação, ou adicionar, ou até mesmo excluir algum dado do XML.</p>
 <p class="title">Vamos utilizar o XML abaixo como exemplo de arquivo inicial. O arquivo está nomeado como "contatos.xml":</p>
-<p class="title"><img class="aligncenter size-full wp-image-526" title="contatos_xml" src="{{ site.baseurl }}/images/assets/contatos_xml.png" alt="contatos_xml" width="549" height="356" /></p>
+<p class="title"><img class="aligncenter size-full wp-image-526" title="contatos_xml" src="{{ site.baseurl }}/assets/images/assets/contatos_xml.png" alt="contatos_xml" width="549" height="356" /></p>
 <p>Antes de começarmos a modificar o XML, temos que ter o arquivo na árvore DOM, para isso, vamos carregar o arquivo na memória:</p>
 <p>[code lang="java"]<br />
 //fazer o parse do arquivo e criar o documento XML<br />
@@ -120,7 +120,7 @@ Transformer transformer = transFactory.newTransformer();<br />
 transformer.transform(source, result);<br />
 [/code]</p>
 <p>Após rodar o programa, vamos ter o seguinte XML modificado:</p>
-<p><img class="aligncenter size-full wp-image-533" title="contatos_mod_xml" src="{{ site.baseurl }}/images/assets/contatos_mod_xml.png" alt="contatos_mod_xml" width="525" height="372" /></p>
+<p><img class="aligncenter size-full wp-image-533" title="contatos_mod_xml" src="{{ site.baseurl }}/assets/images/assets/contatos_mod_xml.png" alt="contatos_mod_xml" width="525" height="372" /></p>
 <p>O código completo desse post você pode fazer o download <a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank" rel="noopener">aqui </a>(projeto no formato da IDE Eclipse)<br />
-<a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank" rel="noopener"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
+<a href="http://www.loiane.com/downloads/ModificacaoXMLComDOM.zip" target="_blank" rel="noopener"><img class="size-full wp-image-370" title="download" src="{{ site.baseurl }}/assets/images/assets/icone_download.jpg" alt="download" width="63" height="53" /></a></p>
 <p>Até a próxima!</p>

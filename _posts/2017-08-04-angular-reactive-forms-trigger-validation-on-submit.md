@@ -3,7 +3,7 @@ layout: post
 title: "Angular Reactive Forms: trigger validation on submit"
 date: 2017-08-04 08:35:12.000000000 -02:00
 path: 2017-08-04-angular-reactive-forms-trigger-validation-on-submit.md
-image: /images/2017/angular-reactive-forms-validate-submit-03.png
+image: /assets/images/2017/angular-reactive-forms-validate-submit-03.png
 tag: angular
 ---
 
@@ -26,7 +26,7 @@ For this example we will use [Bootstrap](getbootstrap.com) (v3) framework for th
 
 The first option we have when working with forms is to disable the submit button if the form is invalid. This approach is OK for very small forms such as login forms, where we only have 2 fields (user/email and password). It is easy for the user to guess it is needed to inform both fields before the submit button becomes available:
 
-<img src="/images/2017/angular-reactive-forms-validate-submit-01.png">
+<img src="/assets/images/2017/angular-reactive-forms-validate-submit-01.png">
 
 Let's take a look at the code that renders the form above. It is the file `simple-form.component.ts`:
 
@@ -130,7 +130,7 @@ export class ValidateFieldsSubmitFormComponent implements OnInit {
 
 In this form we have `name`, `email` and a set of `address` fields. Note that the fields related to the address are grouped under the form control named `address`.
 
-<img src="/images/2017/angular-reactive-forms-validate-submit-02.png"> 
+<img src="/assets/images/2017/angular-reactive-forms-validate-submit-02.png"> 
 
 Now let's see the code for the template `validate-fields-submit-form.component.html`:
 
@@ -403,11 +403,11 @@ onSubmit() {
 
 An Angular Reactive Form is like the tree data structure. Each FormControl is a leaf and each FormGroup is a node with children. The root node is the form reference itself. So to traverse a form and visit all its controls we need a recursive method passing the root as starting node:
 
-<img src="/images/2017/angular-reactive-forms-validate-submit-04.png">
+<img src="/assets/images/2017/angular-reactive-forms-validate-submit-04.png">
 
 If we click on the submit button we will trigger the validation and the validation error messages will be displayed on the page:
 
-<img src="/images/2017/angular-reactive-forms-validate-submit-03.png">
+<img src="/assets/images/2017/angular-reactive-forms-validate-submit-03.png">
 
 The code we developed for this example can be used in any Angular Reactive Form. The only thing that might be different is how the CSS framework you chose to use in your project handles the validation styles applied to each form control.
 
