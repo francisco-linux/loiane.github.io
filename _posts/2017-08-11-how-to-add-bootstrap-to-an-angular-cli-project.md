@@ -16,8 +16,6 @@ In this article we will learn how to setup an Angular project with Bootstrap 3 o
 {:toc}
 </div>
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  Want the code? Go [straight to GitHub](https://github.com/loiane/repo) or check out the [live demo](https://angular-bootstrap-example.firebaseapp.com/)!
-
 Although the setup seems simple, I still get a lot of questions on how to setup an Angular project generated with Angular CLI with Bootstrap. So let's see the step by step in the sections below.
 
 ### 1: Creating an Angular project with Angular CLI
