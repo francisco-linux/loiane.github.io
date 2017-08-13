@@ -16,8 +16,6 @@ In this article we will learn different approaches of validating all form fields
 {:toc}
 </div>
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  Want the code? Go [straight to GitHub repo](https://github.com/loiane/angular-reactive-forms-validate-submit) or view the [live demo](https://ng-forms-fields-validation.firebaseapp.com/)
-
 When working with forms we have 2 options: the first one is to disable the submit button if the form is invalid (meaning there is at least one invalid field) and the second option is to validate the form before the HTTP POST action is executed by the code and display a message to the user to fix any pending validation errors. Let's take a look at these scenarios in the following sections.
 
 For this example we will use [Bootstrap](getbootstrap.com) (v3) framework for the CSS styles.
