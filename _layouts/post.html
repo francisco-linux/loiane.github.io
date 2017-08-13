@@ -2,24 +2,20 @@
 layout: default
 ---
 
-{% include components/categories.html %}
+<div class="post">
+    <h1 class="post-title">{{ page.title }}</h1>
 
-<article class="post single">
-  <section class="post__content">
-    <div class="post__detail">
-    <header class="post__header">
-      <h1 class="alpha post__title" itemprop="name headline">
-        {{ page.title }}
-        <div class="post-card__container">
-          <div class="post-card__meta">
-            <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/images/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
-            </div>
-            {{ page.date | date: "%-d %b, %Y" }}
+    <div class="post-header">
+      <div class="post-header-container">
+        <div class="post-header-detail">
+          <div class="post-header-category">
+              <img src="{{ site.baseurl }}/assets/images/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
           </div>
-          <div class="post-card__meta">
-            <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/images/tags/time.svg" alt="">
+          {{ page.date | date_to_string }}
+        </div>
+        <div class="post-header-detail">
+            <div class="post-header-category">
+                <i class="mdi mdi-clock mdi-24px"></i>
             </div>
             {% assign words = content | strip_html | number_of_words %}
             {% if words < 360 %}
@@ -28,94 +24,26 @@ layout: default
               {{ words | divided_by:200 }} mins read
             {% endif %}
           </div>
-          <div class="post-card__meta">
-            <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/images/icons/github-dark.svg" alt="">
-            </div>
-            {% if page.path %}
-            <a class="post-card-edit" href="//github.com/loiane/loiane.github.io/blob/master/{{ page.path }}" target="_blank" rel="noopener">
-              Edit post
-            </a>
-            {% endif %}
-          </div>
-          <!--<div class="post-card__meta">
-            <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/images/icons/comments.svg" alt="">
-            </div>
-            <span class="disqus-comment-count" data-disqus-url="https://loiane.com{{ page.url }}"></span>
-          </div>-->
-        </div>
-      </h1>
-      <div class="post__meta__divider"></div>
-    </header>
-      {{ content }}
+          {% if page.path %}
+          <!--div class="post-header-detail">
+              <div class="post-header-category">
+                <i class="mdi mdi-github-circle mdi-24px"></i>
+              </div>
+              {% if page.path %}
+              <a class="post-card-edit" href="//github.com/loiane/loiane.github.io/blob/master/{{ page.path }}" target="_blank" rel="noopener">
+                Edit post
+              </a>
+              {% endif %}
+          </div -->
+          {% endif %}
+      </div>
     </div>
 
+  {{ content }}
 
-  </section>
-</article>
+  {% include components/share-addthis.html %}
 
-<div class="share">
-  <h4 class="share__title">Enjoy this post? Share it!</h4>
-  <p>
-    I love writing blog posts and creating new content.
-    It would help me a lot you'd spare a moment to share them!
-  </p>
-  <div class="addthis_inline_share_toolbox"></div>
-  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-597a235ae1b10e2a"></script>
+  {% include components/related-posts.html %}
+
+  {% include components/disqus.html %}
 </div>
-
-<div class="post__ending">
-
-  {% if page.previous.url %}
-    <div class="post-card">
-      <a href="{{ page.previous.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.previous.title }}">
-        <div class="post-card__meta">
-          <div class="post-card__tag">
-            <img src="{{ site.baseurl }}/images/tags/{% if page.previous.tag %}{{ page.previous.tag }}{% else %}tag{% endif %}.svg" alt="">
-          </div>
-          {{ page.previous.date | date: "%b %-d, %Y" }}
-        </div>
-        <h2 class="post-card__title">
-          {{ page.previous.title }}
-        </h2>
-        <p>
-          {{ page.previous.content | markdownify | strip_html | truncatewords: 15 }}
-        </p>
-      </a>
-    </div>
-  {% endif %}
-  {% if page.next.url %}
-    <div class="post-card">
-      <a href="{{ page.next.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.next.title }}">
-        <div class="post-card__meta">
-          <div class="post-card__tag">
-            <img src="{{ site.baseurl }}/images/tags/{% if page.next.tag %}{{ page.next.tag }}{% else %}tag{% endif %}.svg" alt="">
-          </div>
-          {{ page.next.date | date: "%b %-d, %Y" }}
-        </div>
-        <h2 class="post-card__title">
-          {{ page.next.title }}
-        </h2>
-        <p>
-          {{ page.next.content | markdownify | strip_html | truncatewords: 15 }}
-        </p>
-      </a>
-    </div>
-  {% endif %}
-  </div>
-</div>
-
-{% if page.tag != 'pt-br' %}
-<div class="disqus">
-  <div id="disqus_thread"></div>
-</div>
-{% endif %}
-<script>
-(function() {
-var d = document, s = d.createElement('script');
-s.src = 'https://loiane.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
