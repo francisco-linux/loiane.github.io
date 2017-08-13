@@ -10,13 +10,11 @@ tag: angular
 This article will show you how to setup your Angular project (v2+) using Angular Material 2.
 
 <div class="toc" markdown="1">
-<span class="gamma">Table of contents</span>
+<span>Table of contents</span>
 {:.no_toc}
 * TOC
 {:toc}
 </div>
-
-> <i class="mdi mdi-github-circle mdi-24px"></i>  Want the code? Go [straight to GitHub repo](https://github.com/loiane/angular-material-example) or view the [live demo](https://angular-material-example.firebaseapp.com)
 
 ### 1: Create your Angular project with Angular CLI
 
@@ -385,12 +383,11 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 ### Source code and live demo
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-material-example) or check out the [live demo](https://angular-material-example.firebaseapp.com)
+> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-material-example) 
+> or check out the [live demo](https://angular-material-example.firebaseapp.com)
 
 References: 
 * [Angular Material 2 docs](https://material.angular.io/components)
 * [Angular Material Getting Started Guide](https://material.angular.io/guide/getting-started)
-
-Please let me know in the comments section below if you would like any other tutorial related to Angular Material or Angular. :)
 
 Happy coding!
