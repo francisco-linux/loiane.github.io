@@ -18,8 +18,6 @@ In this article we will learn two approaches to hide the Navbar Menu when displa
 
 For both examples in this tutorial we will use [Angular Material](https://material.angular.io/) as our UI library. I've covered how to [setup an Angular project with Angular Material in this post](https://loiane.com/2017/07/getting-started-with-angular-material-2). 
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  Want the code for both examples? Go [straight to GitHub](https://github.com/loiane/angular-login-hide-navbar).
-
 ### Example 1: Using *ngIf to "hide" the NavBar
 
 In this first example we will have only one page layout and we will verify if the user is logged in and use *ngIf to verify if the application should display the navigation bar or not. This is the most common example we find when searching for how to hide the navbar when displaying the login page.
