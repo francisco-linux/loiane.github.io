@@ -19,7 +19,7 @@ first_name: Loiane
 last_name: ''
 ---
 <p style="text-align: justify;">Neste curto tutorial, você vai aprender como controlar o componente Ext.Window Panel do ExtJS.<br />
-<a href="http://www.loiane.com/wp-content/uploads/2009/12/ext.window_hide_or_close.png"><img class="aligncenter size-full wp-image-1354" title="ext.window_hide_or_close" src="{{ site.baseurl }}/images/assets/ext.window_hide_or_close.png" alt="" width="511" height="312" /></a></p>
+<a href="http://www.loiane.com/wp-content/uploads/2009/12/ext.window_hide_or_close.png"><img class="aligncenter size-full wp-image-1354" title="ext.window_hide_or_close" src="{{ site.baseurl }}/assets/images/assets/ext.window_hide_or_close.png" alt="" width="511" height="312" /></a></p>
 <p style="text-align: justify;"><strong>Problema</strong>: você criou uma janela com ExtJS, e ela funcionou perfeitamente na primeira vez. Quando a aplicação disparou o evento para abrir a janela pela segunda vez, nada aconteceu, ou você viu um erro no firebug (algum coisa is not defined ou alguma coisa is null). Como reparar isso?</p>
 <p style="text-align: justify;"><strong>Solução</strong>: quando você não diz como o Ext.Window deve trabalhar, o comportamento padrão é fechar (close) o componente, e com isso, destruí-lo (destroy). Devemos então, esconder (hide) o componente, assim, poderemos reutilizá-lo nas próximas vezes.</p>
 <p style="text-align: justify;">Código de Exemplo (referência: http://www.extjs.com/deploy/dev/examples/window/hello.html):</p>
@@ -86,4 +86,4 @@ win.show(this);<br />
 [/code]</p>
 <p>Bons códigos!</p>
 <p>English Version of this post: <a href="http://loianegroner.com/2010/01/ext-window-panel-show-or-hide/" target="_blank" rel="noopener">Ext.Window Panel: Show or Hide?</a></p>
-<p>Download do projeto: <a href="http://github.com/loiane/ext-window" target="_blank" rel="noopener"><img title="public" src="{{ site.baseurl }}/images/assets/public.png" alt="public" width="16" height="16" /> http://github.com/loiane/ext-window</a></p>
+<p>Download do projeto: <a href="http://github.com/loiane/ext-window" target="_blank" rel="noopener"><img title="public" src="{{ site.baseurl }}/assets/images/assets/public.png" alt="public" width="16" height="16" /> http://github.com/loiane/ext-window</a></p>

@@ -3,7 +3,7 @@ layout: post
 title: "Getting Started with Angular Material 2"
 date: 2017-07-30 09:35:12.000000000 -02:00
 path: 2017-07-30-getting-started-with-angular-material-2.md
-image: /images/2017/angular-material-04.png
+image: /assets/images/2017/angular-material-04.png
 tag: angular
 ---
 
@@ -32,7 +32,7 @@ With the command above, we are asking Angular CLI to create a new project with a
 
 It will create a new project with the following files:
 
-<img src="/images/2017/angular-material-01.png">
+<img src="/assets/images/2017/angular-material-01.png">
 
 ### 2: npm install @angular-material and hammerjs
 
@@ -167,7 +167,7 @@ Open `home.component.html` add add the following code:
 
 If you are using VSCode and the [Angular Languague Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extension, you will get some compilation errors in your HTML template:
 
-<img src="/images/2017/angular-material-02.png">
+<img src="/assets/images/2017/angular-material-02.png">
 
 This is because the `md-*` components are not known by Angular, hence we need to import them in our module.
 
@@ -288,11 +288,11 @@ When we load our application in the browser (path ''), the HomeModule will be la
 
 If we execute `ng serve` and open `http://localhost:4200/` we will be able to see a purple-ish toolbar:
 
-<img src="/images/2017/angular-material-03.png">
+<img src="/assets/images/2017/angular-material-03.png">
 
 Our code now has the following structure:
 
-<img src="/images/2017/angular-material-05.png">
+<img src="/assets/images/2017/angular-material-05.png">
 
 This is the project structure I usually use for my Angular Material projects. Now you can add more components and modules as needed and have fun with Material components!
 
@@ -371,7 +371,7 @@ export class AppMaterialModule {}
 
 After the changes above, this will be the output in the browser:
 
-<img src="/images/2017/angular-material-04.png">
+<img src="/assets/images/2017/angular-material-04.png">
 
 ### Tip: Angular Material VSCode Extension
 

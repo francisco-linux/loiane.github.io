@@ -31,7 +31,7 @@ first_name: Loiane
 last_name: ''
 ---
 <p>Este tutorial tem como objetivo mostrar como executar aplicações web no Jetty webserver diretamente do Eclipse.</p>
-<p><img class="aligncenter size-full wp-image-1125" title="Jetty_logo_loiane" src="{{ site.baseurl }}/images/assets/Jetty_logo_loiane.jpg" alt="" width="226" height="64" /></p>
+<p><img class="aligncenter size-full wp-image-1125" title="Jetty_logo_loiane" src="{{ site.baseurl }}/assets/images/assets/Jetty_logo_loiane.jpg" alt="" width="226" height="64" /></p>
 <h3 style="text-align: justify;">Requerimentos:</h3>
 <ol style="text-align: justify;">
 <li><a title="Instalando e Executando o Jetty (WebServer)" href="http://www.loiane.com/2011/07/instalando-e-executando-o-jetty-webserver/" target="_blank" rel="noopener">Como instalar e executar o Jetty</a></li>
@@ -40,23 +40,23 @@ last_name: ''
 <p style="text-align: justify;">Como mencionei nos tutoriais listados acima, estou tentando usar <a href="http://jetty.codehaus.org/jetty/" target="_blank" rel="noopener">Jetty </a>no lugar do <a href="http://tomcat.apache.org/" target="_blank" rel="noopener">Tomcat</a>. Neste post, vou mostrar como é simples e fácil fazer deploy de uma aplicação web no <a href="http://jetty.codehaus.org/jetty/" target="_blank" rel="noopener">Jetty </a>diretamente no Eclipse (com uso do plugin <a title="Integrando Jetty com Eclipse" href="http://www.loiane.com/2011/07/integrando-jetty-com-eclipse/" target="_blank" rel="noopener">Run-Jetty-Run</a>).</p>
 <h3 style="text-align: justify;">Steps:</h3>
 <p style="text-align: justify;">1 – Crie um Projeto do tipo <em>Dynamic Web Project</em> (você pode clicar com o botão direito na view de Project Explorer ou pelo menu File -&gt; New…):</p>
-<p style="text-align: justify;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_04.png"><img class="aligncenter size-full wp-image-1127" title="Jetty_loiane_04" src="{{ site.baseurl }}/images/assets/Jetty_loiane_04.png" alt="" width="512" height="268" /></a></p>
+<p style="text-align: justify;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_04.png"><img class="aligncenter size-full wp-image-1127" title="Jetty_loiane_04" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_04.png" alt="" width="512" height="268" /></a></p>
 <p style="text-align: justify;">2 – Dê um nome para o projeto web e clique em Next:</p>
-<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_05.png"><img class="aligncenter size-full wp-image-1128" title="Jetty_loiane_05" src="{{ site.baseurl }}/images/assets/Jetty_loiane_05.png" alt="" width="542" height="618" /></a></p>
+<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_05.png"><img class="aligncenter size-full wp-image-1128" title="Jetty_loiane_05" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_05.png" alt="" width="542" height="618" /></a></p>
 <p style="text-align: justify;">3 – Clique em Next:</p>
-<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_06.png"><img class="aligncenter size-full wp-image-1129" title="Jetty_loiane_06" src="{{ site.baseurl }}/images/assets/Jetty_loiane_06.png" alt="" width="533" height="378" /></a></p>
+<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_06.png"><img class="aligncenter size-full wp-image-1129" title="Jetty_loiane_06" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_06.png" alt="" width="533" height="378" /></a></p>
 <p style="text-align: justify;">4 – Marque a opção Generate web.xml… e clique em Finish:</p>
-<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_07.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1130" title="Jetty_loiane_07" src="{{ site.baseurl }}/images/assets/Jetty_loiane_07.png" alt="" width="533" height="378" /></a></p>
+<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_07.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1130" title="Jetty_loiane_07" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_07.png" alt="" width="533" height="378" /></a></p>
 <p style="text-align: justify;">5 – O projeto deve ficar assim - projeto bem simples - é preciso criar uma página index.html também:</p>
-<p style="text-align: justify;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_08.png"><img class="aligncenter size-full wp-image-1131" title="Jetty_loiane_08" src="{{ site.baseurl }}/images/assets/Jetty_loiane_08.png" alt="" width="246" height="174" /></a></p>
+<p style="text-align: justify;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_08.png"><img class="aligncenter size-full wp-image-1131" title="Jetty_loiane_08" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_08.png" alt="" width="246" height="174" /></a></p>
 <p style="text-align: justify;">6 – Selecione o projeto, clique no botão Run  -&gt; Run Configurations…</p>
-<p style="text-align: justify;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_09.png"><img class="aligncenter size-full wp-image-1132" title="Jetty_loiane_09" src="{{ site.baseurl }}/images/assets/Jetty_loiane_09.png" alt="" width="352" height="297" /></a></p>
+<p style="text-align: justify;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_09.png"><img class="aligncenter size-full wp-image-1132" title="Jetty_loiane_09" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_09.png" alt="" width="352" height="297" /></a></p>
 <p style="text-align: justify;">7 – Dê um duplo clique na opção Jetty Webapp. Será criada uma configuração com o nome do projeto criado. Depois é só clicar em Run:</p>
-<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_10.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1133" title="Jetty_loiane_10" src="{{ site.baseurl }}/images/assets/Jetty_loiane_10.png" alt="" width="524" height="412" /></a></p>
+<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_10.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1133" title="Jetty_loiane_10" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_10.png" alt="" width="524" height="412" /></a></p>
 <p style="text-align: justify;">8 – Espere pelo servidor iniciar:</p>
-<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_11.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1134" title="Jetty_loiane_11" src="{{ site.baseurl }}/images/assets/Jetty_loiane_11.png" alt="" width="564" height="336" /></a></p>
+<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_11.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1134" title="Jetty_loiane_11" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_11.png" alt="" width="564" height="336" /></a></p>
 <p style="text-align: justify;">9 – Agora é só testar a aplicação!</p>
-<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_12.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1135" title="Jetty_loiane_12" src="{{ site.baseurl }}/images/assets/Jetty_loiane_12.png" alt="" width="583" height="228" /></a></p>
+<p style="text-align: center;"><a href="https://loiane.com/wp-content/uploads/2011/07/Jetty_loiane_12.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-1135" title="Jetty_loiane_12" src="{{ site.baseurl }}/assets/images/assets/Jetty_loiane_12.png" alt="" width="583" height="228" /></a></p>
 <p style="text-align: justify;">Também fiz um vídeo com os steps:</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/rq93RXAfTW4" frameborder="0" width="480" height="390"></iframe></p>
 <p style="text-align: justify;">Bem simple né?!</p>

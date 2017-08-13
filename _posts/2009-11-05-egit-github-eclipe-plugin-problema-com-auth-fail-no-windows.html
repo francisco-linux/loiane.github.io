@@ -20,23 +20,23 @@ display_name: Loiane
 first_name: Loiane
 last_name: ''
 ---
-<p style="text-align: justify;"><img class="alignleft size-full wp-image-1136" title="egit2" src="{{ site.baseurl }}/images/assets/egit2.png" alt="egit2" width="73" height="72" />Se você tentou importar ou exportar algum projeto para o GitHub utilizando o EGit - Eclipse Plugin e apareceu a mensagem de Auth Fail para você, saiba como resolver e não ter mais nenhum problema na hora de trabalhar com o GitHub/Git diretamente do Eclipse:</p>
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-1136" title="egit2" src="{{ site.baseurl }}/assets/images/assets/egit2.png" alt="egit2" width="73" height="72" />Se você tentou importar ou exportar algum projeto para o GitHub utilizando o EGit - Eclipse Plugin e apareceu a mensagem de Auth Fail para você, saiba como resolver e não ter mais nenhum problema na hora de trabalhar com o GitHub/Git diretamente do Eclipse:</p>
 <p>Você preencheu corretamente a tela com os dados do Github nesta tela:</p>
-<p><img class="aligncenter size-full wp-image-1137" title="import_project_from_github_07" src="{{ site.baseurl }}/images/assets/import_project_from_github_07.jpg" alt="import_project_from_github_07" width="470" height="506" /></p>
+<p><img class="aligncenter size-full wp-image-1137" title="import_project_from_github_07" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_07.jpg" alt="import_project_from_github_07" width="470" height="506" /></p>
 <p>E após clicar em Next, apareceu a seguinte mensagem:</p>
-<p><img class="aligncenter size-full wp-image-1138" title="import_project_from_github_08" src="{{ site.baseurl }}/images/assets/import_project_from_github_08.jpg" alt="import_project_from_github_08" width="441" height="136" /></p>
+<p><img class="aligncenter size-full wp-image-1138" title="import_project_from_github_08" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_08.jpg" alt="import_project_from_github_08" width="441" height="136" /></p>
 <h3>Como resolver</h3>
 <p>Na mensagem acima, clique em Yes. Na próxima tela, aceite a criação do diretório ssh:</p>
-<p><img class="aligncenter size-full wp-image-1139" title="import_project_from_github_09" src="{{ site.baseurl }}/images/assets/import_project_from_github_09.jpg" alt="import_project_from_github_09" width="441" height="129" />Aceite novamente:</p>
-<p><img class="aligncenter size-full wp-image-1140" title="import_project_from_github_10" src="{{ site.baseurl }}/images/assets/import_project_from_github_10.jpg" alt="import_project_from_github_10" width="441" height="136" />Clique em OK:</p>
-<p><img class="aligncenter size-full wp-image-1141" title="import_project_from_github_11" src="{{ site.baseurl }}/images/assets/import_project_from_github_11.jpg" alt="import_project_from_github_11" width="441" height="129" />Irá aparecer a seguinte tela. Clique em OK:</p>
-<p><img class="aligncenter size-full wp-image-1142" title="import_project_from_github_12" src="{{ site.baseurl }}/images/assets/import_project_from_github_12.jpg" alt="import_project_from_github_12" width="456" height="153" /></p>
+<p><img class="aligncenter size-full wp-image-1139" title="import_project_from_github_09" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_09.jpg" alt="import_project_from_github_09" width="441" height="129" />Aceite novamente:</p>
+<p><img class="aligncenter size-full wp-image-1140" title="import_project_from_github_10" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_10.jpg" alt="import_project_from_github_10" width="441" height="136" />Clique em OK:</p>
+<p><img class="aligncenter size-full wp-image-1141" title="import_project_from_github_11" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_11.jpg" alt="import_project_from_github_11" width="441" height="129" />Irá aparecer a seguinte tela. Clique em OK:</p>
+<p><img class="aligncenter size-full wp-image-1142" title="import_project_from_github_12" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_12.jpg" alt="import_project_from_github_12" width="456" height="153" /></p>
 <p>E quando você clicar em OK na tela da figura acima, aparecerá a seguinte tela, ainda com erro:</p>
-<p><img class="aligncenter size-full wp-image-1144" title="import_project_from_github_14" src="{{ site.baseurl }}/images/assets/import_project_from_github_14.jpg" alt="import_project_from_github_14" width="470" height="506" /></p>
+<p><img class="aligncenter size-full wp-image-1144" title="import_project_from_github_14" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_14.jpg" alt="import_project_from_github_14" width="470" height="506" /></p>
 <h3>Por que isso acontece?</h3>
 <p style="text-align: justify;">Isso acontece pois quando você criou a chave pública, criou na pasta .ssh (C:\Documents and Settings\{user}\.ssh), e o Egit tenta obter a chave pública da pasta ssh (C:\Documents and Settings\{user}\ssh).</p>
 <p style="text-align: justify;">Por isso, essas mensagens aparecem para que você dê permissão para o plugin criar este último diretório (C:\Users\{user}\ - para usuário do Windows Vista).</p>
 <p style="text-align: justify;">Porém, até agora, você apenas criou o diretório, e se tentar novamente, vai obter a mesma mensagem de Auth Fail. Isso porque falta copiar os arquivos da chave ssh da pasta .ssh para a pasta ssh. Após copiar os arquivos, reinicie o Eclipse e siga os passos novamente, só que desta vez, sem erros!</p>
-<p><img class="aligncenter size-full wp-image-1143" title="import_project_from_github_13" src="{{ site.baseurl }}/images/assets/import_project_from_github_13.jpg" alt="import_project_from_github_13" width="463" height="246" /></p>
+<p><img class="aligncenter size-full wp-image-1143" title="import_project_from_github_13" src="{{ site.baseurl }}/assets/images/assets/import_project_from_github_13.jpg" alt="import_project_from_github_13" width="463" height="246" /></p>
 <p>Até a próxima!</p>
 <p>:)</p>

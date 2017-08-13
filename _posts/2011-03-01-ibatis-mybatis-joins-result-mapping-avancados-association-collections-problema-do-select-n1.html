@@ -33,7 +33,7 @@ first_name: Loiane
 last_name: ''
 ---
 <p style="text-align: justify;">Este tutorial tem como objetivo mostrar como fazer o setup do <a href="http://www.mybatis.org/" target="_blank" rel="noopener">iBatis</a> (<a href="http://www.mybatis.org/" target="_blank" rel="noopener">MyBatis</a>) usando um projeto Java simples, e também mostrará exemplos de como configurar mapeamentos avançados (result mapping), association (1 pra 1), collections (1 pra n, n para n), problema do select n+1 usando configuração em XML e annotations.</p>
-<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"><img class="aligncenter size-full wp-image-2152" title="ibatis_mybatis_loiane" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane.png" alt="" width="274" height="149" /></a></p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/ibatis_mybatis_loiane.png"><img class="aligncenter size-full wp-image-2152" title="ibatis_mybatis_loiane" src="{{ site.baseurl }}/assets/images/assets/ibatis_mybatis_loiane.png" alt="" width="274" height="149" /></a></p>
 <h2 style="text-align: justify;">Pré-Requisitos</h2>
 <p style="text-align: justify;">
 <p>Para este tutorial usei:</p>
@@ -41,15 +41,15 @@ last_name: ''
 DataBase: <a href="http://dev.mysql.com/downloads/" target="_blank" rel="noopener">MySQL</a><br />
 Libs/jars: <a href="http://www.mybatis.org/" target="_blank" rel="noopener">Mybatis</a>, <a href="http://dev.mysql.com/downloads/" target="_blank" rel="noopener">MySQL</a> conector e <a href="http://www.junit.org/" target="_blank" rel="noopener">JUnit</a> (para testes)</p>
 <p>No Eclipse, a estrutura do seu projeto vai ficar assim:</p>
-<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_handling_joins.png"><img class="aligncenter size-full wp-image-2265" title="ibatis_mybatis_loiane_handling_joins" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_handling_joins.png" alt="" width="260" height="493" /></a></p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_handling_joins.png"><img class="aligncenter size-full wp-image-2265" title="ibatis_mybatis_loiane_handling_joins" src="{{ site.baseurl }}/assets/images/assets/ibatis_mybatis_loiane_handling_joins.png" alt="" width="260" height="493" /></a></p>
 <h2 style="text-align: justify;"><span style="font-size: 13px; font-weight: normal;"></p>
 <h2 style="font-size: 1.5em;">Dados de Exemplo</h2>
 <p>Execute o script que está dentro da pasta sql antes de começar o projeto. Este arquivo contém os dados de exemplo usados neste tutorial.</p>
 <p></span></h2>
-<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_loiane_advancedresultmapping.png"><img class="aligncenter size-full wp-image-2266" title="ibatis_loiane_advancedresultmapping" src="{{ site.baseurl }}/images/assets/ibatis_loiane_advancedresultmapping.png" alt="" width="474" height="314" /></a></p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_loiane_advancedresultmapping.png"><img class="aligncenter size-full wp-image-2266" title="ibatis_loiane_advancedresultmapping" src="{{ site.baseurl }}/assets/images/assets/ibatis_loiane_advancedresultmapping.png" alt="" width="474" height="314" /></a></p>
 <h2>1 - POJOs - Beans</h2>
 <p style="text-align: justify;">Vou representar os Beans com um diagrama UML para melhor visualização. O código fonte completo pode ser baixado no final do tutorial.</p>
-<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_uml_handlingjoins.png"><img class="aligncenter size-full wp-image-2267" title="ibatis_mybatis_loiane_uml_handlingjoins" src="{{ site.baseurl }}/images/assets/ibatis_mybatis_loiane_uml_handlingjoins.png" alt="" width="386" height="414" /></a></p>
+<p style="text-align: justify;"><a href="http://www.loiane.com/wp-content/uploads/2011/02/ibatis_mybatis_loiane_uml_handlingjoins.png"><img class="aligncenter size-full wp-image-2267" title="ibatis_mybatis_loiane_uml_handlingjoins" src="{{ site.baseurl }}/assets/images/assets/ibatis_mybatis_loiane_uml_handlingjoins.png" alt="" width="386" height="414" /></a></p>
 <p style="text-align: justify;">O objetivo desse post é demonstrar como obter os dados do Blog do banco de dados, mas como pode perceber, a classe Blog contém uma association com Autor (Author), e uma coleção de Posts (que por sua vez contém uma coleção de Tags). Vamos tentar popular esses objetos.</p>
 <p style="text-align: justify;">Para popular esses objetos, vamos usar as seguintes relação: 1-1, 1-n, n-n usando iBatis/Mybatis.</p>
 <h2>2 - Mapeamento Avançado - Result Mapping</h2>
@@ -442,6 +442,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;</p>
 <h2 style="text-align: justify;">Download</h2>
 <p style="text-align: justify;">Se desejar fazer o download do código fonte completo, basta ir até a minha conta no GitHub: <a href="https://github.com/loiane/ibatis-handling-joins" target="_blank" rel="noopener">https://github.com/loiane/ibatis-handling-joins</a></p>
 <p style="text-align: justify;">Se quiser fazer o download o aqruivo zip com o projeto, clique no botão de Downloads (depois é só importar pro Eclipse ou outra IDE):</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-2175" title="donwload-github-example-loiane" src="{{ site.baseurl }}/images/assets/donwload-github-example-loiane.png" alt="" width="572" height="219" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2011/01/donwload-github-example-loiane.png" target="_blank" rel="noopener"><img class="aligncenter size-full wp-image-2175" title="donwload-github-example-loiane" src="{{ site.baseurl }}/assets/images/assets/donwload-github-example-loiane.png" alt="" width="572" height="219" /></a></p>
 <p style="text-align: justify;">Mais tutoriais sobre iBatis/MyBatis estão vindo! Fique ligado! :)</p>
 <p style="text-align: justify;">Bons códigos! :)</p>

@@ -1,42 +1,51 @@
-# Source code for loiane.com
+# loiane.github.io
 
-Uncompiled [Jekyll](//jekyllrb.com) source code for [loiane.com](https://loiane.com).
+[![Build Status][travis-image]][travis-url] [![Dependency Status][dependencyci-image]][dependencyci-url]
 
-## Build this project
+> source for loiane.com
 
-### Install jekyll
+## Prerequisites
 
-Ensure `jekyll` is installed:
+To install this project, you'll need the following things installed on your machine.
 
-```
-gem install jekyll
-```
+1. [Jekyll](http://jekyllrb.com/) - `$ gem install jekyll -v 3.5.1`
+2. [NodeJS](http://nodejs.org) - use the installer.
 
-### Installing dependencies
+## Local Installation
 
-This project makes use of `gulp` and `yarn`. First, you'll need to make sure you have them both installed:
+1. Clone this repo, or download it into a directory of your choice.
+2. Inside the directory, run `npm install`.
 
-```
-npm install --g gulp
-npm install --g yarn
-```
+## Usage
 
-Next, you'll need to `yarn install` the other dev-dependencies, run this from the `loiane.github.io` root folder:
+**Development mode**
 
-```
-cd loiane.github.io
-yarn install
+This will give you file watching, browser synchronisation, auto-rebuild, CSS injecting etc.
+
+```shell
+$ npm run start
 ```
 
-### Running the server
+**Deploy mode**
 
-Gulp is setup to make it easier to run all the tasks, to run the project simply run:
-
+You can easily deploy your site build with the command
+```shell
+$ npm run deploy
 ```
-yarn start
+
+## Tests
+
+If you want to run the tests on your local machine please install `gem install html-proofer`. And then run the tests using
+```shell
+$ htmlproofer ./_site
 ```
 
-This will start serving the project from `localhost:4000`, with livereload functionality.
+[license-image]: https://img.shields.io/badge/license-ISC-blue.svg
+[license-url]: https://github.com/loiane/loiane.github.io/blob/master/LICENSE
+[travis-image]: https://travis-ci.org/loiane/loiane.github.io.svg?branch=master
+[travis-url]: https://travis-ci.org/loiane/loiane.github.io
+[dependencyci-image]: https://dependencyci.com/github/loiane/loiane.github.io/badge
+[dependencyci-url]: https://dependencyci.com/github/loiane/loiane.github.io
 
 ### Notes
 
@@ -44,4 +53,4 @@ Despite being open sourced, all code and content remain copyright of Loiane Gron
 
 ### Theme
 
-Theme adapted from https://github.com/toddmotto/toddmotto.github.io 
+Theme adapted from Hyde

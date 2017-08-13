@@ -7,7 +7,7 @@ permalink: /speaking
 
 I have been given the opportunity to speak at some conferences about Java, JavaScript, Sencha, Ionic and Angular. 
 
-<img src="images/speaking.jpg">
+<img src="assets/images/speaking.jpg">
 
 # Upcoming events / Próximos eventos
 

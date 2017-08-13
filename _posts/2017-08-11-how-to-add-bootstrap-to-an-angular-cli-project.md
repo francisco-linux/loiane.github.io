@@ -3,7 +3,7 @@ layout: post
 title: "How to Add Bootstrap to an Angular CLI project"
 date: 2017-08-11 09:35:12.000000000 -02:00
 path: 2017-08-11-how-to-add-bootstrap-to-an-angular-cli-project.md
-image: /images/2017/angular-cli-bootstrap-02.png
+image: /assets/images/2017/angular-cli-bootstrap-02.png
 tag: angular
 ---
 
@@ -50,7 +50,7 @@ npm install bootstrap@next --save
 
 As an alternative, you can also download the Bootstrap CSS and add it locally to your project. I donwloaded Bootstrap [from the website](https://getbootstrap.com/) and created a folder `styles` (same level as `styles.css`):
 
-<img src="/images/2017/angular-cli-bootstrap-01.png">
+<img src="/assets/images/2017/angular-cli-bootstrap-01.png">
 
 > <i class="mdi mdi-lightbulb-on mdi-24px"></i>  Don't place your local CSS files under `assets` folder. When we do the production build with Angular CLI, the CSS files declared in the `.angular-cli.json` will be minified and all styles will be bundled into a single styles.css. The assets folder is copied to the dist folder during the build process (the CSS code will be duplicated). Only place your local CSS files under `assets` in case you are importing them directly in the `index.html`.
 
@@ -217,7 +217,7 @@ For the DropDown component, ngx-bootstrap provides some directives:
 
 And you'll have the same behavior as Bootstrap + Jquery:
 
-<img src="/images/2017/angular-cli-bootstrap-02.png">
+<img src="/assets/images/2017/angular-cli-bootstrap-02.png">
 
 Let's also develop a button with a tooltip:
 
@@ -230,7 +230,7 @@ Button with tooltip
 
 The `tooptip` directive has the same effect as `data-toggle="tooltip" title="Tooltip text"`.
 
-<img src="/images/2017/angular-cli-bootstrap-03.png">
+<img src="/assets/images/2017/angular-cli-bootstrap-03.png">
 
 Let's also take a look how to use a Modal component:
 
@@ -280,7 +280,7 @@ export class AppComponent {
 
 `{3}`: and when the user clicks on the button to open the popup we keep the modal reference and pass the template local name to the modalService.
 
-<img src="/images/2017/angular-cli-bootstrap-04.png">
+<img src="/assets/images/2017/angular-cli-bootstrap-04.png">
 
 > <i class="mdi mdi-comment-alert-outline mdi-24px"></i>  ngx-bootstrap source code is still using Angular v2.x. Since there were no major breaking changes from v2.x to v.4x, it's ok to use with v4.x. However, some ngx-bootstrap components use `<template>` instead of `<ng-template>`, so you might get warnings in your browser console related to `template` being deprecated. For the examples, such as the modal, replace `template` with `ng-template` in your code and you should be fine.
 

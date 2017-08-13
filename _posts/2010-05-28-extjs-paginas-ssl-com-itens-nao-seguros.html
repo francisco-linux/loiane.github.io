@@ -41,7 +41,7 @@ first_name: Loiane
 last_name: ''
 ---
 <p style="text-align: justify;">Quando você acessa uma página SSL da sua aplicação web, o sistema mostra um warning com a mensagem: "<strong>This page contains both secure and nonsecure items. Do you want to display the nonsecure items?</strong>" (Esta página contém itens seguros e não seguros. Deseja visualizar os items não seguros?)</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2010/05/ie7-security-warning.gif"><img class="aligncenter size-full wp-image-1693" title="ie7-security-warning" src="{{ site.baseurl }}/images/assets/ie7-security-warning.gif" alt="" width="332" height="150" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2010/05/ie7-security-warning.gif"><img class="aligncenter size-full wp-image-1693" title="ie7-security-warning" src="{{ site.baseurl }}/assets/images/assets/ie7-security-warning.gif" alt="" width="332" height="150" /></a></p>
 <p style="text-align: justify;">Este é um erro comum que ocorre quando algum elemento numa página web segura (que é acessada via <strong>https://</strong> na barra de endereço) não é acessado de uma fonte segura (ou seja, do mesmo domínio). Isso geralmente ocorrer com imagens, frames, iframes, Flash e JavaScripts.</p>
 <h3>Como resolver esse "pequeno problema" quando sua página/projeto foi desenvolvido com ExtJS?</h3>
 <p>Existe uma propriedade na classe <a href="http://www.extjs.com/deploy/ext/docs/output/Ext.html" target="_blank" rel="noopener">Ext</a> chamada <a href="http://www.extjs.com/deploy/ext/docs/output/Ext.html#BLANK_IMAGE_URL">BLANK_IMAGE_URL</a>:</p>
@@ -51,7 +51,7 @@ last_name: ''
 <p style="text-align: justify;">"URL para uma imagem gif transparente 1x1 usado pelo Ext para criar ícones alinhados com imagens de fundo CSS. (O padrão é "<strong>http://extjs.com/s.gif</strong>" e você deve alterar essa caminho para uma URL no seu servidor)."</p>
 </blockquote>
 <p>Segue abaixo um screenshot do Firebug quando tentei carregar uma aplicação que usa a biblioteca ExtJS:</p>
-<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/05/extjs_secure_warning_loiane1.gif"><img class="aligncenter size-full wp-image-1694" title="extjs_secure_warning_loiane1" src="{{ site.baseurl }}/images/assets/extjs_secure_warning_loiane1.gif" alt="" width="518" height="38" /></a></p>
+<p style="text-align: center;"><a href="http://www.loiane.com/wp-content/uploads/2010/05/extjs_secure_warning_loiane1.gif"><img class="aligncenter size-full wp-image-1694" title="extjs_secure_warning_loiane1" src="{{ site.baseurl }}/assets/images/assets/extjs_secure_warning_loiane1.gif" alt="" width="518" height="38" /></a></p>
 <p style="text-align: justify;">A solução é bem simples. É preciso apontar a propriedade BLANK_IMAGE_URL para a imagem "s.gif" que está no diretório da sua aplicação.</p>
 <p style="text-align: left;">Por exemplo:  se o nome da sua aplicação é "<em><a href="http://github.com/loiane/extjs-crud-grid" target="_blank" rel="noopener">extjs-crud-grid</a></em>", deve apontar para:</p>
 <p>[code lang="js" firstline="1" toolbar="true" collapse="false" wraplines="false"]<br />
@@ -60,6 +60,6 @@ Ext.onReady(function(){<br />
 )};<br />
 [/code]</p>
 <p><em><a href="http://github.com/loiane/extjs-crud-grid" target="_blank" rel="noopener">extjs-crud-grid</a></em> - diretório da aplicação:</p>
-<p><a href="http://www.loiane.com/wp-content/uploads/2010/05/extjs_nonsecure_warning_02.gif"><img class="aligncenter size-full wp-image-1695" title="extjs_nonsecure_warning_02" src="{{ site.baseurl }}/images/assets/extjs_nonsecure_warning_02.gif" alt="" width="365" height="815" /></a></p>
+<p><a href="http://www.loiane.com/wp-content/uploads/2010/05/extjs_nonsecure_warning_02.gif"><img class="aligncenter size-full wp-image-1695" title="extjs_nonsecure_warning_02" src="{{ site.baseurl }}/assets/images/assets/extjs_nonsecure_warning_02.gif" alt="" width="365" height="815" /></a></p>
 <p>Espero que tenha ajudado!</p>
 <p>Bons códigos! :)</p>
