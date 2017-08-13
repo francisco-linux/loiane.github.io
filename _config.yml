@@ -9,7 +9,6 @@ url: "https://loiane.com" # the base hostname & protocol for your site e.g. "htt
 twitter_username: loiane
 github_username:  loiane
 include: [_pages]
-exclude: ['node_modules']
 paginate: 12
 paginate_path: "/page:num/"
 permalink: /:year/:month/:title
@@ -20,6 +19,21 @@ encoding: "utf-8"
 # Build settings
 markdown: kramdown
 highlighter: rouge
+
+exclude: [
+  "node_modules",
+  "LICENSE",
+  "package.json",
+  "package-lock.json",
+  "README.md",
+  "Gemfile",
+  "Gemfile.lock",
+  "gulpfile.babel.js",
+  ".babelrc",
+  ".gitignore",
+  "src",
+  "validate"
+]
 
 # html minify
 compress_html:
