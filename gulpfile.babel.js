@@ -132,7 +132,19 @@ gulp.task('generate-service-worker', (callback) => {
   var blogDir = '';
 
   swPrecache.write(path.join(blogDir, 'sw.js'), {
-    staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,json,svg}'],
+    staticFileGlobs: [
+      rootDir + '/*.html',
+      rootDir + '/*.json',
+      rootDir + '/*.webapp',
+      rootDir + '/assets/**/*.{js,css}',
+      rootDir + '/assets/fonts/*.{woff,woff2}',
+      rootDir + '/assets/images/*.jpg',
+      rootDir + '/assets/images/tags/*.svg',
+      rootDir + '/assets/images/icons/*.png',
+      rootDir + '/assets/images/2017/*.{png,jpg,gif,svg}',
+      rootDir + '/2017/**/*.html'
+      //rootDir + '/**/*.{js,html,css,png,jpg,gif,json,svg}'
+    ],
     stripPrefix: rootDir,
     replacePrefix: ''
   }, callback);
