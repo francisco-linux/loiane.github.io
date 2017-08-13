@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "name": "Loiane",
+  "launch_path": "/index.html",
+  "description": "blog loiane.com",
+  "icons": {
+    "192": "assets/images/icons/android-chrome-192x192.png"
+  },
+  "developer": {
+    "name": "Loiane Groner",
+    "url": "http://loiane.com"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Loiane Groner",
+      "description": "blog loiane.com"
+    }
+  }
+}
