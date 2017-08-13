@@ -133,6 +133,7 @@ gulp.task('generate-service-worker', (callback) => {
 
   swPrecache.write(path.join(blogDir, 'sw.js'), {
     staticFileGlobs: [
+      rootDir + '/',
       rootDir + '/*.html',
       rootDir + '/*.json',
       rootDir + '/*.webapp',
