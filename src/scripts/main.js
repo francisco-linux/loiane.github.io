@@ -16,10 +16,11 @@
 })(window, document);*/
 
 //register service worker
-((window, document, undefined) => {
+/*((window, document, undefined) => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').then(function() {
       console.log('Service Worker Registered');
     });
   }
 })(window, document);
+*/
