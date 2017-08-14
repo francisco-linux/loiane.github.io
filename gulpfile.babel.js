@@ -41,13 +41,15 @@ gulp.task('minify-html', () => {
 
 // Optimize images.
 gulp.task('minify-images', () => {
-  const imgDst = 'assets/images/';
+  const imgDst = 'assets/images/2017';
+  const imgSrc = 'src/images/2017/*';
   gulp.src([
-    'src/images/**/*'
+    //'src/images/**/*'
+    imgSrc
   ])
     .pipe(plumber())
-    //.pipe(filelog())
-    .pipe(changed(imgDst))
+    .pipe(filelog())
+    //.pipe(changed(imgSrc))
     .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
     .pipe(filelog('Optimized'))
     .pipe(gulp.dest(imgDst));
@@ -179,7 +181,7 @@ gulp.task('build', () =>
     'jekyll-build-for-deploy',
     'minify-html',
     'generate-service-worker',
-    'minify-images'//,
+   // 'minify-images'//,
     //'revert-config'
   )
 );
