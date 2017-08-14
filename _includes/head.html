@@ -10,6 +10,10 @@
 
   <link rel="author" href="https://plus.google.com/+loianegroner?rel=author">
 
+  <link rel="stylesheet" href="/assets/css/main.css?{{site.time | date: '%s%N'}}" media="none" onload="if(media!='all')media='all'">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+
   <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Loiane Groner">
@@ -36,10 +40,6 @@
   <meta itemprop="name" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}"/>
   <meta itemprop="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <meta itemprop="image" content="{{ site.url }}/assets/images/loiane.jpg | prepend: site.baseurl | prepend: site.url"/>
-
-  <link rel="stylesheet" href="/assets/css/main.css?{{site.time | date: '%s%N'}}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
   {% if page.title %}
   <meta property="og:locale" content="en_US">
