@@ -1,0 +1,70 @@
+/**
+ * Syntax highlighting styles inspired by Atom's One Dark theme
+ */
+// Config -----------------------------------
+$syntax-hue:          220;
+$syntax-saturation:   13%;
+$syntax-brightness:   18%;
+
+// Monochrome -----------------------------------
+$mono-1: hsl($syntax-hue, 14%, 71%); // default text
+$mono-2: hsl($syntax-hue,  9%, 55%);
+$mono-3: hsl($syntax-hue, 10%, 40%);
+
+// Colors -----------------------------------
+$hue-1:   hsl(187, 47%, 55%); // <-cyan
+$hue-2:   hsl(207, 82%, 66%); // <-blue
+$hue-3:   hsl(286, 60%, 67%); // <-purple
+$hue-4:   hsl( 95, 38%, 62%); // <-green
+
+$hue-5:   hsl(355, 65%, 65%); // <-red 1
+$hue-5-2: hsl(  5, 48%, 51%); // <-red 2
+
+$hue-6:   hsl( 29, 54%, 61%); // <-orange 1
+$hue-6-2: hsl( 39, 67%, 69%); // <-orange 2
+
+// Base colors -----------------------------------
+$syntax-fg:     $mono-1;
+$syntax-bg:     hsl($syntax-hue, $syntax-saturation, $syntax-brightness);
+$syntax-gutter: darken($syntax-fg, 26%);
+$syntax-guide:  fade($syntax-fg, 15%);
+$syntax-accent: hsl($syntax-hue, 100%, 66% );
+
+// code variables
+$code-font-family: Menlo, Monaco, "Courier New", monospace;
+$code-background-color: #e8f2fb;
+$code-font-color:       #384454;
+
+// Our variables
+$base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-size:   16px;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+
+$spacing-unit:     30px;
+
+$text-color:       #515151;
+$background-color: #fdfdfd;
+$brand-color:      #1976D2;
+$headings-color:   #545e6f;
+$bold-color:       #545e6f;
+
+$blockquote-bg-color: #ddf2fd;
+$blockquote-font-color: #0071f0;
+$blockquote-code-bg-color: #f3fdff;
+
+$post-details-color: #545e6f;
+
+$light-gray: #f7f8fb;
+
+$sidebar-width: 250px;
+
+$on-desktop: 1100px;
+$on-smartphone: 850px;
+
+
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}

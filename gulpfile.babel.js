@@ -85,15 +85,15 @@ gulp.task('scss', () => {
       'android >= 4.4',
       'bb >= 10'
     ];
-    return gulp.src('src/scss/main.scss')
+    return gulp.src(['src/scss/main.scss','src/scss/mainpost.scss'])
         .pipe($.sass({
             includePaths: ['css'],
             onError: browserSync.notify
         }))
         .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
         .pipe($.cssnano())
-        .pipe(gulp.dest('assets/css'))
-        .pipe(gulp.dest('src/css'));
+        .pipe(header(banner))
+        .pipe(gulp.dest('assets/css'));
 });
 
 // Watch change in files.
