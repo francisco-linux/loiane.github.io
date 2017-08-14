@@ -5,15 +5,15 @@ class: speaking
 permalink: /speaking
 ---
 
-I have been given the opportunity to speak at some conferences about Java, JavaScript, Sencha, Ionic and Angular. 
+I have been given the opportunity to speak at some conferences about Java, JavaScript, Sencha, Ionic and Angular. And I'm very thankfull for these opportunities.
 
 <img src="assets/images/speaking.jpg">
 
 # Upcoming events / Próximos eventos
 
-No speaking engagements booked yet.
+I'm not available for any speaking engagments between Aug-Dec 2017.
 
-[Pt-br] No momento estou sem disponibilidade para novos eventos.
+[Pt-br] No momento estou sem disponibilidade para novos eventos para 2017.
 
 # Past events / Eventos que já aconteceram
 
@@ -31,7 +31,7 @@ No speaking engagements booked yet.
 * Onde:  São Paulo, SP  (https://jsexperience2017.imasters.com.br/)
 * Slides: Programação reativa com Ionic
 
-### Full Stack Experience (em breve)
+### Full Stack Experience
 
 * Quando: 09 de Junho
 * Onde:  São Paulo, SP (http://fsxp.org/)
