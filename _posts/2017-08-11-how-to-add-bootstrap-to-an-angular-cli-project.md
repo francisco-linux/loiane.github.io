@@ -18,7 +18,7 @@ In this article we will learn how to setup an Angular project with Bootstrap 3 o
 
 Although the setup seems simple, I still get a lot of questions on how to setup an Angular project generated with Angular CLI with Bootstrap. So let's see the step by step in the sections below.
 
-### 1: Creating an Angular project with Angular CLI
+## 1: Creating an Angular project with Angular CLI
 
 The first step is creating your Angular project using [Angular CLI](https://github.com/angular/angular-cli).
 
@@ -28,7 +28,7 @@ For this example we will use the following command:
 ng new angular-bootstrap-example
 ```
 
-### 2: Installing Bootstrap from NPM
+## 2: Installing Bootstrap from NPM
 
 Next, we need to install Bootstrap. Change the directory to the project we created (`cd angular-bootstrap-example`) and execute the following command:
 
@@ -44,7 +44,7 @@ For Bootstrap 4 (currently in beta):
 npm install bootstrap@next --save
 ```
 
-#### 2.1: Alternative: Local Bootstrap CSS
+### 2.1: Alternative: Local Bootstrap CSS
 
 As an alternative, you can also download the Bootstrap CSS and add it locally to your project. I donwloaded Bootstrap [from the website](https://getbootstrap.com/) and created a folder `styles` (same level as `styles.css`):
 
@@ -52,7 +52,7 @@ As an alternative, you can also download the Bootstrap CSS and add it locally to
 
 > <i class="mdi mdi-lightbulb-on mdi-24px"></i>  Don't place your local CSS files under `assets` folder. When we do the production build with Angular CLI, the CSS files declared in the `.angular-cli.json` will be minified and all styles will be bundled into a single styles.css. The assets folder is copied to the dist folder during the build process (the CSS code will be duplicated). Only place your local CSS files under `assets` in case you are importing them directly in the `index.html`.
 
-### 3: Importing the CSS
+## 3: Importing the CSS
 
 We have two options to import the CSS from Bootstrap that was installed from NPM:
 
@@ -73,7 +73,7 @@ We have two options to import the CSS from Bootstrap that was installed from NPM
 
 I personally prefer to import all my styles in `src/style.css` since it's been declared in `.angular-cli.json` already.
 
-#### 3.1 Alternative: Local Bootstrap CSS
+### 3.1 Alternative: Local Bootstrap CSS
 
 If you added the Bootstrap CSS file locally, just import it in `.angular-cli.json` 
 
@@ -92,7 +92,7 @@ or `src/style.css`:
 
 With this setup we are able to start using the Bootstrap CSS classes in our project.
 
-### 4: Bootstrap JavaScript Components with ngx-bootstrap
+## 4: Bootstrap JavaScript Components with ngx-bootstrap
 
 In case you don't need to use Bootstrap JavaScript components (that require JQuery), this is all the setup you need. But if you need to use modals, accordion, datepicker, tooltips or any other component, how can we use these components without installing jQuery?
 
@@ -110,7 +110,7 @@ In case you want to install Bootstrap and ngx-bootstrap at the same time when yo
 npm install bootstrap ngx-bootstrap --save
 ```
 
-#### 4.1: Adding the required Bootstrap modules in app.module.ts
+### 4.1: Adding the required Bootstrap modules in app.module.ts
 
 Go through the `ngx-bootstrap` and add the modules needed in your `app.module.ts`. For example, suppose we want to use the Dropdown, Tooltip and Modal components:
 
@@ -169,7 +169,7 @@ export class AppModule {}
 
 `ngx-bootstrap` works with Bootstrap 3 and 4. And I also made some tests and most of the functionalities also work with Bootstrap 2.x (yes, I still have some legacy code to maintain).
 
-### 5: Let's code!
+## 5: Let's code!
 
 Now that we have the setup for CSS and JavaScript components completed, let's add some code to our `app.component.html`:
 
@@ -284,7 +284,7 @@ export class AppComponent {
 
 We have an Angular project using Bootstrap and did not need to import JQuery to have the same behavior!
 
-### Source code and live demo
+## Source code and live demo
 
 > <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/repo) or check out the [live demo](https://angular-bootstrap-example.firebaseapp.com/)!
 

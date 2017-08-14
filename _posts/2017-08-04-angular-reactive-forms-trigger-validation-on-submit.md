@@ -20,7 +20,7 @@ When working with forms we have 2 options: the first one is to disable the submi
 
 For this example we will use [Bootstrap](getbootstrap.com) (v3) framework for the CSS styles.
 
-### Disable the submit button if form is invalid
+## Disable the submit button if form is invalid
 
 The first option we have when working with forms is to disable the submit button if the form is invalid. This approach is OK for very small forms such as login forms, where we only have 2 fields (user/email and password). It is easy for the user to guess it is needed to inform both fields before the submit button becomes available:
 
@@ -86,7 +86,7 @@ Please note that in this form we do not have any visual indicator that the `emai
 
 However, specially when working with enterprise projects, we have forms with lots of fields. And disabling the submit form when the form is invalid is not appropriate. Let's take a look at a different approach in the next example. 
 
-### Trigger validation of all fields on submit
+## Trigger validation of all fields on submit
 
 Let's create a new form with some more fields. For this example, we will work on the `validate-fields-submit-form.component.ts`:
 
@@ -220,7 +220,7 @@ Now let's see the code for the template `validate-fields-submit-form.component.h
 
 Since we are using Boostrap classes in our project, each `form-group` is a row of our form. For the fields we want to occupy an entire row we can use the class `col-sm-12` (part of the [Bootstrap grid system](https://getbootstrap.com/css/#grid)). For the fields we want a more complex layout (street, street2 and zipCode), we can wrap the fields in a `form-group` DIV and we can use the classes `col-md-6`, `col-md-3`, `col-md-*` to set the width that each field will ocuppy (just remember that the sum of the col-md-X needs to be 12). The address fields are also wrapped in a DIV `<div formGroupName="address">` so the reactive control group can be linked to the HTML template form as well.
 
-#### Displaying Bootstrap validation styles
+### Displaying Bootstrap validation styles
 
 Boostrap 3 has built in [validation styles for form fields](https://getbootstrap.com/css/#forms-control-validation). 
 
@@ -267,7 +267,7 @@ Just remember that if you have nested controls you need to pass the complete pat
 [ngClass]="displayFieldCss('address.street')"
 ```
 
-##### Displaying the validation error message
+#### Displaying the validation error message
 
 To display the validation error message of each field and also the `X` icon when the field is invalid we can create a presentational component (or dumb component).
 
@@ -321,7 +321,7 @@ In each of our form controls (fields) we can simply use the following code to di
 
 Much better then repeating the Bootstrap code 7 times in our small form!
 
-#### Displaying the required field asterisk (*)
+### Displaying the required field asterisk (*)
 
 To display the red asterisk in each field using Bootstrap styles, we can use the following CSS:
 
@@ -341,7 +341,7 @@ Then, in the labels of the required fields we can add the class `required` along
 
 Now the user has visual indicators for some required fields, but still can miss a field or other and click on the submit button anyway. So let's go to the next step.
 
-#### Validating all fields on submit
+### Validating all fields on submit
 
 When we click on the submit button, we want to submit the form only if it is valid. If it is not valid, we want to display the validation errors so the user is able to fix them before submiting the form again:
 
@@ -409,7 +409,7 @@ If we click on the submit button we will trigger the validation and the validati
 
 The code we developed for this example can be used in any Angular Reactive Form. The only thing that might be different is how the CSS framework you chose to use in your project handles the validation styles applied to each form control.
 
-### Attempt to submit flag instead of marking the control as touched/dirty
+## Attempt to submit flag instead of marking the control as touched/dirty
 
 There is a simpler way of achieving the same result as our second example without iterating all the form controls and marking them as touched (or dirty).
 
@@ -461,7 +461,7 @@ The form will be reseted (values will be reseted to their initial value and the 
 
 Both examples have the same output, however, we were able to achieve the same result with less lines of code in the second example.
 
-### Source code and live demo
+## Source code and live demo
 
 > <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-reactive-forms-validate-submit) or check out the [live demo](https://ng-forms-fields-validation.firebaseapp.com/)
 

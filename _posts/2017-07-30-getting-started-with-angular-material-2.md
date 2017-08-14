@@ -16,7 +16,7 @@ This article will show you how to setup your Angular project (v2+) using Angular
 {:toc}
 </div>
 
-### 1: Create your Angular project with Angular CLI
+## 1: Create your Angular project with Angular CLI
 
 The first step is creating your Angular project using [Angular CLI](https://github.com/angular/angular-cli).
 
@@ -32,7 +32,7 @@ It will create a new project with the following files:
 
 <img src="/assets/images/2017/angular-material-01.png">
 
-### 2: npm install @angular-material and hammerjs
+## 2: npm install @angular-material and hammerjs
 
 Next, we need to install @angular-material and its required dependencies. Change the directory to the project we created (`cd angular-material-example`) and execute the following command:
 
@@ -40,7 +40,7 @@ Next, we need to install @angular-material and its required dependencies. Change
 npm install --save @angular/material @angular/cdk hammerjs
 ```
 
-### 3: Configure angular-cli.json and hammerjs
+## 3: Configure angular-cli.json and hammerjs
 
 `Hammer.js` is an optional dependency and helps with touch support for a few of the components (`md-slide-toggle`, `md-slider`, `mdTooltip`). 
 
@@ -52,7 +52,7 @@ I like to always include `hammerjs` as a dependency as well. And we also need to
 ],
 ```
 
-### 4: Include a theme and Material Icons
+## 4: Include a theme and Material Icons
 
 To add a theme to our project, open `src/style.css` or `src/style.scss` and add:
 
@@ -64,7 +64,7 @@ Angular Material 2 comes with 4 pre built themes: `indigo-pink`, `deeppurple-am
 
 You can replace `indigo-pink.css` with any of the options mentioned above. 
 
-#### Material Icons
+### Material Icons
 
 If you need to use icons in your application, you can also import [Material Design icons](https://design.google.com/icons/).
 
@@ -80,7 +80,7 @@ If you are using `scss` as file extension, include the following import in your 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 ```
 
-##### Local support to Material Icons
+#### Local support to Material Icons
 
 If you prefer to host Material Icons locally, you can also follow the next steps.
 
@@ -98,7 +98,7 @@ In your `src/style.css` add the following import:
 
 And that's it!
 
-### 5: Configure app.module
+## 5: Configure app.module
 
 Some Angular Material components depend on `@angular/animations` package. Open your `package.json` and confirm if it has been already installed (Angular CLI already adds it as a dependency along with other `@angular` packages). If it is not installed, then install it with the command below:
 
@@ -127,13 +127,13 @@ export class AppModule { }
 
 If you would not like to use animations, then replace `BrowserAnimationsModule` with `NoopAnimationsModule` in the code above.
 
-### 6: Using Material Components
+## 6: Using Material Components
 
 Now the setup is already in place and we can start coding!
 
 We can open `app.component.html` and start adding our Material components HTML tags. But we will do some extra steps so we have a project a little bit more organized.
 
-#### Creating a HomeComponent page
+### Creating a HomeComponent page
 
 Let's create a new module and component using Angular CLI:
 
@@ -189,7 +189,7 @@ import { MdToolbarModule } from '@angular/material';
 export class HomeModule { }
 ```
 
-#### Creating a shared MaterialModule for our project
+### Creating a shared MaterialModule for our project
 
 Suppose we have another module that is also going to use the `md-toolbar` component. We would need to import `MdToolbarModule` again in that module. 
 
@@ -244,7 +244,7 @@ import { AppMaterialModule } from './../app-material/app-material.module';
 export class HomeModule { }
 ```
 
-#### Configuring the routes and app.component
+### Configuring the routes and app.component
 
 Since we created a `home.component`, this is going to be the main Component for the `home.module`. So we need to add the `home.component` in our `HomeRoutingModule`:
 
@@ -294,7 +294,7 @@ Our code now has the following structure:
 
 This is the project structure I usually use for my Angular Material projects. Now you can add more components and modules as needed and have fun with Material components!
 
-#### Adding more Material Components to home.component.html
+### Adding more Material Components to home.component.html
 
 Let's go back to `home.component.html` and enhance our example. Our template should have the following code:
 
@@ -371,7 +371,7 @@ After the changes above, this will be the output in the browser:
 
 <img src="/assets/images/2017/angular-material-04.png">
 
-### Tip: Angular Material VSCode Extension
+## Tip: Angular Material VSCode Extension
 
 VSCode has a very good extension to work with Angular Material components.
 
@@ -381,10 +381,10 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 > This extension is also part of the Angular extension package I created to work with Angular projects: [Angular Extension Pack](https://marketplace.visualstudio.com/items?itemName=loiane.angular-extension-pack)
 
-### Source code and live demo
+## Source code and live demo
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-material-example) 
-> or check out the [live demo](https://angular-material-example.firebaseapp.com)
+> <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-material-example) 
+> <i class="mdi mdi-github-circle mdi-24px"></i>  [live demo](https://angular-material-example.firebaseapp.com)
 
 References: 
 * [Angular Material 2 docs](https://material.angular.io/components)

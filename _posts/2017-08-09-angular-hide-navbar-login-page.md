@@ -18,7 +18,7 @@ In this article we will learn two approaches to hide the Navbar Menu when displa
 
 For both examples in this tutorial we will use [Angular Material](https://material.angular.io/) as our UI library. I've covered how to [setup an Angular project with Angular Material in this post](https://loiane.com/2017/07/getting-started-with-angular-material-2). 
 
-### Example 1: Using *ngIf to "hide" the NavBar
+## Example 1: Using *ngIf to "hide" the NavBar
 
 In this first example we will have only one page layout and we will verify if the user is logged in and use *ngIf to verify if the application should display the navigation bar or not. This is the most common example we find when searching for how to hide the navbar when displaying the login page.
 
@@ -60,7 +60,7 @@ If the user is not logged in, the application shall display the login page witho
 
 Ok, we have our requirenments, let's start coding!
 
-#### The app-material module
+### The app-material module
 
 To develop this simple application, we will need some UI components. Since we are using Angular Material, we will need the following Material modules to be imported by our application:
 
@@ -113,7 +113,7 @@ import './rxjs-operators';
 export class AppModule { }
 ```
 
-#### Creating the Login component
+### Creating the Login component
 
 The code for the `login.component.ts` is presented below:
 
@@ -214,7 +214,7 @@ And now that we have the Angular form in place, let's take a look at the login t
 
 Our login widget is a Material card with maximum width of 400 pixels, with two required form fields and a login button.
 
-#### Creating the Home component
+### Creating the Home component
 
 Our Home component is going to be very simple. Just a message confirming the user is logged in:
 
@@ -229,7 +229,7 @@ import { Component } from '@angular/core';
 export class HomeComponent {}
 ```
 
-#### Creating the AuthService
+### Creating the AuthService
 
 For the purpose of this example, we will not integrate the service with any backend API. 
 
@@ -280,7 +280,7 @@ export interface User {
 }
 ```
 
-#### Configuring the Router and the AuthGuard
+### Configuring the Router and the AuthGuard
 
 These will be the routes we will use in this example:
 
@@ -332,7 +332,7 @@ export class AuthGuard implements CanActivate {
 
 First we are going to retrieve the `isLoggedIn` (`{1}`) getter from the `AuthService`, which is an Observable. Since we are only interested in checking the value from the Observalbe a single time (if the user is logged in or not), we will use the `take` operator (`{2}`). We will verify the value emitted by the `BehaviorSubject` (`{3}`) and if not logged in we will navigate to the login screen (`{4}`) and return false. The AuthGuard will return true in case the user is logged in, meaning the user can access the route (path: '') which renders the HomeComponent.
 
-#### Updating the AppComponent
+### Updating the AppComponent
 
 For this example, we AppComponent will be our main component:
 
@@ -352,7 +352,7 @@ export class AppComponent {}
 
 It will display the `app-header` which is our navigation bar and the component according to the routing config.
 
-#### Creating the Navigation Bar
+### Creating the Navigation Bar
 
 Let's start creating the navigation bar with the simplest template:
 
@@ -453,7 +453,7 @@ Now we have the expected behavior for our example:
 
 <img src="/assets/images/2017/angular-login-hide-navbar-05.png">
 
-### Example 2: Using different layouts and routing config
+## Example 2: Using different layouts and routing config
 
 For the second example the code is basically the same as the example 1, but with a few changes. Instead of using **ngIf* to hide the navbar, we are going to use different page layouts with child routes. All the control will be in the routing config.
 
@@ -466,7 +466,7 @@ ng g c layouts/home-layout -is -it
 ng g c layouts/login-layout -is -it
 ```
 
-#### Creating the HomeLayout page
+### Creating the HomeLayout page
 
 For the HomeLayout, we want to display the navbar, so our component will have the following code:
 
@@ -484,7 +484,7 @@ import { Component } from '@angular/core';
 export class HomeLayoutComponent {}
 ```
 
-#### Creating the LoginLayout page
+### Creating the LoginLayout page
 
 For the LoginLayout, we do **not** want to display the navbar, so our component will have the following code:
 
@@ -502,7 +502,7 @@ export class LoginLayoutComponent {}
 
 The component only has the `router-outlet` to display the LoginComponent.
 
-#### Configuring the routes and child routes
+### Configuring the routes and child routes
 
 Our routing config will be different from the first example:
 
@@ -540,7 +540,7 @@ And we have the same output as the example 1!
 
 This approach where we control the layouts using the router configuration can be used in applications that have different page layouts such as a plain page, or a page with a header navbar, or a page with a sidebar (very used in admin layouts).
 
-### Source code
+## Source code
 
 > <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code for both examples [on GitHub](https://github.com/loiane/angular-login-hide-navbar).
 

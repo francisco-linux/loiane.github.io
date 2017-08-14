@@ -64,7 +64,7 @@ This helps me keep the imports section of the files a little bit cleaner, and if
 
 It also saves me some Kb in the production bundle size!
 
-#### What to avoid
+### What to avoid
 
 Some people like to import RxJS as `import {Observable} from 'rxjs';`
 
