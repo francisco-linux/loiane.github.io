@@ -85,7 +85,7 @@ gulp.task('scss', () => {
       'android >= 4.4',
       'bb >= 10'
     ];
-    return gulp.src(['src/scss/main.scss','src/scss/mainpost.scss'])
+    return gulp.src(['src/scss/main.scss'])
         .pipe($.sass({
             includePaths: ['css'],
             onError: browserSync.notify
