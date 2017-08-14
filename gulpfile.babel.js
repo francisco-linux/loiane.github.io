@@ -143,8 +143,7 @@ gulp.task('generate-service-worker', (callback) => {
       rootDir + '/assets/images/*.jpg',
       rootDir + '/assets/images/tags/*.svg',
       rootDir + '/assets/images/icons/*.png',
-      rootDir + '/assets/images/2017/*.{png,jpg,gif,svg}',
-      rootDir + '/2017/**/*.html'
+      rootDir + '/assets/images/2017/*.{png,jpg,gif,svg}'
       //rootDir + '/**/*.{js,html,css,png,jpg,gif,json,svg}'
     ],
     stripPrefix: rootDir,
@@ -166,7 +165,7 @@ gulp.task('generate-service-worker', (callback) => {
         .pipe(gulp.dest('.'));
   });*/
 
-gulp.task('jekyll-build', ['scripts', 'scss', 'jekyll']/*, $.shell.task(['jekyll build'])*/);
+gulp.task('jekyll-build', ['scripts', 'scss', 'jekyll', 'generate-service-worker']/*, $.shell.task(['jekyll build'])*/);
 
 gulp.task('jekyll-build-for-deploy', $.shell.task(['jekyll build']));
 
