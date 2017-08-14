@@ -14,7 +14,25 @@ layout: compress
     <div class="content container">
       {{ content }}
     </div>
-    
+
+    <div class="content">
+    <div class="footer-outter">
+      <div class="footer-container">
+        <div class="footer-card">
+          <h5>&copy; {{ site.time | date: '%Y' }}, Loiane Groner</h5>
+          <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons Attribution 4.0 International License</a>. In other words, share generously but provide attribution.</p>
+        </div>
+        <div class="footer-card">
+          <h5>Disclaimer</h5>
+          <p>Opinions expressed here are my own.</p>
+        </div>
+        <div class="footer-card">
+            <h5>This site is published with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a></h5>
+            <p>Theme adapted from <a href="https://github.com/poole/hyde" target="_blank" rel="noopener">Hyde</a>. It is also a functioning PWA. Design inspired by <a href="https://github.com/toddmotto/toddmotto.github.io" target="_blank" rel="noopener">Todd Motto</a> and <a href="http://wesbos.com" target="_blank" rel="noopener">Wes Bos</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
     {% include footer.html %}
   </body>
 </html>

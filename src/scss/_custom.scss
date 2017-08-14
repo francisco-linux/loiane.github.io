@@ -78,3 +78,49 @@
     }
   }
 }
+
+.footer-outter {
+  background: $light-gray;
+}
+
+.footer-container {
+  text-align: right;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.footer-card {
+  float: left;
+  text-align: left;
+  width: 31.333333333%;
+  margin: 0.75%;
+  margin-bottom: 5px;
+  position: relative;
+
+  @media screen and (max-width: $on-desktop) {
+    width: 48%;
+  }
+  @media screen and (max-width: $on-smartphone) {
+    width: 95%;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
+
+  p {
+    margin-bottom: 5px;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+
+  a {
+    color: lighten(#3f4754, 25%);
+    transition: all .2s ease;
+    &:hover {
+      color: lighten(#3f4754, 30%);
+    }
+  }
+}

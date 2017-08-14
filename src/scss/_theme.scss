@@ -149,8 +149,8 @@ html {
    */
 
 .content {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 1rem;
+  // padding-bottom: 4rem;
   margin-left: $sidebar-width;
 
   @media (max-width: $on-smartphone) {
