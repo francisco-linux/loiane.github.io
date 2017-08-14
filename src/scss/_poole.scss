@@ -238,6 +238,10 @@ blockquote {
     a {
       font-weight: bold;
     }
+    i {
+      padding-right: 10px;
+      vertical-align: text-top;
+    }
   }
 }
 blockquote p:last-child {
@@ -414,8 +418,10 @@ tbody tr:nth-child(odd) th {
       }
     }
   }
-  h1, h2, h3, h4, h5, h6 {
-    padding: 30px inherit;
+  h2, h3, h4, h5, h6 {
+    padding: 40px inherit;
+   // border-bottom:1px solid lighten($headings-color, 15%);
+    margin: 40px 0 25px 0;
   }
   pre {
     position: relative;
@@ -461,10 +467,20 @@ tbody tr:nth-child(odd) th {
   padding-top: 2rem;
   padding-bottom: 2rem;
   border-top: 1px solid #eee;
+
+  h1, h2, h3, h4, h5, h6 {
+    border-bottom: none;
+    margin: 0;
+  }
+
 }
 .related-posts {
   padding-left: 0;
   list-style: none;
+
+  h1, h2, h3, h4, h5, h6 {
+    border-bottom: none;
+  }
 }
 .related-posts h3 {
   margin-top: 0;

@@ -10,7 +10,6 @@ tag: angular
 This article will show you how to setup your Angular project (v2+) using Angular Material 2.
 
 <div class="toc" markdown="1">
-<span>Table of contents</span>
 {:.no_toc}
 * TOC
 {:toc}
@@ -383,8 +382,9 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 ## Source code and live demo
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-material-example) 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  [live demo](https://angular-material-example.firebaseapp.com)
+> <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-material-example)
+
+> <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Live demo](https://angular-material-example.firebaseapp.com)
 
 References: 
 * [Angular Material 2 docs](https://material.angular.io/components)

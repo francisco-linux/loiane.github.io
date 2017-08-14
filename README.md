@@ -53,4 +53,6 @@ Despite being open sourced, all code and content remain copyright of Loiane Gron
 
 ### Theme
 
-Theme adapted from Hyde
+Theme adapted from [Hyde](https://github.com/poole/hyde).
+
+Design inspired by [Todd Motto](https://toddmotto.com) and [Wes Bos](http://wesbos.com).

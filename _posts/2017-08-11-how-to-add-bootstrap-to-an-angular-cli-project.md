@@ -10,7 +10,6 @@ tag: angular
 In this article we will learn how to setup an Angular project with Bootstrap 3 or Bootstrap 4.
 
 <div class="toc" markdown="1">
-<span class="gamma">Table of contents</span>
 {:.no_toc}
 * TOC
 {:toc}
@@ -286,7 +285,9 @@ We have an Angular project using Bootstrap and did not need to import JQuery to 
 
 ## Source code and live demo
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/repo) or check out the [live demo](https://angular-bootstrap-example.firebaseapp.com/)!
+> <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-bootstrap-example)
+
+> <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Live demo](https://angular-bootstrap-example.firebaseapp.com/)
 
 References:
 * [Angular CLI](https://angular.io/guide/forms)
@@ -295,5 +296,3 @@ References:
 * [ngx-bootstrap](http://valor-software.com/ngx-bootstrap)
 
 Happy coding!
-
-

@@ -10,7 +10,6 @@ tag: angular
 In this article we will learn different approaches of validating all form fields when user clicks on submit button for Angular Reactive Forms. We will also learn how to disable the submit button if the form is invalid.
 
 <div class="toc" markdown="1">
-<span class="gamma">Table of contents</span>
 {:.no_toc}
 * TOC
 {:toc}
@@ -463,7 +462,9 @@ Both examples have the same output, however, we were able to achieve the same re
 
 ## Source code and live demo
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code [on GitHub](https://github.com/loiane/angular-reactive-forms-validate-submit) or check out the [live demo](https://ng-forms-fields-validation.firebaseapp.com/)
+> <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-reactive-forms-validate-submit)
+
+> <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Live demo](https://ng-forms-fields-validation.firebaseapp.com/)
 
 References: 
 * [Angular Forms guide](https://angular.io/guide/forms)

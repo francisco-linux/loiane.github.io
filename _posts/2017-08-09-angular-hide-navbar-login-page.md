@@ -10,7 +10,6 @@ tag: angular
 In this article we will learn two approaches to hide the Navbar Menu when displaying the Login page in Angular projects.
 
 <div class="toc" markdown="1">
-<span class="gamma">Table of contents</span>
 {:.no_toc}
 * TOC
 {:toc}
@@ -542,7 +541,7 @@ This approach where we control the layouts using the router configuration can be
 
 ## Source code
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  View the full source code for both examples [on GitHub](https://github.com/loiane/angular-login-hide-navbar).
+> <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-login-hide-navbar)
 
 References: 
 * [RxJS Subject classes](http://reactivex.io/documentation/subject.html)
