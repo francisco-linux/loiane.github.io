@@ -4,19 +4,24 @@
     <img src="{{site.baseurl}}{{post.image}}" alt="{{post.title}}"
       class="post-card-img" scale="0">
     {% endif %}
-    <div class="post-header-detail">
-      <div class="post-header-category">
-          <img src="{{ site.baseurl }}/assets/images/tags/{% if post.tag %}{{ post.tag }}{% else %}tag{% endif %}.svg" alt="">
-      </div>
-      {{ post.date | date_to_string }}
-    </div>
+
     <h4 class="post-card-title">
       {{ post.title }}
     </h4>
-    {% if post.image %}{% else %}
+
+    {% if post.image %}
+    <p class="post-card-desc-empty"></p>
+    {% else %}
     <p class="post-card-desc">
-      {{ post.content | markdownify | strip_html | truncatewords: 15 }}
+      {{ post.content | markdownify | strip_html | truncatewords: 15 }}!
     </p>
     {% endif %}
+
+    <div class="post-card-cat">
+      <div class="post-card-cat-detail">
+          <img src="{{ site.baseurl }}/assets/images/tags/{% if post.tag %}{{ post.tag }}{% else %}tag{% endif %}.svg" alt="">
+      </div>
+      <span>{{ post.date | date_to_string }}</span>
+    </div>
   </a>
 </div>

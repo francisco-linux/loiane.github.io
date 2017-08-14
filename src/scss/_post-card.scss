@@ -13,6 +13,7 @@
   width: 23.33333%;
   margin: 0.75%;
   margin-bottom: 20px;
+  position: relative;
 
   @media screen and (max-width: 1600px) {
     width: 31.333333333%;
@@ -51,11 +52,20 @@
     border-radius: 0;
   }
 
-  .post-header-category {
-    margin-top: 5px;
-    margin-left: 10px;
-    padding: 5px;
+  &-desc{
+    padding: 10px 10px 30px 10px;
+    color: lighten($headings-color, 5%);
+    font-weight: 400;
+    &:hover {
+      color: lighten($headings-color, 15%);
+      text-decoration: none;
+    }
   }
+
+  &-desc-empty{
+    padding: 10px;
+  }
+
 
   .post-header-detail {
     font-size: 13px;
@@ -63,13 +73,27 @@
     padding-top: 10px;
   }
 
-  &-desc{
-    padding: 10px;
-    color: lighten($headings-color, 5%);
-    font-weight: 400;
-    &:hover {
-      color: lighten($headings-color, 15%);
-      text-decoration: none;
+  .post-card-cat {
+    height: 40px;
+    position: absolute;
+    bottom: 3px;
+    width: 100%;
+
+    span {
+      position: absolute;
+      bottom: 7px;
+      padding-left: 40px;
+    }
+
+    &-detail {
+      font-size: 13px;
+      height: 25px;
+      width: 25px;
+      position: absolute;
+      top: 8px !important;
+      left: 7px !important;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
