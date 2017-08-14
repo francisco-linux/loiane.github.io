@@ -124,3 +124,13 @@
     }
   }
 }
+
+.follow-me {
+  position: absolute;
+  bottom: 5px;
+  left: 15px;
+
+  @media screen and (max-width: $on-smartphone) {
+    display: none;
+  }
+}
