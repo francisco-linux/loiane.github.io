@@ -91,7 +91,7 @@ or `src/style.css`:
 
 With this setup we are able to start using the Bootstrap CSS classes in our project.
 
-## 4: Bootstrap JavaScript Components with ngx-bootstrap
+## 4: Bootstrap JavaScript Components with ngx-bootstrap (Option 1)
 
 In case you don't need to use Bootstrap JavaScript components (that require JQuery), this is all the setup you need. But if you need to use modals, accordion, datepicker, tooltips or any other component, how can we use these components without installing jQuery?
 
@@ -283,6 +283,42 @@ export class AppComponent {
 
 We have an Angular project using Bootstrap and did not need to import JQuery to have the same behavior!
 
+## 5: Bootstrap 4 JavaScript Components with ng-bootstrap (Option 2)
+
+There is also a second option to use Bootstrap JavaScript components in Angular without JQuery in case you are using Bootstrap 4: [ng-bootstrap](https://ng-bootstrap.github.io/).
+
+You can install `ng-bootstrap` in your project from NPM:
+
+```shell
+npm install --save @ng-bootstrap/ng-bootstrap
+```
+
+In your `app.module.ts` you need to import the `NgbModule.forRoot()` using the `forRoot()` method.
+
+```js
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+@NgModule({
+  imports: [ NgbModule.forRoot(), ... ],  
+  // ...
+})
+export class AppModule {}
+```
+If you have feature modules in your application, you also need to import `NgbModule`, but **without** the `forRoot()` method:
+
+Other modules in your application can simply import `NgbModule`:
+
+```js
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+@NgModule({
+ // ...
+  imports: [NgbModule, ...], 
+})
+export class OtherModule {
+}
+```
+
 ## Source code and live demo
 
 > <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-bootstrap-example)
@@ -294,5 +330,6 @@ References:
 * [Bootstrap 3](https://getbootstrap.com/)
 * [Bootstrap 4](https://v4-alpha.getbootstrap.com/)
 * [ngx-bootstrap](http://valor-software.com/ngx-bootstrap)
+* [ng-bootstrap](https://ng-bootstrap.github.io/)
 
 Happy coding!
