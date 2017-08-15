@@ -283,7 +283,7 @@ export class AppComponent {
 
 We have an Angular project using Bootstrap and did not need to import JQuery to have the same behavior!
 
-## 5: Bootstrap 4 JavaScript Components with ng-bootstrap (Option 2)
+## 6: Bootstrap 4 JavaScript Components with ng-bootstrap (Option 2)
 
 There is also a second option to use Bootstrap JavaScript components in Angular without JQuery in case you are using Bootstrap 4: [ng-bootstrap](https://ng-bootstrap.github.io/).
 
