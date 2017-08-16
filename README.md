@@ -49,7 +49,7 @@ $ htmlproofer ./_site
 
 ### Notes
 
-Despite being open sourced, all code and content remain copyright of Loiane Groner. Please don't steal!
+This work is licensed under a Creative Commons Attribution 4.0 International License. In other words, share but provide attribution/credits.
 
 ### Theme
 
