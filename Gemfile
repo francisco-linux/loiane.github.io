@@ -16,3 +16,4 @@ gem "jekyll", "3.5.1"
 #   gem "jekyll-github-metadata", "~> 1.0"
 # end
 gem 'jekyll-paginate'
+gem 'jekyll-toc'
