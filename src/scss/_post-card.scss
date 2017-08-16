@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   max-width: 1800px;
   margin-left: 1em;
+  margin-top: 30px;
 }
 
 .post-card {
@@ -30,7 +31,8 @@
     transition: all .2s ease;
     color: $headings-color;
     &:hover {
-      color: lighten($headings-color, 15%);
+      //color: lighten($headings-color, 15%);
+      color: $hue-2;
       text-decoration: none;
     }
   }
@@ -40,7 +42,8 @@
     padding: 10px;
     font-weight: 400;
     &:hover {
-      color: lighten($headings-color, 15%);
+      //color: lighten($headings-color, 15%);
+      color: $hue-2;
       text-decoration: none;
     }
   }
@@ -57,20 +60,14 @@
     color: lighten($headings-color, 5%);
     font-weight: 400;
     &:hover {
-      color: lighten($headings-color, 15%);
+     // color: lighten($headings-color, 15%);
+      color: $hue-2;
       text-decoration: none;
     }
   }
 
   &-desc-empty{
     padding: 10px;
-  }
-
-
-  .post-header-detail {
-    font-size: 13px;
-    padding-left: 45px;
-    padding-top: 10px;
   }
 
   .post-card-cat {

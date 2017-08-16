@@ -140,6 +140,7 @@ blockquote p:last-child {
   margin-bottom: 2em;
   margin-left: 2em;
   margin-right: 2em;
+  padding-top: 2em;
 
   @media screen and (max-width: $on-smartphone) {
     margin-left: 1em;
