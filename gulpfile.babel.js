@@ -46,8 +46,8 @@ const banner = (
 );
 gulp.task('scripts', () => {
   gulp.src([
-    './src/scripts/main.js'//,
-   // './src/scripts/sw-registration.js'
+    './src/scripts/sw-registration.js',
+    './src/scripts/main.js'
   ])
     .pipe($.concat('main.min.js'))
     .pipe($.babel())
