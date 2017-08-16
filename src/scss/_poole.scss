@@ -237,10 +237,15 @@ img {
 .pagination-item {
   display: block;
   padding: 1rem;
-  border: 1px solid #eee;
+  //border: 1px solid #eee;
 }
 .pagination-item:first-child {
   margin-bottom: -1px;
+}
+
+.page-number {
+  border: none !important;
+  color:$text-color !important;
 }
 
 /* Only provide a hover state for linked pagination items */
@@ -254,7 +259,7 @@ a.pagination-item:hover {
   }
   .pagination-item {
     float: left;
-    width: 50%;
+    width: 33%;
   }
   .pagination-item:first-child {
     margin-bottom: 0;
