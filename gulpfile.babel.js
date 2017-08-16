@@ -125,7 +125,7 @@ gulp.task('generate-service-worker', (callback) => {
       rootDir + '/*.html',
       rootDir + '/*.json',
       rootDir + '/*.webapp',
-      rootDir + '/assets/**/*.{js,css}',
+      //rootDir + '/assets/**/*.{js,css}',
       rootDir + '/assets/fonts/*.{woff,woff2}',
       rootDir + '/assets/images/*.jpg',
       rootDir + '/assets/images/tags/*.svg',
