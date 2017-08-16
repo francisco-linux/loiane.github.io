@@ -2,7 +2,7 @@
 title: 'Loiane Groner'
 title_separator: "|"
 description: > # this means to ignore newlines until "baseurl:"
-  Java, Angular, Sencha, JavaScript, Phonegap
+  Java, Angular, Sencha, JavaScript, Phonegap, Ionic
 baseurl: "" # the subpath of your site, e.g. /blog
 #url: "http://127.0.0.1:4000" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 url: "https://loiane.com" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
@@ -11,15 +11,15 @@ github_username:  loiane
 include: [_pages]
 paginate: 12
 paginate_path: "/page:num/"
-permalink: /:year/:month/:title
-sass:
-  compressed: true
+permalink: /:year/:month/:title/
 encoding: "utf-8"
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
-
+kramdown:
+  parse_block_html: true
+keep_files: ["assets/images","assets/fonts"]
 exclude: [
   "node_modules",
   "LICENSE",
@@ -43,4 +43,4 @@ compress_html:
   profile: false
 
 # Gems
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-toc]
