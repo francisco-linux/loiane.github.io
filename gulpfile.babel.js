@@ -16,27 +16,12 @@ import child from 'child_process';
 const $ = gulpLoadPlugins();
 const siteRoot = '_site';
 
+browserSync.create();
+
 // Delete the _site directory.
 gulp.task('cleanup-build', () => {
   return gulp.src('_site', {read: false})
       .pipe($.clean());
-});
-
-// Minify the HTML.
-gulp.task('minify-html', () => {
-  return gulp.src('_site/**/*.html')
-    .pipe($.htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeRedundantAttributes: true,
-      removeEmptyAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      removeOptionalTags: true
-    }))
-    .pipe(gulp.dest('_site'));
 });
 
 // Optimize images.
@@ -61,8 +46,8 @@ const banner = (
 );
 gulp.task('scripts', () => {
   gulp.src([
-    './src/scripts/main.js',
-    './src/scripts/sw-registration.js'
+    './src/scripts/main.js'//,
+   // './src/scripts/sw-registration.js'
   ])
     .pipe($.concat('main.min.js'))
     .pipe($.babel())
@@ -96,8 +81,17 @@ gulp.task('scss', () => {
         .pipe(gulp.dest('assets/css'));
 });
 
+const jekyllLogger = buffer => {
+  buffer.toString().split(/\n/).forEach((message) => util.log(`Jekyll: ${message}`));
+};
+gulp.task('jekyll', () => {
+  const jekyll = child.spawn('jekyll', ['serve', '--watch', '--incremental', '--drafts']);
+  jekyll.stdout.on('data', jekyllLogger);
+  jekyll.stderr.on('data', jekyllLogger);
+});
+
 // Watch change in files.
-gulp.task('serve', ['jekyll-build'], () => {
+gulp.task('serve', () => {
   browserSync.init({
     notify: false,
     port: 3000,
@@ -107,18 +101,9 @@ gulp.task('serve', ['jekyll-build'], () => {
     }
     // https: true,
   });
+});
 
-  // Watch html changes.
-  gulp.watch([
-    'assets/css/**/*.css',
-    'assets/scripts/**/*.js',
-    'assets/images/**/*.js',
-    '_includes/**/*.html',
-    '_layouts/**/*.html',
-    '_posts/**/*.md',
-    'index.html'
-  ], ['jekyll-build', browserSync.reload]);
-
+gulp.task('watch', () => {
   // Watch scss changes.
   gulp.watch('src/scss/**/*.scss', ['scss']);
 
@@ -126,7 +111,7 @@ gulp.task('serve', ['jekyll-build'], () => {
   gulp.watch('src/scripts/**/*.js', ['scripts']);
 
   // Watch image changes.
-  gulp.watch('src/images/**/*', ['minify-images']);
+  //gulp.watch('src/images/**/*', ['minify-images']);
 });
 
 gulp.task('generate-service-worker', (callback) => {
@@ -153,6 +138,25 @@ gulp.task('generate-service-worker', (callback) => {
   }, callback);
 });
 
+// ***************** CI build *****************
+
+// Minify the HTML.
+gulp.task('minify-html', () => {
+  return gulp.src('_site/**/*.html')
+    .pipe($.htmlmin({
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      removeEmptyAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      removeOptionalTags: true
+    }))
+    .pipe(gulp.dest('_site'));
+});
+
   /*gulp.task('fix-config', () => {
     gulp.src('_config.yml')
       .pipe($.replace('baseurl: ""', 'baseurl: "loiane.com"'))
@@ -167,12 +171,12 @@ gulp.task('generate-service-worker', (callback) => {
         .pipe(gulp.dest('.'));
   });*/
 
-gulp.task('jekyll-build', ['jekyll']/*, $.shell.task(['jekyll build'])*/);
+//gulp.task('jekyll-build', ['scss', 'scripts', 'jekyll']/*, $.shell.task(['jekyll build'])*/);
 
-gulp.task('jekyll-build-for-deploy', $.shell.task(['jekyll build']));
+//gulp.task('jekyll-build-for-deploy', $.shell.task(['jekyll build']));
 
 // Default task.
-gulp.task('build', () =>
+/*gulp.task('build', () =>
   runSequence(
     //'fix-config',
     'cleanup-build',
@@ -184,16 +188,7 @@ gulp.task('build', () =>
    // 'minify-images'//,
     //'revert-config'
   )
-);
-
-const jekyllLogger = buffer => {
-  buffer.toString().split(/\n/).forEach((message) => util.log(`Jekyll: ${message}`));
-};
-gulp.task('jekyll', () => {
-  const jekyll = child.spawn('jekyll', ['serve', '--watch', '--incremental', '--drafts']);
-  jekyll.stdout.on('data', jekyllLogger);
-  jekyll.stderr.on('data', jekyllLogger);
-});
+);*/
 
 // Depoly website to gh-pages.
 gulp.task('gh-pages', () => {
@@ -203,7 +198,6 @@ gulp.task('gh-pages', () => {
 
 gulp.task('deploy', () => {
   runSequence(
-    'fix-config',
     'cleanup-build',
     'scss',
     'scripts',
@@ -216,4 +210,4 @@ gulp.task('deploy', () => {
   )
 });
 
-gulp.task('dev', ['scss', 'scripts', 'minify-images', 'serve', 'jekyll']);
+gulp.task('dev', ['scss', 'scripts', 'jekyll', 'watch', 'serve']);

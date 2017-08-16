@@ -12,7 +12,7 @@
   },
   "homepage": "https://loiane.com",
   "scripts": {
-    "start": "gulp serve",
+    "start": "gulp dev",
     "build": "gulp build",
     "deploy": "gulp deploy",
     "minimages": "gulp minify-images",
