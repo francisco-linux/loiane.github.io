@@ -1,27 +1,22 @@
 ---
 layout: post
 title: "Responsive Toolbar using Angular Material 2 and Angular Flex-Layout"
-date: 2017-08-21 09:35:12.000000000 -02:00
-path: 2017-08-11-responsive-toolbar-using-angular-material-and-angular-flex-layout.md
+date: 2017-08-15 09:35:12.000000000 -02:00
 image: /images/2017/responsive-toolbar-angular-material-flexlayout-01.png
-tag: pwa
+tag: angular
 ---
 
 In this article we will learn how to create a responsive toolbar using Angular Material 2 and Angular Flex-Layout.
 
 <div class="toc" markdown="1">
-<span class="gamma">Table of contents</span>
-{:.no_toc}
 * TOC
 {:toc}
 </div>
 
-> <i class="mdi mdi-github-circle mdi-24px"></i>  Want the code? Go [straight to GitHub](https://github.com/loiane/repo) or view the [live demo](https://loiane.com/repo/)
-
-
 ### Creating a toolbar
 
 The first step is creating an Angular CLI project and installing Angular Material 2. You can checkout the steps to setup Angulat Material 2 in this post.
+
 
 
 
