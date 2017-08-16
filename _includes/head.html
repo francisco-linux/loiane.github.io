@@ -10,7 +10,10 @@
 
   <link rel="author" href="https://plus.google.com/+loianegroner?rel=author">
 
-  <link rel="stylesheet" href="/assets/css/main.css?{{site.time | date: '%s%N'}}">
+  <style>
+    {% include assets/main.css %}
+  </style>
+  <!--link rel="stylesheet" href="/assets/css/main.css?{{site.time | date: '%s%N'}}"-->
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 

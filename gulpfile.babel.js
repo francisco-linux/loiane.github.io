@@ -53,7 +53,7 @@ gulp.task('scripts', () => {
     .pipe($.babel())
     .pipe($.uglify())
     .pipe(header(banner))
-    .pipe(gulp.dest('assets/scripts'));
+    .pipe(gulp.dest('_includes/assets'));
 });
 
 // Compile scss to css.
@@ -78,7 +78,7 @@ gulp.task('scss', () => {
         .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
         .pipe($.cssnano())
         .pipe(header(banner))
-        .pipe(gulp.dest('assets/css'));
+        .pipe(gulp.dest('_includes/assets'));
 });
 
 const jekyllLogger = buffer => {
@@ -210,4 +210,4 @@ gulp.task('deploy', () => {
   )
 });
 
-gulp.task('dev', ['scss', 'scripts', 'jekyll', 'watch', 'serve']);
+gulp.task('dev', ['scss', 'scripts', 'jekyll', 'watch', 'serve', 'generate-service-worker']);
