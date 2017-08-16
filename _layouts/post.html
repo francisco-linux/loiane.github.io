@@ -9,7 +9,7 @@ layout: default
       <div class="post-header-container">
         <div class="post-header-detail">
           <div class="post-header-category">
-              <img src="{{ site.baseurl }}/assets/images/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
+              <img src="{{ site.baseurl }}/assets/images/tags/{% if page.category %}{{ page.category }}{% else %}tag{% endif %}.svg" width="30" height="30">
           </div>
           {{ page.date | date_to_string }}
         </div>
@@ -41,6 +41,7 @@ layout: default
     </div>
 
   {{ content }}
+
 
   {% include components/share-addthis.html %}
 

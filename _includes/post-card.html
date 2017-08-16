@@ -19,7 +19,7 @@
 
     <div class="post-card-cat">
       <div class="post-card-cat-detail">
-          <img src="{{ site.baseurl }}/assets/images/tags/{% if post.tag %}{{ post.tag }}{% else %}tag{% endif %}.svg" alt="">
+          <img src="{{ site.baseurl }}/assets/images/tags/{% if post.category %}{{ post.category }}{% else %}tag{% endif %}.svg" width="25" height="25">
       </div>
       <span>{{ post.date | date_to_string }}</span>
     </div>
