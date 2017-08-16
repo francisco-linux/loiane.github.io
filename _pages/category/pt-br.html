@@ -1,0 +1,12 @@
+---
+layout: default
+permalink: /category/pt-br
+---
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.language == 'pt-br' %}
+			{% include post-card.html %}
+		{% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,12 @@
+---
+layout: default
+permalink: /category/angular
+---
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.category == 'angular' %}
+			{% include post-card.html %}
+		{% endif %}
+  {% endfor %}
+</div>
