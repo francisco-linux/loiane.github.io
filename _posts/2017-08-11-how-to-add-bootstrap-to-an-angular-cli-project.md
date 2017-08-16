@@ -4,13 +4,15 @@ title: "How to Add Bootstrap to an Angular CLI project"
 date: 2017-08-11 09:35:12.000000000 -02:00
 path: 2017-08-11-how-to-add-bootstrap-to-an-angular-cli-project.md
 image: /assets/images/2017/angular-cli-bootstrap.png
-tag: angular
+category: angular
 ---
 
 In this article we will learn how to setup an Angular project with Bootstrap 3 or Bootstrap 4.
 
-<div class="toc" markdown="1">
+### Contents
 {:.no_toc}
+
+<div class="toc" markdown="1">
 * TOC
 {:toc}
 </div>

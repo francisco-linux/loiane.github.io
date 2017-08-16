@@ -4,13 +4,15 @@ title: "Angular Reactive Forms: trigger validation on submit"
 date: 2017-08-04 08:35:12.000000000 -02:00
 path: 2017-08-04-angular-reactive-forms-trigger-validation-on-submit.md
 image: /assets/images/2017/angular-reactive-forms-validate-submit.png
-tag: angular
+category: angular
 ---
 
 In this article we will learn different approaches of validating all form fields when user clicks on submit button for Angular Reactive Forms. We will also learn how to disable the submit button if the form is invalid.
 
-<div class="toc" markdown="1">
+### Contents
 {:.no_toc}
+
+<div class="toc" markdown="1">
 * TOC
 {:toc}
 </div>

@@ -4,7 +4,7 @@ title: "Angular Tips: Avoiding duplication of RxJS operator imports"
 date: 2017-08-01 08:35:12.000000000 -02:00
 path: 2017-08-01-angular-rxjs-imports.md
 image: /assets/images/2017/angular-rxjs-imports_.png
-tag: angular
+category: angular
 ---
 
 In this article we will learn how to avoid duplication of RxJS operators imports in your Angular project files.

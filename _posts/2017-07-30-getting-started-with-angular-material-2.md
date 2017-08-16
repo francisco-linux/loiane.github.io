@@ -4,13 +4,15 @@ title: "Getting Started with Angular Material 2"
 date: 2017-07-30 09:35:12.000000000 -02:00
 path: 2017-07-30-getting-started-with-angular-material-2.md
 image: /assets/images/2017/angular-material.png
-tag: angular
+category: angular
 ---
 
 This article will show you how to setup your Angular project (v2+) using Angular Material 2.
 
-<div class="toc" markdown="1">
+### Contents
 {:.no_toc}
+
+<div class="toc" markdown="1">
 * TOC
 {:toc}
 </div>
