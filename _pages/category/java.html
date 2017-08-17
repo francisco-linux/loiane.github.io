@@ -4,5 +4,13 @@ permalink: /category/java
 ---
 
 <div class="posts">
-  <p class="lead">Coming soon. I'm still migrating all my Java posts from wordpress to this blog.</p>
+  <p class="lead">I'm still migrating all my Java posts from wordpress to this blog.</p>
+</div>
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.category == 'java' %}
+			{% include post-card.html %}
+		{% endif %}
+  {% endfor %}
 </div>
