@@ -1,0 +1,16 @@
+---
+layout: default
+permalink: /category/sencha
+---
+
+<div class="posts">
+  <p class="lead">I'm still migrating all my Sencha Ext JS and Touch posts from wordpress to this blog.</p>
+</div>
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.category == 'sencha' %}
+			{% include post-card.html %}
+		{% endif %}
+  {% endfor %}
+</div>
