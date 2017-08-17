@@ -79,7 +79,7 @@
   }
 
   a {
-    color: lighten($headings-color, 5%);
+    color: lighten($headings-color, 15%);
     transition: all .2s ease;
     &:hover {
       text-decoration: underline;
