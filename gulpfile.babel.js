@@ -52,7 +52,7 @@ gulp.task('scripts', () => {
     .pipe($.concat('main.min.js'))
     .pipe($.babel())
     .pipe($.uglify())
-    .pipe(header(banner))
+    //.pipe(header(banner))
     .pipe(gulp.dest('_includes/assets'));
 });
 
@@ -77,7 +77,7 @@ gulp.task('scss', () => {
         }))
         .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
         .pipe($.cssnano())
-        .pipe(header(banner))
+        //.pipe(header(banner))
         .pipe(gulp.dest('_includes/assets'));
 });
 
