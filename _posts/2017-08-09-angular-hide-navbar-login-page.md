@@ -3,7 +3,7 @@ layout: post
 title: "Angular: Hide Navbar Menu from Login page"
 date: 2017-08-09 08:30:12.000000000 -03:00
 path: 2017-08-09-angular-hide-navbar-login-page.md
-image: /assets/images/2017/angular-login-hide-navbar.png
+image: /assets/images/2017/angular-login-hide-navbar.jpg
 category: angular
 ---
 

@@ -47,6 +47,7 @@ const banner = (
 gulp.task('scripts', () => {
   gulp.src([
     './src/scripts/sw-registration.js',
+    //'./src/scripts/lazyload.min.js',
     './src/scripts/main.js'
   ])
     .pipe($.concat('main.min.js'))
@@ -125,7 +126,7 @@ gulp.task('generate-service-worker', (callback) => {
       rootDir + '/*.html',
       rootDir + '/*.json',
       rootDir + '/*.webapp',
-      //rootDir + '/assets/**/*.{js,css}',
+      rootDir + '/assets/**/*.{js,css}',
       rootDir + '/assets/fonts/*.{woff,woff2}',
       rootDir + '/assets/images/*.jpg',
       rootDir + '/assets/images/tags/*.svg',

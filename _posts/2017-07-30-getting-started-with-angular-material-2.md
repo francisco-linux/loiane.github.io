@@ -3,7 +3,7 @@ layout: post
 title: "Getting Started with Angular Material 2"
 date: 2017-07-30 09:35:12.000000000 -02:00
 path: 2017-07-30-getting-started-with-angular-material-2.md
-image: /assets/images/2017/angular-material.png
+image: /assets/images/2017/angular-material.jpg
 category: angular
 ---
 
