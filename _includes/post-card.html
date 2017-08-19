@@ -1,7 +1,7 @@
 <div class="post-card">
   <a href="{{ post.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ post.title }}">
     {% if post.image %}
-    <img src="{{site.baseurl}}{{post.image}}" alt="{{post.title}}"
+    <img data-original="{{post.image}}" alt="{{post.title}}"
       class="post-card-img" scale="0">
     {% endif %}
 

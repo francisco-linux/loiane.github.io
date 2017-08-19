@@ -3,7 +3,7 @@ layout: post
 title: "Angular Reactive Forms: trigger validation on submit"
 date: 2017-08-04 08:35:12.000000000 -02:00
 path: 2017-08-04-angular-reactive-forms-trigger-validation-on-submit.md
-image: /assets/images/2017/angular-reactive-forms-validate-submit.png
+image: /assets/images/2017/angular-reactive-forms-validate-submit.jpg
 category: angular
 ---
 

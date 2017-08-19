@@ -1,26 +1,41 @@
 'use strict';
 
-// add link icon to post titles
-/*((window, document, undefined) => {
-  linkjuice.init('.post__content', {
-    selectors: ['h2', 'h3', 'h4', 'h5'],
-    contentFn: node => `
-        <a href="#${node.id}" class="linkjuice">
-          <span class="linkjuice-icon">
-            <i class="linkjuice__icon"></i>
-          </span>
-          ${node.innerHTML}
-        </a>
-      `
-  });
-})(window, document);*/
-
-//register service worker
-/*((window, document, undefined) => {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(function() {
-      console.log('Service Worker Registered');
-    });
+/*(function () {
+  if (typeof window.CustomEvent === "function") {
+      return false;
   }
-})(window, document);
-*/
+
+  function CustomEvent(event, params) {
+      params = params || {bubbles: false, cancelable: false, detail: undefined};
+      var evt = document.createEvent("CustomEvent");
+      evt.initCustomEvent (event, params.bubbles, params.cancelable, params.detail);
+      return evt;
+  }
+
+  CustomEvent.prototype = window.Event.prototype;
+  window.CustomEvent = CustomEvent;
+})();
+
+var myLazyLoad = new LazyLoad();*/
+
+(function() {
+
+  function loadJS(path){
+    var theScript = document.createElement('script');
+    theScript.type = 'text/javascript';
+    theScript.src = path;
+
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(theScript, s);
+  }
+
+  if (window.matchMedia) {
+    if (window.matchMedia('(min-width: 850px)').matches) {
+     loadJS('https://apis.google.com/js/platform.js');
+     loadJS('/assets/js/twitter.js');
+    }
+  } else { //not supported, load js
+    loadJS('https://apis.google.com/js/platform.js');
+    loadJS('/assets/js/twitter.js');
+  }
+})();
