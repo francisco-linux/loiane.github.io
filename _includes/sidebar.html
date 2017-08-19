@@ -34,51 +34,10 @@
           Archive (All Posts)
         </a>
     </nav>
-    <div class="sidebar-follow-me">
-      <a href="https://twitter.com/loiane" class="twitter-follow-button" data-show-count="true"></a>
-    </div>
-    <div class="sidebar-follow-me">
-      <div class="g-ytsubscribe" data-channel="loianeg" data-layout="default" data-count="default"></div>
-    </div>
 
-    <!--nav class="sidebar-nav">
-      <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
+    {% include follow-me.html %}
 
-      {% comment %}
-        The code below dynamically generates a sidebar nav of pages with
-        `layout: page` in the front-matter. See readme for usage.
-      {% endcomment %}
+    {% include social-networks.html %}
 
-      {% assign pages_list = site.pages %}
-      {% for node in pages_list %}
-        {% if node.title != null %}
-          {% if node.layout == "page" %}
-            <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
-          {% endif %}
-        {% endif %}
-      {% endfor %} -->
-
-      <!--a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a -->
-    <!--/nav -->
-
-    <!--p>&copy; {{ site.time | date: '%Y' }}</p -->
-    <div class="follow-me">
-      <a href="//twitter.com/loiane" target="_blank" rel="noopener" aria-label="Loiane Groner on Twitter">
-        <i class="mdi mdi-twitter mdi-24px social_network"></i>
-      </a>
-      <a href="//github.com/loiane" target="_blank" rel="noopener" aria-label="Loiane Groner on GitHub">
-        <i class="mdi mdi-github-circle mdi-24px social_network"></i>
-      </a>
-      <a href="//youtube.com/loianegroner" target="_blank" rel="noopener" aria-label="Loiane Groner on YouTube">
-        <i class="mdi mdi-youtube-play mdi-24px social_network"></i>
-      </a>
-      <a href="//facebook.com/loianegroner" target="_blank" rel="noopener" aria-label="Loiane Groner on Facebook">
-        <i class="mdi mdi-facebook-box mdi-24px social_network"></i>
-      </a>
-      <a href="//www.linkedin.com/in/loiane" target="_blank" rel="noopener" aria-label="Loiane Groner on Linkedin">
-        <i class="mdi mdi-linkedin-box mdi-24px social_network"></i>
-      </a>
-    </div>
   </div>
 </div>
