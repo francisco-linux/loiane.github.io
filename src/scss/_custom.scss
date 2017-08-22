@@ -87,14 +87,23 @@
   }
 }
 
-.follow-me {
-  position: absolute;
-  bottom: 10px;
-  left: 3em;
-
+.add-space {
+  height:30px;
   @media screen and (max-width: $on-smartphone) {
-    display: none;
+    height: 10px;
   }
+}
+
+.follow-me {
+  //position: absolute;
+ // bottom: 10px;
+  //left: 3em;
+  text-align: center;
+  margin: 10px 0;
+
+  /*@media screen and (max-width: $on-smartphone) {
+    display: none;
+  }*/
 
   a {
     color: #fff;

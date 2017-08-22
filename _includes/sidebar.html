@@ -4,16 +4,8 @@
       <img src="{{ site.baseurl }}/assets/images/loiane.jpg" alt="Loiane Groner">
       <p>{{ site.title }}</p>
     </div>
-    <!--span>Developer and published author</span -->
-    <!--div class="sidebar-about">
-      <h1>
-        <a href="{{ site.baseurl }}">
-          {{ site.title }}
-        </a>
-      </h1>
-      <p class="lead">{{ site.description }}</p>
-    </div -->
-    <div style="height:50px;"></div>
+    {% include social-networks.html %}
+    <div class="add-space"></div>
     <nav class="sidebar-nav">
         <a class="sidebar-nav-item" href="/">
           Blog
@@ -36,8 +28,6 @@
     </nav>
 
     {% include follow-me.html %}
-
-    {% include social-networks.html %}
 
   </div>
 </div>
