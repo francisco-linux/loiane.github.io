@@ -95,7 +95,7 @@ gulp.task('jekyll', () => {
 gulp.task('serve', () => {
   browserSync.init({
     notify: false,
-    port: 3000,
+    port: 4000,
     server: {
       baseDir: siteRoot,
       middleware: hygienist(siteRoot)
