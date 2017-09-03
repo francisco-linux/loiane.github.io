@@ -15,7 +15,7 @@
     "start": "gulp dev",
     "build": "gulp build",
     "deploy": "gulp deploy",
-    "minimages": "gulp minify-images",
+    "minimg": "gulp minify-images",
     "sw": "gulp generate-service-worker"
   },
   "license": "ISC",
