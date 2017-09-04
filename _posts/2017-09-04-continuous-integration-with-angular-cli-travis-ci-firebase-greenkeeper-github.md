@@ -207,7 +207,7 @@ notifications:
 
 <img src="/assets/images/2017/angular-travis-firebase-12.jpg">
 
-You can commit the new `.travis.yml` and see the automated process! But there is still on extra step.
+You can commit the new `.travis.yml` and see the automated process! But there is still one extra step.
 
 ## 5 - Greenkeeper
 
