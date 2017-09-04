@@ -285,7 +285,7 @@ This is the same setup I use for the Angular examples published in this blog!
 
 ### 6.1 - Testing everything together
 
-Just to make sure our build process will work as we expect, let's make two tests:
+Just to make sure our build process will work as we expect, let's perform two tests:
 
 1 - PR to master branch - we still want te build process to be verified, but no Firebase deploy:
 
