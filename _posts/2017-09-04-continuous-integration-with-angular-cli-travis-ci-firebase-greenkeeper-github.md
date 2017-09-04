@@ -68,8 +68,9 @@ Enable Travis CI for the repository we just created:
 
 <img src="/assets/images/2017/angular-travis-firebase-04.jpg">
 
-Since the Angular CLI production build requires a special command (`ng build`) we will tell Travis CI how we want the production build to be created. So we will change the repo settings to only run the build after we have the `.travis.yml` create 
-- if you do not see the settings tab you can go to "More Options" - it can take a few seconds before it is displayed after we enable the repository:
+Since the Angular CLI production build requires a special command (`ng build`) we will tell Travis CI how we want the production build to be created. So we will change the repo settings to only run the build after we have the `.travis.yml` created. 
+
+> if you do not see the settings tab you can go to "More Options" - it can take a few seconds before it is displayed after we enable the repository:
 
 <img src="/assets/images/2017/angular-travis-firebase-05.jpg">
 
