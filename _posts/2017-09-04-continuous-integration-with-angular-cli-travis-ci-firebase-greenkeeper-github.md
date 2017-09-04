@@ -146,7 +146,7 @@ By default, the `firebase.json` will be created empty and we need to configure w
 
 This file tells Firebase we want to deploy the content of the `dist` folder (which is where Angular CLI generated the prod build by default) and the main page is `index.html`.
 
-And that's it! We don't need to manually deploy our poject to Firebase hosting. We will let Travis CI take care of it for us! Even for the first build. I like to let Travis handle the first so I know the automated process it is working OK.
+And that's it! We don't need to manually deploy our poject to Firebase hosting. We will let Travis CI take care of it for us! Even for the first build. I like to let Travis handle the first build and deploy so I know the automated process it is working OK.
 
 However, if you do want to test the upload and the hosting manually, you can use the following commands:
 
