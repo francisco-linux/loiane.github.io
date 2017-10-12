@@ -45,7 +45,7 @@ I'm not available for any speaking engagments between Aug-Dec 2017.
 
 ### Internal Speaker Series
 
-* Quando: 24 de Mario
+* Quando: 24 de Maio
 * Onde: Citibank (internal)
 * Slides: Ionic 3 (http://www.slideshare.net/loianeg/angular-2-overview-in-60-minutes)
 
