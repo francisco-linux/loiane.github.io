@@ -9,6 +9,8 @@ category: angular
 
 In this article we will learn two approaches to hide the Navbar Menu when displaying the Login page in Angular projects.
 
+Update December 2017: code updated to Angular v5+ and Material v5+.
+
 ### Contents
 {:.no_toc}
 
