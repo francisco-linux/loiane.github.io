@@ -7,7 +7,7 @@ image: /assets/images/2017/angular-material.jpg
 category: angular
 ---
 
-This article will show you how to setup your Angular project (v2+) using Angular Material 2.
+This article will show you how to setup your Angular project (v2+) using Angular Material 2 (updated code with Angular v5+).
 
 ### Contents
 {:.no_toc}
@@ -43,7 +43,7 @@ npm install --save @angular/material @angular/cdk hammerjs
 
 ## 3: Configure angular-cli.json and hammerjs
 
-`Hammer.js` is an optional dependency and helps with touch support for a few of the components (`md-slide-toggle`, `md-slider`, `mdTooltip`). 
+`Hammer.js` is an optional dependency and helps with touch support for a few of the components (`mat-slide-toggle`, `mat-slider`, `atTooltip`). 
 
 I like to always include `hammerjs` as a dependency as well. And we also need to include its import in `angular-cli.json`. Locate the `scripts` section and add the `hammer.min.js` import:
 
@@ -159,31 +159,34 @@ ng g c home/home -st
 Open `home.component.html` add add the following code:
 
 ```html
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>Angular Material Example</span>
-</md-toolbar>  
+</mat-toolbar>
 ```
 
 If you are using VSCode and the [Angular Languague Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extension, you will get some compilation errors in your HTML template:
 
 <img src="/assets/images/2017/angular-material-02.png">
 
-This is because the `md-*` components are not known by Angular, hence we need to import them in our module.
+This is because the `mat-*` components are not known by Angular, hence we need to import them in our module.
 
-We can verify in the [Angular Material docs](https://material.angular.io/components) which are the Material modules we need to import in our project. 
+> Please note that Angular Material RC changed its prefix from `md` to `mat`
 
-For the `md-toolbar`, we can go to [Toolbar API tab link](https://material.angular.io/components/toolbar/api) and we will see that we need to import `MdToolbarModule`.
 
-We have two options. The first one is importing `MdToolbarModule` in the `home.module.ts` file:
+We can verify in the [Angular Material docs](https://material.angular.io/components) which are the Material modules we need to import in our project.
+
+For the `mat-toolbar`, we can go to [Toolbar API tab link](https://material.angular.io/components/toolbar/api) and we will see that we need to import `MatToolbarModule`.
+
+We have two options. The first one is importing `MatToolbarModule` in the `home.module.ts` file:
 
 ```js
-import { MdToolbarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MdToolbarModule
+    MatToolbarModule
   ],
   declarations: [HomeComponent]
 })
@@ -192,7 +195,7 @@ export class HomeModule { }
 
 ### Creating a shared MaterialModule for our project
 
-Suppose we have another module that is also going to use the `md-toolbar` component. We would need to import `MdToolbarModule` again in that module. 
+Suppose we have another module that is also going to use the `mat-toolbar` component. We would need to import `MatToolbarModule` again in that module.
 
 To avoid repeating the same import in several different modules in our project, we are going to create a shared MaterialModule (this is the second option, and I personally prefer using this one). This way, we only need to import the component we need once and we can import this module in any other module that is needed.
 
@@ -202,20 +205,20 @@ To do so, we will use Angular CLI to create a new module:
 ng g m app-material
 ```
 
-We will add any Material module in this module. Let's start with the `MdToolbarModule`:
+We will add any Material module in this module. Let's start with the `MatToolbarModule`:
 
 ```js
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MdToolbarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    MdToolbarModule
+    MatToolbarModule
   ]
 })
 export class AppMaterialModule { }
@@ -300,45 +303,45 @@ This is the project structure I usually use for my Angular Material projects. No
 Let's go back to `home.component.html` and enhance our example. Our template should have the following code:
 
 ```html
-<md-toolbar color="primary">
-  <button md-icon-button [mdMenuTriggerFor]="menu">
-    <md-icon>more_vert</md-icon>
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
   </button>
   <span>Angular Material Example</span>
 
-  <md-menu #menu="mdMenu">
-    <button md-menu-item>
-    <md-icon>dialpad</md-icon>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
     <span>Menu 1</span>
   </button>
-    <button md-menu-item disabled>
-    <md-icon>voicemail</md-icon>
+    <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
     <span>Menu 2</span>
   </button>
-    <button md-menu-item>
-    <md-icon>notifications_off</md-icon>
+    <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
     <span>Menu 3</span>
   </button>
-  </md-menu>
-</md-toolbar>
+  </mat-menu>
+</mat-toolbar>
 
-<md-card class="example-card">
-  <md-card-header>
-    <div md-card-avatar class="example-header-image"></div>
-    <md-card-title>Angular</md-card-title>
-    <md-card-subtitle>Material 2</md-card-subtitle>
-  </md-card-header>
-  <img md-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">
-  <md-card-content>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Angular</mat-card-title>
+    <mat-card-subtitle>Material 2</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">
+  <mat-card-content>
     <p>
       Material Design components for Angular
     </p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>LIKE</button>
-    <button md-button>SHARE</button>
-  </md-card-actions>
-</md-card>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
 ```
 
 We also need to go back to `app-material.module.ts` and add the additional Material components we are using the HTML code above:
@@ -348,21 +351,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  MdToolbarModule,
-  MdIconModule,
-  MdButtonModule,
-  MdMenuModule,
-  MdCardModule
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonModule,
+  MatMenuModule,
+  MatCardModule
 } from '@angular/material';
 
 @NgModule({
   imports: [CommonModule],
   exports: [
-    MdToolbarModule,
-    MdIconModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdCardModule
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatCardModule
   ]
 })
 export class AppMaterialModule {}
@@ -376,7 +379,7 @@ After the changes above, this will be the output in the browser:
 
 VSCode has a very good extension to work with Angular Material components.
 
-In the HTML templates we can simply type `md-` and the extension provide code snippets for the components available in angulat material.
+In the HTML templates we can simply type `mat-` and the extension provide code snippets for the components available in angulat material.
 
 This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Material icon snippets](https://marketplace.visualstudio.com/items?itemName=1tontech.angular-material).
 
@@ -388,7 +391,9 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 > <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Live demo](https://angular-material-example.firebaseapp.com)
 
-References: 
+> <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Stackblitz online demo](https://stackblitz.com/edit/angular-material-hello)
+
+References:
 * [Angular Material 2 docs](https://material.angular.io/components)
 * [Angular Material Getting Started Guide](https://material.angular.io/guide/getting-started)
 
