@@ -7,7 +7,9 @@ image: /assets/images/2017/angular-material.jpg
 category: angular
 ---
 
-This article will show you how to setup your Angular project (v2+) using Angular Material 2 (updated code with Angular v5+).
+This article will show you how to setup your Angular project (v2+) using Angular Material 2.
+
+Update December 2017: code updated to Angular v5+ and Material v5+. Stackblitz link also available at the end of this article.
 
 ### Contents
 {:.no_toc}
