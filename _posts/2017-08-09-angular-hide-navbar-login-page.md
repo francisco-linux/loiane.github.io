@@ -69,19 +69,19 @@ To develop this simple application, we will need some UI components. Since we ar
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MdToolbarModule,
-  MdCardModule,
-  MdInputModule,
-  MdButtonModule
+  MatToolbarModule,
+  MatCardModule,
+  MatInputModule,
+  MatButtonModule
 } from '@angular/material';
 
 @NgModule({
   imports: [CommonModule],
   exports: [
-    MdToolbarModule,
-    MdCardModule,
-    MdInputModule,
-    MdButtonModule
+    MatToolbarModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class AppMaterialModule {}
@@ -91,7 +91,7 @@ We cannot forget to update our `app.module.ts` and import `AppMaterialModule`.
 
 > <i class="mdi mdi-comment-alert-outline mdi-24px"></i>  In your application, import the `AppMaterialModule` in all modules that your components belongs to. Since this is a very small project, we only have one module with components which is the app.module.
 
-Since we imported `MdInputModule`, this means we will work with forms. So we also need to import `ReactiveFormsModule` (or `FormsModule` if you prefer to work with template driven forms):
+Since we imported `MatInputModule`, this means we will work with forms. So we also need to import `ReactiveFormsModule` (or `FormsModule` if you prefer to work with template driven forms):
 
 ```js
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -171,7 +171,7 @@ To display some validation error messages in our form, we'll verify if the field
 Our form will use some custom CSS styles as well:
 
 ```css
-md-card {
+mat-card {
   max-width: 400px;
   margin: 2em auto;
   text-align: center;
@@ -188,28 +188,28 @@ And now that we have the Angular form in place, let's take a look at the login t
 
 ```html
 <div class="signin-content">
-  <md-card>
-    <md-card-content>
+  <mat-card>
+    <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <p>Please login to continue</p>
-        <md-input-container class="full-width-input">
-          <input mdInput placeholder="User" 
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="User" 
                  formControlName="userName" required>
-          <md-error *ngIf="isFieldInvalid('userName')">
+          <mat-error *ngIf="isFieldInvalid('userName')">
             Please inform your user name
-          </md-error>
-        </md-input-container>
-        <md-input-container class="full-width-input">
-          <input mdInput type="password" placeholder="Password" 
+          </mat-error>
+        </mat-input-container>
+        <mat-input-container class="full-width-input">
+          <input matInput type="password" placeholder="Password" 
                  formControlName="password" required>
-          <md-error *ngIf="isFieldInvalid('userName')">
+          <mat-error *ngIf="isFieldInvalid('userName')">
             Please inform your password
-          </md-error>
-        </md-input-container>
-        <button md-raised-button color="primary" type="submit">Login</button>
+          </mat-error>
+        </mat-input-container>
+        <button mat-raised-button color="primary" type="submit">Login</button>
       </form>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 </div>
 ```
 
@@ -358,17 +358,17 @@ It will display the `app-header` which is our navigation bar and the component a
 Let's start creating the navigation bar with the simplest template:
 
 ```html
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>
     <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo">
     Angular NavBar + Login Example #01
   </span>
   <span class="fill-remaining-space"></span>
-  <button md-button>Menu Option 01</button>
-  <button md-button>Menu Option 02</button>
-  <button md-button routerLink="login">Login</button>
-  <button md-button (click)="onLogout()">Logout</button>
-</md-toolbar>
+  <button mat-button>Menu Option 01</button>
+  <button mat-button>Menu Option 02</button>
+  <button mat-button routerLink="login">Login</button>
+  <button mat-button (click)="onLogout()">Logout</button>
+</mat-toolbar>
 ```
 
 Our navbar has a title, two menu options (just to look prettier) and a Login + Logout buttons.
@@ -426,7 +426,7 @@ And at last, when the user clicks on the logout we will call the logout method (
 So now let's back to the HTML template and use *ngIf to display the navbar or not:
 
 ```html
-<md-toolbar color="primary" *ngIf="isLoggedIn$ | async">
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async">
 ```
 
 The code above is enough to display or not the navbar.
@@ -436,16 +436,16 @@ The code above is enough to display or not the navbar.
 Just for the purpose of this example, suppose we also want to verify if the user is logged in and display the Logout button:
 
 ```html
-<button md-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
+<button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
 ```
 
 Note that the expression is the same as used in the navbar. We are subscribing to the `isLoggedIn$` twice. We can write a better code and only subscribe once by using the `as` alias introduced in Angular v4.0 enhanced *ngIf and *ngFor:
 
 ```html
-<md-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
   <!-- more HTML template code -->
-  <button md-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
-</md-toolbar>
+  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+</mat-toolbar>
 ```
 
 The code above means we are subscribing to the `isLoggedIn$` and storing its value in the `isLoggedIn` local template variable. Then we can use this variable in other parts of the template such as the Logout button!
