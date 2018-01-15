@@ -11,13 +11,69 @@ I have been given the opportunity to speak at some conferences about Java, JavaS
 
 # Upcoming events / Próximos eventos
 
-I'm not available for any speaking engagments between Aug-Dec 2017.
+### DevFest Space Coast
 
-[Pt-br] No momento estou sem disponibilidade para novos eventos para 2017.
+* When: February 24, 2018
+* Where:  Melbourne, FL  (https://www.eventbrite.com/e/devfest-space-coast-tickets-40000091350)
+* Slides: soon
 
 # Past events / Eventos que já aconteceram
 
 ## 2017
+
+### FrontInPOA 2017
+
+* Quando: 16 de Dezembro
+* Onde:  Porto Alegre, RS  (https://frontin.poa.br/2017/)
+* Slides: PWAs: Progressive Web Apps e a evolução da web (https://slides.com/loiane/pwas-evolucao-da-web)
+
+### Community BootCamp: Women Dev Summit
+
+* Quando: 13 de Dezembro
+* Onde:  São Paulo, SP  (https://www.meetup.com/pt-BR/WoMakersCode/events/245173987/)
+* Slides: 10 Dicas de Angular: Organização dos Módulos, VSCode e boas práticas (http://slides.com/loiane/angular-10-dicas-organizacao-modulos-vscode-boas-praticas)
+
+### Mobile Summit Brazil
+
+* Quando: 09 de Dezembro
+* Onde:  Porto Alegre, RS - hangout  (http://msummit.com.br/)
+* Slides: Ionic 3 (https://www.slideshare.net/loianeg/ionic-3-76483653)
+
+### Developers Sao Paulo: NatalNerd - IT Talks
+
+* Quando: 02 de Dezembro
+* Onde:  São Paulo, SP  (https://www.meetup.com/pt-BR/Developers-SP/events/244979937/?eventId=244979937)
+* Slides: Reatividade FullStack com Spring WebFlux e Angular (http://slides.com/loiane/arquitetura-reativa-do-front-ao-back-end-com-angular-e-spring-webflux)
+
+### MS Azure Open Dev Brasil
+
+* Quando: 21 de Novembro
+* Onde:  São Paulo, SP  (http://aka.ms/azure-open-dev)
+* Slides: Deploying to Azure: JavaScript Moderno na Nuvem (http://slides.com/loiane/javascript-moderno-na-nuvem)
+
+### DevFest Paraná
+
+* Quando: 11 de Novembro
+* Onde:  Maringá, PR  (https://devfestpr.org)
+* Slides: Gerenciamento de estado no Angular com NgRx! (https://www.slideshare.net/loianeg/gerenciamento-de-estado-no-angular-com-ngrx)
+
+### PayPal Developers 1 - Programação Reativa
+
+* Quando: 31 de Outubro
+* Onde:  São Paulo, SP  (https://www.meetup.com/pt-BR/Meetup-PayPal-Desenvolvedores/events/244515413/)
+* Slides: Desmistificando a programação reativa (https://www.slideshare.net/loianeg/desmistificando-a-programacao-reativa)
+
+### Meetup AngularSP 15 Google Brazil
+
+* Quando: 28 de Setembro
+* Onde:  São Paulo, SP  (https://www.meetup.com/pt-BR/AngularJS-Sao-Paulo/events/243067541/)
+* Slides: Gerenciamento de estado no Angular com NgRx! (https://www.slideshare.net/loianeg/gerenciamento-de-estado-no-angular-com-ngrx)
+
+### BrazilJS Conf 2017
+
+* Quando: 25 e 26 de Agosto
+* Onde:  Porto Alegre, RS  (https://braziljs.org/conf/)
+* Slides: TypeScript: The fun parts! (https://www.slideshare.net/loianeg/typescript-the-fun-parts-braziljs-2017)
 
 ### Oracle Code São Paulo
 
@@ -61,7 +117,7 @@ I'm not available for any speaking engagments between Aug-Dec 2017.
 * Onde:  Curitiba, PR (http://capivara.codes/)
 * Slides: Ionic 2 com Angular 4 (http://www.slideshare.net/loianeg/introducao-ao-ionic-2-na-pratica)
 
-### Meetup AngularSP n12 Especial Mês das Mulheres no CUBO
+### Meetup AngularSP 12 Especial Mês das Mulheres no CUBO
 
 * Quando: 27 de Março
 * Onde:  Cubo - São Paulo (https://www.meetup.com/pt-BR/AngularJS-Sao-Paulo/events/238274496/?eventId=238274496)
