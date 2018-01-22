@@ -13,6 +13,14 @@ I'm always trying to contribute with the communitty sharing what I've learned.
 
 I offer some free online courses in Portuguese at ([https://loiane.training](https://loiane.training)).
 
+* <a href="https://developers.google.com/experts/people/loiane-groner" target="_blank" rel="noopener" alt="Google Developers Expert profile">
+  Google Developers Experts profile
+</a>
+* <a href="https://mvp.microsoft.com/en-us/mvp/Loiane%20%20Groner-5002870" target="_blank" rel="noopener" alt="Microsoft MVP profile">
+  Microsoft MVP profile
+</a>
+
+
 #### Contact
 
 You can find me on the social networks below. But I'm usually more active on <a href="http://twitter.com/loiane" target="_blank" rel="noopener">twitter</a>! :)
