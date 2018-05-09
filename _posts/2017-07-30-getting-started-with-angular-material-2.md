@@ -11,6 +11,8 @@ This article will show you how to setup your Angular project (v2+) using Angular
 
 Update December 2017: code updated to Angular v5+ and Material v5+. Stackblitz link also available at the end of this article.
 
+Update May 2018: code updated to Angular v6 and added new section about CLI v6.
+
 ### Contents
 {:.no_toc}
 
@@ -43,7 +45,24 @@ Next, we need to install @angular-material and its required dependencies. Change
 npm install --save @angular/material @angular/cdk hammerjs
 ```
 
-## 3: Configure angular-cli.json and hammerjs
+### 2.1: ng add @angular/material (Angular v6+)
+
+Since Angular v6 and Angular CLI v6, a new command is available to automatically install and configure Angular Material: `ng add @angular/material`. This command will install do the following:
+
+* install Angular material and animations package using your package manager
+* include a theme in `angular.json` 
+* add the import for Material Icons and `Roboto` font in the `index.html`
+* add `BrowserAnimationsModule` import to the `app.module.ts` file
+
+By using the `ng add @angular/material` command, three material components will be available in Angular CLI through schematics:
+
+* `ng generate @angular/material:material-nav --name=my-nav-name`
+* `ng generate @angular/material:material-dashboard --name=my-dashboard-name`
+* `ng generate @angular/material:material-table --name=my-table-name`
+
+Personally, I still prefer importing the theme and Material Icons as described at [section #4](https://loiane.com/2017/07/getting-started-with-angular-material-2/#4-include-a-theme-and-material-icons) of this article, so I use the `ng add` command and remove the imports from `index.html` and `angular.json`
+
+## 3: Configure angular.json and hammerjs
 
 `Hammer.js` is an optional dependency and helps with touch support for a few of the components (`mat-slide-toggle`, `mat-slider`, `atTooltip`). 
 
@@ -51,9 +70,18 @@ I like to always include `hammerjs` as a dependency as well. And we also need to
 
 ```json
 "scripts": [
+  "node_modules/hammerjs/hammer.min.js"
+],
+```
+
+Note: if you are using Angular v5 or below, please use the following code instead in `angular-cli.json` (as some structure files were updated in Angular v6+):
+
+```json
+"scripts": [
   "../node_modules/hammerjs/hammer.min.js"
 ],
 ```
+
 
 ## 4: Include a theme and Material Icons
 
@@ -66,6 +94,8 @@ To add a theme to our project, open `src/style.css` or `src/style.scss` and add:
 Angular Material 2 comes with 4 pre built themes: `indigo-pink`, `deeppurple-amber`, `purple-green` and `pink-bluegrey`. 
 
 You can replace `indigo-pink.css` with any of the options mentioned above. 
+
+> By using `ng add @angular/material`, the theme will be automatically imported in `angular.json`, so no need to add to your css or scss.
 
 ### Material Icons
 
@@ -82,6 +112,8 @@ If you are using `scss` as file extension, include the following import in your 
 ```scss
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 ```
+
+> By using `ng add @angular/material`, the icons will be automatically imported in `index.html`, so no need to add to your css or scss.
 
 #### Local support to Material Icons
 
@@ -117,7 +149,7 @@ If you would like Material components to be animated, then add `BrowserAnimation
 
 ```js
 //other EcmaScript imports
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -129,6 +161,8 @@ export class AppModule { }
 ```
 
 If you would not like to use animations, then replace `BrowserAnimationsModule` with `NoopAnimationsModule` in the code above.
+
+> By using `ng add @angular/material`, the `BrowserAnimationsModule` will be automatically added to `app.module.ts`.
 
 ## 6: Using Material Components
 
@@ -155,8 +189,10 @@ With the command above the following files will be created:
 Now let's also create a HomeComponent:
 
 ```bash
-ng g c home/home -st
+ng g c home/home -s
 ```
+
+> The `-s` flag will skip creating the `.scss` file and will use inline styles in the component.
 
 Open `home.component.html` add add the following code:
 
@@ -174,7 +210,6 @@ This is because the `mat-*` components are not known by Angular, hence we need t
 
 > Please note that Angular Material RC changed its prefix from `md` to `mat`
 
-
 We can verify in the [Angular Material docs](https://material.angular.io/components) which are the Material modules we need to import in our project.
 
 For the `mat-toolbar`, we can go to [Toolbar API tab link](https://material.angular.io/components/toolbar/api) and we will see that we need to import `MatToolbarModule`.
@@ -182,7 +217,7 @@ For the `mat-toolbar`, we can go to [Toolbar API tab link](https://material.angu
 We have two options. The first one is importing `MatToolbarModule` in the `home.module.ts` file:
 
 ```js
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   imports: [
@@ -210,15 +245,11 @@ ng g m app-material
 We will add any Material module in this module. Let's start with the `MatToolbarModule`:
 
 ```js
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
   exports: [
     MatToolbarModule
   ]
@@ -283,7 +314,7 @@ And as a last step of our basic configuration, we need to add a routing path to 
 ```js
 const routes: Routes = [
   {
-    path: '', loadChildren: 'app/home/home.module#HomeModule'
+    path: '', loadChildren: './home/home.module#HomeModule'
   }
 ];
 ```
@@ -350,18 +381,14 @@ We also need to go back to `app-material.module.ts` and add the additional Mate
 
 ```js
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import {
-  MatToolbarModule,
-  MatIconModule,
-  MatButtonModule,
-  MatMenuModule,
-  MatCardModule
-} from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  imports: [CommonModule],
   exports: [
     MatToolbarModule,
     MatIconModule,
@@ -370,7 +397,7 @@ import {
     MatCardModule
   ]
 })
-export class AppMaterialModule {}
+export class AppMaterialModule { }
 ```
 
 After the changes above, this will be the output in the browser:
@@ -387,7 +414,7 @@ This is the extension I use: [Angular Material 2, Flex layout 1, Covalent 1 & Ma
 
 > This extension is also part of the Angular extension package I created to work with Angular projects: [Angular Extension Pack](https://marketplace.visualstudio.com/items?itemName=loiane.angular-extension-pack)
 
-## Source code and live demo
+## Source code + live demo + Stackblitz
 
 > <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-material-example)
 
