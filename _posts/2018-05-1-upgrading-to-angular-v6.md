@@ -4,7 +4,7 @@ title: "Upgrading to Angular v6: Step by Step"
 date: 2018-05-11 12:35:12.000000000 -02:00
 path: 2018-05-1-upgrading-to-angular-v6.md
 image: /assets/images/2018/angular-v6.jpg
-tag: angular
+category: angular
 ---
 
 Angular v6 was released on May 3rd and now we can focus on upgrading our projects to the new version. In this post I documented my experience and steps upgrading some projects from v5 to v6. Some tips and key differences between projects created with v5 and v6 are also included.
