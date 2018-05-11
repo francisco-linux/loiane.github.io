@@ -7,6 +7,81 @@ image: /assets/images/2017/angular-rxjs-imports_.jpg
 category: angular
 ---
 
+### Updated post
+
+Update May 2018: since Angular v5, we can use [RxJS Pipeable Operators](https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md), which makes easier to import only the operators needed in the files they are needed. So the original content published in this article can still be used in Angular v5, but needs to be [updated in Angular v6](https://loiane.com/2018/05/upgrading-to-angular-v6/).
+
+As a quick summary regarding the changes in the imports:
+
+```js
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of;'
+```
+
+to:
+
+```js
+import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
+```
+
+From
+
+```js
+import 'rxjs/add/observable/of';	
+import 'rxjs/add/operator/catch';	
+import 'rxjs/add/operator/do';	
+import 'rxjs/add/operator/map';	
+import 'rxjs/add/operator/mergeMap';	
+import 'rxjs/add/operator/switchMap';
+```
+
+to
+
+```js
+import { of } from 'rxjs';
+import { map, switchMap, catchError, mergeMap } from 'rxjs/operators';
+```
+
+The following operators were renamed as well:
+
+```js
+do -> tap
+catch -> catchError
+switch -> switchAll
+finally -> finalize
+```
+
+And in our code, we can start using the [pipeble operators](https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md). 
+
+Before:
+
+```js
+this.http.get('url')
+  .do(console.log)
+  .map(results => results.data)
+  .subscribe(results => {
+    console.log('Results', results);
+  });
+```
+
+After:
+
+```js
+this.http.get('url')
+  pipe(
+    tap(console.log), // old 'do' operator
+    map(results => results.data)
+  )
+  .subscribe(results => {
+    console.log('Results', results);
+  });
+```
+
+
+### Original Content
+
 In this article we will learn how to avoid duplication of RxJS operators imports in your Angular project files.
 
 I love working with RxJS in Angular projects. But I often forget how to import the operators. Some editors such as [VSCode](https://code.visualstudio.com/) provide the capability of [creating and saving your own code snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets), and this helps a lot.

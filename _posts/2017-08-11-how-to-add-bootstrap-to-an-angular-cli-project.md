@@ -9,6 +9,8 @@ category: angular
 
 In this article we will learn how to setup an Angular project with Bootstrap 3 or Bootstrap 4.
 
+Update May 2018: code updated to Angular v6. Stackblitz link also available at the end of this article.
+
 ### Contents
 {:.no_toc}
 
@@ -36,13 +38,13 @@ Next, we need to install Bootstrap. Change the directory to the project we creat
 For Bootstrap 3:
 
 ```bash
-npm install bootstrap --save
+npm install bootstrap@3.3.7
 ```
 
-For Bootstrap 4 (currently in beta):
+For Bootstrap 4:
 
 ```bash
-npm install bootstrap@next --save
+npm install bootstrap
 ```
 
 ### 2.1: Alternative: Local Bootstrap CSS
@@ -51,17 +53,17 @@ As an alternative, you can also download the Bootstrap CSS and add it locally to
 
 <img src="/assets/images/2017/angular-cli-bootstrap-01.png">
 
-> <i class="mdi mdi-lightbulb-on mdi-24px"></i>  Don't place your local CSS files under `assets` folder. When we do the production build with Angular CLI, the CSS files declared in the `.angular-cli.json` will be minified and all styles will be bundled into a single styles.css. The assets folder is copied to the dist folder during the build process (the CSS code will be duplicated). Only place your local CSS files under `assets` in case you are importing them directly in the `index.html`.
+> <i class="mdi mdi-lightbulb-on mdi-24px"></i>  Don't place your local CSS files under `assets` folder. When we do the production build with Angular CLI, the CSS files declared in the `angular.json` will be minified and all styles will be bundled into a single styles.css. The assets folder is copied to the dist folder during the build process (the CSS code will be duplicated). Only place your local CSS files under `assets` in case you are importing them directly in the `index.html`.
 
 ## 3: Importing the CSS
 
 We have two options to import the CSS from Bootstrap that was installed from NPM:
 
-1: Configure `.angular-cli.json`:
+1: Configure `angular.json`:
 
 ```json
 "styles": [
-  "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
   "styles.scss"
 ]
 ```
@@ -72,11 +74,11 @@ We have two options to import the CSS from Bootstrap that was installed from NPM
 @import '~bootstrap/dist/css/bootstrap.min.css';
 ```
 
-I personally prefer to import all my styles in `src/style.css` since it's been declared in `.angular-cli.json` already.
+I personally prefer to import all my styles in `src/style.css` since it's been declared in `angular.json` already.
 
 ### 3.1 Alternative: Local Bootstrap CSS
 
-If you added the Bootstrap CSS file locally, just import it in `.angular-cli.json` 
+If you added the Bootstrap CSS file locally, just import it in `angular.json` 
 
 ```json
 "styles": [
@@ -321,11 +323,13 @@ export class OtherModule {
 }
 ```
 
-## Source code and live demo
+## Source code + live demo + Stackblitz
 
 > <i class="mdi mdi-github-circle mdi-24px"></i>  Source code available [on GitHub](https://github.com/loiane/angular-bootstrap-example)
 
 > <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Live demo](https://angular-bootstrap-example.firebaseapp.com/)
+
+> <i class="mdi mdi-laptop-mac mdi-24px"></i>  [Stackblitz online demo](https://stackblitz.com/edit/angular-bootstrap3)
 
 References:
 * [Angular CLI](https://angular.io/guide/forms)
