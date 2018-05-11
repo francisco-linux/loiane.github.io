@@ -26,8 +26,8 @@ gulp.task('cleanup-build', () => {
 
 // Optimize images.
 gulp.task('minify-images', () => {
-  const imgDst = 'assets/images/2017';
-  const imgSrc = 'src/images/2017/*';
+  const imgDst = 'assets/images/2018';
+  const imgSrc = 'src/images/2018/*';
   gulp.src([
     //'src/images/**/*'
     imgSrc
@@ -131,7 +131,8 @@ gulp.task('generate-service-worker', (callback) => {
       rootDir + '/assets/images/*.jpg',
       rootDir + '/assets/images/tags/*.svg',
       rootDir + '/assets/images/icons/*.png',
-      rootDir + '/assets/images/2017/*.{png,jpg,gif,svg}'
+      rootDir + '/assets/images/2017/*.{png,jpg,gif,svg}',
+      rootDir + '/assets/images/2018/*.{png,jpg,gif,svg}'
       //rootDir + '/**/*.{js,html,css,png,jpg,gif,json,svg}'
     ],
     stripPrefix: rootDir,
