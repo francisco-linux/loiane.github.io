@@ -46,7 +46,7 @@ You should see something like this:
 
 #### 2: ng update
 
-Needless to say, please do create a branch to update your project, as you'll never now if all dependencies will still work after upgrading to Angular v6.
+Needless to say, please do create a branch to update your project, as you'll never know if all dependencies will still work after upgrading to Angular v6.
 
 We can use `ng update -d` or `ng update --dry-run` to check what needs to be updated in our project:
 
